@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Club extends Model
+{
+    //Defining Table
+
+    protected $table='clubs';
+
+    //Relationships
+
+        //Admin (One to One)
+    public function admin(){
+        return $this->hasOne('App\Models\Admin','club_id');
+    }
+
+        //Team (One to Many)
+    public function teams(){
+        return $this->hasMany('App\Models\Team','club_id');
+    }
+
+}

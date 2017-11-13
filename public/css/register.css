@@ -1,0 +1,34 @@
+body, html {
+    height: 100%;
+}
+
+/*.bg-pic {*/
+    /*background-image: url("http://localhost/dbase/public/images/Riquelme.jpeg");*/
+    /*position:relative;*/
+    /*!* Full height *!*/
+    /*height: 100%;*/
+
+    /*!* Center and scale the image nicely *!*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+/*}*/
+.btn-r{
+    padding: 0 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 42px;
+    line-height: 40px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+}
+.btn-register{
+    background-color:#0d3625;
+    border-radius: 4px;
+    position:relative;
+    left:20%;
+}
+
+
