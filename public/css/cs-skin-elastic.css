@@ -46,6 +46,7 @@ div.cs-skin-elastic {
 
 .cs-skin-elastic.cs-active .cs-options {
 	pointer-events: auto;
+	box-shadow: 0 0 3pt 2pt #588c75;
 }
 
 .cs-skin-elastic .cs-options > ul::before {
