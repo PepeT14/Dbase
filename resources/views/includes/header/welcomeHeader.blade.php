@@ -10,7 +10,7 @@
                 <div class="row">
                     <!-- Login Option -->
                     <div class="col-sm-6 col-xs-12 pull-right">
-                        <ul class="login">
+                        <ul class="login active">
                             <li class="login">
                                 <button class="btn-l btn-login">
                                     <i class="fa fa-user"></i>
@@ -38,7 +38,7 @@
         <div class="carousel-inner" role="listbox">
 
             <!-- Item -->
-            <div class="item welc active f">
+            <div class="item welc active f" id="welcome">
                 <img class="fullscreen" src="{{asset('images/welcome/fondo1.png')}}" alt="">
                 <div class="position-center-x full-width">
                     <div class="container">
