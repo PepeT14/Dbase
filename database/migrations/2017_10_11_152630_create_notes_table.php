@@ -20,7 +20,7 @@ class CreateNotesTable extends Migration
            $table->text('note');
            $table->integer('mister_id')->unsigned();
 
-           $table->foreign('master_id')->references('id')->on('misters');
+           $table->foreign('mister_id')->references('id')->on('misters');
         });
     }
 
