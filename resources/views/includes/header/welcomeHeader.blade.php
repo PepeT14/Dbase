@@ -96,12 +96,10 @@
                                                 </div>
                                             </div>
 
-
-
                                             <div class="form-group">
-                                                <div class="col-md-6 col-md-offset-4" id="login-button">
-                                                    <button type="submit" class="btn-l btn-login">
-                                                        Register
+                                                <div class="col-md-8 col-md-offset-4" id="login-button">
+                                                    <button type="submit" class="btn-l btn-login btn-logger">
+                                                        Login
                                                     </button>
                                                 </div>
                                             </div>

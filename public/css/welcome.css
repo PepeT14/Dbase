@@ -24,3 +24,9 @@
     outline:none;
     padding: 2px 2px 2px 25px;
 }
+
+.btn-logger{
+    position:relative;
+    top:50%;
+    left:15%;
+}
