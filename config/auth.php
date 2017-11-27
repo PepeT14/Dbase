@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'player',
-        'passwords' => 'players',
+        'guard' => 'mister',
+        'passwords' => 'misters',
     ],
 
     /*
