@@ -22,4 +22,9 @@ class Club extends Model
         return $this->hasMany('App\Models\Team','club_id');
     }
 
+        //Material (One to Many)
+    public function materials(){
+        return $this->hasMany('App\Models\ClubMaterial','club_id');
+    }
+
 }

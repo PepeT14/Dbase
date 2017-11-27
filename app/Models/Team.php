@@ -53,4 +53,9 @@ class Team extends Model
     public function sistems(){
         return $this->hasMany('App\models\Sistem','team_id');
     }
+
+        //Materials (One to Many)
+    public function materials(){
+        return $this->hasMany('App\Models\TeamMaterial','team_id');
+    }
 }
