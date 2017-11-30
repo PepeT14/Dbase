@@ -36,7 +36,6 @@
     <!-- Wrapper for slides -->
     <div class="inner-banner-2">
         <div class="carousel-inner" role="listbox">
-
             <!-- Item -->
             <div class="item welc active f" id="welcome">
                 <img class="fullscreen" src="{{asset('images/welcome/fondo1.png')}}" alt="">
@@ -66,19 +65,19 @@
                         {{--</div>--}}
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
-                                <div class="panel panel-transparent animated fadeInUp ">
+                                <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
                                     <div class="panel-heading panel-title ">Login</div>
                                     <div class="panel-body">
-                                        <form class="form-login"  role="form" method="POST" >
+                                        <form class="form-login"  role="form" method="POST" action="{{route('login.submit')}}" >
                                             {{ csrf_field() }}
                                             <div class="form-group-login">
-                                                    <label for="email">Correo Electrónico</label>
-                                                @if ($errors->has('email'))
+                                                    <label for="username">username</label>
+                                                @if ($errors->has('username'))
                                                     <span class="help-block">
-                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                            <strong>{{ $errors->first('username') }}</strong>
                                                         </span>
                                                 @endif
-                                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  required>
+                                                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}"  required>
 
 
 

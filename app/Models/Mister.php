@@ -10,6 +10,15 @@ class Mister extends misterUser
     //
     use Notifiable;
 
+    //Mass assignable
+
+    protected $fillable = ['name','email' , 'password', 'username'];
+
+    //Hidden for arrays
+
+    protected $hidden = ['remember_token','password'];
+
+
     //Relationships
 
         //Team (One to One)

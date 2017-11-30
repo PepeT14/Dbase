@@ -19,6 +19,7 @@ class CreateTutorsTable extends Migration
             $table->rememberToken();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->integer('player_id')->unsigned();
             $table->timestamps();
 

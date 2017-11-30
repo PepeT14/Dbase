@@ -19,6 +19,7 @@ class CreatePlayersTable extends Migration
            $table->increments('id');
            $table->string('name');
            $table->string('email')->unique();
+           $table->string('username')->unique();
            $table->string('password');
            $table->integer('number');
            $table->string('photo');

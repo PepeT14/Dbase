@@ -17,8 +17,8 @@ class CreateMistersTable extends Migration
         Schema::create('misters',function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
-            $table->string('username');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('file');
             $table->integer('team_id')->unsigned();

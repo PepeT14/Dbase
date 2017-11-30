@@ -12,7 +12,7 @@ class Tutor extends tutorUser
 
     //Mass assignable
 
-    protected $fillable = ['name','email' , 'password', ];
+    protected $fillable = ['name','email' , 'password', 'username'];
 
     //Hidden for arrays
 

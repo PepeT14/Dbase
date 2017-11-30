@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Illuminate\Http\Request;
+use App\Models\Player;
+use Illuminate\Support\Facades\Lang;
 
 class LoginController extends Controller
 {
@@ -35,31 +37,61 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+    public function username(){
+        return 'username';
     }
 
-    public function login(Request $request){
+    public function authenticate(Request $request){
+
 
         $this->validate($request,[
-           'email' => 'required|email',
-           'password' => 'password|min:6'
+           'username' => 'required',
+           'password' => 'required'
         ]);
 
-        if(Auth::guard('player')->attempt(['email'=>$request->email , 'password'=>$request->password])){
+        if(Auth::guard('player')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('player.home');
         }
-        if(Auth::guard('admin')->attempt(['email'=>$request->email , 'password'=>$request->password])){
+        if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('admin.home');
         }
-        if(Auth::guard('superAdmin')->attempt(['email'=>$request->email , 'password'=>$request->password])){
-            return response()->redirectToRoute('superAdmin.home');
-        }
-        if(Auth::guard('mister')->attempt(['email'=>$request->email , 'password'=>$request->password])){
+        if(Auth::guard('mister')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('mister.home');
         }
-        if(Auth::guard('tutor')->attempt(['email'=>$request->email , 'password'=>$request->password])){
+        if(Auth::guard('tutor')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('tutor.home');
         }
-        return back();
+        if($request->ajax()){
+            return response()->json();
+        }
+        return $this->sendFailedLoginResponse($request);
     }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+        if ( ! Player::all()->where('username', $request->username)->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => Lang::get('auth.username'),
+                ]);
+        }
+
+        if ( ! Player::all()->where('username', $request->username)->where('password', bcrypt($request->password))->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    'password' => Lang::get('auth.password'),
+                ]);
+        }
+
+    }
+
 }

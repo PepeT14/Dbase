@@ -18,6 +18,7 @@ class CreateAdminClubTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->integer('club_id')->unsigned();

@@ -15,7 +15,7 @@ class Admin extends adminUser
     protected $table = 'admin_clubs';
     //Mass assignable
 
-    protected $fillable = ['name','email' , 'password', ];
+    protected $fillable = ['name','email' , 'password', 'username' ];
 
     //Hidden for arrays
 

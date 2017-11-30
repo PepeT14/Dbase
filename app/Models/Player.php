@@ -12,7 +12,7 @@ class Player extends playerUser
 
     //Mass assignable
 
-    protected $fillable = ['name','email' , 'password', ];
+    protected $fillable = ['name','email' , 'password', 'username'];
 
     //Hidden for arrays
 

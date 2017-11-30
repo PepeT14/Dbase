@@ -52,7 +52,6 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -97,7 +96,6 @@ return [
             'model' => App\Models\Mister::class,
             'table' => 'misters',
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
