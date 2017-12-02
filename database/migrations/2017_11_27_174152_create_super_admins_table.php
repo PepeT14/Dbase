@@ -17,7 +17,7 @@ class CreateSuperAdminsTable extends Migration
         Schema::create('super_admins',function(Blueprint $table){
            $table->rememberToken();
            $table->increments('id');
-           $table->string('username');
+           $table->string('username')->unique();
            $table->string('password');
         });
     }

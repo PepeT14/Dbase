@@ -10,10 +10,10 @@
                 <div class="row">
                     <!-- Login Option -->
                     <div class="col-sm-6 col-xs-12 pull-right">
-                        <ul class="login active">
-                            <li class="login">
+                        <ul class="login">
+                            <li class="login" id="login">
                                 <button class="btn-l btn-login">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-sign-in"></i>
                                     Login
                                 </button>
                             </li>
@@ -59,54 +59,36 @@
             <div class="item log" >
                 <img class="fullscreen" src="{{asset('images/welcome/fondo1.png')}}" alt="">
                 <div class="position-center-x full-width">
-                    <div class="container">
-                        {{--<div class="banner-layer pull-left">--}}
-                            {{--<img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}" alt="">--}}
-                        {{--</div>--}}
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
-                                    <div class="panel-heading panel-title ">Login</div>
-                                    <div class="panel-body">
-                                        <form class="form-login"  role="form" method="POST" action="{{route('login.submit')}}" >
-                                            {{ csrf_field() }}
-                                            <div class="form-group-login">
-                                                    <label for="username">username</label>
-                                                @if ($errors->has('username'))
-                                                    <span class="help-block">
-                                                            <strong>{{ $errors->first('username') }}</strong>
-                                                        </span>
-                                                @endif
-                                                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}"  required>
-
-
-
-                                            </div>
-
-                                            <div class="form-group-login">
-                                                    <label for="password">Contraseña</label>
-                                                <div class="controls">
-                                                    <input id="password" type="password" class="form-control" name="password"  required>
-                                                    @if ($errors->has('password'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('password') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-8 col-md-offset-4" id="login-button">
-                                                    <button type="submit" class="btn-l btn-login btn-logger">
-                                                        Login
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="container-login">
+                        <div class="banner-layer-login pull-left">
+                            <img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}" alt="">
                         </div>
+                           <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
+                               <div class="panel-heading panel-title ">Login</div>
+                               <div class="panel-body">
+                                   <form class="form-login"  role="form" method="POST" action="{{route('login.submit')}}" >
+                                       {{ csrf_field() }}
+                                       <div>
+                                           <input id="username" type="text" placeholder="Usuario" name="username" value="{{ old('username') }}"  required>
+                                       </div>
+
+                                       <input id="password" type="password" placeholder="Contraseña" name="password"  required>
+                                       <button type="submit" class="btn-l btn-login btn-logger">
+                                           Login
+                                       </button>
+                                       @if ($errors->has('username'))
+                                           <span class="help-block">
+                                               <strong>{{ $errors->first('username') }}</strong>
+                                           </span>
+                                       @endif
+                                       @if ($errors->has('password'))
+                                           <span class="help-block">
+                                               <strong>{{ $errors->first('password') }}</strong>
+                                           </span>
+                                       @endif
+                                   </form>
+                               </div>
+                           </div>
                     </div>
                 </div>
             </div>

@@ -74,11 +74,11 @@
     position: relative;
     z-index: 3;
     min-height: 48px;
-    font-family:'Verdana';
     text-transform: uppercase;
-    font-size:12px;
+    font-size:22px;
     font-weight:600;
     text-align: center;
+    color:#af871f;
 
 }
 .panel .panel-heading.separator:after {
@@ -464,7 +464,7 @@ form legend {
     -webkit-transition: opacity ease 0.3s;
     transition: opacity ease 0.3s;
 }
-.form-group{ margin: 0 0 30px; position: relative;}
+.form-group{ margin: 20px 30px 30px; position: relative;}
 .form-group label:not(.error){
     display: inline-block;
     font-family:'Verdana';

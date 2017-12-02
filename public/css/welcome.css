@@ -20,13 +20,39 @@
     height: 20px;
 }
 
-.form-group-login input {
-    outline:none;
-    padding: 2px 2px 2px 25px;
+.form-group-login input[type="text"],input{
+    width: 460px;
+    padding: 20px 0px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #b78d21;
+    outline: none;
+    color: #6D7781;
 }
 
+
 .btn-logger{
-    position:relative;
-    top:50%;
-    left:15%;
+    width:460px;
+    margin:20px 0;
+    background-color:#162525;
 }
+.container-login{
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 280px;
+    border-radius: 5px;
+    background: rgba(3,3,3,0.25);
+    box-shadow: 1px 1px 50px #000;
+}
+.banner-layer-login img{
+    position: absolute;
+    top: -170px;
+    right: 600px;
+    width: 52%;
+}
+

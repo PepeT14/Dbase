@@ -7,27 +7,23 @@ $(document).ready(function(){
         $('.log').addClass("active");
     }
 
-    function ChangeUrl(page, url) {
-        if (typeof (history.pushState) != "undefined") {
-            var obj = {Page: page, Url: url};
-            history.pushState(obj, obj.Page, obj.Url);
-        } else {
-            alert("Browser does not support HTML5.");
-        }
-    }
 
     $('.login').on("click", '.btn-l', function () {
         if ($('#welcome').hasClass("active")) {
-            console.log("oleee");
             $('.welc').removeClass("active");
             $('.log').addClass("active");
-            // ChangeUrl('login', '/login');
+            document.getElementById('login').innerHTML=
+                '<button class="btn-l btn-login">' +
+                '<i class="fa fa-home"></i>' +
+                'Inicio</button>'
             return false;
         } else {
-            console.log('ooooh');
             $('.log').removeClass("active");
             $('.welc').addClass("active");
-            // ChangeUrl('welcome', '');
+            document.getElementById('login').innerHTML=
+                '<button class="btn-l btn-login">' +
+                '<i class="fa fa-sign-in"></i>' +
+                'Login</button>'
             return false;
         }
 

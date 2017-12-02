@@ -56,6 +56,10 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'superAdmins' =>[
+            'driver'  => 'token',
+            'provider' => 'superAdmins',
+        ],
     ],
 
     /*
@@ -96,6 +100,11 @@ return [
             'model' => App\Models\Mister::class,
             'table' => 'misters',
         ],
+        'superAdmins' =>[
+            'driver' => 'eloquent',
+            'model' => App\Models\SuperAdmin::class,
+            'table' => 'super_admins',
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -135,6 +144,11 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'superAdmins' =>[
+            'provider' => 'superAdmins',
             'table' => 'password_resets',
             'expire' => 60,
         ],
