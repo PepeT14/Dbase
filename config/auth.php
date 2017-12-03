@@ -56,8 +56,8 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        'superAdmins' =>[
-            'driver'  => 'token',
+        'superAdmin' =>[
+            'driver'  => 'session',
             'provider' => 'superAdmins',
         ],
     ],

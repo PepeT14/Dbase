@@ -27,6 +27,14 @@ h2 {
     margin-left: -175px;
 }
 
+.leagueForm{
+    width: 350px;
+    position: absolute;
+    top: 10%;
+    right: 70%;
+    margin-left: -175px;
+}
+
 input[type="text"], input[type="password"] {
     width: 350px;
     padding: 20px 0px;
@@ -62,6 +70,7 @@ input[type="submit"] {
     font-size: 12px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
+    margin:20px 0;
 }
 input[type="submit"]:hover {
     background: #16aa56;

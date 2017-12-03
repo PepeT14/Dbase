@@ -20,7 +20,7 @@
     height: 20px;
 }
 
-.form-group-login input[type="text"],input{
+.form-login input[type=text],input[type=password]{
     width: 460px;
     padding: 20px 0px;
     background: transparent;
@@ -29,7 +29,6 @@
     outline: none;
     color: #6D7781;
 }
-
 
 .btn-logger{
     width:460px;

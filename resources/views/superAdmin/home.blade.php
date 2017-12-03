@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html class="homeSA">
-<head>
-    <link rel="stylesheet" href="{{asset('css/superAdmin.css')}}" type="text/css">
-</head>
-<body>
+@extends('layouts.app')
+@section('content')
     <div>
         <div class="inviteForm">
             <h2>Invita a un administrador</h2>
-            <input name="username" placeholder="username" type="text">
-            <input name="password" placeholder="password" type="password">
+            <div class="inputs">
+                <input name="username" placeholder="username" type="text">
+                <select class="cs-select cs-skin-underline">
+                    <option value="" disabled selected>Club</option>
+                </select>
+            </div>
+
             <input class="inviteButton" type="submit" value="invite">
         </div>
         <div class="leagueForm">
@@ -17,8 +18,7 @@
             <input name="state" placeholder="Comunidad" type="text">
             <input name="province" placeholder="Provincia" type="text">
             <input name="category" placeholder="Categoría" type="text">
-            <input class="leagueButton" type="submit" value="invite">
+            <input class="leagueButton" type="submit" value="create">
         </div>
     </div>
-</body>
-</html>
+@endsection

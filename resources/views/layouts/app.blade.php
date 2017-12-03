@@ -36,6 +36,10 @@
     <!--Footer-->
 
 </div>
+@elseif(Request::route()->getName()=='superAdmin.home')
+    <link rel="stylesheet" href="{{asset('css/superAdmin.css')}}" type="text/css">
+
+    @yield('content')
 @else
 
 <div class="wrap push">

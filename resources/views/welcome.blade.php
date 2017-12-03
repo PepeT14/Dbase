@@ -5,17 +5,17 @@
         <br>
         <div class="welcomeRow">
             <div class="welcomeColumn">
-                <select class="cs-select cs-skin-elastic" name='type'>
+                <select class="cs-select cs-skin-elastic" name='state'>
                     <option value="" disabled selected>Comunidad</option>
                 </select>
             </div>
             <div class="welcomeColumn">
-                <select class="cs-select cs-skin-elastic" name="tyoe">
+                <select class="cs-select cs-skin-elastic" name="province">
                     <option value="" disabled selected>Provincia</option>
                 </select>
             </div>
             <div class="welcomeColumn">
-                <select class="cs-select cs-skin-elastic" name="type">
+                <select class="cs-select cs-skin-elastic" name="category">
                     <option value="" disabled selected>Categoría</option>
                     <option value="">Pre-Benjamin</option>
                     <option value="">Benjamin</option>
@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div class="welcomeColumn">
-                <select class="cs-select cs-skin-elastic" name="type">
+                <select class="cs-select cs-skin-elastic" name="league">
                     <option value="" disabled selected>Liga</option>
                 </select>
             </div>

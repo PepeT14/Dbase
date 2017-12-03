@@ -50,7 +50,7 @@ class LoginController extends Controller
            'username' => 'required',
            'password' => 'required'
         ]);
-
+//
         if(Auth::guard('player')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('player.home');
         }
@@ -62,6 +62,9 @@ class LoginController extends Controller
         }
         if(Auth::guard('tutor')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('tutor.home');
+        }
+        if(Auth::guard('superAdmin')->attempt(['username'=>$request->username,'password'=>$request->password])){
+            return response()->redirectToRoute('superAdmin.home');
         }
         if($request->ajax()){
             return response()->json();

@@ -24,6 +24,8 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::prefix('register')->group(function(){
+//    Route::get('superAdminRegister','Auth\SuperAdmin\SuperAdminRegisterController@showSuperAdminRegister')->name('superAdmin.register');
+//    Route::post('superAdminRegister','Auth\SuperAdmin\SuperAdminRegisterController@create')->name('superAdmin.submit');
     Route::get('adminRegister','Auth\Admin\AdminRegisterController@showAdminRegister');
     Route::post('adminRegister','Auth\Admin\AdminRegisterController@registerAdmin');
     Route::get('misterRegister','Auth\Mister\MisterRegisterController@showMisterRegister');
@@ -46,4 +48,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //SuperAdmin
-Route::get('superAdmin/home')->name('superAdmin.home');
+Route::get('superAdmin/home','SuperAdminController@home')->name('superAdmin.home');
+Route::get('superAdmin/invitar','SuperAdminController@invite')->name('superAdmin.invite');
+
+    //League
+Route::get('superAdmin/league','leagueController@create')->name('league.create');
