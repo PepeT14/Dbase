@@ -10,6 +10,13 @@ class Club extends Model
 
     protected $table='clubs';
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'trial_ends_at',
+        'deleted_at'
+    ];
+
     //Relationships
 
         //Admin (One to One)

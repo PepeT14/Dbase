@@ -11,16 +11,17 @@
                 <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
                     <div class="panel-heading panel-title ">Registro</div>
                     <div class="panel-body">
-                        <form class="form-register"  role="form" method="POST" action="{{route('login.submit')}}" >
+                        <form class="form-register"  role="form" method="POST" action="{{route('admin.submit')}}" >
                             {{ csrf_field() }}
                             <div class="inputs">
-                                <input id="name" type="text" placeholder="Nombre" name="username" value="{{ old('name') }}"  required>
-                                <input id="email" type="email" placeholder="Email" name="username" value="{{ old('email') }}"  required>
+                                <input id="name" type="text" placeholder="Nombre" name="name" value="{{ old('name') }}"  required>
+                                <input id="email" type="email" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}"  required>
                                 <input id="username" type="text" placeholder="Usuario" name="username" value="{{ old('username') }}"  required>
                                 <input id="password" type="password" placeholder="Contraseña" name="password"  required>
+                                <input id="club" type="text"  name="club" value="{{$club}}" readonly>
                             </div>
                             <button type="submit" class="btn-r btn-regist btn-register">
-                                Register
+                                Registro
                             </button>
                             @if ($errors->has('username'))
                                 <span class="help-block">

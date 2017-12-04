@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="{{asset('css/register.css')}}" type="text/css">
     <div class="bg-pic">
         <div class="wrap-push">
-            @include('includes.header.registerHeader')
+            {{--@include('includes.header.registerHeader')--}}
             <main class="main-content">
                 @yield('content')
             </main>
         </div>
     </div>
-@elseif(Request::route()->getName() =='')
+@elseif(Request::route()->getName() ==''  || Request::route()->getName()=='login')
 <div class="wrap push">
     <!-- Banner slider -->
     @include('includes.header.welcomeHeader')

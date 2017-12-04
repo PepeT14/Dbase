@@ -5,8 +5,21 @@ $(document).ready(function(){
     if(loginErrors){
         $('.welc').removeClass("active");
         $('.log').addClass("active");
+        document.getElementById('login').innerHTML=
+            '<button class="btn-l btn-login">' +
+            '<i class="fa fa-home"></i>' +
+            'Inicio</button>'
     }
 
+    var login = $('#login-view').data('login')==1;
+    if(login){
+        $('.welc').removeClass("active");
+        $('.log').addClass("active");
+        document.getElementById('login').innerHTML=
+            '<button class="btn-l btn-login">' +
+            '<i class="fa fa-home"></i>' +
+            'Inicio</button>'
+    }
 
     $('.login').on("click", '.btn-l', function () {
         if ($('#welcome').hasClass("active")) {

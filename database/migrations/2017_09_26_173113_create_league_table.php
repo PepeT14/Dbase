@@ -20,6 +20,7 @@ class CreateLeagueTable extends Migration
             $table->string('state');
             $table->string('province');
             $table->string('category');
+            $table->timestamps();
         });
     }
 

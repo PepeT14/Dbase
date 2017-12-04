@@ -63,7 +63,8 @@
                         <div class="banner-layer-login pull-left">
                             <img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}" alt="">
                         </div>
-                           <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
+                           <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}"
+                           @if(Request::route()->getName()=='login') data-login='1' @endif>
                                <div class="panel-heading panel-title ">Login</div>
                                <div class="panel-body">
                                    <form class="form-login"  role="form" method="POST" action="{{route('login.submit')}}" >

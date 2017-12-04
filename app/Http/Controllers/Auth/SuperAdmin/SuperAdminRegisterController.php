@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\SuperAdmin;
 use Illuminate\Http\Request;
+use App\Models\Club;
+use App\Models\League;
+
 class SuperAdminRegisterController extends Controller
 {
     /*
@@ -47,7 +50,17 @@ class SuperAdminRegisterController extends Controller
         ]);
         $sa->save();
 
-        return view('superAdminRegister');
+        $clubs = Club::all()->get();
+
+        $states = collect([]);
+        $leagues = League::all()->get();
+        foreach($leagues as $league){
+            if(!$states->contains($league->state)){
+                $states->push($league->state);
+            }
+        }
+
+        return redirect('superAdminRegister.home')->with(compact(['clubs','states','leagues']));
     }
 
 }

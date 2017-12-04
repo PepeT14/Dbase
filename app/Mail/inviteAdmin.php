@@ -17,9 +17,12 @@ class inviteAdmin extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $club;
+
+    public function __construct(String $club)
     {
         //
+        $this->club = $club;
     }
 
     /**
@@ -30,6 +33,7 @@ class inviteAdmin extends Mailable
     public function build()
     {
         $superAdmin = Auth::guard('superAdmin')->user();
-        return $this->view('mails.inviteAdmin')->with(['superAdmin'=>$superAdmin]);
+        $url = env('APP_URL');
+        return $this->subject('Invitación a dBASE')->view('mails.inviteAdmin')->with(compact(['superAdmin','url']));
     }
 }
