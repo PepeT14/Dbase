@@ -58,3 +58,8 @@ Route::group(['middleware' => ['auth:superAdmin']],function(){
     //Club
     Route::get('superAdmin/club','clubController@create')->name('club.create');
 });
+
+//Admin
+Route::group(['middleware' => ['auth:admin']],function(){
+   Route::get('/admin/home','AdminController@home')->name('admin.home');
+});

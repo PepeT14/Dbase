@@ -9,16 +9,21 @@
 
 </head>
 <body>
+
+{{--REGISTRO--}}
+
 @if(Request::route()->getPrefix()=='/register')
     <link rel="stylesheet" href="{{asset('css/register.css')}}" type="text/css">
     <div class="bg-pic">
-        <div class="wrap-push">
+        <img class="bg-pic" src="{{asset('images/camino.jpg')}}" alt="">
             {{--@include('includes.header.registerHeader')--}}
-            <main class="main-content">
-                @yield('content')
-            </main>
-        </div>
     </div>
+    <main class="main-content">
+        @yield('content')
+    </main>
+
+{{--WELCOME--}}
+
 @elseif(Request::route()->getName() ==''  || Request::route()->getName()=='login')
 <div class="wrap push">
     <!-- Banner slider -->
@@ -34,12 +39,17 @@
     <!--Footer-->
     @include('includes.footer')
     <!--Footer-->
-
 </div>
+
+{{--SUPER ADMINISTRADOR--}}
+
 @elseif(Request::route()->getName()=='superAdmin.home')
     <link rel="stylesheet" href="{{asset('css/superAdmin.css')}}" type="text/css">
 
     @yield('content')
+
+{{--LOS DEMAS--}}
+
 @else
 
 <div class="wrap push">
@@ -82,7 +92,7 @@
     <!-- Main Content -->
 
     <!--Footer-->
-    @include('includes.footer')
+    {{--@include('includes.footer')--}}
     <!--Footer-->
 
 </div>

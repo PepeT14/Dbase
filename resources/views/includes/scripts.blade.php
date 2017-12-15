@@ -21,7 +21,16 @@
 <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/selectFx.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/classie.js')}}" type="text/javascript"></script>
+{{--FullCalendar--}}
 <script src="{{asset('js/fullcalendar.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/locale/es.js')}}" type="text/javascript"></script>
+
+{{--HIGHCHARTS--}}
+<script src="{{asset('js/highcharts.js')}}" type="text/javascript"></script>
+{{--<script src="{{asset('js/series-label.js')}}" type="text/javascript"></script>--}}
+{{--<script src="{{asset('js/exporting.js')}}" type="text/javascript"></script>--}}
+{{--THEME--}}
+{{--<script src="{{asset('js/sand-signika.js')}}" type="text/javascript"></script>--}}
+{{--Home--}}
 <script src="{{asset('js/home.js')}}" type="text/javascript"></script>
 

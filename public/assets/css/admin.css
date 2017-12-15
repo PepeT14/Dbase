@@ -1,0 +1,228 @@
+.fixed-header{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+}
+.adminHeader{
+    position:fixed;
+    top:0;
+    left:0;
+    display: block;
+    height: 60px;
+    width: 100%;
+    padding: 0 20px 0 0;
+    z-index: 800;
+    background-color: darkgray;
+    border-bottom: 1px solid rgba(230, 230, 230, 0.7);
+
+}
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color:#f5f5f5;
+}
+.adminHome{
+    padding-top:50px;
+    position:relative;
+    top:10px;
+}
+.logo{
+    height:60px;
+    padding-top:5px;
+    padding-left:70px;
+    max-width:240px;
+}
+.title{
+    position:absolute;
+    left:35%;
+    text-align: center;
+    display:inline-block;
+    padding-top:10px;
+}
+.name{
+    padding: 10px 10px 10px 50px;
+    font-size:16px;
+}
+.logout{
+    padding-right:10px;
+}
+.well{
+    width:200px;
+    padding:8px 0;
+    height:100%;
+    background-color:white;
+}
+.sidebar-nav-admin{
+    height:100%;
+    margin-top:60px;
+}
+.toolbar{
+    background-color:#fff;
+    border-bottom:1px solid #d5d5d5;
+    height:80px;
+    position:relative;
+    max-height:80px;
+    z-index:10;
+}
+.toolbar .page-header{
+    border-bottom: medium none;
+    margin:0;
+    padding:0;
+}
+.toolbar .page-header h1{
+    color:#666666;
+    font-weight:200;
+    letter-spacing: -1px;
+    padding:0;
+    margin:10px 0 0 0;
+}
+.toolbar .page-header small{
+    color:#888888;
+    font-size:14px;
+    font-weight:300;
+    letter-spacing: 0;
+    display:block;
+    margin-top: 5px;
+}
+.container{
+    width:auto !important;
+    max-width:none;
+    margin-left:200px;
+}
+.badge{
+    background-color:red;
+}
+.wrapper {
+    width: 100%;
+}
+
+.clock-content {
+    width: 100%;
+    padding:20px;
+}
+
+.date, .time {
+    color: white;
+    font-weight: 300;
+    font-size: 2em;
+}
+
+.time {
+    font-size: 3em;
+}
+.panel-white{
+    background-color:white;
+    position:relative;
+    color:#8b91a0;
+}
+.panel{
+    box-shadow:0 1px 2px #C3C3C3;
+    border-radius:3px;
+    border:none;
+}
+.panel-white .border-light{
+    border-color:rgba(0, 0, 0, 0.1);
+}
+.panel .panel-heading{
+    position:relative;
+    border-bottom-width: 1px;
+    border-bottom-style:solid;
+    padding:15px;
+    min-height:50px;
+    color:inherit;
+    font-size:16px;
+    font-weight:normal;
+
+}
+.panel-heading h4{
+    font-family:"Raleway",sans-serif;
+    font-weight:300;
+    background:none;
+    text-align:left;
+    padding:0;
+    color:inherit;
+}
+.panel-heading .panel-heading-tabs{
+    list-style:none;
+    top:0;
+    right:0;
+    position:absolute;
+    margin:0;
+    padding:0;
+}
+.panel-heading .panel-heading-tabs >li{
+    float:left;
+    padding:0 15px;
+    border-left-width:1px;
+    border-left-style:solid;
+    border-left-color:inherit;
+    height:50px;
+    line-height: 50px;
+}
+.panel  .no-padding{
+    padding:0;
+}
+.partition-green{
+    background-color:#1FBBA6;
+    position:relative;
+    color:white;
+}
+.padding-15{
+    padding:15px;
+}
+.mini-stats li{
+    text-align:center;
+    margin-bottom:8px;
+    margin-top:8px;
+}
+.mini-stats li:last-child{
+    border-right:0 none;
+}
+[class^="partition-"]:after{
+    content:"";
+    visibility: hidden;
+    display:block;
+    height:0;
+    clear:both;
+}
+.panel-white .partition-white{
+    background:white;
+    position:relative;
+    color:#8B91A0;
+}
+.height-300{
+    height:300px;
+}
+.panel-blue{
+    background: #5F8295;
+}
+.panel-blue .border-light{
+    border-color:rgba(0, 0, 0, 0.1);
+    color:white;
+    position:relative;
+}
+.btn-h{
+    color:white;
+    border-width:1px;
+    border-style:solid;
+    border-color:white;
+    display:inline-block;
+}
+.events{
+    margin:0;
+    padding:15px 20px;
+    list-style:none;
+    position:relative;
+    margin-bottom:15px;
+    clear:both;
+    border-color:rgba(255,255,255,0.2);
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-top-style:solid;
+    border-top-width:1px;
+}
+#calendar{
+    display:none;
+}

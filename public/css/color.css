@@ -1,5 +1,5 @@
 /*  Theme Color */
-a:hover,
+/*a:hover,*/
 .search-bar i:hover,
 .red-color,
 .upcoming-fixture-date,
@@ -27,7 +27,7 @@ a:hover,
 .match-detail-deep blockquote span i,
 .video-slider .slick-arrow:hover,
 .left-tiem-acounter .countdown li span
-{ color: #cc0000;} 
+{ color: #cc0000;}
 
 /* Theme Backgroung Color */
 .nav-list li a:hover,

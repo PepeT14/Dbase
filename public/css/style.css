@@ -351,7 +351,7 @@ p a{ color: #363636;}
 p a:hover{ text-decoration:underline; outline: none;}
 p{ letter-spacing: normal; margin-bottom: 20px; line-height: 23px; font-size: 14px; color: #363636;}
 
-a{ color: #7f7f7f; text-decoration: none; outline: none; display: block;}
+a{  text-decoration: none; outline: none; display: block;}
 a:hover, a:focus, a:active { outline: none; text-decoration: none;}
 
 .row.no-gutters{ margin-right: 0; margin-left: 0;}

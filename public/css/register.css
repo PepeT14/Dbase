@@ -75,3 +75,9 @@
     margin:20px 0 0;
     background-color:#162525;
 }
+.bg-pic{
+    position:relative;
+    height:100%;
+    background-position:center;
+    background-size:cover;
+}
