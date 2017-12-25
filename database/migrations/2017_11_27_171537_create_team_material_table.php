@@ -18,7 +18,8 @@ class CreateTeamMaterialTable extends Migration
             $table->increments('id');
             $table->integer('cantidad');
             $table->integer('stock');
-            $table->string('name');
+            $table->string('type');
+            $table->string('subtype');
             $table->text('description');
             $table->integer('team_id')->unsigned();
 

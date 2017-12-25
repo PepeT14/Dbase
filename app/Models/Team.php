@@ -9,6 +9,7 @@ class Team extends Model
     //Defining Table
 
     protected $table = 'teams';
+    public $timestamps=false;
 
     //Relationships
 

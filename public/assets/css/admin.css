@@ -23,7 +23,7 @@ body {
     padding: 0;
     background-color:#f5f5f5;
 }
-.adminHome{
+.admin{
     padding-top:50px;
     position:relative;
     top:10px;
@@ -121,6 +121,7 @@ body {
     box-shadow:0 1px 2px #C3C3C3;
     border-radius:3px;
     border:none;
+    min-height:100px;
 }
 .panel-white .border-light{
     border-color:rgba(0, 0, 0, 0.1);
@@ -225,4 +226,56 @@ body {
 }
 #calendar{
     display:none;
+}
+.btn-m{
+    background-color:#1FBBA6;
+    color:white;
+}
+.btn-m:hover{
+    background:#1FBBA6;
+}
+.btn-m:focus{
+    color:white;
+    outline:none;
+}
+.tabbed{
+    position:relative;
+    float:left;
+    text-align:left;
+
+}
+.tabbed label{
+    cursor:pointer;
+}
+.tabbed *{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:none;
+    font-weight:300;
+    font-style:normal;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+.tabbed input[type=radio]{
+    display:none;
+    visibility:hidden;
+    opacity:0;
+}
+.tabbed input:checked+label.tabs{
+    background:white;
+    color:#333;
+    box-shadow:6px 6px 0 0 rgba(0,0,0,.3);
+}
+.tabbed label.tabs{
+    background:#6e98e3;
+    color:white;
+    display:inline-block;
+    font-size:14px;
+    text-align:center;
+    text-transform: uppercase;
+    padding:0 40px;
+    width:auto;
+    height:44px;
+    line-height: 44px;
 }

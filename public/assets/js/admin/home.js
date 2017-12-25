@@ -38,16 +38,18 @@ $(document).ready(function(){
             type: 'column',
             name: 'Alevines',
             data: [4, 3, 3, 9]
-        }, {
-            type:'spline',
-            name: 'Inicial',
-            data: [3, 2.67, 3, 6.33],
-            marker: {
-                lineWidth: 2,
-                lineColor: Highcharts.getOptions().colors[3],
-                fillColor: 'white'
-            }
-        }],
+        }
+            // {
+            // type:'spline',
+            // name: 'Inicial',
+            // data: [3, 2.67, 3, 6.33],
+            // marker: {
+            //     lineWidth: 2,
+            //     lineColor: Highcharts.getOptions().colors[3],
+            //     fillColor: 'white'
+            // }
+        // }
+        ],
         credits:{
             enabled:false
         },

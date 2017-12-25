@@ -61,5 +61,14 @@ Route::group(['middleware' => ['auth:superAdmin']],function(){
 
 //Admin
 Route::group(['middleware' => ['auth:admin']],function(){
-   Route::get('/admin/home','AdminController@home')->name('admin.home');
+   Route::get('/admin/home','adminController@home')->name('admin.home');
+
+
+    //Material
+    Route::get('/admin/material/create','adminController@createMaterial')->name('material.create');
+    Route::get('/admin/material','adminController@material')->name('admin.material');
+
+    //Equipos
+    Route::get('/admin/teams','adminController@teams')->name('admin.teams');
+    Route::get('admin/teams/create','teamController@create')->name('team.create');
 });

@@ -33,16 +33,7 @@ class ClubController extends Controller
 
         $club->save();
 
-        $clubs = Club::all();
 
-        $states = collect([]);
-        $leagues = League::all();
-        foreach($leagues as $league){
-            if(!$states->contains($league->state)){
-                $states->push($league->state);
-            }
-        }
-
-        return redirect()->back()->with(compact(['clubs','states','leagues']));
+        return redirect()->action('superAdmin@home');
     }
 }

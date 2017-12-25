@@ -1,24 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="adminHeader">
-        <div class="pull-left ">
-            <div class="header-inner">
-                <div class="brand inline">
-                    <a href="{{action('HomeController@index')}}">
-                        <img class="logo" src="{{asset('assets/img/dbase.png')}}" alt="logo">
-                    </a>
-                </div>
-            </div>
-
-        </div>
-        <div class="title">
-            <h2>Panel de Administración</h2>
-        </div>
-        <div class=" pull-right">
-            @include('includes.user-info')
-        </div>
-    </div>
-    <div class="content adminHome">
+    <div class="content admin">
         <div class="toolbar row">
             <div class="col-sm-6">
                 <div class="page-header">
@@ -153,5 +135,4 @@
 @section('scripts')
     <script src="{{asset('assets/js/admin/home.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/calendario.js')}}" type="text/javascript"></script>
-
 @endsection

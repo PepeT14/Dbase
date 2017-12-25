@@ -73,8 +73,12 @@
                         <tr>
                             <td>{{$club->name}}</td>
                             <td>{{$club->city}}</td>
+                            @if($club->admin)
                             <td>{{$club->admin->username}}</td>
-                            <td>{{$club->admin->status()}}</td>
+                            @else
+                                <td> </td>
+                            @endif
+                            <td>{{$club->adminStatus()}}</td>
                         </tr>
                     @endforeach
                     </tbody>

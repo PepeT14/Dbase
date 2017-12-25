@@ -8,6 +8,7 @@ use App\Mail\inviteAdmin;
 use Mail;
 use App\Models\Club;
 use App\Models\League;
+use DB;
 
 class SuperAdmincontroller extends Controller
 {
@@ -31,7 +32,13 @@ class SuperAdmincontroller extends Controller
     public function invite(Request $request){
         $club = $request->input('club');
         Mail::to($request->input('email'))->send(new inviteAdmin($club));
-        return 'E-mail enviado correctamente'.env('APP_URL');
+
+        DB::table('valid_admins')->insert([
+            'email' => $request->input('email'),
+            'club' => $club,
+
+        ]);
+        return redirect()->action('superAdminController@home');
     }
 
 }

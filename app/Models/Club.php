@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Club extends Model
 {
@@ -32,6 +33,19 @@ class Club extends Model
         //Material (One to Many)
     public function materials(){
         return $this->hasMany('App\Models\ClubMaterial','club_id');
+    }
+    public function adminStatus(){
+        if($this->Admin){
+            return "Registrado";
+        }
+        else{
+            $valid = DB::table('valid_admins')->where('club',$this->name)->first();
+            if(is_null($valid)){
+                return "Por invitar";
+            }else{
+                return "Pendiente";
+            }
+        }
     }
 
 }

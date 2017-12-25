@@ -58,6 +58,6 @@ class AdminRegisterController extends Controller
         $admin->club()->associate($club);
         $club->admin()->save($admin);
 
-        return $admin;
+        return view('admin.home');
     }
 }

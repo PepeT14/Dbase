@@ -9,6 +9,8 @@ class ClubMaterial extends Model
     //
     protected $table='club_materials';
 
+    public $timestamps=false;
+
     //Relationships
         //CLub (Many to One)
     public function club(){

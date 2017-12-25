@@ -16,6 +16,24 @@
         @include('includes.sidebar')
     </div>
     <div class="container">
+        <div class="adminHeader">
+            <div class="pull-left ">
+                <div class="header-inner">
+                    <div class="brand inline">
+                        <a href="{{action('HomeController@index')}}">
+                            <img class="logo" src="{{asset('assets/img/dbase.png')}}" alt="logo">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="title">
+                <h2>Panel de Administración</h2>
+            </div>
+            <div class=" pull-right">
+                @include('includes.user-info')
+            </div>
+        </div>
         @yield('content')
     </div>
 </main>
