@@ -28,8 +28,8 @@ Route::prefix('register')->group(function(){
     Route::post('superAdminRegister','Auth\SuperAdmin\SuperAdminRegisterController@create')->name('superAdmin.submit');
     Route::get('adminRegister/{club}/','Auth\Admin\AdminRegisterController@showAdminRegister');
     Route::post('adminRegister','Auth\Admin\AdminRegisterController@registerAdmin')->name('admin.submit');
-    Route::get('misterRegister','Auth\Mister\MisterRegisterController@showMisterRegister');
-    Route::post('misterRegister','Auth\Mister\MisterRegisterController@registerMister');
+    Route::get('misterRegister/{team}','Auth\Mister\MisterRegisterController@showMisterRegister');
+    Route::post('misterRegister','Auth\Mister\MisterRegisterController@registerMister')->name('mister.submit');
     Route::get('tutorRegister','Auth\Tutor\TutorRegisterController@showTutorRegister');
     Route::post('tutorRegister','Auth\Tutor\TutorRegisterController@registerTutor');
     Route::get('playerRegister','Auth\Player\PlayerRegisterController@showPlayerRegister');
@@ -65,10 +65,18 @@ Route::group(['middleware' => ['auth:admin']],function(){
 
 
     //Material
-    Route::get('/admin/material/create','adminController@createMaterial')->name('material.create');
-    Route::get('/admin/material','adminController@material')->name('admin.material');
+    Route::get('admin/material/create','adminController@createMaterial')->name('material.create');
+    Route::get('admin/material','adminController@material')->name('admin.material');
 
     //Equipos
-    Route::get('/admin/teams','adminController@teams')->name('admin.teams');
+    Route::get('admin/teams','adminController@teams')->name('admin.teams');
     Route::get('admin/teams/create','teamController@create')->name('team.create');
+
+    //Entrenadores
+    Route::get('admin/invitar','adminController@misterInvite')->name('mister.invite');
+});
+
+//Mister
+Route::group(['middleware' => ['auth:mister']],function(){
+   Route::get('/mister/home','misterController@home')->name('mister.home');
 });

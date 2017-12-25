@@ -28,8 +28,8 @@ class MisterRegisterController extends Controller{
      * Return formulario de registro de entrenadores
      * */
 
-    public function showMisterRegister(){
-        return view('auth.misterRegister');
+    public function showMisterRegister($team){
+        return view('auth.misterRegister')->with(compact(['team']));
     }
 
     /*
@@ -42,13 +42,17 @@ class MisterRegisterController extends Controller{
          * Validaciones a nivel de servidor
          * --------------------------------
          * */
+        $messages =[
+            'email.exists' => 'Parece que usted no está invitado para ser administrador del club!',
+            'username.unique' => 'Ups! Hay otra persona que ya ha pensado este nombre de usuario, por favor, eliga otro',
+            'password.alpha_num' => 'Introduce una contraseña que solamente contenga letras y números por favor. Gracias'
+        ];
         $this->validate($request,[
-            'name' => 'required|max:100',
-            'email'=> 'required|email|unique:misters',
-            'password' => 'required|min:6|confirmed',
-            'team_name' => 'required|exists:teams,name',
-            'photo' => 'image|max:4096'
-        ]);
+            'name' => 'required|min:3|max:190',
+            'email' => 'required|email|max:190|unique:misters,email|exists:valid_misters,email',
+            'username' => 'required|min:6|max:190|unique:misters,username',
+            'password' => 'required|min:6|max:190|alpha_num'
+        ],$messages);
 
 
         /*
@@ -60,8 +64,11 @@ class MisterRegisterController extends Controller{
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' =>bcrypt($request->input('password')),
+            'username' => $request->input('username')
         ]);
-
+        $tName = $request->input('team');
+        $team = Team::where('name',$tName)->first();
+        $mister->team_id = $team->id;
         /*
          * Controles de Imagen
          * */
@@ -76,22 +83,20 @@ class MisterRegisterController extends Controller{
             $mister->file = url("images/avatars/Maestro_Tortuga.png");
         }
 
-        $team =$request->input('team_name');
-
-        $team_id = Team::where('name',$team)->first();
-
-        $mister-> team_id = $team_id;
-
         /*
          * Guardar Entrenador en la base de datos
          * */
 
         $mister->save();
 
+        //RELATIONSHIPS
+        $mister->team()->associate($team);
+        $team->mister()->save($mister);
+
         /*
          *Redirigir al home
          **/
 
-        return redirect('/home');
+        return view('mister.home');
     }
 }

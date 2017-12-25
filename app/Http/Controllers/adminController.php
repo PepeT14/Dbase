@@ -7,6 +7,10 @@ use App\Models\ClubMaterial;
 use Auth;
 use App\Models\Team;
 use App\Models\League;
+use App\Models\Mister;
+use Mail;
+use App\Mail\inviteMister;
+use DB;
 
 class adminController extends Controller
 {
@@ -41,6 +45,26 @@ class adminController extends Controller
         $admin = Auth::guard('admin')->user();
         $teams = Team::where('club_id','=',$admin->club->id)->get();
         $leagues = League::all();
-        return view('admin.teams')->with(compact(['teams','leagues']));
+        $misters = collect([]);
+        foreach($teams as $team){
+            $m = Mister::all()->where('team_id','=',$team->id)->first();
+            $misters->push($m);
+        }
+        return view('admin.teams')->with(compact(['teams','leagues','misters']));
+    }
+
+    //Invitar Entrenador
+    public function misterInvite(Request $request){
+        $admin = Auth::guard('admin')->user();
+        $team = $request->input('team');
+        Mail::to($request->input('email'))->send(new inviteMister($team));
+
+        DB::table('valid_misters')->insert([
+            'email' => $request->input('email'),
+            'club' => $admin->club->name,
+            'team' => $team
+
+        ]);
+        return redirect()->action('adminController@teams');
     }
 }

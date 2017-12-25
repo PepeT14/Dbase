@@ -14,9 +14,9 @@
                             {{ csrf_field() }}
                             <div class="inputs">
                                 <input id="name" type="text" placeholder="Nombre" name="name" value="{{ old('name') }}"  required>
-                                @if ($errors->has('email'))
+                                @if ($errors->has('name'))
                                     <span class="help-block">
-                                               <strong>{{ $errors->first('username') }}</strong>
+                                               <strong>{{ $errors->first('name') }}</strong>
                                            </span>
                                 @endif
                                 <input id="email" type="email" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}"  required>
