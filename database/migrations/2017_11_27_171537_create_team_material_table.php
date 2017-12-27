@@ -22,6 +22,8 @@ class CreateTeamMaterialTable extends Migration
             $table->string('subtype');
             $table->text('description');
             $table->integer('team_id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('team_id')->references('id')->on('teams');
         });

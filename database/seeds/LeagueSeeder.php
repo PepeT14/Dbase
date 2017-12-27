@@ -12,5 +12,11 @@ class LeagueSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('leagues')->insert([
+            'name' => 'Tercera Andaluza',
+            'state' => 'Andalucía',
+            'province' => 'Cádiz',
+            'category' => 'Alevín',
+        ]);
     }
 }

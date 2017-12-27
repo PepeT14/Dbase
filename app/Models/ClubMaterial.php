@@ -9,7 +9,7 @@ class ClubMaterial extends Model
     //
     protected $table='club_materials';
 
-    public $timestamps=false;
+    protected $dates=['created_at,updated_at,deleted_at'];
 
     //Relationships
         //CLub (Many to One)

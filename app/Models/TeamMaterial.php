@@ -9,6 +9,8 @@ class TeamMaterial extends Model
     //
     protected $table='team_materials';
 
+    protected $dates=['created_at,updated_at,deleted_at'];
+
     //Relationships
 
         //Team (One to Many)

@@ -22,6 +22,8 @@ class CreateClubMaterialTable extends Migration
             $table->string('subtype');
             $table->text('description');
             $table->integer('club_id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('club_id')->references('id')->on('clubs');
     });

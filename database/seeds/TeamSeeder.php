@@ -14,7 +14,8 @@ class TeamSeeder extends Seeder
         //
         DB::table('teams')->insert([
            'name' => 'Alevin A',
-           'league_id' =>  rand(1,2)
-        ]);
+           'league_id' =>  '1',
+            'club_id' => '1'
+         ]);
     }
 }

@@ -17,7 +17,7 @@ class MisterSeeder extends Seeder
             'email' => 'titomou@gmail.com',
             'username' => 'mister',
             'password' => bcrypt('prueba'),
-            'team_id' => rand(1,2),
+            'team_id' => '1',
         ]);
     }
 }

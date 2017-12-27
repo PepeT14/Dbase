@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
             'email' => str_random(10).'@gmail.com',
             'username' => 'dios',
             'password' => bcrypt('prueba'),
-            'club_id' => rand(1,2)
+            'club_id' => '1'
         ]);
     }
 }
