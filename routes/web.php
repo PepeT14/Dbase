@@ -47,8 +47,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //SuperAdmin
 Route::group(['middleware' => ['auth:superAdmin']],function(){
-    Route::get('superAdmin/home','SuperAdminController@home')->name('superAdmin.home');
-    Route::get('superAdmin/invitar','SuperAdminController@invite')->name('superAdmin.invite');
+    Route::get('superAdmin/home','superAdminController@home')->name('superAdmin.home');
+    Route::get('superAdmin/invitar','superAdminController@invite')->name('superAdmin.invite');
 
     //League
     Route::get('superAdmin/league','leagueController@create')->name('league.create');

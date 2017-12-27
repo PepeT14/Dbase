@@ -12,5 +12,12 @@ class MisterSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('misters')->insert([
+            'name' => 'Mou',
+            'email' => 'titomou@gmail.com',
+            'username' => 'mister',
+            'password' => bcrypt('prueba'),
+            'team_id' => rand(1,2),
+        ]);
     }
 }

@@ -26,7 +26,7 @@
                             @foreach($material as $material_item)
                                 <li><a data-toggle="tab" href="#{{$material_item->type}}">{{$material_item->type}}</a></li>
                             @endforeach
-                                <li><a data-toggle="tab" href="#form"><i class="fa fa-plus"></i></a></li>
+                                <li><a data-toggle="tab" href="#form">Añadir <i class="fa fa-plus"></i></a></li>
                         </ul>
                         <div class="tab-content">
                             @foreach($material as $material_item)

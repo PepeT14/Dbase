@@ -22,7 +22,7 @@ class adminController extends Controller
     //Material
     public function material(){
         $admin = Auth::guard('admin')->user();
-        $material = ClubMaterial::where('club_id','=',$admin->id)->get();
+        $material = ClubMaterial::where('club_id','=',$admin->club->id)->get();
         return view('admin.material')->with(compact(['material']));
     }
 
