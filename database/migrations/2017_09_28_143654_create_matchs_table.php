@@ -16,9 +16,10 @@ class CreateMatchsTable extends Migration
         //
         Schema::create('matchs',function(Blueprint $table){
             $table->increments('id');
-            $table->date('date');
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
+            $table->integer('jornada');
+            $table->date('date')->nullable();
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
             $table->integer('league_id')->unsigned();
 
             $table->foreign('league_id')->references('id')->on('leagues');

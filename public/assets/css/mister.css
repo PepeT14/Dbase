@@ -1,0 +1,43 @@
+.adminHeader{
+    position:fixed;
+    top:0;
+    left:0;
+    display: block;
+    height: 60px;
+    width: 100%;
+    padding: 0 20px 0 0;
+    z-index: 800;
+    background-color: darkgray;
+    border-bottom: 1px solid rgba(230, 230, 230, 0.7);
+
+}
+.fixed-header{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+}
+.logo{
+    height:60px;
+    padding-top:5px;
+    padding-left:70px;
+    max-width:240px;
+}
+.title{
+    position:absolute;
+    left:35%;
+    text-align: center;
+    display:inline-block;
+    padding-top:10px;
+}
+.name{
+    padding: 10px 10px 10px 50px;
+    font-size:16px;
+}
+.logout{
+    padding-right:10px;
+}
+.container{
+    width:auto !important;
+    max-width:none;
+}

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.mister')
 
 @section('content')
     <!-- Next Match -->

@@ -16,7 +16,6 @@ class CreateAdminClubTable extends Migration
         //
         Schema::create('admin_clubs',function(Blueprint $table){
             $table->increments('id');
-            $table->string('name');
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('password');

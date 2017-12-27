@@ -16,7 +16,7 @@ class CreateTeamMatchTable extends Migration
         //
         Schema::create('team_match',function(Blueprint $table){
             $table->increments('id');
-            $table->integer('positive_goals');
+            $table->integer('positive_goals')->nullable();
             $table->enum('quality',['local','visit']);
             $table->integer('match_id')->unsigned();
             $table->integer('team_id')->unsigned();

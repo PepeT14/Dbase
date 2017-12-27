@@ -24,6 +24,15 @@
         </div>
     @endif
     <div class="pull-right name">
-        <span class="semi-bold"><i class="fa fa-power-off logout"></i>Salir</span>
+        <a href="{{ route('logout') }}" class="clearfix" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+            <span class="pull-smi-bold">
+                <i class="fa fa-power-off logout"></i>
+                Salir
+            </span>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+        </form>
     </div>
 </div>

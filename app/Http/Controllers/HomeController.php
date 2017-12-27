@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::guard('admin')->check()){
+            return view('admin.home');
+        }
+        if(Auth::guard('player')->check()){
+            return view('player.home');
+        }
+        if(Auth::guard('mister')->check()){
+            return view('mister.home');
+        }
+        if(Auth::guard('tutor')->check()){
+            return view('tutor.home');
+        }
+        else{
+            return view('welcome');
+        }
     }
 }
