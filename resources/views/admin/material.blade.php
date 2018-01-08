@@ -37,6 +37,7 @@
                                         <tr>
                                             <th>Cantidad</th>
                                             <th>Subtipo</th>
+                                            <th>Descripcion</th>
                                             <th>Disponible</th>
                                         </tr>
                                         </thead>
@@ -44,6 +45,7 @@
                                         <tr>
                                             <td>{{$material_item->cantidad}}</td>
                                             <td>{{$material_item->subtype}}</td>
+                                            <td>{{$material_item->description}}</td>
                                             <td>{{$material_item->stock}}</td>
                                         </tr>
                                         </tbody>
@@ -56,14 +58,25 @@
                                         <div class="matForm">
                                             <h2>Crear Material</h2>
                                             <div class="inputs">
-                                                <input name="type" placeholder="Tipo Ej: Balones" type="text">
-                                                <input name="subtype" placeholder="Subtipo Ej: Fútbol 7" type="text">
-                                                <input name="cantidad" placeholder="Cantidad Ej:10" type="number">
-                                                <input name="description" placeholder="Descripción Ej: Balones nike fútbol 7" type="text">
+                                                <div>
+                                                    <input name="type" placeholder="Ej: Balones" type="text">
+                                                    <label for="type">Tipo</label>
+                                                </div>
+                                                <div>
+                                                    <input name="subtype" placeholder="Ej: Fútbol 7" type="text">
+                                                    <label for="subtype">Subtipo</label>
+                                                </div>
+                                                <div>
+                                                    <input name="cantidad" placeholder="Ej:10" type="number">
+                                                    <label for="cantidad">Cantidad</label>
+                                                </div>
+                                                <div>
+                                                    <input name="description" placeholder="Ej: Balones nike fútbol 7" type="text">
+                                                    <label for="description">Descripción</label>
+                                                </div>
+                                                <input class="createButton" type="submit" value="CREAR">
+
                                             </div>
-
-                                            <input class="createButton" type="submit" value="CREAR">
-
                                         </div>
                                     </form>
                                 </div>

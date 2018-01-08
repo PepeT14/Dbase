@@ -22,7 +22,7 @@ $(document).ready(function(){
     }
 
     $('.login').on("click", '.btn-l', function () {
-        if ($('#welcome').hasClass("active")) {
+        if ($('#welcomeText').hasClass("active")) {
             $('.welc').removeClass("active");
             $('.log').addClass("active");
             document.getElementById('login').innerHTML=

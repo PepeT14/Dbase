@@ -78,7 +78,7 @@
     font-size:22px;
     font-weight:600;
     text-align: center;
-    color:#5F8295;
+    color:white;
 
 }
 .panel .panel-heading.separator:after {
@@ -237,7 +237,7 @@
     margin-bottom: 20px;
 }
 /*welcome*/
-.welcome{ background: #ffffff;}
+.welcome{ background: #070b19;}
 .btn-l{
     padding: 0 15px;
     text-transform: uppercase;
@@ -249,7 +249,7 @@
     color: #fff;
 }
 .btn-login{
-    background-color:rgba(13, 54, 37, 0.21);
+    background-color:rgb(0, 160, 123);
     border-radius: 4px;
     position:relative;
 }
@@ -1618,8 +1618,8 @@ font-size: 10px;}
 /****** About Us ***********************************************************
 *********************************************************** About Us ******/
 .facilities-column{ position: relative; padding: 0 0 0 100px; margin: 30px 0;}
-.facilities-column h5{ font-size: 16px;}
-.facilities-column p{ color: #555; margin: 0;}
+.facilities-column h5{ font-size: 16px; color:#00A17C;}
+.facilities-column p{ color: white; margin: 0;}
 .Facilities-icon{ height: 80px; line-height: 80px; border-radius: 100%; width: 80px; text-align: center; left: 0;}
 .Facilities-icon.bg-1{ background: #68737e;}
 .Facilities-icon.bg-2{ background: #f3d15e;}
@@ -1628,7 +1628,7 @@ font-size: 10px;}
 .Facilities-icon.bg-5{ background: #74a6cd;}
 .Facilities-icon.bg-6{ background: #c1d154;}
 
-.facilities-column.center{ text-align: center; padding: 0; background: #f9f9f9; padding: 30px; margin: 15px 0;
+.facilities-column.center{ text-align: center; padding: 0;  padding: 30px; margin: 15px 0;
 border: 1px solid #dddbdb; border-radius: 6px;}
 .facilities-column.center .Facilities-icon{ margin: 0 0 30px; position: static; display: inline-block;
 -webkit-transform: translate(0, 0);

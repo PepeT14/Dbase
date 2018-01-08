@@ -32,5 +32,5 @@
 {{--THEME--}}
 {{--<script src="{{asset('js/sand-signika.js')}}" type="text/javascript"></script>--}}
 {{--Home--}}
-<script src="{{asset('js/home.js')}}" type="text/javascript"></script>
+{{--<script src="{{asset('js/home.js')}}" type="text/javascript"></script>--}}
 

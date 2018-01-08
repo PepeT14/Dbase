@@ -34,11 +34,6 @@
     <main class="main-content">
             @yield('content')
     </main>
-    <!-- Main Content-->
-
-    <!--Footer-->
-    @include('includes.footer')
-    <!--Footer-->
 </div>
 
 {{--SUPER ADMINISTRADOR--}}

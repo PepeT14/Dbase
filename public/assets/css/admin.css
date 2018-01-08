@@ -305,3 +305,45 @@ td input::placeholder{
     color:#5F8295;
     opacity:0.6;
 }
+.inputs input::placeholder{
+    color:black;
+}
+.matForm label{
+    position:relative;
+    float:left;
+    width:120px;
+    line-height:3em;
+    border-bottom:solid 1px darkslategrey;
+    color:darkslategrey;
+    font-size: 16px;
+    font-weight: bold;
+}
+.matForm h2{
+    text-align:center;
+    padding-top:10px;
+    color:#a94442;
+}
+.inputs{
+    margin-right:300px;
+    margin-left:300px;
+}
+.matForm input[type=text],input[type=number]{
+    float:right;
+    border:none;
+    border-bottom:solid 1px darkslategrey;
+    width:calc(100% - 120px);
+    line-height:3.3em;
+    color:black;
+}
+.createButton{
+    width:100%;
+    margin-top:10px;
+    padding:5px;
+    background-color: #1b6d85;
+    color:white;
+    height:45px;
+    border-radius:5px;
+}
+.nav>li>a{
+    color:darkslategrey;
+}

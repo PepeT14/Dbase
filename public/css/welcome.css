@@ -19,21 +19,24 @@
     width: 20px;
     height: 20px;
 }
+.form-login input::placeholder{
+    color:white;
+}
 
 .form-login input[type=text],input[type=password]{
     width: 460px;
     padding: 20px 0px;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #b78d21;
+    border-bottom: 1px solid #aad1aa;
     outline: none;
-    color: #6D7781;
+    color: white;
 }
 
 .btn-logger{
     width:460px;
     margin:20px 0;
-    background-color:#162525;
+    background-color:#00410e;
 }
 .container-login{
     position: absolute;
@@ -54,4 +57,44 @@
     right: 600px;
     width: 52%;
 }
+#fondo{
+    height:auto !important;
+}
 
+#logoWelcome{
+    width:220px;
+    position:absolute;
+    left: 30px;
+    top:-12px;
+}
+
+#welcomeText{
+    background-color: transparent;
+    position:absolute;
+    top:100px;
+    left:300px;
+    width: calc(100% - 400px);
+    height:calc(85% - 50px);
+    padding-right:25px;
+    border:solid 1px white;
+    opacity:1;
+}
+
+#welcomeText p{
+    color:white;
+    padding:10px;
+    font-family: fantasy;
+}
+
+#loginWelcome{
+    position:absolute;
+    top:50%;
+    left:30%;
+}
+.main-heading h2{
+    color:#00a131;
+    text-transform: none;
+}
+.main-heading p{
+    color:white;
+}
