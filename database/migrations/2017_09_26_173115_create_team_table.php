@@ -17,6 +17,7 @@ class CreateTeamTable extends Migration
         Schema::create('teams',function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
+            $table->string('category');
             $table->integer('league_id')->unsigned();
             $table->integer('club_id')->unsigned();
 

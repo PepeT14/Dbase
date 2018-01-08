@@ -25,12 +25,16 @@
     padding: 20px 0;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #b78d21;
+    border-bottom: 1px solid #5F8295;
     outline: none;
-    color: white;
+    color: black;
 }
+/*#formReg{*/
+    /*background-color: white;*/
+    /*opacity:0.6;*/
+/*}*/
 .form-register input::placeholder{
-    color: #b78d21;
+    color: #5F8295;
     font-style: oblique;
     font-weight: bold;
 }
@@ -43,7 +47,7 @@
     width: 500px;
     height: fit-content;
     border-radius: 5px;
-    background: rgba(3,3,3,0.25);
+    background: white;
     box-shadow: 1px 1px 50px #000;
 }
 .banner-layer-register img{
@@ -80,4 +84,7 @@
     height:100%;
     background-position:center;
     background-size:cover;
+}
+span strong{
+    color:red;
 }

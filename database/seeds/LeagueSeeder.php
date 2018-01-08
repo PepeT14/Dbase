@@ -16,7 +16,7 @@ class LeagueSeeder extends Seeder
             'name' => 'Tercera Andaluza',
             'state' => 'Andalucía',
             'province' => 'Cádiz',
-            'category' => 'Alevín',
+            'category' => 'Pre-Benjamin',
         ]);
     }
 }

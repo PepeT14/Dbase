@@ -47,16 +47,17 @@ class adminController extends Controller
         $leagues = League::all();
         $misters = collect([]);
         foreach($teams as $team){
-            $m = Mister::all()->where('team_id','=',$team->id)->first();
-            $misters->push($m);
+            $m = Mister::all()->where('team_id','=',$team->id);
+            foreach($m as $mister){
+                $misters->push($mister);
+            }
         }
         return view('admin.teams')->with(compact(['teams','leagues','misters']));
     }
 
     //Invitar Entrenador
-    public function misterInvite(Request $request){
+    public function misterInvite(Request $request,$team){
         $admin = Auth::guard('admin')->user();
-        $team = $request->input('team');
         Mail::to($request->input('email'))->send(new inviteMister($team));
 
         DB::table('valid_misters')->insert([

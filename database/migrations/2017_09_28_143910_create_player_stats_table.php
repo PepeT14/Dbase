@@ -20,7 +20,6 @@ class CreatePlayerStatsTable extends Migration
            $table->integer('yellow_cards');
            $table->integer('red_cards');
            $table->integer('goals');
-           $table->string('team');
            $table->integer('player_id')->unsigned();
 
            $table->foreign('player_id')->references('id')->on('players');

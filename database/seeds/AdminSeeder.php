@@ -14,9 +14,15 @@ class AdminSeeder extends Seeder
         //
         DB::table('admin_clubs')->insert([
             'email' => str_random(10).'@gmail.com',
-            'username' => 'dios',
+            'username' => 'admin',
             'password' => bcrypt('prueba'),
             'club_id' => '1'
+        ]);
+        DB::table('admin_clubs')->insert([
+            'email' => str_random(10).'@gmail.com',
+            'username' => 'admin2',
+            'password' => bcrypt('prueba'),
+            'club_id' => '2'
         ]);
     }
 }

@@ -43,7 +43,9 @@ class MisterRegisterController extends Controller{
          * --------------------------------
          * */
         $messages =[
-            'email.exists' => 'Parece que usted no está invitado para ser administrador del club!',
+            'email.email' => 'Mete un email válido imbecil',
+            'username.min' => 'Mete un usuario más grande zopenco, minimo 6!',
+            'email.exists' => 'Parece que usted no está invitado para ser entrenador del club!',
             'username.unique' => 'Ups! Hay otra persona que ya ha pensado este nombre de usuario, por favor, eliga otro',
             'password.alpha_num' => 'Introduce una contraseña que solamente contenga letras y números por favor. Gracias'
         ];

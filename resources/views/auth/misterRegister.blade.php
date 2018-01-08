@@ -3,7 +3,7 @@
 @section('content')
     <div class="item log" >
         <div class="position-center-x full-width">
-            <div class="container-register">
+            <div class="container-register" id="formReg">
                 <div class="banner-layer-register pull-left">
                     <a  href="/"><img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}"></a>
                 </div>

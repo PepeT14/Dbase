@@ -34,6 +34,11 @@ body {
     padding-left:70px;
     max-width:240px;
 }
+.escudo{
+    display:inline-block;
+    height:40px;
+    max-width:240px;
+}
 .title{
     position:absolute;
     left:35%;
@@ -278,4 +283,25 @@ body {
     width:auto;
     height:44px;
     line-height: 44px;
+}
+
+th, td{
+    padding:5px 10px 0 10px;
+    text-align: center;
+}
+
+th{
+    width:220px;
+}
+
+td input{
+    border-radius: 5px;
+    border-style:solid;
+    border-color:#5F8295;
+}
+td input::placeholder{
+    text-align: center;
+    font-size: 13px;
+    color:#5F8295;
+    opacity:0.6;
 }

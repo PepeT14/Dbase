@@ -71,10 +71,13 @@ Route::group(['middleware' => ['auth:admin']],function(){
     Route::get('admin/teams/create','teamController@create')->name('team.create');
 
     //Entrenadores
-    Route::get('admin/invitar','adminController@misterInvite')->name('mister.invite');
+    Route::get('admin/invitar/{team}','adminController@misterInvite')->name('mister.invite');
 });
 
 //Mister
 Route::group(['middleware' => ['auth:mister']],function(){
    Route::get('/mister/home','misterController@home')->name('mister.home');
 });
+
+//PUBLIC
+Route::get('/profile/{mister}','misterController@showProfile')->name('mister.profile');

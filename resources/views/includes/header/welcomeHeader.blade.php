@@ -38,10 +38,10 @@
         <div class="carousel-inner" role="listbox">
             <!-- Item -->
             <div class="item welc active f" id="welcome">
-                <img class="fullscreen" src="{{asset('images/welcome/fondo1.png')}}" alt="">
+                <img class="fullscreen" src="{{asset('images/welcome/fondo1.jpg')}}" alt="">
                 <div class="position-center-x full-width">
-                    <div class="container">
-                        <div class="banner-layer pull-left">
+                    <div class="container-login">
+                        <div class="banner-layer-login pull-left">
                             <img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}" alt="">
                         </div>
                         <div class="banner-caption style-1 p-white h-white pull-right">

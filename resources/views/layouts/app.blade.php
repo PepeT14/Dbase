@@ -56,32 +56,6 @@
 
     @include('includes.header.header')
 
-    <!-- Page Heading banner -->
-
-        <div class="overlay-dark theme-padding parallax-window" data-appear-top-offset="500" data-parallax="scroll" data-image-src="images/cabecera1.png"></div>
-        <!-- Banner slider -->
-        <div id="animated-slider" class="carousel slide carousel-fade">
-            <!-- News Slider -->
-            <div class="news-slider style-2">
-                <div class="container">
-                    <div class="news-slider-holder">
-                        <div class="alert-spinner">
-                            <div class="double-bounce1"></div>
-                            <div class="double-bounce2"></div>
-                        </div>
-                        <ul id="ticker" class="ticker">
-                            <li><span>Top Headlines:</span>Source: Manziel 'hung over' at Browns' meeting Clippers suspend Griffin four games.</li>
-                            <li><span>Top Headlines:</span>Source: Manziel 'hung over' at Browns' meeting Clippers suspend Griffin four games.</li>
-                            <li><span>Top Headlines:</span>Source: Manziel 'hung over' at Browns' meeting Clippers suspend Griffin four games.</li>
-                            <li><span>Top Headlines:</span>Source: Manziel 'hung over' at Browns' meeting Clippers suspend Griffin four games.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- News Slider -->
-        </div>
-
-    <!-- Page Heading banner -->
 
     <!-- Main Content -->
         <main class="main-content">
