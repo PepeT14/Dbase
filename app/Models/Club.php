@@ -34,6 +34,16 @@ class Club extends Model
     public function materials(){
         return $this->hasMany('App\Models\ClubMaterial','club_id');
     }
+
+    //Instalaciones
+    public function instalaciones(){
+        return $this->hasMany('App\Models\Instalacion','club_id');
+    }
+
+    //Leagues no federativas (One to Many)
+    public function leaguesNof(){
+        return $this->hasMany('App\Models\League_Nof','club_id');
+    }
     public function adminStatus(){
         if($this->Admin){
             return "Registrado";
@@ -46,6 +56,15 @@ class Club extends Model
                 return "Pendiente";
             }
         }
+    }
+    public function matchs(){
+        $matchs = collect([]);
+        $equipos = $this->teams();
+        foreach($equipos as $equipo){
+            $partidos = $equipo->matchs;
+            $matchs->push($partidos);
+        }
+        return $matchs;
     }
 
 }

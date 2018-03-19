@@ -18,5 +18,11 @@ class LeagueSeeder extends Seeder
             'province' => 'Cádiz',
             'category' => 'Pre-Benjamin',
         ]);
+
+        //PARTIDOS
+        DB::table('matchs')->insert([
+            ['jornada'=>1,'title'=>'Paquete U.D A - Paquete U.D B','start'=>'2018-01-27 10:00','end' => '2018-01-27 12:00','league_id' => 1]
+        ]);
+
     }
 }

@@ -9,7 +9,6 @@
     z-index: 800;
     background-color: darkgray;
     border-bottom: 1px solid rgba(230, 230, 230, 0.7);
-
 }
 .fixed-header{
     position:fixed;
@@ -20,7 +19,7 @@
 .logo{
     height:60px;
     padding-top:5px;
-    padding-left:70px;
+    padding-left:80px;
     max-width:240px;
 }
 .title{
@@ -40,4 +39,33 @@
 .container{
     width:auto !important;
     max-width:none;
+}
+.escudo{
+    display:inline-block;
+    height:40px;
+    max-width:240px;
+}
+.informacion{
+    margin-top: 60px;
+}
+
+.mister-content{
+    padding-left:70px;
+    padding-top: 70px;
+    width:100%;
+}
+
+.mister-content .tacticas{
+    display:inline-flex;
+}
+
+.fa, .fas{
+    width:20px;
+    text-align:center;
+}
+
+@media(max-width:1024px){
+    .mister-content{
+        margin-left:0;
+    }
 }

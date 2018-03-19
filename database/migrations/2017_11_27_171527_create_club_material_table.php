@@ -20,7 +20,7 @@ class CreateClubMaterialTable extends Migration
             $table->integer('stock');
             $table->string('type');
             $table->string('subtype');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('club_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

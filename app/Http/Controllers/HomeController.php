@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::guard('admin')->check()){
-            return view('admin.home');
+            return redirect()->action('adminController@home');
         }
         if(Auth::guard('player')->check()){
             return view('player.home');

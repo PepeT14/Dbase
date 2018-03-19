@@ -216,6 +216,10 @@ body {
     border-color:white;
     display:inline-block;
 }
+.btn-h:hover{
+    background-color: #434348;
+}
+
 .events{
     margin:0;
     padding:15px 20px;
@@ -228,9 +232,6 @@ body {
     border-bottom-width:1px;
     border-top-style:solid;
     border-top-width:1px;
-}
-#calendar{
-    display:none;
 }
 .btn-m{
     background-color:#1FBBA6;
@@ -284,17 +285,22 @@ body {
     height:44px;
     line-height: 44px;
 }
-
+a:hover{
+    color:white;
+}
+a:focus{
+    color:white;
+}
 th, td{
     padding:5px 10px 0 10px;
     text-align: center;
 }
 
-th{
+.teamTable th{
     width:220px;
 }
 
-td input{
+.teamTable td input{
     border-radius: 5px;
     border-style:solid;
     border-color:#5F8295;
@@ -346,4 +352,26 @@ td input::placeholder{
 }
 .nav>li>a{
     color:darkslategrey;
+}
+
+.icon-med{
+    font-size:20px;
+}
+
+.no-border-select{
+    border:none;
+}
+
+#calendar{
+    padding:17px;
+}
+.panel-red{
+    background-color:#e66b6b;
+}
+
+form.tr {
+    display:table-row;
+}
+span.td{
+    display:table-cell;
 }

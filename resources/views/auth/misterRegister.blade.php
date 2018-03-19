@@ -19,6 +19,7 @@
                                                <strong>{{ $errors->first('name') }}</strong>
                                            </span>
                                 @endif
+
                                 <input id="email" type="email" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}"  required>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -40,7 +41,7 @@
                                 <input id="team" type="text"  name="team" value="{{$team}}" readonly>
                             </div>
                             <button type="submit" class="btn-r btn-regist btn-register">
-                                Registro
+                                Registro {{Auth::check()}}
                             </button>
 
                         </form>

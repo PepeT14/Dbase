@@ -2,28 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instalacion;
 use Illuminate\Http\Request;
 use App\Models\ClubMaterial;
 use Auth;
 use App\Models\Team;
 use App\Models\League;
-use App\Models\Mister;
 use Mail;
 use App\Mail\inviteMister;
 use DB;
+use MaddHatter\LaravelFullcalendar\Calendar;
+use App\Models\League_Nof;
 
 class adminController extends Controller
 {
     //Home
     public function home(){
-        return view('admin.home');
+        $eventos = $this->getEvents();
+        $partidos = $this->getMatchs();
+
+        $calendar = \Calendar::addEvents($eventos)->addEvents($partidos)->setOptions([
+            'displayEventTime' =>false,
+            'timeFormat'=> 'HH:mm',
+            'fixedWeekCount'=>false,
+            'dayNamesShort' =>['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']
+        ])->setCallbacks([
+            'eventClick'=>'function(calEvent){
+                if(calEvent.id.includes("e")){
+                    window.alert("edit");
+                }else{
+                    window.location.href="match/"+calEvent.id+"/";
+                }
+            }',
+        ]);
+
+        return view('admin.home')->with(compact('calendar'));
     }
 
     //Material
     public function material(){
         $admin = Auth::guard('admin')->user();
-        $material = ClubMaterial::where('club_id','=',$admin->club->id)->get();
-        return view('admin.material')->with(compact(['material']));
+        $materialAgrupado = Clubmaterial::all()->where('club_id','=',$admin->club->id)->groupBy('type');
+
+        return view('admin.material')->with(compact(['materialAgrupado']));
     }
 
     public function createMaterial(Request $request){
@@ -35,24 +56,29 @@ class adminController extends Controller
         $material->subtype = $request->input('subtype');
         $material->description = $request->input('description');
         $material->club_id = $admin->club->id;
-
         $material->save();
+
         return redirect()->action('adminController@material');
     }
+    public function deleteMaterial(){
+
+    }
+
 
     //Equipos
     public function teams(){
         $admin = Auth::guard('admin')->user();
         $teams = Team::where('club_id','=',$admin->club->id)->get();
         $leagues = League::all();
-        $misters = collect([]);
-        foreach($teams as $team){
-            $m = Mister::all()->where('team_id','=',$team->id);
-            foreach($m as $mister){
-                $misters->push($mister);
-            }
-        }
-        return view('admin.teams')->with(compact(['teams','leagues','misters']));
+        return view('admin.teams')->with(compact(['teams','leagues']));
+    }
+
+    //Ligas No Federativas
+    public function leaguesNof(){
+        $admin = Auth::guard('admin')->user();
+        $club = $admin->club;
+        $leaguesNof = League_Nof::all()->where('club_id','=',$club->id);
+        return view('admin.leaguesNof')->with(compact('leaguesNof'));
     }
 
     //Invitar Entrenador
@@ -68,4 +94,53 @@ class adminController extends Controller
         ]);
         return redirect()->action('adminController@teams');
     }
+
+    //Instalaciones
+    public function instalaciones(){
+        $admin = Auth::guard('admin')->user();
+        $instalaciones = Instalacion::all()->where('club_id','=',$admin->club->id);
+        return view('admin.instalaciones',compact('instalaciones'));
+    }
+
+    //CREAR EVENTOS
+    public function getEvents(){
+        $admin = Auth::guard('admin')->user();
+        $events=collect([]);
+        $adminEvents = $admin->events();
+
+        foreach($adminEvents as $adminEvent){
+            $event = Calendar::event(
+                $adminEvent->title,//Titulo
+                false,//¿Dia Entero?
+                $adminEvent->start,//INICIO
+                $adminEvent->end,//FIN
+                $adminEvent->id.'e',//EVENT ID
+                [
+                    'editable' => true,
+                ]
+            );
+            $events->push($event);
+        }
+        return $events;
+    }
+    private function getMatchs(){
+        $admin = Auth::guard('admin')->user();
+        $matchs= collect([]);
+        $partidos = $admin->club->matchs();
+        foreach($partidos as $partido){
+            $match = Calendar::event(
+                $partido->title,//Titulo
+                false,//¿Dia Entero?
+                $partido->start,//INICIO
+                $partido->end,//FIN
+                $partido->id,//EVENT ID
+                [
+                    'editable' => true,
+                ]
+            );
+            $matchs->push($match);
+        }
+        return $matchs;
+    }
+
 }

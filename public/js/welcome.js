@@ -35,7 +35,7 @@ $(document).ready(function(){
             $('.welc').addClass("active");
             document.getElementById('login').innerHTML=
                 '<button class="btn-l btn-login">' +
-                '<i class="fa fa-sign-in"></i>' +
+                '<i class="fa fa-sign-in-alt"></i>' +
                 'Login</button>'
             return false;
         }

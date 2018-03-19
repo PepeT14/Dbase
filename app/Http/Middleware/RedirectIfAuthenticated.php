@@ -20,6 +20,9 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
         }
+        if(Auth::guard('admin')->check() || Auth::guard('player')->check() || Auth::guard('tutor')->check() || Auth::guard()->check()){
+            return redirect()->action('HomeController@index');
+        }
 
         return $next($request);
     }

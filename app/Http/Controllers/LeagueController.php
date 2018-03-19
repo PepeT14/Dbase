@@ -21,4 +21,9 @@ class LeagueController extends Controller
 
       return redirect()->action('superAdminController@home');
     }
+
+    //HOME
+    public function home($league){
+        return view('league.league',compact('league'));
+    }
 }

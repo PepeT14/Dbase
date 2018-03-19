@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Team extends Model
 {
@@ -25,9 +26,9 @@ class Team extends Model
     public function club(){
         return $this->belongsTo('App\Models\Club','club_id');
     }
-        //Team_Match (One to Many)
+        //Team_Match (Many to Many)
     public function matchs(){
-        return $this->hasMany('App\Models\TeamMatch','team_id');
+        return $this->belongToMany('App\Models\Match','team_match','team_id','match_id')->withPivot('positive_goals','quality');
     }
         //Player_Stats (Many to Many)
     public function playerStats(){
@@ -58,5 +59,23 @@ class Team extends Model
         //Materials (One to Many)
     public function materials(){
         return $this->hasMany('App\Models\TeamMaterial','team_id');
+    }
+
+    //Ligas no federativas (Many to Many)
+    public function leagues_nof(){
+        return $this->belongsToMany('App\Models\League_nof','teams_leagues_nof','team_id','league_nof_id');
+    }
+    public function misterStatus(){
+        if($this->mister){
+            return "Registrado";
+        }
+        else{
+            $valid = DB::table('valid_misters')->where('team',$this->name)->first();
+            if(is_null($valid)){
+                return "Por invitar";
+            }else{
+                return "Pendiente";
+            }
+        }
     }
 }

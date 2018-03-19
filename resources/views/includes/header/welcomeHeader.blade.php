@@ -13,7 +13,7 @@
                         <ul class="login">
                             <li class="login" id="login">
                                 <button class="btn-l btn-login">
-                                    <i class="fa fa-sign-in"></i>
+                                    <i class="fa fa-sign-in-alt"></i>
                                     Login
                                 </button>
                             </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Mister;
 use App\Models\Team;
+use Auth;
 
 class MisterRegisterController extends Controller{
 

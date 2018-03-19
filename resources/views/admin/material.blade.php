@@ -23,14 +23,14 @@
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-tabs tabbs">
-                            @foreach($material as $material_item)
-                                <li><a data-toggle="tab" href="#{{$material_item->type}}">{{$material_item->type}}</a></li>
+                            @foreach($materialAgrupado->keys() as $material_item)
+                                <li><a data-toggle="tab" href="#{{$material_item}}">{{$material_item}}</a></li>
                             @endforeach
                                 <li><a data-toggle="tab" href="#form">Añadir <i class="fa fa-plus"></i></a></li>
                         </ul>
                         <div class="tab-content">
-                            @foreach($material as $material_item)
-                                <div id="{{$material_item->type}}" class="tab-pane fadeInLeft">
+                            @foreach($materialAgrupado->keys() as $key)
+                                <div id="{{$key}}" class="tab-pane fadeInLeft">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -39,15 +39,22 @@
                                             <th>Subtipo</th>
                                             <th>Descripcion</th>
                                             <th>Disponible</th>
+                                            <th>Acciones</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach(array_get($materialAgrupado,$key) as $material_item)
                                         <tr>
                                             <td>{{$material_item->cantidad}}</td>
                                             <td>{{$material_item->subtype}}</td>
                                             <td>{{$material_item->description}}</td>
                                             <td>{{$material_item->stock}}</td>
+                                            <td class="icon-med"><i class="fa fa-trash"> </i>
+                                                <i class="fa fa-pencil-square"></i>
+                                                <i class="fa fa-plus-circle"></i>
+                                            </td>
                                         </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

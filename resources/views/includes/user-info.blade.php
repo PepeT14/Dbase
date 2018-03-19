@@ -1,5 +1,5 @@
 <!-- START User Info-->
-<div class="visible-lg visible-md m-t-10">
+<div class="m-t-10">
         @php
             $user = Auth::user();
             if(Auth::guard('admin')->user()){

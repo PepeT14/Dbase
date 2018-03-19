@@ -45,6 +45,7 @@
 
 <!-- Scripts -->
 @include('includes.scripts')
+<script src="{{asset('assets/js/admin/admin.js')}}" type="text/javascript"></script>
 @yield('scripts')
 </body>
 </html>

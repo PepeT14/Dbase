@@ -1,0 +1,38 @@
+
+.field{
+    position:relative;
+    height:100%;
+
+}
+.field-header{
+    height:20px;
+    background-color: darkgrey;
+    color:white;
+    font-weight: bold;
+}
+.field-content{
+    border:solid 1px;
+    height: 600px;
+    width:50%;
+}
+.field-header > ul:first-child{
+    border-right:solid 1px;
+}
+
+.header-item{
+    border-bottom:solid 1px;
+    text-align:center;
+}
+.header-item:hover{
+    cursor:pointer;
+    background-color: #1b1b1b;
+}
+.header-item.selected{
+    background-color:#1b1b1b;
+}
+.columna-datos{
+    border:solid 1px;
+    border-left:none;
+    height:600px;
+    width:200px;
+}

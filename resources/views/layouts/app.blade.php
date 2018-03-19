@@ -1,8 +1,13 @@
+@if(Auth::guard('admin')->check())
+    @include('layouts.admin')
+@elseif(Auth::guard('mister')->check())
+    @include('layouts.mister')
+@else
 <!DOCTYPE html>
 <html class="no-js">
 <head>
-    @include ('includes.meta')
-    <!-- Styles -->
+@include ('includes.meta')
+<!-- Styles -->
     @include ('includes.styles')
 
     <script src="{{asset('js/vendor/modernizr.js')}}"></script>
@@ -16,38 +21,38 @@
     <link rel="stylesheet" href="{{asset('css/register.css')}}" type="text/css">
     <div class="bg-pic">
         <img class="bg-pic" src="{{asset('images/camino.jpg')}}" alt="">
-            {{--@include('includes.header.registerHeader')--}}
+        {{--@include('includes.header.registerHeader')--}}
     </div>
     <main class="main-content">
         @yield('content')
     </main>
 
-{{--WELCOME--}}
+    {{--WELCOME--}}
 
 @elseif(Request::route()->getName() ==''  || Request::route()->getName()=='login')
-<div class="wrap push">
-    <!-- Banner slider -->
+    <div class="wrap push">
+        <!-- Banner slider -->
     @include('includes.header.welcomeHeader')
     <!-- Banner slider -->
 
-    <!-- Main Content-->
-    <main class="main-content">
+        <!-- Main Content-->
+        <main class="main-content">
             @yield('content')
-    </main>
-</div>
+        </main>
+    </div>
 
-{{--SUPER ADMINISTRADOR--}}
+    {{--SUPER ADMINISTRADOR--}}
 
 @elseif(Request::route()->getName()=='superAdmin.home')
     <link rel="stylesheet" href="{{asset('css/superAdmin.css')}}" type="text/css">
 
     @yield('content')
 
-{{--LOS DEMAS--}}
+    {{--LOS DEMAS--}}
 
 @else
 
-<div class="wrap push">
+    <div class="wrap push">
 
     @include('includes.header.header')
 
@@ -58,19 +63,21 @@
                 @yield('content')
             </div>
         </main>
-    <!-- Main Content -->
+        <!-- Main Content -->
 
-    <!--Footer-->
+        <!--Footer-->
     {{--@include('includes.footer')--}}
     <!--Footer-->
 
-</div>
+    </div>
     <!--Menu Responsive-->
     @include('includes.slider-menu')
     <!--Menu Responsive-->
 @endif
-    <!-- Scripts -->
-    @include('includes.scripts')
-    @yield('scripts')
+<!-- Scripts -->
+@include('includes.scripts')
+@yield('scripts')
 </body>
 </html>
+
+@endif

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mister;
 use App\Models\Team;
 use App\Models\League;
-use DB;
+use Auth;
 class misterController extends Controller
 {
     //HOME
@@ -27,5 +27,10 @@ class misterController extends Controller
             $lastTeam = $stats->last()->get()->team;
 
         return view('misterProfile',with(compact(['m','t','league','lastTeam'])));
+    }
+
+    public function tactica(){
+        $mister = Auth::guard('mister')->user();
+        return view('mister.tacticas',with(compact('mister')));
     }
 }

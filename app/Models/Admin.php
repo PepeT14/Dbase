@@ -28,4 +28,9 @@ class Admin extends adminUser
     public function club(){
         return $this->belongsTo('App\Models\Club','club_id');
     }
+
+    public function events(){
+        $events = DB::table('admin_events')->where('admin_id',$this->id)->get();
+        return $events;
+    }
 }

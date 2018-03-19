@@ -17,7 +17,7 @@ class Match extends Model
     }
         //Match_Team (One to Many)
     public function teams(){
-        return $this->hasMany('App\Models\TeamMatch','match_id');
+        return $this->belongsToMany('App\Models\Team','team_match','match_id','team_id')->withPivot('positive_goals','quality');
 
     }
         //Player_Match_Stats (One to Many)

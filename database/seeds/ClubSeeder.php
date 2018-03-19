@@ -11,7 +11,7 @@ class ClubSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Equipo
         DB::table('clubs')->insert([
             'name' => 'Paquete U.D',
             'telephone' => '666666666',
@@ -21,14 +21,22 @@ class ClubSeeder extends Seeder
             'address' => 'Avenida Lebrija, 8',
             'state' => 'Andalucía'
         ]);
-        DB::table('clubs')->insert([
-            'name' => 'Marianistas A.D',
-            'telephone' => '666666666',
-            'escudo' => 'assets/escudos/marianistas.jpg',
-            'country' => 'España',
-            'city' => 'Jerez de la Frontera',
-            'address' => 'Avenida Cruz Roja, 8',
-            'state' => 'Andalucía'
+
+        //Instalaciones
+        DB::table('instalaciones')->insert([
+            ['name' => 'Pista 1','tipo' => 'Fútbol 7', 'club_id' => 1],
+            ['name' => 'Pista 2','tipo' => 'Fútbol 7', 'club_id' => 1],
+            ['name' => 'Pista 3','tipo' => 'Fútbol 11', 'club_id' => 1],
+            ['name' => 'Pista 4','tipo' => 'Fútbol sala', 'club_id' => 1]
+        ]);
+
+        //Material
+        DB::table('club_materials')->insert([
+            ['cantidad' => 25,'stock' => 25, 'type' => 'Balones', 'subtype' => 'Fútbol 11','club_id' => 1],
+            ['cantidad' => 30,'stock' => 25, 'type' => 'Balones', 'subtype' => 'Fútbol 7','club_id' => 1],
+            ['cantidad' => 50,'stock' => 25, 'type' => 'Conos', 'subtype' => 'Rojos','club_id' => 1],
+            ['cantidad' => 10,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Pequeños','club_id' => 1],
+            ['cantidad' => 10,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Grandes','club_id' => 1],
         ]);
     }
 }

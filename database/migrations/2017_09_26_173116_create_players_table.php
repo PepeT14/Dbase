@@ -18,11 +18,11 @@ class CreatePlayersTable extends Migration
            $table->rememberToken();
            $table->increments('id');
            $table->string('name');
-           $table->string('email')->unique();
+           $table->string('email');
            $table->string('username')->unique();
            $table->string('password');
-           $table->integer('number');
-           $table->string('photo');
+           $table->integer('number')->nullable();
+           $table->string('photo')->nullable();
            $table->date('birthday');
            $table->string('position');
            $table->integer('team_id')->unsigned();
