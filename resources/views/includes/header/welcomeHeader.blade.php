@@ -10,9 +10,9 @@
                 <div class="row">
                     <!-- Login Option -->
                     <div class="col-sm-6 col-xs-12 pull-right">
-                        <ul class="login">
+                        <ul>
                             <li class="login" id="login">
-                                <button class="btn-l btn-login">
+                                <button class="btn-l btn-login" id="logear">
                                     <i class="fa fa-sign-in-alt"></i>
                                     Login
                                 </button>

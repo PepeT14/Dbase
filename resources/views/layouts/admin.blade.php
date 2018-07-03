@@ -39,10 +39,6 @@
 </main>
 <!-- Main Content -->
 
-    <!--Menu Responsive-->
-@include('includes.slider-menu')
-    <!--Menu Responsive-->
-
 <!-- Scripts -->
 @include('includes.scripts')
 <script src="{{asset('assets/js/admin/admin.js')}}" type="text/javascript"></script>

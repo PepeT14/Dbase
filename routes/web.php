@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth:admin']],function(){
     //Material
     Route::get('admin/material/create','adminController@createMaterial')->name('material.create');
     Route::get('admin/material','adminController@material')->name('admin.material');
+    Route::get('admin/material/remove/{id}','adminController@deleteMaterial')->name('material.remove');
+    Route::get('admin/material/add/{id}','adminController@addMaterial')->name('material.add');
 
     //Equipos
     Route::get('admin/teams','adminController@teams')->name('admin.teams');

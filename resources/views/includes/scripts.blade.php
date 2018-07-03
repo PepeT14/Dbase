@@ -1,8 +1,10 @@
 <script src="{{asset('js/moment.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/vendor/jquery.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/lib/jquery-ui.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/welcome.js')}}" type="text/javascript"></script>
+
 <script src="{{asset('js/vendor/bootstrap.min.js')}}" type="text/javascript"></script>
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--<script src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 <script src="{{asset('js/gmap3.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/bigslide.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/slick.js')}}" type="text/javascript"></script>

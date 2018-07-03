@@ -86,6 +86,3 @@
     <!-- Facilities And What we do best -->
 
 @endsection
-@section('scripts')
-    <script src="{{asset('js/welcome.js')}}" type="text/javascript"></script>
-@endsection

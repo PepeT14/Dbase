@@ -42,7 +42,7 @@ class adminController extends Controller
     //Material
     public function material(){
         $admin = Auth::guard('admin')->user();
-        $materialAgrupado = Clubmaterial::all()->where('club_id','=',$admin->club->id)->groupBy('type');
+        $materialAgrupado = ClubMaterial::all()->where('club_id','=',$admin->club->id)->groupBy('type');
 
         return view('admin.material')->with(compact(['materialAgrupado']));
     }
@@ -60,10 +60,17 @@ class adminController extends Controller
 
         return redirect()->action('adminController@material');
     }
-    public function deleteMaterial(){
-
+    public function deleteMaterial($id){
+        ClubMaterial::where('id',$id)->first()->delete();
+        return $this->material();
     }
-
+    public function addMaterial($id){
+        $material=ClubMaterial::where('id',$id)->first();
+        $material->cantidad = $material->cantidad+1;
+        $material->stock = $material->stock+1;
+        $material->save();
+        return $this->material();
+    }
 
     //Equipos
     public function teams(){

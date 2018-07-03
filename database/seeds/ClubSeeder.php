@@ -35,8 +35,8 @@ class ClubSeeder extends Seeder
             ['cantidad' => 25,'stock' => 25, 'type' => 'Balones', 'subtype' => 'Fútbol 11','club_id' => 1],
             ['cantidad' => 30,'stock' => 25, 'type' => 'Balones', 'subtype' => 'Fútbol 7','club_id' => 1],
             ['cantidad' => 50,'stock' => 25, 'type' => 'Conos', 'subtype' => 'Rojos','club_id' => 1],
-            ['cantidad' => 10,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Pequeños','club_id' => 1],
-            ['cantidad' => 10,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Grandes','club_id' => 1],
+            ['cantidad' => 30,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Pequeños','club_id' => 1],
+            ['cantidad' => 30,'stock' => 25, 'type' => 'Petos', 'subtype' => 'Grandes','club_id' => 1],
         ]);
     }
 }

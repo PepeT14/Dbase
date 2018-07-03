@@ -22,6 +22,14 @@
                     <div class="panel-heading" id="materialPanel">
                     </div>
                     <div class="panel-body">
+                        <div class="fondoDelete" style="display:none"></div>
+                        <div class="confirmDelete" style="display:none;">
+                            <div class="panel-blanco">
+                                <div class="textConfirm">¿Estás seguro de que quieres eliminar este material de tu inventario?</div>
+                                <button class="noConfirm btn-confirm">No</button>
+                                <button class="yesConfirm btn-confirm">Sí</button>
+                            </div>
+                        </div>
                         <ul class="nav nav-tabs tabbs">
                             @foreach($materialAgrupado->keys() as $material_item)
                                 <li><a data-toggle="tab" href="#{{$material_item}}">{{$material_item}}</a></li>
@@ -44,14 +52,14 @@
                                         </thead>
                                         <tbody>
                                         @foreach(array_get($materialAgrupado,$key) as $material_item)
-                                        <tr>
+                                        <tr data-id="{{$material_item->id}}">
                                             <td>{{$material_item->cantidad}}</td>
                                             <td>{{$material_item->subtype}}</td>
                                             <td>{{$material_item->description}}</td>
                                             <td>{{$material_item->stock}}</td>
-                                            <td class="icon-med"><i class="fa fa-trash"> </i>
-                                                <i class="fa fa-pencil-square"></i>
-                                                <i class="fa fa-plus-circle"></i>
+                                            <td class="icon-med"><i class="fa fa-trash deleteMaterial"> </i>
+                                                <i class="fa fa-pencil-alt editMaterial"></i>
+                                                <i class="fa fa-plus-circle addMaterial"></i>
                                             </td>
                                         </tr>
                                         @endforeach

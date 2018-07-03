@@ -375,3 +375,51 @@ form.tr {
 span.td{
     display:table-cell;
 }
+
+.confirmDelete{
+    z-index:9999;
+    position:fixed;
+    left:calc(50% - 200px);
+    top:calc(50% - 175px);
+}
+.fondoDelete{
+    background-color: #3c3b3bc7;
+    position:fixed;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    z-index:9998;
+}
+.panel-blanco {
+    width: 400px;
+    height: 250px;
+    background-color: white;
+    border-radius: 15px;
+    text-align:center;
+}
+
+.textConfirm{
+    padding: 80px 10px 10px 0;
+    font-size: 16px;
+}
+.btn-confirm {
+    border-radius: 5px;
+    width: 80px;
+    height: 35px;
+    margin: 10px;
+    color: white;
+    position: relative;
+    margin-top: 24px;
+}
+.noConfirm{
+    background-color: red;
+}
+
+.yesConfirm{
+    background-color:#196b27;
+}
+
+.editMaterial, .addMaterial, .deleteMaterial{
+    cursor:pointer;
+}
