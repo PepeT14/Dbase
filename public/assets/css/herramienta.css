@@ -1,0 +1,114 @@
+/*------ HEADER -----*/
+.header-first{
+    background-color:#638d40;
+    height:70px;
+}
+.header-second{
+    background-color:#aac198;
+    height:30px;
+}
+.contenido-segunda-cabecera{
+    height:100%;
+}
+.logo-cabecera{
+    width:5em;
+}
+.icono-navegacion-cabecera{
+    font-size:1.5em;
+    color:white;
+}
+
+/*----- CONTENIDO -----*/
+.loader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: .8;
+    background-color:rgb(249,249,249);
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.icono-loader{
+    animation:rotar 1s infinite;
+    width:13em;
+}
+.icono-accion{
+    cursor:pointer;
+}
+    /*----- INICIO -----*/
+.iconos-iniciales{
+    margin-top:50px;
+}
+.iconoContent{
+    margin:15px;
+}
+
+.iconoContent:hover{
+    transform:scale(1.1);
+}
+.iconoHerramienta i{
+    font-size:40px;
+    color: white;
+    width:105px;
+}
+
+.textoIcono{
+    color:white;
+    background-color:#628941;
+    padding:5px;
+    border-radius:5px;
+    font-size:2em;
+}
+
+    /*------ PARTIDO -----*/
+.partido-content{
+    width:50%;
+}
+.icono-equipo-partido{
+    width:5em;
+    height:100%;
+}
+.cuadro-jugador{
+    border-radius:5px;
+    border:1.5px solid #628941;
+}
+.fila-jugadores{
+    margin-top:20px;
+}
+#cronometro{
+    color:#628941;
+    font-size:3em;
+}
+.inicio-botton{
+    border-radius:5px;
+    background-color:#628941;
+    color:white;
+    font-size:2em;
+    padding:5px;
+    cursor:pointer;
+}
+.inicio-botton:hover{
+    transform:scale(1.1);
+}
+
+/*----- CALENDARIO -----*/
+.calendar-content{
+    margin: 190px 20px 20px;
+    padding: 20px;
+    background-color: white;
+    border: solid 1px green;
+    border-radius: 20px;
+    box-shadow: 4px 5px 26px black;
+    visibility:hidden;
+    opacity:0;
+}
+
+/*------ ANIMACIONES -----*/
+@keyframes rotar {
+    0%{transform:rotate(0);}
+    100%{transform:rotate(360deg);}
+}

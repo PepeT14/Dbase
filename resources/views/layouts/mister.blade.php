@@ -44,11 +44,18 @@
                        </a>
                     <span class="icon-sidebar">
                             <i class="fa fa-lg fa-home"></i>
-                        </span></li>
+                        </span>
+                </li>
                 <li><a href="{{action('misterController@tactica')}}">Tactica
                     </a>
                     <span class="icon-sidebar">
-                        <i class="fa fa-lg fa-clipboard"></i></span></li>
+                        <i class="fa fa-lg fa-clipboard"></i></span>
+                </li>
+                <li><a href="{{action('misterController@herramientaMinutos')}}">Minutos
+                    </a>
+                    <span class="icon-sidebar">
+                        <i class="fa fa-lg fa-clock"></i></span>
+                </li>
             </ul>
         </div>
         @yield('content')

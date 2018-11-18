@@ -28,7 +28,7 @@ class Team extends Model
     }
         //Team_Match (Many to Many)
     public function matchs(){
-        return $this->belongToMany('App\Models\Match','team_match','team_id','match_id')->withPivot('positive_goals','quality');
+        return $this->belongsToMany('App\Models\Match','team_match','team_id','match_id')->withPivot('positive_goals','quality');
     }
         //Player_Stats (Many to Many)
     public function playerStats(){
@@ -65,6 +65,7 @@ class Team extends Model
     public function leagues_nof(){
         return $this->belongsToMany('App\Models\League_nof','teams_leagues_nof','team_id','league_nof_id');
     }
+
     public function misterStatus(){
         if($this->mister){
             return "Registrado";

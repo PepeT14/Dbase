@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/profile.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('assets/css/header.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('assets/css/public.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('assets/css/herramienta.css')}}" type="text/css">
 
 
 

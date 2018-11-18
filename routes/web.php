@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 
 
@@ -90,6 +90,8 @@ Route::group(['middleware' => ['auth:admin']],function(){
 Route::group(['middleware' => ['auth:mister']],function(){
    Route::get('/mister/home','misterController@home')->name('mister.home');
    Route::get('/mister/tactica','misterController@tactica')->name('mister.tactica');
+   Route::get('/herramienta','misterController@herramientaMinutos')->name('mister.herramienta');
+   Route::get('/herramienta/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
 });
 
 //Player
