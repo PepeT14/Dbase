@@ -35,4 +35,5 @@
     <div id="partido-formulario">
         @include('vistasHerramienta.includes.formularios.partido')
     </div>
+    <div class="panel-fondo"></div>
 @endsection

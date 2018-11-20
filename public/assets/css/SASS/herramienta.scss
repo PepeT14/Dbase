@@ -15,7 +15,14 @@
     }
   }
 }
-
+.panel-fondo{
+  position:fixed;
+  background-color:white;
+  height:100%;
+  width:100%;
+  display:none;
+  z-index:9999;
+}
 /*------ PARTIDO -----*/
 .partido-content{
   width:50%;
@@ -46,4 +53,3 @@
 .inicio-botton:hover{
   transform:scale(1.1);
 }
-#partido-formulario{display:none;}

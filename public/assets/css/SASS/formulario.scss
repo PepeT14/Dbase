@@ -1,4 +1,9 @@
 @import 'variables';
+/*----- PERSONALIZADOS ------*/
+#partido-formulario{
+  display:none;
+  width:30%;
+}
 /*----- FORMULARIOS -----*/
 .form-panel{
   background-color:$color-principal;
@@ -9,12 +14,12 @@
 }
 
 .formulario-contenido{
-  margin:2em 8em;
+  padding-top:1em;
 }
 .form-title{
   border-bottom:solid 1px $color-fondo-clarito;
   text-align:center;
-  padding:3em 0 1em 0;
+  padding:1em 0 1em 0;
   margin:0 2em;
 }
 .form-title>img{
@@ -37,5 +42,14 @@
       }
     }
     .btn.focus,.btn:focus{box-shadow:none;}
+  }
+}
+
+.navegacion-menu{
+  padding:10px 20px 0 20px;
+  i{
+    color:white;
+    font-size:1em;
+    cursor:pointer;
   }
 }

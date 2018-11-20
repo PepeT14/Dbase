@@ -73,6 +73,17 @@
   width: 100%;
 }
 
+.group-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*----- PERSONALIZADOS ------*/
+#partido-formulario {
+  display: none;
+  width: 30%;
+}
+
 /*----- FORMULARIOS -----*/
 .form-panel {
   background-color: #638d40;
@@ -83,13 +94,13 @@
 }
 
 .formulario-contenido {
-  margin: 2em 8em;
+  padding-top: 1em;
 }
 
 .form-title {
   border-bottom: solid 1px #f3f4ef;
   text-align: center;
-  padding: 3em 0 1em 0;
+  padding: 1em 0 1em 0;
   margin: 0 2em;
 }
 
@@ -120,6 +131,15 @@
   box-shadow: none;
 }
 
+.navegacion-menu {
+  padding: 10px 20px 0 20px;
+}
+.navegacion-menu i {
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
 /*----- INICIO -----*/
 .iconos-iniciales {
   margin-top: 50px;
@@ -136,6 +156,15 @@
   padding: 5px;
   border-radius: 5px;
   font-size: 2em;
+}
+
+.panel-fondo {
+  position: fixed;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  display: none;
+  z-index: 9999;
 }
 
 /*------ PARTIDO -----*/
@@ -173,10 +202,6 @@
 
 .inicio-botton:hover {
   transform: scale(1.1);
-}
-
-#partido-formulario {
-  display: none;
 }
 
 /*# sourceMappingURL=main-herramienta.css.map */
