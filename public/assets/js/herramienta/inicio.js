@@ -1,5 +1,7 @@
 $(document).ready(function(){
     $('.icono-accion').on('click',function(){
-        window.location.href = $(this).data('href');
+        $('.iconos-iniciales').hide('slideUp');
+        let section = $(this).data('section');
+        $('#'+section).show('slideUp');
     });
 });

@@ -1,0 +1,45 @@
+@import 'variables';
+/*---CABECERA---*/
+.header-first{
+  background-color:$color-principal;
+  height:70px;
+  .content img.logo-cabecera{
+    width:4.4em;
+  }
+}
+.header-second{
+  background-color:$color-secundario;
+  height:30px;
+  .content{
+    height:100%;
+    i.icono-navegacion-cabecera{
+      font-size:1.5em;
+      color:white;
+    }
+  }
+}
+
+/*---LOGO_CARGA---*/
+.loader{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.8;
+  background-color:rgb(249,249,249);
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+.icono-loader{
+  animation:rotar 1s infinite;
+  width:13em;
+}
+
+/*------ ANIMACIONES -----*/
+@keyframes rotar {
+  0%{transform:rotate(0);}
+  100%{transform:rotate(360deg);}
+}

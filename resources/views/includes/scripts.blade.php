@@ -5,7 +5,8 @@
 
 <script src="{{asset('assets/js/tactica.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/herramienta.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/vendor/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
 <!--<script src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 <!--<script src="{{asset('js/gmap3.min.js')}}" type="text/javascript"></script>-->
 <script src="{{asset('js/bigslide.js')}}" type="text/javascript"></script>

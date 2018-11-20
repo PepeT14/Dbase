@@ -1,0 +1,41 @@
+@import 'variables';
+/*----- FORMULARIOS -----*/
+.form-panel{
+  background-color:$color-principal;
+  margin-top:50px;
+  border-radius:5px;
+  text-align:center;
+  height:100%;
+}
+
+.formulario-contenido{
+  margin:2em 8em;
+}
+.form-title{
+  border-bottom:solid 1px $color-fondo-clarito;
+  text-align:center;
+  padding:3em 0 1em 0;
+  margin:0 2em;
+}
+.form-title>img{
+  width:5em;
+}
+
+.form-group{
+  label{color:white;}
+  .btn-group{
+    width:100%;
+    &.btn-group-toggle{
+      background-color:$color-fondo-clarito;
+      &>label{color:$color-principal};
+      .btn{
+        border-radius:0;
+        &.active{
+          background-color:$color-secundario;
+          color:white;
+        }
+      }
+    }
+    .btn.focus,.btn:focus{box-shadow:none;}
+  }
+}

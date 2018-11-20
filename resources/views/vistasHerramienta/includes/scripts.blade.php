@@ -11,3 +11,7 @@
 <script src="{{asset('js/moment.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/fullcalendar.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/locale/es.js')}}" type="text/javascript"></script>
+
+{{-- Bootstrap --}}
+<script src="{{asset('js/bootstrap/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap/bootstrap.bundle.min.js')}}" type="text/javascript"></script>

@@ -39,7 +39,7 @@ class misterController extends Controller
     //HERRAMIENTA MINUTOS
     public function herramientaMinutos(){
         $mister = Auth::guard('mister')->user();
-        return view('vistasHerramienta.includes.inicio');
+        return view('vistasHerramienta.includes.inicio',with(compact('mister')));
     }
     public function herramientaPartido(){
         return view('vistasHerramienta.includes.partido');

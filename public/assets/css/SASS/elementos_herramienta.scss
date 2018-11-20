@@ -1,0 +1,16 @@
+@import 'variables';
+/*---ESTILOS_GENERALES---*/
+.icono-accion{
+  cursor:pointer;
+}
+.border-secundario{border:1px solid $color-secundario}
+.btn-clarito{
+  background-color:$color-fondo-clarito;
+  color:$color-principal;
+  &[type='submit']:hover {
+    transform: scale(1.1);
+  }
+}
+.btn-50{ width:50%;  }
+.btn-100{ width:100%; }
+
