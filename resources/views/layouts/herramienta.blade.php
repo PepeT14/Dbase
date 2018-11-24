@@ -18,7 +18,7 @@
     </div>
     @endif
 </div>
-<div class="container-fluid d-flex justify-content-center">
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
     @yield('content')
 </div>
 </body>

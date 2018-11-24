@@ -2,7 +2,9 @@
 /*----- PERSONALIZADOS ------*/
 #partido-formulario{
   display:none;
-  width:30%;
+}
+#editar-alineacion{
+  display:none;
 }
 /*----- FORMULARIOS -----*/
 .form-panel{
@@ -19,7 +21,7 @@
 .form-title{
   border-bottom:solid 1px $color-fondo-clarito;
   text-align:center;
-  padding:1em 0 1em 0;
+  padding:0.5em 0 1em 0;
   margin:0 2em;
 }
 .form-title>img{
@@ -51,5 +53,34 @@
     color:white;
     font-size:1em;
     cursor:pointer;
+    &.green{
+      color:$color-principal;
+    }
   }
+}
+
+
+.btn-end{
+  border-radius:5px;
+  height:100%;
+  padding:5px;
+  width:100%;
+  cursor:pointer;
+}
+
+.control-panel-icon {
+  padding:0 20px 0 20px;
+  i{
+    color:white;
+    font-size:1.7em;
+    border:1.5px solid $color-secundario;
+    border-radius:5px;
+    cursor:pointer;
+    padding:5px;
+    &:hover{background-color:$color-fondo-clarito}
+  }
+}
+
+.edit-alineacion-btn{
+  &:hover{background-color:$color-secundario}
 }

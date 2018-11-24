@@ -11,11 +11,74 @@
     transform: scale(1.1);
   }
 }
+.btn,button{
+  &:focus{box-shadow: none;outline: none}
+}
 .btn-50{ width:50%;  }
 .btn-100{ width:100%; }
+
+.btn-form{
+  color:white;
+  font-size:1.2em;
+}
+.btn-cancel{
+  background-color:#c36868;
+  &:hover{background-color:#884a4a}
+}
+.btn-save{
+  background:lightseagreen;
+  &:hover{background-color:#187772}
+}
 
 .group-around{
   display:flex;
   justify-content: space-around;
+  @media(min-width:576px) and (max-width:768px){
+    flex-direction:column;
+    & .btn{
+      margin-bottom:5px;
+    }
+  }
 }
 
+/*------- MODAL ----*/
+.modal-title{
+  color:$color-principal;
+  text-align:center;
+  width:100%;
+  font-size:1.5em;
+}
+
+.cuadro-action{
+  width:100%;
+  border:1.5px solid $color-principal;
+  display:flex;
+  border-radius:5px;
+  margin-bottom:10px;
+  justify-content: space-between;
+  align-items: baseline;
+  input{
+    color:$color-secundario;
+    font-size:1em;
+    font-weight:bold;
+    text-align:center;
+    border:none;
+    &:focus{box-shadow:none; text-align:left;}
+  }
+  i{
+    font-size:1.2em;
+    color:$color-principal;
+    cursor:pointer;
+    margin-right:10px;
+  }
+}
+
+.modal-footer{
+}
+.add-more-action{
+  width:100%;
+  text-align:center;
+  font-size:1.7em;
+  color:$color-principal;
+  i{cursor:pointer;}
+}

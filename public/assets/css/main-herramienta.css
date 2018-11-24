@@ -1,3 +1,7 @@
+body {
+  font-family: "Gill Sans", sans-serif !important;
+}
+
 /*---CABECERA---*/
 .header-first {
   background-color: #638d40;
@@ -65,6 +69,11 @@
   transform: scale(1.1);
 }
 
+.btn:focus, button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
 .btn-50 {
   width: 50%;
 }
@@ -73,15 +82,90 @@
   width: 100%;
 }
 
+.btn-form {
+  color: white;
+  font-size: 1.2em;
+}
+
+.btn-cancel {
+  background-color: #c36868;
+}
+.btn-cancel:hover {
+  background-color: #884a4a;
+}
+
+.btn-save {
+  background: lightseagreen;
+}
+.btn-save:hover {
+  background-color: #187772;
+}
+
 .group-around {
   display: flex;
   justify-content: space-around;
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .group-around {
+    flex-direction: column;
+  }
+  .group-around .btn {
+    margin-bottom: 5px;
+  }
+}
+
+/*------- MODAL ----*/
+.modal-title {
+  color: #638d40;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5em;
+}
+
+.cuadro-action {
+  width: 100%;
+  border: 1.5px solid #638d40;
+  display: flex;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.cuadro-action input {
+  color: #aac198;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+}
+.cuadro-action input:focus {
+  box-shadow: none;
+  text-align: left;
+}
+.cuadro-action i {
+  font-size: 1.2em;
+  color: #638d40;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.add-more-action {
+  width: 100%;
+  text-align: center;
+  font-size: 1.7em;
+  color: #638d40;
+}
+.add-more-action i {
+  cursor: pointer;
 }
 
 /*----- PERSONALIZADOS ------*/
 #partido-formulario {
   display: none;
-  width: 30%;
+}
+
+#editar-alineacion {
+  display: none;
 }
 
 /*----- FORMULARIOS -----*/
@@ -100,7 +184,7 @@
 .form-title {
   border-bottom: solid 1px #f3f4ef;
   text-align: center;
-  padding: 1em 0 1em 0;
+  padding: 0.5em 0 1em 0;
   margin: 0 2em;
 }
 
@@ -138,6 +222,36 @@
   color: white;
   font-size: 1em;
   cursor: pointer;
+}
+.navegacion-menu i.green {
+  color: #638d40;
+}
+
+.btn-end {
+  border-radius: 5px;
+  height: 100%;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.control-panel-icon {
+  padding: 0 20px 0 20px;
+}
+.control-panel-icon i {
+  color: white;
+  font-size: 1.7em;
+  border: 1.5px solid #aac198;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+.control-panel-icon i:hover {
+  background-color: #f3f4ef;
+}
+
+.edit-alineacion-btn:hover {
+  background-color: #aac198;
 }
 
 /*----- INICIO -----*/
@@ -180,6 +294,10 @@
 .cuadro-jugador {
   border-radius: 5px;
   border: 1.5px solid #628941;
+  min-height: 1.5em;
+  padding: 2px;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .fila-jugadores {
@@ -202,6 +320,39 @@
 
 .inicio-botton:hover {
   transform: scale(1.1);
+}
+
+/*------ ALINEACION -----*/
+.alineacion-container {
+  text-align: center;
+  color: #638d40;
+  margin-top: 50px;
+}
+
+.add-suplentes {
+  cursor: pointer;
+  height: 2em;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #638d40;
+  color: white;
+}
+.add-suplentes:hover {
+  background-color: #537338;
+}
+
+.alineacion-container .row {
+  margin-top: 10px;
+}
+
+.alineacion-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-bottom: 7px;
+  border-bottom: 1px solid lightseagreen;
 }
 
 /*# sourceMappingURL=main-herramienta.css.map */

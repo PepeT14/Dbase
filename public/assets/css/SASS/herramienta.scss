@@ -32,8 +32,12 @@
   height:100%;
 }
 .cuadro-jugador{
-  border-radius:5px;
-  border:1.5px solid #628941;
+  border-radius: 5px;
+  border: 1.5px solid #628941;
+  min-height: 1.5em;
+  padding: 2px;
+  width:100%;
+  margin: 10px 0;
 }
 .fila-jugadores{
   margin-top:20px;
@@ -53,3 +57,12 @@
 .inicio-botton:hover{
   transform:scale(1.1);
 }
+
+
+/*------ ALINEACION -----*/
+.alineacion-container{
+  text-align:center;
+  color:$color-principal;
+  margin-top:50px;
+}
+
