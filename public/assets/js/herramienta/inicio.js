@@ -1,8 +1,24 @@
 $(document).ready(function(){
-    $('.icono-accion').on('click',function(){
+    //NUEVO EQUIPO
+    $('#team-category').on('change',function(){
+        let obj = $(this);
+        let ligas = $(document).find('#new-team').data('leagues').filter(league => league.category=obj.val());
+        console.log(ligas);
+        ligas.forEach(function(liga){
+            option = '<option name='+liga.name+'>'+liga.name+'</option>';
+            $('#team-league').append(option);
+        });
+    });
+
+    //Funciones generales
+    $('.icono-accion.seccion').on('click',function(){
         $('.iconos-iniciales').hide('slow');
         let section = $(this).data('section');
         $('#'+section).show('slow');
+    });
+
+    $('.icono-accion.ruta').on('click',function(){
+       window.location.href=$(this).data('href');
     });
 
     $('.navegacion-menu i').on('click',function(){

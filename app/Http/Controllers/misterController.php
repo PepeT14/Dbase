@@ -9,11 +9,13 @@ use App\Models\League;
 use MaddHatter\LaravelFullcalendar\Calendar;
 use Auth;
 
-class misterController extends Controller
-{
+class misterController extends Controller{
+
+
     //HOME
     public function home(){
-        return view('mister.home');
+        $mister = Auth::guard('mister')->user();
+        return view('vistasHerramienta.inicio',with(compact('mister')));
     }
 
     //PERFIL
@@ -36,14 +38,17 @@ class misterController extends Controller
         return view('mister.tacticas',with(compact('mister')));
     }
 
-    //HERRAMIENTA MINUTOS
-    public function herramientaMinutos(){
-        $mister = Auth::guard('mister')->user();
-        return view('vistasHerramienta.includes.inicio',with(compact('mister')));
-    }
+
     public function herramientaPartido(){
-        return view('vistasHerramienta.includes.partido');
+        return view('vistasHerramienta.partido');
     }
+
+    //EQUIPO
+    public function showEquipo(){
+        $mister = Auth::guard('mister')->user();
+        return view('vistasHerramienta.equipo',with(compact('mister')));
+    }
+
     //CALENDARIO PARTIDOS
     public function getMisterCalendar(){
         $partidos = $this->getMatchs();

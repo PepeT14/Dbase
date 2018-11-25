@@ -13,8 +13,8 @@ class MisterSeeder extends Seeder
     {
         //
         DB::table('misters')->insert([
-            'name' => 'Mou',
-            'email' => 'titomou@gmail.com',
+            'name' => 'Javier',
+            'email' => str_random(10).'@gmail.com',
             'username' => 'mister',
             'password' => bcrypt('prueba'),
             'team_id' => '1',

@@ -90,8 +90,12 @@ Route::group(['middleware' => ['auth:admin']],function(){
 Route::group(['middleware' => ['auth:mister']],function(){
    Route::get('/mister/home','misterController@home')->name('mister.home');
    Route::get('/mister/tactica','misterController@tactica')->name('mister.tactica');
-   Route::get('/herramienta','misterController@herramientaMinutos')->name('mister.herramienta');
+
+   //Partido
    Route::get('/herramienta/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
+
+   //Equipo
+   Route::get('/herramienta/mister/equipo','misterController@showEquipo')->name('mister.equipo');
 });
 
 //Player

@@ -1,22 +1,40 @@
 @import 'variables';
 
-body{font-family:"Gill Sans",sans-serif !important}
+body{
+  font-family:"Gill Sans",sans-serif !important;
+  color:$primary-text;
+}
 /*---CABECERA---*/
 .header-first{
-  background-color:$color-principal;
+  background-color:$dark-primary-color;
   height:70px;
-  .content img.logo-cabecera{
-    width:4.4em;
+  .content {
+    max-height:100%;
+    width: 100%;
+    display:inline-flex;
+    justify-content: space-between;
+    .icono-profile{
+      width:70px;
+      display:flex;
+      padding:5px;
+      .user-icon{
+        border-radius:50%;
+      }
+    }
+    img.logo-cabecera{
+      width:4.4em;
+      padding:5px;
+    }
   }
 }
 .header-second{
-  background-color:$color-secundario;
+  background-color:$light-primary-color;
   height:30px;
   .content{
     height:100%;
     i.icono-navegacion-cabecera{
       font-size:1.5em;
-      color:white;
+      color:$color-resaltado;
     }
   }
 }

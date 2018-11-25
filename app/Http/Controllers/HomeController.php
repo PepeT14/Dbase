@@ -31,13 +31,13 @@ class HomeController extends Controller
             return view('player.home');
         }
         if(Auth::guard('mister')->check()){
-            return view('mister.home');
+            return redirect()->action('misterController@home');
         }
         if(Auth::guard('tutor')->check()){
             return view('tutor.home');
         }
         else{
-            return view('welcome');
+            return redirect()->route('login');
         }
     }
 }

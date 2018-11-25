@@ -1,15 +1,11 @@
 @import 'variables';
-/*----- PERSONALIZADOS ------*/
-#partido-formulario{
-  display:none;
-}
-#editar-alineacion{
-  display:none;
-}
+
 /*----- FORMULARIOS -----*/
 .form-panel{
-  background-color:$color-principal;
+  background-color:white;
   margin-top:50px;
+  border:1.5px solid $dark-primary-color;
+  padding:7px;
   border-radius:5px;
   text-align:center;
   height:100%;
@@ -19,7 +15,7 @@
   padding-top:1em;
 }
 .form-title{
-  border-bottom:solid 1px $color-fondo-clarito;
+  border-bottom:solid 1px $light-primary-color;
   text-align:center;
   padding:0.5em 0 1em 0;
   margin:0 2em;
@@ -29,17 +25,21 @@
 }
 
 .form-group{
-  label{color:white;}
+  input,select{
+    border-color:$color-resaltado;
+    &:focus{border-color:$light-primary-color;box-shadow:0 0 0 0.2rem $color-resaltado }
+  }
+  label{color:$primary-text;}
   .btn-group{
     width:100%;
     &.btn-group-toggle{
-      background-color:$color-fondo-clarito;
-      &>label{color:$color-principal};
+      background-color:$light-primary-color;
+      &>label{color:$primary-color};
       .btn{
         border-radius:0;
         &.active{
-          background-color:$color-secundario;
-          color:white;
+          background-color:$light-primary-color;
+          color:$texto;
         }
       }
     }
@@ -50,11 +50,11 @@
 .navegacion-menu{
   padding:10px 20px 0 20px;
   i{
-    color:white;
+    color:$texto;
     font-size:1em;
     cursor:pointer;
     &.green{
-      color:$color-principal;
+      color:$primary-color;
     }
   }
 }
@@ -71,16 +71,16 @@
 .control-panel-icon {
   padding:0 20px 0 20px;
   i{
-    color:white;
+    color:$texto;
     font-size:1.7em;
-    border:1.5px solid $color-secundario;
+    border:1.5px solid $light-primary-color;
     border-radius:5px;
     cursor:pointer;
     padding:5px;
-    &:hover{background-color:$color-fondo-clarito}
+    &:hover{background-color:$light-primary-color}
   }
 }
 
 .edit-alineacion-btn{
-  &:hover{background-color:$color-secundario}
+  &:hover{background-color:$light-primary-color}
 }

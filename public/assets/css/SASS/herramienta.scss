@@ -7,8 +7,8 @@
       transform:scale(1.1);
     }
     .textoIcono{
-      color:white;
-      background-color:$color-principal;
+      color:$texto;
+      background-color:$primary-color;
       padding:5px;
       border-radius:5px;
       font-size:2em;
@@ -23,6 +23,15 @@
   display:none;
   z-index:9999;
 }
+.section{
+  display:none;
+}
+/*------AÑADIR EQUIPO------*/
+
+.new-team{
+  margin-top:50px;
+}
+
 /*------ PARTIDO -----*/
 .partido-content{
   width:50%;
@@ -43,13 +52,13 @@
   margin-top:20px;
 }
 #cronometro{
-  color:#628941;
+  color:$primary-color;
   font-size:3em;
 }
 .inicio-botton{
   border-radius:5px;
-  background-color:#628941;
-  color:white;
+  background-color:$color-resaltado;
+  color:$texto;
   font-size:2em;
   padding:5px;
   cursor:pointer;
@@ -62,7 +71,7 @@
 /*------ ALINEACION -----*/
 .alineacion-container{
   text-align:center;
-  color:$color-principal;
+  color:$primary-color;
   margin-top:50px;
 }
 

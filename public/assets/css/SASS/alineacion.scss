@@ -1,3 +1,4 @@
+@import 'variables';
 .add-suplentes{
   cursor:pointer;
   height:2em;
@@ -6,10 +7,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #638d40;
-  color: white;
+  background-color: $primary-color;
+  color: $texto;
   &:hover{
-    background-color:#537338;
+    background-color:$dark-primary-color;
   }
 };
 
@@ -21,5 +22,5 @@
   font-size:1.5em;
   font-weight:bold;
   padding-bottom:7px;
-  border-bottom:1px solid lightseagreen;
+  border-bottom:1px solid $divider-color;
 }

@@ -25,6 +25,3 @@
     </div>
 </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/js/herramienta/inicio.js')}}" type="text/javascript"></script>
-@endsection

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as playerUser;
+use Carbon\Carbon;
 
 class Player extends playerUser
 {
@@ -53,6 +54,10 @@ class Player extends playerUser
         //Lesion (One to Many)
     public function lesions(){
         return $this->hasMany('App\Models\Lesion','player_id');
+    }
+
+    public function edad(){
+        return Carbon::now()->year - Carbon::createFromFormat('Y-m-d', $this->birthday)->year;
     }
 
 }

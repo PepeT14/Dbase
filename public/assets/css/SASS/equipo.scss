@@ -1,0 +1,13 @@
+@import 'variables';
+.equipo-container{
+  margin-top:50px;
+}
+.equipo-title{
+  padding-bottom:20px;
+  width:100%;
+  border-bottom: 1px solid $divider-color;
+}
+
+.add-player{
+  cursor:pointer;
+}

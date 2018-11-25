@@ -1,18 +1,35 @@
+@charset "UTF-8";
 body {
   font-family: "Gill Sans", sans-serif !important;
+  color: #212121;
 }
 
 /*---CABECERA---*/
 .header-first {
-  background-color: #638d40;
+  background-color: #388E3C;
   height: 70px;
+}
+.header-first .content {
+  max-height: 100%;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}
+.header-first .content .icono-profile {
+  width: 70px;
+  display: flex;
+  padding: 5px;
+}
+.header-first .content .icono-profile .user-icon {
+  border-radius: 50%;
 }
 .header-first .content img.logo-cabecera {
   width: 4.4em;
+  padding: 5px;
 }
 
 .header-second {
-  background-color: #aac198;
+  background-color: #C8E6C9;
   height: 30px;
 }
 .header-second .content {
@@ -20,7 +37,7 @@ body {
 }
 .header-second .content i.icono-navegacion-cabecera {
   font-size: 1.5em;
-  color: white;
+  color: #607D8B;
 }
 
 /*---LOGO_CARGA---*/
@@ -58,12 +75,21 @@ body {
 }
 
 .border-secundario {
-  border: 1px solid #aac198;
+  border: 1px solid #C8E6C9;
+}
+
+.btn-principal {
+  background-color: #607D8B;
+  color: white;
+}
+.btn-principal:hover {
+  transform: scale(1.1);
+  background-color: #425F6D;
 }
 
 .btn-clarito {
-  background-color: #f3f4ef;
-  color: #638d40;
+  background-color: #C8E6C9;
+  color: white;
 }
 .btn-clarito[type=submit]:hover {
   transform: scale(1.1);
@@ -95,10 +121,10 @@ body {
 }
 
 .btn-save {
-  background: lightseagreen;
+  background: #4CAF50;
 }
 .btn-save:hover {
-  background-color: #187772;
+  background-color: #388E3C;
 }
 
 .group-around {
@@ -116,7 +142,7 @@ body {
 
 /*------- MODAL ----*/
 .modal-title {
-  color: #638d40;
+  color: #4CAF50;
   text-align: center;
   width: 100%;
   font-size: 1.5em;
@@ -124,7 +150,7 @@ body {
 
 .cuadro-action {
   width: 100%;
-  border: 1.5px solid #638d40;
+  border: 1.5px solid #388E3C;
   display: flex;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -132,7 +158,7 @@ body {
   align-items: baseline;
 }
 .cuadro-action input {
-  color: #aac198;
+  color: #C8E6C9;
   font-size: 1em;
   font-weight: bold;
   text-align: center;
@@ -144,7 +170,7 @@ body {
 }
 .cuadro-action i {
   font-size: 1.2em;
-  color: #638d40;
+  color: #4CAF50;
   cursor: pointer;
   margin-right: 10px;
 }
@@ -153,25 +179,18 @@ body {
   width: 100%;
   text-align: center;
   font-size: 1.7em;
-  color: #638d40;
+  color: #4CAF50;
 }
 .add-more-action i {
   cursor: pointer;
 }
 
-/*----- PERSONALIZADOS ------*/
-#partido-formulario {
-  display: none;
-}
-
-#editar-alineacion {
-  display: none;
-}
-
 /*----- FORMULARIOS -----*/
 .form-panel {
-  background-color: #638d40;
+  background-color: white;
   margin-top: 50px;
+  border: 1.5px solid #388E3C;
+  padding: 7px;
   border-radius: 5px;
   text-align: center;
   height: 100%;
@@ -182,7 +201,7 @@ body {
 }
 
 .form-title {
-  border-bottom: solid 1px #f3f4ef;
+  border-bottom: solid 1px #C8E6C9;
   text-align: center;
   padding: 0.5em 0 1em 0;
   margin: 0 2em;
@@ -192,23 +211,30 @@ body {
   width: 5em;
 }
 
+.form-group input, .form-group select {
+  border-color: #607D8B;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: #C8E6C9;
+  box-shadow: 0 0 0 0.2rem #607D8B;
+}
 .form-group label {
-  color: white;
+  color: #212121;
 }
 .form-group .btn-group {
   width: 100%;
 }
 .form-group .btn-group.btn-group-toggle {
-  background-color: #f3f4ef;
+  background-color: #C8E6C9;
 }
 .form-group .btn-group.btn-group-toggle > label {
-  color: #638d40;
+  color: #4CAF50;
 }
 .form-group .btn-group.btn-group-toggle .btn {
   border-radius: 0;
 }
 .form-group .btn-group.btn-group-toggle .btn.active {
-  background-color: #aac198;
+  background-color: #C8E6C9;
   color: white;
 }
 .form-group .btn-group .btn.focus, .form-group .btn-group .btn:focus {
@@ -224,7 +250,7 @@ body {
   cursor: pointer;
 }
 .navegacion-menu i.green {
-  color: #638d40;
+  color: #4CAF50;
 }
 
 .btn-end {
@@ -241,17 +267,17 @@ body {
 .control-panel-icon i {
   color: white;
   font-size: 1.7em;
-  border: 1.5px solid #aac198;
+  border: 1.5px solid #C8E6C9;
   border-radius: 5px;
   cursor: pointer;
   padding: 5px;
 }
 .control-panel-icon i:hover {
-  background-color: #f3f4ef;
+  background-color: #C8E6C9;
 }
 
 .edit-alineacion-btn:hover {
-  background-color: #aac198;
+  background-color: #C8E6C9;
 }
 
 /*----- INICIO -----*/
@@ -266,7 +292,7 @@ body {
 }
 .iconos-iniciales .iconoContent .textoIcono {
   color: white;
-  background-color: #638d40;
+  background-color: #4CAF50;
   padding: 5px;
   border-radius: 5px;
   font-size: 2em;
@@ -279,6 +305,15 @@ body {
   width: 100%;
   display: none;
   z-index: 9999;
+}
+
+.section {
+  display: none;
+}
+
+/*------AÑADIR EQUIPO------*/
+.new-team {
+  margin-top: 50px;
 }
 
 /*------ PARTIDO -----*/
@@ -305,13 +340,13 @@ body {
 }
 
 #cronometro {
-  color: #628941;
+  color: #4CAF50;
   font-size: 3em;
 }
 
 .inicio-botton {
   border-radius: 5px;
-  background-color: #628941;
+  background-color: #607D8B;
   color: white;
   font-size: 2em;
   padding: 5px;
@@ -325,7 +360,7 @@ body {
 /*------ ALINEACION -----*/
 .alineacion-container {
   text-align: center;
-  color: #638d40;
+  color: #4CAF50;
   margin-top: 50px;
 }
 
@@ -337,11 +372,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #638d40;
+  background-color: #4CAF50;
   color: white;
 }
 .add-suplentes:hover {
-  background-color: #537338;
+  background-color: #388E3C;
 }
 
 .alineacion-container .row {
@@ -352,7 +387,21 @@ body {
   font-size: 1.5em;
   font-weight: bold;
   padding-bottom: 7px;
-  border-bottom: 1px solid lightseagreen;
+  border-bottom: 1px solid #BDBDBD;
+}
+
+.equipo-container {
+  margin-top: 50px;
+}
+
+.equipo-title {
+  padding-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid #BDBDBD;
+}
+
+.add-player {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main-herramienta.css.map */

@@ -5,6 +5,7 @@
 {{--Scripts propios--}}
 <script src="{{asset('assets/js/herramienta.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/herramienta/inicio.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/herramienta/equipo.js')}}" type="text/javascript"></script>
 
 
 {{--FullCalendar--}}
