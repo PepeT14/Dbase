@@ -21,7 +21,7 @@ class CreateMistersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('file')->nullable();
-            $table->integer('team_id')->unsigned()->nullable();
+            $table->integer('team_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
 

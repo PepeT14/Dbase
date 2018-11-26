@@ -18,9 +18,9 @@ class CreatePlayersTable extends Migration
            $table->rememberToken();
            $table->increments('id');
            $table->string('name');
-           $table->string('email');
-           $table->string('username')->unique();
-           $table->string('password');
+           $table->string('email')->nullable();
+           $table->string('username')->unique()->nullable();
+           $table->string('password')->nullable();
            $table->integer('number')->nullable();
            $table->string('photo')->nullable();
            $table->date('birthday');

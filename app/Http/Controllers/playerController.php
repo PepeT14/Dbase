@@ -11,4 +11,5 @@ class playerController extends Controller
     public function home(){
         return view('player.home');
     }
+
 }

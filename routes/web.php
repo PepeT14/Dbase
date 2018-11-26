@@ -73,7 +73,6 @@ Route::group(['middleware' => ['auth:admin']],function(){
     //Equipos
     Route::get('admin/teams','adminController@teams')->name('admin.teams');
     Route::get('admin/teams/create','teamController@create')->name('team.create');
-
     //Entrenadores
     Route::get('admin/invitar/{team}','adminController@misterInvite')->name('mister.invite');
 
@@ -95,7 +94,8 @@ Route::group(['middleware' => ['auth:mister']],function(){
    Route::get('/herramienta/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
 
    //Equipo
-   Route::get('/herramienta/mister/equipo','misterController@showEquipo')->name('mister.equipo');
+   Route::get('mister/equipo','misterController@showEquipo')->name('mister.equipo');
+   Route::get('mister/create/player','misterController@addPlayer')->name('mister.create.player');
 });
 
 //Player

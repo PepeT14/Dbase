@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mister;
 use App\Models\Team;
 use App\Models\League;
+use App\Models\Player;
 use MaddHatter\LaravelFullcalendar\Calendar;
 use Auth;
 
@@ -47,6 +48,18 @@ class misterController extends Controller{
     public function showEquipo(){
         $mister = Auth::guard('mister')->user();
         return view('vistasHerramienta.equipo',with(compact('mister')));
+    }
+
+    public function addPlayer(Request $request){
+        $player = new Player();
+        $player->name = $request->input('player-name');
+        $player->position = $request->input('player-position');
+        $player->birthday = $request->input('player-birthday');
+        $team = Auth::guard('mister')->user()->team;
+        $player->team()->associate($team);
+        $player->save();
+
+        return redirect()->action('misterController@showEquipo');
     }
 
     //CALENDARIO PARTIDOS

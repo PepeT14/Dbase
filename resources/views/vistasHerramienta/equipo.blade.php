@@ -44,11 +44,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{route('player.create')}}">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="nombre-jugador">Nombre</label>
-                                <input class="form-control" id="nombre-jugador" name="player-name" type="text">
+                                <input class="form-control" id="player-name" name="player-name" type="text">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="nombre-jugador">Appellidos</label>
@@ -61,13 +61,13 @@
                         </div>
                         <div class="form-group">
                             <label for="fecha-jugador">Fecha de nacimiento</label>
-                            <input class="form-control" id="fecha-jugador" name="player-birthday" type="text">
+                            <input class="form-control" id="fecha-jugador" name="player-birthday" type="text" placeholder="yyyy-mm-dd">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-cancel btn-form">CANCELAR</button>
-                    <button class="btn btn-save btn-form">AÑADIR</button>
+                    <button class="btn btn-save btn-save-player btn-form">AÑADIR</button>
                 </div>
             </div>
         </div>
