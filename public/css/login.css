@@ -1,0 +1,35 @@
+.login-bck {
+  background: url("../../imagenes/fondos/fondo-equipo.jpg") no-repeat center;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  position: fixed;
+}
+
+.seccion-inicial {
+  transform: scale(0);
+  text-align: center;
+  transition: transform 1s;
+}
+
+.seccion-inicial.animate {
+  transform: scale(1);
+}
+
+#login-form {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 1s ease;
+  transition-delay: 0.4s;
+  z-index: -1;
+}
+
+#login-form.animate {
+  opacity: 1;
+}
+
+.login-container {
+  height: 100%;
+}
+
+/*# sourceMappingURL=login.css.map */

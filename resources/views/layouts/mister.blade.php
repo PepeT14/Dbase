@@ -1,74 +1,41 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
-@include ('includes.meta')
-<!-- Styles -->
+    @include ('includes.meta')
     @include ('includes.styles')
-    {{--Admin--}}
-    <link rel="stylesheet" href="{{asset('assets/css/mister.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/tacticas.css')}}" type="text/css">
-    <script src="{{asset('js/vendor/modernizr.js')}}"></script>
-
 </head>
 <body>
-<!-- Main Content -->
-<main class="main-content">
-    <div class="container">
-        <div class="adminHeader">
-            <div class="pull-left icon-menu">
-                <i class="fa fa-list"></i>
-            </div>
-            <div class="pull-left ">
-                <div class="header-inner">
-                    <div class="brand inline">
-                        <a href="{{action('HomeController@index')}}">
-                            <img class="logo" src="{{asset('assets/img/dbase.png')}}" alt="logo">
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="title">
-            </div>
-            <div class=" pull-right">
-                @include('includes.user-info')
-            </div>
+<div class="header-first container-fluid">
+    <div class="content">
+        <img class="logo-cabecera icono-accion ruta" src="{{asset('imagenes/dbase.png')}}" data-href="{{route('home')}}">
+        <div class="pull-right name">
+            <a href="{{ route('logout') }}" class="clearfix" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+            <span class="pull-semi-bold">
+                <i class="fa fa-power-off logout"></i>
+                Salir
+            </span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         </div>
-        <div class="sidebar-menu">
-            <div class="sidebar-header">
-                FootdBase
-            </div>
-            <ul class="menu-items">
-                <li class="m-t-30"></li>
-                <li><a href="{{action('misterController@home')}}">Inicio
-                       </a>
-                    <span class="icon-sidebar">
-                            <i class="fa fa-lg fa-home"></i>
-                        </span>
-                </li>
-                <li><a href="{{action('misterController@tactica')}}">Tactica
-                    </a>
-                    <span class="icon-sidebar">
-                        <i class="fa fa-lg fa-clipboard"></i></span>
-                </li>
-                <li><a href="{{action('misterController@herramientaMinutos')}}">Minutos
-                    </a>
-                    <span class="icon-sidebar">
-                        <i class="fa fa-lg fa-clock"></i></span>
-                </li>
-            </ul>
+        <div class="icono-profile">
+            <img class="img-fluid user-icon icono-accion ruta" src="{!! $mister->file ? asset($mister->file) : asset('imagenes/profile.png') !!}">
         </div>
-        @yield('content')
     </div>
-</main>
-<!-- Main Content -->
-
-<!--Menu Responsive-->
-@include('includes.slider-menu')
-<!--Menu Responsive-->
-
-<!-- Scripts -->
+</div>
+<div class="header-second container-fluid">
+    @if(Request::route()->getName()!=='home')
+        <div class="content d-flex align-items-center">
+            <i class="fa fa-arrow-left icono-navegacion-cabecera icono-accion ruta" data-href="{{url()->previous()}}"></i>
+        </div>
+    @endif
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+    @yield('content')
+</div>
+</body>
 @include('includes.scripts')
 @yield('scripts')
-</body>
 </html>

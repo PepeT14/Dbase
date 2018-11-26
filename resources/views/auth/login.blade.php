@@ -1,71 +1,28 @@
 @extends('layouts.app')
-
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/login.css')}}" type="text/css">
+@endsection
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Username</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+    <div class="login-bck">
+        <div class="login-container d-flex justify-content-center align-items-center">
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="seccion-inicial">
+                    <div class="login-button">
+                        <button class="btn btn-login">LOGIN</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="registra-club">
+                        <button class="btn btn-register">REGISTRA TU CLUB</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10" id="login-form">
+                    @include('includes.auth.login-form')
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
+@section('scripts')
+    <script src="{{asset('js/auth/login.js')}}" type="text/javascript"></script>
+@endsection
+

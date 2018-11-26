@@ -44,7 +44,7 @@ class LoginController extends Controller
         return 'username';
     }
     public function showLoginForm(){
-        return view('welcome');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request){

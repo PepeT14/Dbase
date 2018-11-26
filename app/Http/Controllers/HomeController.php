@@ -31,7 +31,7 @@ class HomeController extends Controller
             return view('player.home');
         }
         if(Auth::guard('mister')->check()){
-            return redirect()->action('misterController@home');
+            return response()->redirectToRoute('mister.home');
         }
         if(Auth::guard('tutor')->check()){
             return view('tutor.home');

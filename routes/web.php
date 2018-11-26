@@ -87,15 +87,17 @@ Route::group(['middleware' => ['auth:admin']],function(){
 
 //Mister
 Route::group(['middleware' => ['auth:mister']],function(){
-   Route::get('/mister/home','misterController@home')->name('mister.home');
-   Route::get('/mister/tactica','misterController@tactica')->name('mister.tactica');
+    Route::group(['prefix' => 'mister'],function(){
+        Route::get('/home','misterController@home')->name('mister.home');
+        Route::get('/tactica','misterController@tactica')->name('mister.tactica');
 
-   //Partido
-   Route::get('/herramienta/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
+        //Partido
+        Route::get('/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
 
-   //Equipo
-   Route::get('mister/equipo','misterController@showEquipo')->name('mister.equipo');
-   Route::get('mister/create/player','misterController@addPlayer')->name('mister.create.player');
+        //Equipo
+        Route::get('/equipo','misterController@showEquipo')->name('mister.equipo');
+        Route::get('/create/player','misterController@addPlayer')->name('mister.create.player');
+    });
 });
 
 //Player

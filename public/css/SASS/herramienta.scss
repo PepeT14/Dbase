@@ -1,0 +1,74 @@
+/*----- INICIO -----*/
+.iconos-iniciales{
+  margin-top:50px;
+  .iconoContent{
+    margin:15px;
+    &:hover{
+      transform:scale(1.1);
+    }
+    .textoIcono{
+      color:$texto;
+      background-color:$primary-color;
+      padding:5px;
+      border-radius:5px;
+      font-size:2em;
+    }
+  }
+}
+.panel-fondo{
+  position:fixed;
+  background-color:white;
+  height:100%;
+  width:100%;
+  display:none;
+  z-index:9999;
+}
+/*------AÑADIR EQUIPO------*/
+
+.new-team{
+  margin-top:50px;
+}
+
+/*------ PARTIDO -----*/
+.partido-content{
+  width:50%;
+}
+.icono-equipo-partido{
+  width:5em;
+  height:100%;
+}
+.cuadro-jugador{
+  border-radius: 5px;
+  border: 1.5px solid #628941;
+  min-height: 1.5em;
+  padding: 2px;
+  width:100%;
+  margin: 10px 0;
+}
+.fila-jugadores{
+  margin-top:20px;
+}
+#cronometro{
+  color:$primary-color;
+  font-size:3em;
+}
+.inicio-botton{
+  border-radius:5px;
+  background-color:$color-resaltado;
+  color:$texto;
+  font-size:2em;
+  padding:5px;
+  cursor:pointer;
+}
+.inicio-botton:hover{
+  transform:scale(1.1);
+}
+
+
+/*------ ALINEACION -----*/
+.alineacion-container{
+  text-align:center;
+  color:$primary-color;
+  margin-top:50px;
+}
+

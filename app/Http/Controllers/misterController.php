@@ -16,7 +16,7 @@ class misterController extends Controller{
     //HOME
     public function home(){
         $mister = Auth::guard('mister')->user();
-        return view('vistasHerramienta.inicio',with(compact('mister')));
+        return view('mister.home',compact('mister'));
     }
 
     //PERFIL
@@ -31,12 +31,12 @@ class misterController extends Controller{
         else
             $lastTeam = $stats->last()->get()->team;
 
-        return view('misterProfile',with(compact(['m','t','league','lastTeam'])));
+        return view('misterProfile',compact(['m','t','league','lastTeam']));
     }
 
     public function tactica(){
         $mister = Auth::guard('mister')->user();
-        return view('mister.tacticas',with(compact('mister')));
+        return view('mister.tacticas',compact('mister'));
     }
 
 

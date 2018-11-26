@@ -1,0 +1,88 @@
+@import 'variables';
+
+/*----- FORMULARIOS -----*/
+.form-panel{
+  background-color:white;
+  border:1.5px solid $dark-primary-color;
+  padding:7px;
+  border-radius:5px;
+  text-align:center;
+  height:100%;
+  .login-form{
+    padding:20px;
+  }
+}
+
+.formulario-contenido{
+  padding-top:1em;
+}
+.form-title{
+  border-bottom:solid 1px $light-primary-color;
+  text-align:center;
+  padding:0.5em 0 1em 0;
+  margin:0 2em;
+}
+.form-title>img{
+  width:5em;
+}
+
+.form-group{
+  input,select{
+    border-color:$color-resaltado;
+    &:focus{border-color:$light-primary-color;box-shadow:0 0 0 0.2rem $color-resaltado }
+  }
+  label{color:$primary-text;}
+  .btn-group{
+    width:100%;
+    &.btn-group-toggle{
+      background-color:$light-primary-color;
+      &>label{color:$primary-color};
+      .btn{
+        border-radius:0;
+        &.active{
+          background-color:$light-primary-color;
+          color:$texto;
+        }
+      }
+    }
+    .btn.focus,.btn:focus{box-shadow:none;}
+  }
+}
+
+.navegacion-menu{
+  padding:10px 20px 0 20px;
+  i{
+    color:$texto;
+    font-size:1em;
+    cursor:pointer;
+    &.green{
+      color:$primary-color;
+    }
+  }
+}
+
+
+.btn-end{
+  border-radius:5px;
+  height:100%;
+  padding:5px;
+  width:100%;
+  cursor:pointer;
+}
+
+.control-panel-icon {
+  padding:0 20px 0 20px;
+  i{
+    color:$texto;
+    font-size:1.7em;
+    border:1.5px solid $light-primary-color;
+    border-radius:5px;
+    cursor:pointer;
+    padding:5px;
+    &:hover{background-color:$light-primary-color}
+  }
+}
+
+.edit-alineacion-btn{
+  &:hover{background-color:$light-primary-color}
+}
