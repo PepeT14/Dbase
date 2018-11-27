@@ -1,7 +1,8 @@
 {{--jQuery--}}
 <script src="{{asset('js/jQuery/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jQuery/jquery-ui.min.js')}}" type="text/javascript"></script>
-
+<script src="{{asset('js/jQuery/jQueryValidate/jquery.validate.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/jQuery/jQueryValidate/additional-methods.js')}}" type="text/javascript"></script>
 
 {{--FullCalendar--}}
 <script src="{{asset('js/fullcalendar/moment.js')}}" type="text/javascript"></script>

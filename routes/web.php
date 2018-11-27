@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth:mister']],function(){
 
         //Equipo
         Route::get('/equipo','misterController@showEquipo')->name('mister.equipo');
-        Route::get('/create/player','misterController@addPlayer')->name('mister.create.player');
+        Route::post('/create/player','misterController@addPlayer')->name('mister.create.player');
     });
 });
 

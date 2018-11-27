@@ -41,16 +41,23 @@ class misterController extends Controller{
 
 
     public function herramientaPartido(){
-        return view('vistasHerramienta.partido');
+        return view('mister.partido');
     }
 
     //EQUIPO
     public function showEquipo(){
         $mister = Auth::guard('mister')->user();
-        return view('vistasHerramienta.equipo',with(compact('mister')));
+        return view('mister.equipo',with(compact('mister')));
     }
 
     public function addPlayer(Request $request){
+
+        $this->validate($request,[
+            'player-name' =>'required|string',
+            'player-position' =>'string',
+            'player-birthday' =>'required|date',
+        ]);
+
         $player = new Player();
         $player->name = $request->input('player-name');
         $player->position = $request->input('player-position');
@@ -58,8 +65,7 @@ class misterController extends Controller{
         $team = Auth::guard('mister')->user()->team;
         $player->team()->associate($team);
         $player->save();
-
-        return redirect()->action('misterController@showEquipo');
+        return redirect()->route('mister.equipo');
     }
 
     //CALENDARIO PARTIDOS

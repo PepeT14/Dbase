@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html, body {
   font-family: "Gill Sans", sans-serif !important;
   color: #212121;
@@ -17,7 +16,7 @@ html, body {
 
 /*---CABECERA---*/
 .header-first {
-  background-color: #388E3C;
+  background-color: #00796B;
   height: 70px;
 }
 .header-first .content {
@@ -40,7 +39,7 @@ html, body {
 }
 
 .header-second {
-  background-color: #C8E6C9;
+  background-color: #B2DFDB;
   height: 30px;
 }
 .header-second .content {
@@ -80,13 +79,114 @@ html, body {
     transform: rotate(360deg);
   }
 }
+/*----- FORMULARIOS -----*/
+.form-panel {
+  background-color: white;
+  border: 1.5px solid #00796B;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  height: 100%;
+}
+
+.formulario-contenido {
+  padding-top: 1em;
+}
+
+.form-title {
+  border-bottom: solid 1px #00796B;
+  text-align: center;
+  padding: 0.5em 0 1em 0;
+  margin: 0 2em;
+}
+
+.form-row.button-row {
+  text-align: center;
+}
+.form-row.button-row div:first-child {
+  margin-bottom: 5px;
+}
+
+.form-title > img {
+  width: 5em;
+}
+
+.form-group input, .form-group select {
+  border-color: #607D8B;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: #B2DFDB;
+  box-shadow: 0 0 0 0.2rem #607D8B;
+}
+.form-group label {
+  color: #212121;
+}
+.form-group .btn-group {
+  width: 100%;
+}
+.form-group .btn-group.btn-group-toggle {
+  background-color: #B2DFDB;
+}
+.form-group .btn-group.btn-group-toggle > label {
+  color: #009688;
+}
+.form-group .btn-group.btn-group-toggle .btn {
+  border-radius: 0;
+}
+.form-group .btn-group.btn-group-toggle .btn.active {
+  background-color: #B2DFDB;
+  color: white;
+}
+.form-group .btn-group .btn.focus, .form-group .btn-group .btn:focus {
+  box-shadow: none;
+}
+
+.navegacion-menu {
+  padding: 10px 20px 0 20px;
+}
+.navegacion-menu i {
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+.navegacion-menu i.green {
+  color: #009688;
+}
+
+.btn-end {
+  border-radius: 5px;
+  height: 100%;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.control-panel-icon {
+  padding: 0 20px 0 20px;
+}
+.control-panel-icon i {
+  color: white;
+  font-size: 1.7em;
+  border: 1.5px solid #B2DFDB;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+.control-panel-icon i:hover {
+  background-color: #B2DFDB;
+}
+
+.edit-alineacion-btn:hover {
+  background-color: #B2DFDB;
+}
+
 /*---ESTILOS_GENERALES---*/
 .icono-accion {
   cursor: pointer;
 }
 
 .border-secundario {
-  border: 1px solid #C8E6C9;
+  border: 1px solid #B2DFDB;
 }
 
 .btn-principal {
@@ -99,7 +199,7 @@ html, body {
 }
 
 .btn-clarito {
-  background-color: #C8E6C9;
+  background-color: #B2DFDB;
   color: white;
 }
 .btn-clarito[type=submit]:hover {
@@ -132,10 +232,10 @@ html, body {
 }
 
 .btn-save {
-  background: #4CAF50;
+  background: #009688;
 }
 .btn-save:hover {
-  background-color: #388E3C;
+  background-color: #00796B;
 }
 
 .group-around {
@@ -153,7 +253,7 @@ html, body {
 
 /*------- MODAL ----*/
 .modal-title {
-  color: #4CAF50;
+  color: #009688;
   text-align: center;
   width: 100%;
   font-size: 1.5em;
@@ -161,7 +261,7 @@ html, body {
 
 .cuadro-action {
   width: 100%;
-  border: 1.5px solid #388E3C;
+  border: 1.5px solid #00796B;
   display: flex;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -169,7 +269,7 @@ html, body {
   align-items: baseline;
 }
 .cuadro-action input {
-  color: #C8E6C9;
+  color: #B2DFDB;
   font-size: 1em;
   font-weight: bold;
   text-align: center;
@@ -181,7 +281,7 @@ html, body {
 }
 .cuadro-action i {
   font-size: 1.2em;
-  color: #4CAF50;
+  color: #009688;
   cursor: pointer;
   margin-right: 10px;
 }
@@ -190,213 +290,10 @@ html, body {
   width: 100%;
   text-align: center;
   font-size: 1.7em;
-  color: #4CAF50;
+  color: #009688;
 }
 .add-more-action i {
   cursor: pointer;
-}
-
-/*----- FORMULARIOS -----*/
-.form-panel {
-  background-color: white;
-  border: 1.5px solid #388E3C;
-  padding: 7px;
-  border-radius: 5px;
-  text-align: center;
-  height: 100%;
-}
-.form-panel .login-form {
-  padding: 20px;
-}
-
-.formulario-contenido {
-  padding-top: 1em;
-}
-
-.form-title {
-  border-bottom: solid 1px #C8E6C9;
-  text-align: center;
-  padding: 0.5em 0 1em 0;
-  margin: 0 2em;
-}
-
-.form-title > img {
-  width: 5em;
-}
-
-.form-group input, .form-group select {
-  border-color: #607D8B;
-}
-.form-group input:focus, .form-group select:focus {
-  border-color: #C8E6C9;
-  box-shadow: 0 0 0 0.2rem #607D8B;
-}
-.form-group label {
-  color: #212121;
-}
-.form-group .btn-group {
-  width: 100%;
-}
-.form-group .btn-group.btn-group-toggle {
-  background-color: #C8E6C9;
-}
-.form-group .btn-group.btn-group-toggle > label {
-  color: #4CAF50;
-}
-.form-group .btn-group.btn-group-toggle .btn {
-  border-radius: 0;
-}
-.form-group .btn-group.btn-group-toggle .btn.active {
-  background-color: #C8E6C9;
-  color: white;
-}
-.form-group .btn-group .btn.focus, .form-group .btn-group .btn:focus {
-  box-shadow: none;
-}
-
-.navegacion-menu {
-  padding: 10px 20px 0 20px;
-}
-.navegacion-menu i {
-  color: white;
-  font-size: 1em;
-  cursor: pointer;
-}
-.navegacion-menu i.green {
-  color: #4CAF50;
-}
-
-.btn-end {
-  border-radius: 5px;
-  height: 100%;
-  padding: 5px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.control-panel-icon {
-  padding: 0 20px 0 20px;
-}
-.control-panel-icon i {
-  color: white;
-  font-size: 1.7em;
-  border: 1.5px solid #C8E6C9;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px;
-}
-.control-panel-icon i:hover {
-  background-color: #C8E6C9;
-}
-
-.edit-alineacion-btn:hover {
-  background-color: #C8E6C9;
-}
-
-/*----- INICIO -----*/
-.iconos-iniciales {
-  margin-top: 50px;
-}
-.iconos-iniciales .iconoContent {
-  margin: 15px;
-}
-.iconos-iniciales .iconoContent:hover {
-  transform: scale(1.1);
-}
-.iconos-iniciales .iconoContent .textoIcono {
-  color: white;
-  background-color: #4CAF50;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 2em;
-}
-
-.panel-fondo {
-  position: fixed;
-  background-color: white;
-  height: 100%;
-  width: 100%;
-  display: none;
-  z-index: 9999;
-}
-
-/*------AÑADIR EQUIPO------*/
-.new-team {
-  margin-top: 50px;
-}
-
-/*------ PARTIDO -----*/
-.partido-content {
-  width: 50%;
-}
-
-.icono-equipo-partido {
-  width: 5em;
-  height: 100%;
-}
-
-.cuadro-jugador {
-  border-radius: 5px;
-  border: 1.5px solid #628941;
-  min-height: 1.5em;
-  padding: 2px;
-  width: 100%;
-  margin: 10px 0;
-}
-
-.fila-jugadores {
-  margin-top: 20px;
-}
-
-#cronometro {
-  color: #4CAF50;
-  font-size: 3em;
-}
-
-.inicio-botton {
-  border-radius: 5px;
-  background-color: #607D8B;
-  color: white;
-  font-size: 2em;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.inicio-botton:hover {
-  transform: scale(1.1);
-}
-
-/*------ ALINEACION -----*/
-.alineacion-container {
-  text-align: center;
-  color: #4CAF50;
-  margin-top: 50px;
-}
-
-.add-suplentes {
-  cursor: pointer;
-  height: 2em;
-  font-size: 1.3em;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4CAF50;
-  color: white;
-}
-.add-suplentes:hover {
-  background-color: #388E3C;
-}
-
-.alineacion-container .row {
-  margin-top: 10px;
-}
-
-.alineacion-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding-bottom: 7px;
-  border-bottom: 1px solid #BDBDBD;
 }
 
 .equipo-container {

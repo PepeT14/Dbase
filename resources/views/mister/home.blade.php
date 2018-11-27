@@ -1,5 +1,4 @@
-@extends('layouts.mister')
-
+@extends('layouts.app')
 @section('content')
     <div class="iconos-iniciales col-lg-4 col-md-8 col-sm-12" id="iconos-iniciales">
         @if($mister->team)
@@ -54,4 +53,7 @@
         </div>
     @endif
     <div class="panel-fondo"></div>
+@endsection
+@section('scripts')
+    <script src="{{asset('js/mister/inicio.js')}}" type="text/javascript"></script>
 @endsection
