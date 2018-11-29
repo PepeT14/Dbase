@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="iconoContent partidosHerramienta row justify-content-center">
-                <div class="textoIcono icono-accion" data-href={{route('mister.herramienta.partido')}}>
+                <div class="textoIcono icono-accion">
                     <span>ENTRENAMIENTO</span>
                 </div>
             </div>
@@ -23,12 +23,12 @@
                 </div>
             </div>
             <div class="iconoContent partidosHerramienta row justify-content-center">
-                <div class="textoIcono icono-accion" data-href={{route('mister.herramienta.partido')}}>
+                <div class="textoIcono icono-accion">
                     <span>INVENTARIO</span>
                 </div>
             </div>
             <div class="iconoContent partidosHerramienta row justify-content-center">
-                <div class="textoIcono icono-accion" data-href={{route('mister.herramienta.partido')}}>
+                <div class="textoIcono icono-accion">
                     <span>CALENDARIO</span>
                 </div>
             </div>
@@ -42,14 +42,14 @@
     </div>
     @if($mister->team)
         <div id="partido-formulario" class="section col-lg-4 col-md-8 col-sm-12">
-            @include('vistasHerramienta.includes.formularios.partido')
+            @include('mister.formularios.newPartidoForm')
         </div>
         <div id="editar-alineacion" class="section col-lg-6 col-md-8 col-sm-12">
-            @include('vistasHerramienta.includes.formularios.editarAlineacion')
+            @include('mister.editarAlineacion')
         </div>
     @else
         <div id="new-team" class="section col-lg-4 col-md-8 col-sm-12" data-leagues="{{DB::table('leagues')->get()}}">
-            @include('vistasHerramienta.includes.formularios.nuevo-equipo')
+            @include('mister.formularios.newEquipoForm')
         </div>
     @endif
     <div class="panel-fondo"></div>

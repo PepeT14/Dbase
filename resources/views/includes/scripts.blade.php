@@ -10,8 +10,11 @@
 <script src="{{asset('js/fullcalendar/locale/es.js')}}" type="text/javascript"></script>
 
 {{-- Bootstrap --}}
-<script src="{{asset('js/bootstrap/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/bootstrap/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+
+{{-- cs-Select --}}
+<script src="{{asset('js/selectFx.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/classie.js')}}" type="text/javascript"></script>
 
 {{--Scripts propios--}}
 <script src="{{asset('js/main.js')}}" type="text/javascript"></script>

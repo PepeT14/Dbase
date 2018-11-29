@@ -1,21 +1,19 @@
 <div class="header-first container-fluid">
     <div class="content">
         <img class="logo-cabecera icono-accion ruta" src="{{asset('imagenes/dbase.png')}}" data-href="{{route('home')}}">
-        <div class="pull-right name">
-            <a href="{{ route('logout') }}" class="clearfix" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-            <span class="pull-semi-bold">
+
+        <div class="icono-profile" data-toggle="dropdown" id="dropdownMisterProfileBtn">
+            <img class="img-fluid user-icon" src="{!! $mister->file ? asset($mister->file) : asset('imagenes/profile.png') !!}">
+        </div>
+        <div class="dropdown-menu mister-profile" aria-labelledby="dropdownMisterProfileBtn">
+            <div class="logout">
                 <i class="fa fa-power-off logout"></i>
-                Salir
-            </span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
+                <span>Salir</span>
+            </div>
         </div>
-        <div class="icono-profile">
-            <img class="img-fluid user-icon icono-accion ruta" src="{!! $mister->file ? asset($mister->file) : asset('imagenes/profile.png') !!}">
-        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+        </form>
     </div>
 </div>
 <div class="header-second container-fluid">

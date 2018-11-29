@@ -13,6 +13,118 @@ html,body{
   border-bottom:1.5px solid $divider-color;
   margin:25px;
 }
+
+.icono-accion{
+  cursor:pointer;
+}
+.border-secundario{border:1px solid $light-primary-color}
+
+
+.group-around{
+  display:flex;
+  justify-content: space-around;
+  @media(min-width:576px) and (max-width:768px){
+    flex-direction:column;
+    & .btn{
+      margin-bottom:5px;
+    }
+  }
+}
+
+      /*----BOTONES-----*/
+
+.btn-principal{
+  background-color:$color-resaltado;
+  color:$texto;
+  &:hover{
+    background-color:$dark-color-resaltado;
+  }
+}
+.btn-primary-color{
+  background-color:$primary-color;
+  color:$texto;
+  &:hover{
+    background-color:$dark-primary-color;
+  }
+}
+.btn-clarito{
+  background-color:$light-primary-color;
+  color:$texto;
+  &[type='submit']:hover {
+    transform: scale(1.1);
+  }
+}
+.btn,button{
+  &.outline{
+    border:solid 1px $color-resaltado;
+    background-color:transparent;
+    color:$color-resaltado;
+    &:hover{
+      background-color:$color-resaltado;
+      color:white;
+    }
+  }
+  &:focus{box-shadow: none;outline: none}
+}
+.btn-50{ width:50%;  }
+.btn-100{ width:100%; }
+
+.btn-form{
+  color:$texto;
+  font-size:1.2em;
+}
+.btn-cancel{
+  background-color:$cancel-color;
+  &:hover{background-color:$dark-cancel-color}
+}
+.btn-save{
+  background:$save-color;
+  &:hover{background-color:$dark-save-color}
+}
+      /*------- MODAL ----*/
+.modal-title{
+  color:$primary-color;
+  text-align:center;
+  width:100%;
+  font-size:1.5em;
+}
+
+.cuadro-action{
+  width:100%;
+  border:1.5px solid $dark-primary-color;
+  display:flex;
+  border-radius:5px;
+  margin-bottom:10px;
+  justify-content: space-between;
+  align-items: baseline;
+  input{
+    color:$light-primary-color;
+    font-size:1em;
+    font-weight:bold;
+    text-align:center;
+    border:none;
+    &:focus{box-shadow:none; text-align:left;}
+  }
+  i{
+    font-size:1.2em;
+    color:$primary-color;
+    cursor:pointer;
+    margin-right:10px;
+  }
+}
+
+.modal-footer{
+}
+.add-more-action{
+  width:100%;
+  text-align:center;
+  font-size:1.7em;
+  color:$primary-color;
+  i{cursor:pointer;}
+}
+/*----------------------------------------------
+------------------------ SECCIONES -----------------------
+-------------------------------------------------*/
 /*---CABECERA---*/
 .header-first{
   background-color:$dark-primary-color;

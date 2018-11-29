@@ -56,6 +56,10 @@ class Player extends playerUser
         return $this->hasMany('App\Models\Lesion','player_id');
     }
 
+        //Player_Match (One to Many)
+    public function playerMatchs(){
+        return $this->belongsToMany('APP\Models\Match','player_match','player_id','match_id')->withPivot('minutes','summoned','playing');;
+    }
     public function edad(){
         return Carbon::now()->year - Carbon::createFromFormat('Y-m-d', $this->birthday)->year;
     }

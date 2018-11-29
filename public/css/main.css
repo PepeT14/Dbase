@@ -14,6 +14,141 @@ html, body {
   margin: 25px;
 }
 
+.icono-accion {
+  cursor: pointer;
+}
+
+.border-secundario {
+  border: 1px solid #B2DFDB;
+}
+
+.group-around {
+  display: flex;
+  justify-content: space-around;
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .group-around {
+    flex-direction: column;
+  }
+  .group-around .btn {
+    margin-bottom: 5px;
+  }
+}
+
+/*----BOTONES-----*/
+.btn-principal {
+  background-color: #607D8B;
+  color: white;
+}
+.btn-principal:hover {
+  background-color: #425F6D;
+}
+
+.btn-primary-color {
+  background-color: #009688;
+  color: white;
+}
+.btn-primary-color:hover {
+  background-color: #00796B;
+}
+
+.btn-clarito {
+  background-color: #B2DFDB;
+  color: white;
+}
+.btn-clarito[type=submit]:hover {
+  transform: scale(1.1);
+}
+
+.btn.outline, button.outline {
+  border: solid 1px #607D8B;
+  background-color: transparent;
+  color: #607D8B;
+}
+.btn.outline:hover, button.outline:hover {
+  background-color: #607D8B;
+  color: white;
+}
+.btn:focus, button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-50 {
+  width: 50%;
+}
+
+.btn-100 {
+  width: 100%;
+}
+
+.btn-form {
+  color: white;
+  font-size: 1.2em;
+}
+
+.btn-cancel {
+  background-color: #c36868;
+}
+.btn-cancel:hover {
+  background-color: #884a4a;
+}
+
+.btn-save {
+  background: #009688;
+}
+.btn-save:hover {
+  background-color: #00796B;
+}
+
+/*------- MODAL ----*/
+.modal-title {
+  color: #009688;
+  text-align: center;
+  width: 100%;
+  font-size: 1.5em;
+}
+
+.cuadro-action {
+  width: 100%;
+  border: 1.5px solid #00796B;
+  display: flex;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.cuadro-action input {
+  color: #B2DFDB;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+}
+.cuadro-action input:focus {
+  box-shadow: none;
+  text-align: left;
+}
+.cuadro-action i {
+  font-size: 1.2em;
+  color: #009688;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.add-more-action {
+  width: 100%;
+  text-align: center;
+  font-size: 1.7em;
+  color: #009688;
+}
+.add-more-action i {
+  cursor: pointer;
+}
+
+/*----------------------------------------------
+------------------------ SECCIONES -----------------------
+-------------------------------------------------*/
 /*---CABECERA---*/
 .header-first {
   background-color: #00796B;
@@ -88,6 +223,9 @@ html, body {
   text-align: center;
   height: 100%;
 }
+.form-panel.partido {
+  border: none;
+}
 
 .formulario-contenido {
   padding-top: 1em;
@@ -125,13 +263,10 @@ html, body {
   width: 100%;
 }
 .form-group .btn-group.btn-group-toggle {
-  background-color: #B2DFDB;
-}
-.form-group .btn-group.btn-group-toggle > label {
-  color: #009688;
+  border-radius: 25px;
 }
 .form-group .btn-group.btn-group-toggle .btn {
-  border-radius: 0;
+  border-radius: 25px;
 }
 .form-group .btn-group.btn-group-toggle .btn.active {
   background-color: #B2DFDB;
@@ -174,126 +309,6 @@ html, body {
 }
 .control-panel-icon i:hover {
   background-color: #B2DFDB;
-}
-
-.edit-alineacion-btn:hover {
-  background-color: #B2DFDB;
-}
-
-/*---ESTILOS_GENERALES---*/
-.icono-accion {
-  cursor: pointer;
-}
-
-.border-secundario {
-  border: 1px solid #B2DFDB;
-}
-
-.btn-principal {
-  background-color: #607D8B;
-  color: white;
-}
-.btn-principal:hover {
-  transform: scale(1.1);
-  background-color: #425F6D;
-}
-
-.btn-clarito {
-  background-color: #B2DFDB;
-  color: white;
-}
-.btn-clarito[type=submit]:hover {
-  transform: scale(1.1);
-}
-
-.btn:focus, button:focus {
-  box-shadow: none;
-  outline: none;
-}
-
-.btn-50 {
-  width: 50%;
-}
-
-.btn-100 {
-  width: 100%;
-}
-
-.btn-form {
-  color: white;
-  font-size: 1.2em;
-}
-
-.btn-cancel {
-  background-color: #c36868;
-}
-.btn-cancel:hover {
-  background-color: #884a4a;
-}
-
-.btn-save {
-  background: #009688;
-}
-.btn-save:hover {
-  background-color: #00796B;
-}
-
-.group-around {
-  display: flex;
-  justify-content: space-around;
-}
-@media (min-width: 576px) and (max-width: 768px) {
-  .group-around {
-    flex-direction: column;
-  }
-  .group-around .btn {
-    margin-bottom: 5px;
-  }
-}
-
-/*------- MODAL ----*/
-.modal-title {
-  color: #009688;
-  text-align: center;
-  width: 100%;
-  font-size: 1.5em;
-}
-
-.cuadro-action {
-  width: 100%;
-  border: 1.5px solid #00796B;
-  display: flex;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.cuadro-action input {
-  color: #B2DFDB;
-  font-size: 1em;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-}
-.cuadro-action input:focus {
-  box-shadow: none;
-  text-align: left;
-}
-.cuadro-action i {
-  font-size: 1.2em;
-  color: #009688;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.add-more-action {
-  width: 100%;
-  text-align: center;
-  font-size: 1.7em;
-  color: #009688;
-}
-.add-more-action i {
-  cursor: pointer;
 }
 
 .equipo-container {

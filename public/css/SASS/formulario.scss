@@ -8,6 +8,9 @@
   border-radius:5px;
   text-align:center;
   height:100%;
+  &.partido{
+    border:none;
+  }
 }
 
 .formulario-contenido{
@@ -36,10 +39,9 @@
   .btn-group{
     width:100%;
     &.btn-group-toggle{
-      background-color:$light-primary-color;
-      &>label{color:$primary-color};
+      border-radius:25px;
       .btn{
-        border-radius:0;
+        border-radius:25px;
         &.active{
           background-color:$light-primary-color;
           color:$texto;
@@ -82,8 +84,4 @@
     padding:5px;
     &:hover{background-color:$light-primary-color}
   }
-}
-
-.edit-alineacion-btn{
-  &:hover{background-color:$light-primary-color}
 }

@@ -1,53 +1,10 @@
 $(document).ready(function(){
-    //NUEVO EQUIPO
-    $('#team-category').on('change',function(){
-        let obj = $(this);
-        let ligas = $(document).find('#new-team').data('leagues').filter(league => league.category=obj.val());
-        console.log(ligas);
-        ligas.forEach(function(liga){
-            option = '<option name='+liga.name+'>'+liga.name+'</option>';
-            $('#team-league').append(option);
-        });
-    });
-
-    //Funciones generales
-
-
-
-    $('.formulario-partido').submit(function(){return false;});
-
-    $('#edit-alineacion-btn').on('click',function(){
-        $(this).parents().find('#partido-formulario').hide('slow');
-        $('#editar-alineacion').show('slow');
-        rellenaEditAlineacion();
-    });
-
-    $('#control-panel').on('show.bs.modal',function(){
-        $('.btn-cancel').on('click',function(){$('#control-panel').modal('hide')});
-        let clickWithEnter = function(){
-            $('.cuadro-action input').on('focus',function(){
-                let obj = $(this);
-                let funcion = function(){
-                    let acciones = obj.parent().parent()[0].children.length;
-                    console.log(acciones);
-                    let ultimaAccion = obj.parent().parent()[0].children[acciones-2];
-                    console.log(ultimaAccion);
-                    let accion = obj.parent()[0];
-                    if(ultimaAccion === accion){
-                        console.log(obj);
-                        $('.add-more-action').trigger('click');
-                    }
-                    obj.parent().next().find('input').focus();
-                };
-                linkaEnter(obj,funcion);
-            });
-        };
-        linkMoreActions(clickWithEnter);
-    });
-
-
+/*--------------------------------------------------------
+* ----------------- CLASE OBJETO PARTIDO -------------------
+* --------------------------------------------------------*/
     let Partido = function(){
         this.calculaJugadores(this.getTipoPartido());
+        this.alineacion = null;
     };
 
     Partido.prototype.getTipoPartido=function(){
@@ -88,22 +45,185 @@ $(document).ready(function(){
         }
     };
 
-    let rellenaEditAlineacion = function(){
-        $('.titulares div.cuadro-jugador').remove();
-        $('.suplentes div.cuadro-jugador').remove();
-        let partido = new Partido();
-        let fila = '<div class="row cuadro-jugador"> </div>';
+    let partido = new Partido();
+
+/*--------------------------------------------------------
+* ----------------- FORMULARIO PARTIDO -------------------
+* --------------------------------------------------------*/
+
+const newMatchForm = $('#new-match-form');
+
+    /*------------- PANEL DE CONTROL DE ACCIONES ---------*/
+    $('#control-panel').on('show.bs.modal',function(){
+        $('.btn-cancel').on('click',function(){$('#control-panel').modal('hide')});
+        let clickWithEnter = function(){
+            $('.cuadro-action input').on('focus',function(){
+                let obj = $(this);
+                let funcion = function(){
+                    let acciones = obj.parent().parent()[0].children.length;
+                    console.log(acciones);
+                    let ultimaAccion = obj.parent().parent()[0].children[acciones-2];
+                    console.log(ultimaAccion);
+                    let accion = obj.parent()[0];
+                    if(ultimaAccion === accion){
+                        console.log(obj);
+                        $('.add-more-action').trigger('click');
+                    }
+                    obj.parent().next().find('input').focus();
+                };
+                linkaEnter(obj,funcion);
+            });
+        };
+        linkMoreActions(clickWithEnter);
+    });
+
+    /*------------ ENVIO DEL FORMULARIO ------------*/
+    newMatchForm.validate({
+        rules:{
+            'fecha-partido':{
+                required:true,
+                date:true
+            },
+            'hora-partido':{
+                required:true,
+                time:true
+            },
+            'jornada-partido':{
+                required:true
+            },
+            'player-birthday':{
+                required:true,
+                date:true
+            }
+        }
+    });
+
+    newMatchForm.on('submit',function(){
+        event.preventDefault();
+        if($(this).valid()){
+            let data = $(this).serializeFormJSON();
+            if(partido.alineacion){
+                data.alineacion = partido.alineacion;
+            }
+            $.ajax({
+                url:$('meta[name="app-url"]').attr('content') + '/mister/create/match',
+                method:'POST',
+                data:data,
+                success:function(response){
+                    console.log('Empieza el partido');
+                    window.location.href=response;
+                },
+                error:function(response){
+                    $('body')[0].innerHTML =response.responseText;
+                    console.log(response);
+                }
+            });
+        }else{
+            window.location.href='/';
+        }
+    });
+/*------------------------------------------------
+* ----------------- ALINEACION -------------------
+* ------------------------------------------------*/
+    $('#edit-alineacion-btn').on('click',function(){
+        event.preventDefault();
+        $(this).parents().find('#partido-formulario').hide('slow');
+        $('#editar-alineacion').show('slow');
+        if(partido.alineacion){
+            console.log(partido.alineacion);
+        }else{
+            rellenaEditAlineacion(partido);
+        }
+    });
+
+    /*----------- FUNCIONES UTILES ------------*/
+
+    let rellenaEditAlineacion = function(partido){
         let suplentesSelector = $('.suplentes');
-        for(let i=0;i<partido.titulares;i++){
-            $('.titulares').append(fila);
-        }
-        for(let i=0;i<partido.suplentes;i++){
-            suplentesSelector.append(fila);
-        }
-        suplentesSelector.append('<div class="cuadro-jugador add-suplentes btn-add-row">' +
-            '<i class="fa fa-plus-circle"></i><span>AÑADIR MÁS</span></div>');
-        linkBotonesAddFila(fila,'.add-suplentes','.delete-suplentes');
+        let titularesSelector = $('.titulares');
+        new Promise(function(ok){
+            //ELimino los cuadros creados anteriormente
+            $('.titulares div.cuadro-jugador').remove();
+            $('.suplentes div.cuadro-jugador').remove();
+
+            //Texto que vamos a insertar por cada jugador
+            let fila = '<div class="row cuadro-jugador">' +
+                '<select class="selector-jugador-partido"></select>' +
+                ' </div>';
+
+            //Insertamos en los titulares y en los suplentes
+            for(let i=0;i<partido.titulares;i++){
+                titularesSelector.append(fila);
+            }
+            for(let i=0;i<partido.suplentes;i++){
+                suplentesSelector.append(fila);
+            }
+            /*
+            //BOTON PARA AÑADIR MAS JUGADORES
+            suplentesSelector.append('<div class="cuadro-jugador add-suplentes btn-add-row">' +
+                '<i class="fa fa-plus-circle"></i><span>AÑADIR MÁS</span></div>');
+
+            //Linkear el boton para que cuando sea pulsado añada una fila mas de un jugador
+            linkBotonesAddFila(fila,'.add-suplentes','.delete-suplentes');
+            */
+
+            //Fin del promise
+            ok();
+        }).then(function(){
+            let jugadores = $('#edit-alineacion-btn').data('players');
+            let cargaInicial = cargaSelectores(jugadores);
+            refrescaSelectores(cargaInicial[0],cargaInicial[1]);
+            partido.alineacion = {};
+            let idTitulares = [];
+            let idSuplentes = [];
+            $('.titulares select option:selected').each(function(){idTitulares.push($(this)[0].value)});
+            $('.suplentes select option:selected').each(function(){idSuplentes.push($(this)[0].value)});
+            partido.alineacion.titulares = jugadores.filter(function(jugador){
+                return idTitulares.includes(jugador.id.toString());
+            });
+            partido.alineacion.suplentes = jugadores.filter(function(jugador){
+                return idSuplentes.includes(jugador.id.toString());
+            });
+        });
     };
+
+    /*----------------- LOGICA SELECTORES ALINEACION -----------*/
+
+    let cargaSelectores = function(jugadores){
+        let seleccionados = [];
+        $('.cuadro-jugador select').each(function(){
+            let obj = this;
+            jugadores = jugadores.filter(function(jugador){
+                return !seleccionados.includes(jugador.id.toString());
+            });
+            jugadores.forEach(function(jugador){
+                $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
+            });
+            let optSeleccionada = $(this).find('option:selected')[0].value;
+            seleccionados.push(optSeleccionada);
+        });
+        return [jugadores,seleccionados];
+    };
+
+    let refrescaSelectores = function(jugadores,seleccionados){
+        $('.cuadro-jugador select').each(function(){
+            let obj = this;
+            jugadores = jugadores.filter(function(jugador){
+                return !seleccionados.includes(jugador.id.toString());
+            });
+            let optSeleccionada = $(this).find('option:selected')[0].value;
+            let jugadorSeleccionado = null;
+            $('#edit-alineacion-btn').data('players').forEach(function(jugador){if(jugador.id.toString()===optSeleccionada){jugadorSeleccionado = jugador}});
+            $(this).find('option').remove();
+            $(this).append('<option value="'+jugadorSeleccionado.id+'">'+jugadorSeleccionado.name+'</option>');
+            jugadores.forEach(function(jugador){
+                $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
+            });
+        });
+    };
+
+
+
 
     let linkMoreActions = function(funcion){
         let fila = '<div class="cuadro-action">'+
@@ -117,7 +237,7 @@ $(document).ready(function(){
     };
 
     let linkBotonesAddFila = function(append,boton,botonEliminar,funcionCallback){
-        new Promise(function(){
+        new Promise(function(ok){
             $(boton).on('click',function(){
                 $(this).parent().append(append);
                 activaBotonEliminar(botonEliminar);
@@ -125,8 +245,9 @@ $(document).ready(function(){
                 $(this).parent().append(html);
                 $(this).remove();
                 linkBotonesAddFila(append,boton,botonEliminar,funcionCallback);
+                ok();
             });
-        }).then(funcionCallback.call());
+        }).then(function(){try{funcionCallback.call()}catch(err){console.log(err)}});
     };
 
     let activaBotonEliminar = function(boton){

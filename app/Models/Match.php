@@ -8,7 +8,7 @@ class Match extends Model
 {
     //Defining table
     protected $table = 'matchs';
-
+    public $timestamps=false;
     //Relationships
 
         //League (Many to One)
@@ -20,9 +20,9 @@ class Match extends Model
         return $this->belongsToMany('App\Models\Team','team_match','match_id','team_id')->withPivot('positive_goals','quality');
 
     }
-        //Player_Match_Stats (One to Many)
+        //Player_Match (One to Many)
     public function players(){
-        return $this->hasMany('App\Models\PlayerMatch','match_id');
+        return $this->belongsToMany('App\Models\Player','player_match','match_id','player_id')->withPivot('minutes','summoned','playing');
     }
 
         //Sistems (Many to Many)

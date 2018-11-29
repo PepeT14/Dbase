@@ -8,6 +8,7 @@ class PlayerMatch extends Model
 {
     //Defining table
     protected $table ='player_match';
+    public $timestamps=false;
 
     //Relationships
 
@@ -17,7 +18,7 @@ class PlayerMatch extends Model
     }
         //Macth (Many to One)
     public function match(){
-        return $this->belongTo('App\Models\Match','match_id');
+        return $this->belongsTo('App\Models\Match','match_id');
     }
         //Cards (One to Many)
     public function cards(){

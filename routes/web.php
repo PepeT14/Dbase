@@ -92,7 +92,8 @@ Route::group(['middleware' => ['auth:mister']],function(){
         Route::get('/tactica','misterController@tactica')->name('mister.tactica');
 
         //Partido
-        Route::get('/partido','misterController@herramientaPartido')->name('mister.herramienta.partido');
+        Route::get('/partido/{id}','misterController@startPartido')->name('mister.start.partido');
+        Route::post('/create/match','misterController@addMatch')->name('mister.create.match');
 
         //Equipo
         Route::get('/equipo','misterController@showEquipo')->name('mister.equipo');
@@ -114,4 +115,3 @@ Route::group(['middleware' => ['auth:tutor']],function(){
 Route::get('/profile/{mister}','misterController@showProfile')->name('mister.profile');
 Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
-

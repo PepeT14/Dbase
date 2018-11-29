@@ -15,4 +15,9 @@ $(document).ready(function(){
         $(this).parent().parent().parent().hide('slow');
         $('#'+backSection).show('slow');
     });
+
+
+    $('.logout').on('click',function(){
+        $('#logout-form').submit();
+    })
 });

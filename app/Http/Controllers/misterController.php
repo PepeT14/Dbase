@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Match;
 use Illuminate\Http\Request;
-use App\Models\Mister;
-use App\Models\Team;
-use App\Models\League;
+use Carbon\Carbon;
 use App\Models\Player;
+use App\Models\PlayerMatch;
 use MaddHatter\LaravelFullcalendar\Calendar;
 use Auth;
 
@@ -20,18 +20,9 @@ class misterController extends Controller{
     }
 
     //PERFIL
-    public function showProfile($mister){
-        $m = Mister::all()->where('id', '=', $mister)->first();
-        $team = Team::all()->where('id','=',$m->team->id)->first();
-        $t=$team->name;
-        $league = League::all()->where('id',$team->league->id)->first()->name;
-        $stats= $m->stats;
-        if($stats->count()<1)
-            $lastTeam='--';
-        else
-            $lastTeam = $stats->last()->get()->team;
-
-        return view('misterProfile',compact(['m','t','league','lastTeam']));
+    public function showProfile(){
+        $mister = Auth::guard('mister')->user();
+        return view('misterProfile',compact('mister'));
     }
 
     public function tactica(){
@@ -40,11 +31,52 @@ class misterController extends Controller{
     }
 
 
-    public function herramientaPartido(){
-        return view('mister.partido');
+    public function addMatch(Request $request){
+        $mister = Auth::guard('mister')->user();
+
+        $this->validate($request,[
+            'fecha-partido' =>'required|date',
+            'hora-partido' => 'required',
+            'jornada-partido' => 'required'
+        ]);
+
+        $match = new Match();
+        $match->jornada = $request->input('jornada-partido');
+        $match->title = 'Partido del '.$mister->team->name.'. Jornada '.$request->input('jornada-partido');
+        $fecha = $request->input('fecha-partido');
+        $hora = $request->input('hora-partido');
+        $match->start = Carbon::createFromFormat('Y-m-d H:i', $fecha.$hora);
+        $match->league()->associate($mister->team->league);
+        $match->save();
+
+        if($request->has('alineacion')){
+            $titulares = collect($request->input('alineacion.titulares'));
+            $suplentes = collect($request->input('alineacion.suplentes'));
+            foreach($titulares as $titular){
+                $player = Player::Where('id',collect($titular)->get('id'))->first();
+                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>1]);
+            }
+            forEach($suplentes as $suplente){
+                $player = Player::Where('id',collect($suplente)->get('id'))->first();
+                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>0]);
+            }
+        }
+        if($request->has('local')){
+            $quality = 'local';
+        }else{
+            $quality = 'visitante';
+        }
+        $match->teams()->attach($mister->team,['quality' => $quality]);
+        return 'partido/'.$match->id;
     }
 
     //EQUIPO
+    public function startPartido($match){
+        $mister = Auth::guard('mister')->user();
+        $partido = Match::find($match);
+        return view('mister.partido',compact(['partido','mister']));
+    }
+
     public function showEquipo(){
         $mister = Auth::guard('mister')->user();
         return view('mister.equipo',with(compact('mister')));
