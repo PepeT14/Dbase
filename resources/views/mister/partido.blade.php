@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<div class="partido-content">
+<div class="partido-content" data-partido="{{$match->id}}">
     <div class="row justify-content-center">
-        <span id="Horas">00</span>
-        <span id="Minutos">:00</span>
+        <span id="Minutos">00</span>
         <span id="Segundos">:00</span>
-        <span id="Centesimas">:00</span>
+        <span id="Centesimas" style="display:none;">:00</span>
     </div>
     <div class="row">
         <div class="col-3 d-flex justify-content-center align-items-center">
@@ -28,14 +27,8 @@
         </div>
 
     </div>
-    <div class="row fila-jugadores">
-        <div class="col-4">
-            @foreach($partido->players as $player)
-                <div class="cuadro-jugador d-flex justify-content-center">
-                    <span>{{$player->name}}</span>
-                </div>
-            @endforeach
-        </div>
+    <div class="partido-contenido-jugadores">
+        @include('mister.partido-jugadores')
     </div>
 </div>
 @endsection

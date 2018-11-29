@@ -119,7 +119,7 @@ const newMatchForm = $('#new-match-form');
                 }
             });
         }else{
-            window.location.href='/';
+           return false;
         }
     });
 /*------------------------------------------------

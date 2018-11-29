@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth:mister']],function(){
         //Partido
         Route::get('/partido/{id}','misterController@startPartido')->name('mister.start.partido');
         Route::post('/create/match','misterController@addMatch')->name('mister.create.match');
+        Route::post('/match/{id}/changePlayer','MatchController@changePlayer')->name('match.changePlayer');
 
         //Equipo
         Route::get('/equipo','misterController@showEquipo')->name('mister.equipo');

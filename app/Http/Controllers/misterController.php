@@ -73,8 +73,8 @@ class misterController extends Controller{
     //EQUIPO
     public function startPartido($match){
         $mister = Auth::guard('mister')->user();
-        $partido = Match::find($match);
-        return view('mister.partido',compact(['partido','mister']));
+        $match = Match::find($match);
+        return view('mister.partido',compact(['match','mister']));
     }
 
     public function showEquipo(){
