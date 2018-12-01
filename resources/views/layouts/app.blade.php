@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html class="no-js">
+<!doctype html>
+<html lang="es">
 <head>
     @include ('includes.meta')
     @include ('includes.styles')
@@ -12,7 +12,7 @@
 <div class="loader"><img class="icono-loader" src="{{asset('imagenes/carga.png')}}"></div>
 @if(Auth::guard('mister')->check())
     @include('mister.mister-header')
-    <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+    <div class="container-fluid d-flex justify-content-center align-items-center flex-column main-content">
         @yield('content')
     </div>
 @else

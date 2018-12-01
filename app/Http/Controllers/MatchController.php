@@ -22,4 +22,12 @@ class MatchController extends Controller
         $match->players()->updateExistingPivot($suplenteId, ['playing'=>1]);
         return intval($minutos) + intval($minutosTitular);
     }
+    public function updateMinutes(Request $request,$id){
+        $match = Match::find($id);
+        $jugadorId = $request->input('jugador');
+        $minutos = $request->input('minuto') - $request->input('minutoJugador');
+        $minutosJugador = $match->players->where('id',$jugadorId)->first()->pivot->minutes;
+        $match->players()->updateExistingPivot($jugadorId, ['minutes'=>intval($minutos) + $minutosJugador]);
+        return view('mister.partido-jugadores',compact('match'));
+    }
 }

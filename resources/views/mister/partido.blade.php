@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="partido-content" data-partido="{{$match->id}}">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center cronometro">
         <span id="Minutos">00</span>
         <span id="Segundos">:00</span>
         <span id="Centesimas" style="display:none;">:00</span>
     </div>
-    <div class="row">
+    <div class="row botones visible-md hidden-sm">
         <div class="col-3 d-flex justify-content-center align-items-center">
             <button class="btn btn-primary-color" id="inicio">INICIO</button>
         </div>
@@ -14,7 +14,7 @@
             <button class="btn btn-danger-color" id="parar">PARAR</button>
         </div>
         <div class="col-3 d-flex justify-content-center align-items-center">
-            <button class="btn btn-dark" id="continuar">RESUME</button>
+            <button class="btn btn-primary-color" id="continuar">RESUME</button>
         </div>
         <div class="col-3 d-flex justify-content-center align-items-center">
             <button class="btn btn-outline-primary" id="reinicio">RESET</button>
@@ -25,7 +25,10 @@
         <div class="col-4 d-flex justify-content-center">
             <img src="{{asset($mister->team->club->escudo)}}" class="icono-equipo-partido">
         </div>
-
+    </div>
+    <div class="row">
+        <button class="btn btn-primary-color outline tactica-btn">4-3-3</button>
+        <button class="btn btn-primary-color outline tactica-btn">3-5-2</button>
     </div>
     <div class="partido-contenido-jugadores">
         @include('mister.partido-jugadores')

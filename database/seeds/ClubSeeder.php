@@ -15,7 +15,7 @@ class ClubSeeder extends Seeder
         DB::table('clubs')->insert([
             'name' => 'Paquete U.D',
             'telephone' => '666666666',
-            'escudo' => 'assets/escudos/paquete-ud.jpg',
+            'escudo' => 'imagenes/escudos/paquete-ud.jpg',
             'country' => 'España',
             'city' => 'Jerez de la Frontera',
             'address' => 'Avenida Lebrija, 8',
@@ -25,7 +25,7 @@ class ClubSeeder extends Seeder
         DB::table('clubs')->insert([
             'name' => 'Marianistas A.D',
             'telephone' => '999999999',
-            'escudo' => 'assets/escudos/marianistas.jpg',
+            'escudo' => 'imagenes/escudos/marianistas.jpg',
             'country' => 'España',
             'city' => 'Jerez de la Frontera',
             'address' => 'Avenida Marianistas, 11',

@@ -17,9 +17,7 @@
     </div>
 </div>
 <div class="header-second container-fluid">
-    @if(Request::route()->getName()!=='home')
-        <div class="content d-flex align-items-center">
+{{--    <div class="content d-flex align-items-center">
             <i class="fa fa-arrow-left icono-navegacion-cabecera icono-accion ruta" data-href="{{url()->previous()}}"></i>
-        </div>
-    @endif
+        </div>--}}
 </div>

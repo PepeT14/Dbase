@@ -2,9 +2,19 @@
     <div class="col-4">
         @foreach($match->players as $player)
             @if($player->pivot->playing)
-                <div class="cuadro-jugador d-flex justify-content-center jugador-titular" data-toggle="modal"
-                     data-target="#modal-acciones" data-jugador="{{$player->id}}" data-minuto='0'>
-                    <span>{{$player->name}}</span>
+                <div class="row fila-jugador align-items-center">
+                    <div class="cuadro-jugador row jugador-titular col-10" data-toggle="modal"
+                         data-target="#modal-acciones" data-jugador="{{$player->id}}" data-minuto='0'>
+                        <div class="numero-jugador col-2 p-0">
+                            <span>{{$player->number}}</span>
+                        </div>
+                        <div class="nombre-jugador col-10">
+                            <span>{{$player->name}}</span>
+                        </div>
+                    </div>
+                    <div class="minutes-jugador col-2">
+                        <span>{{$player->pivot->minutes}}</span>
+                    </div>
                 </div>
             @endif
         @endforeach
@@ -25,8 +35,16 @@
                     <div class="dropdown-menu">
                         @foreach($match->players as $player)
                             @if(!$player->pivot->playing)
-                                <div class="cuadro-jugador d-flex justify-content-center jugador-suplente" data-jugador="{{$player->id}}">
-                                    <span>{{$player->name}}</span>
+                                <div class="fila-jugador">
+                                    <div class="cuadro-jugador d-flex justify-content-center jugador-suplente" data-jugador="{{$player->id}}">
+                                        <div class="numero-jugador">
+                                            {{$player->number}}
+                                        </div>
+                                        <span>{{$player->name}}</span>
+                                    </div>
+                                    <div class="minutes-jugador">
+                                        <span>{{$player->pivot->minutes}}</span>
+                                    </div>
                                 </div>
                             @endif
                         @endforeach

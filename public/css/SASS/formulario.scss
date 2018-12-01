@@ -33,9 +33,19 @@
 .form-group{
   input,select{
     border-color:$color-resaltado;
-    &:focus{border-color:$light-primary-color;box-shadow:0 0 0 0.2rem $color-resaltado }
+    &:focus{
+      border-color:$light-primary-color;
+      box-shadow:0 0 0 0.2rem $color-resaltado;
+      &.error{
+        border-color:$cancel-color;
+        box-shadow: 0 0 0 0.2remmist $dark-cancel-color;
+      }
+    }
   }
-  label{color:$primary-text;}
+  label{
+    color:$primary-text;
+    &.error{color:red;}
+  }
   .btn-group{
     width:100%;
     &.btn-group-toggle{
@@ -55,7 +65,7 @@
 .navegacion-menu{
   padding:10px 20px 0 20px;
   i{
-    color:$texto;
+    color:$dark-primary-color;
     font-size:1em;
     cursor:pointer;
     &.green{

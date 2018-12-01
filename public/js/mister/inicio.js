@@ -3,10 +3,8 @@ $(document).ready(function(){
 * ----------------- CLASE OBJETO PARTIDO -------------------
 * --------------------------------------------------------*/
     let Partido = function(){
-        this.calculaJugadores(this.getTipoPartido());
         this.alineacion = null;
     };
-
     Partido.prototype.getTipoPartido=function(){
         let checkeado = false;
         let tipoPartido = null;
@@ -40,7 +38,7 @@ $(document).ready(function(){
                 break;
             case 'F11':
                 this.titulares=11;
-                this.suplentes=11;
+                this.suplentes=$('#edit-alineacion-btn').data('players').length - 11;
                 break;
         }
     };
@@ -101,6 +99,18 @@ const newMatchForm = $('#new-match-form');
     newMatchForm.on('submit',function(){
         event.preventDefault();
         if($(this).valid()){
+            let jugadores = $('#edit-alineacion-btn').data('players');
+            partido.alineacion = {};
+            let idTitulares = [];
+            let idSuplentes = [];
+            $('.titulares select option:selected').each(function(){idTitulares.push($(this)[0].value)});
+            $('.suplentes select option:selected').each(function(){idSuplentes.push($(this)[0].value)});
+            partido.alineacion.titulares = jugadores.filter(function(jugador){
+                return idTitulares.includes(jugador.id.toString());
+            });
+            partido.alineacion.suplentes = jugadores.filter(function(jugador){
+                return idSuplentes.includes(jugador.id.toString());
+            });
             let data = $(this).serializeFormJSON();
             if(partido.alineacion){
                 data.alineacion = partido.alineacion;
@@ -132,6 +142,7 @@ const newMatchForm = $('#new-match-form');
         if(partido.alineacion){
             console.log(partido.alineacion);
         }else{
+            partido.calculaJugadores(partido.getTipoPartido());
             rellenaEditAlineacion(partido);
         }
     });
@@ -172,18 +183,7 @@ const newMatchForm = $('#new-match-form');
         }).then(function(){
             let jugadores = $('#edit-alineacion-btn').data('players');
             let cargaInicial = cargaSelectores(jugadores);
-            refrescaSelectores(cargaInicial[0],cargaInicial[1]);
-            partido.alineacion = {};
-            let idTitulares = [];
-            let idSuplentes = [];
-            $('.titulares select option:selected').each(function(){idTitulares.push($(this)[0].value)});
-            $('.suplentes select option:selected').each(function(){idSuplentes.push($(this)[0].value)});
-            partido.alineacion.titulares = jugadores.filter(function(jugador){
-                return idTitulares.includes(jugador.id.toString());
-            });
-            partido.alineacion.suplentes = jugadores.filter(function(jugador){
-                return idSuplentes.includes(jugador.id.toString());
-            });
+
         });
     };
 
@@ -191,34 +191,47 @@ const newMatchForm = $('#new-match-form');
 
     let cargaSelectores = function(jugadores){
         let seleccionados = [];
-        $('.cuadro-jugador select').each(function(){
-            let obj = this;
-            jugadores = jugadores.filter(function(jugador){
-                return !seleccionados.includes(jugador.id.toString());
+        let end = false;
+            $('.cuadro-jugador select').each(function(i){
+                if(!end){
+                    let obj = this;
+                    jugadores = jugadores.filter(function(jugador){
+                        return !seleccionados.includes(jugador.id.toString());
+                    });
+                    $('#edit-alineacion-btn').data('players').forEach(function(jugador){
+                        $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
+                    });
+                    let optSeleccionada = $(this).find('option:selected')[0].value;
+                    seleccionados.push(optSeleccionada);
+                    if(i==$('#edit-alineacion-btn').data('players').length){
+                        end=true;
+                    }
+                }
             });
-            jugadores.forEach(function(jugador){
-                $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
-            });
-            let optSeleccionada = $(this).find('option:selected')[0].value;
-            seleccionados.push(optSeleccionada);
-        });
-        return [jugadores,seleccionados];
+        return [jugadores,seleccionados]
     };
 
     let refrescaSelectores = function(jugadores,seleccionados){
-        $('.cuadro-jugador select').each(function(){
-            let obj = this;
-            jugadores = jugadores.filter(function(jugador){
-                return !seleccionados.includes(jugador.id.toString());
-            });
-            let optSeleccionada = $(this).find('option:selected')[0].value;
-            let jugadorSeleccionado = null;
-            $('#edit-alineacion-btn').data('players').forEach(function(jugador){if(jugador.id.toString()===optSeleccionada){jugadorSeleccionado = jugador}});
-            $(this).find('option').remove();
-            $(this).append('<option value="'+jugadorSeleccionado.id+'">'+jugadorSeleccionado.name+'</option>');
-            jugadores.forEach(function(jugador){
-                $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
-            });
+        let end = false;
+        let jugadoresEquipo = $('#edit-alineacion-btn').data('players');
+        $('.cuadro-jugador select').each(function(i){
+            if(!end){
+                let obj = this;
+                jugadores = jugadores.filter(function(jugador){
+                    return !seleccionados.includes(jugador.id.toString());
+                });
+                let optSeleccionada = $(this).find('option:selected')[0].value;
+                let jugadorSeleccionado = null;
+                jugadoresEquipo.forEach(function(jugador){if(jugador.id.toString()===optSeleccionada){jugadorSeleccionado = jugador}});
+                $(this).find('option').remove();
+                $(this).append('<option value="'+jugadorSeleccionado.id+'">'+jugadorSeleccionado.name+'</option>');
+                jugadores.forEach(function(jugador){
+                    $(obj).append('<option value="'+jugador.id+'">'+jugador.name+'</option>');
+                });
+                if(i==jugadoresEquipo.length){
+                    end=true;
+                }
+            }
         });
     };
 

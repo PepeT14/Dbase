@@ -4,8 +4,12 @@ html,body{
   font-family:"Gill Sans",sans-serif !important;
   color:$primary-text;
   height:100%;
+  overflow:scroll;
 }
 /*------ CLASES GLOBALES ------*/
+.main-content{
+  overflow:auto;
+}
 .section{
   display:none;
 }
@@ -19,6 +23,8 @@ html,body{
 }
 .border-secundario{border:1px solid $light-primary-color}
 
+.logout{cursor:pointer;}
+.dropdown-menu{padding:15px;}
 
 .group-around{
   display:flex;

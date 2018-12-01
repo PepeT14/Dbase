@@ -26,11 +26,7 @@ $(document).ready(function(){
                 required:true,
                 date:true
             }
-        },
-        submitHandler: function(form) {
-            // do other things for a valid form
-            form.submit();
-        },
+        }
     });
 
     newPlayerForm.on('submit',function(){

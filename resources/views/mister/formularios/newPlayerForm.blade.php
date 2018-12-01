@@ -19,9 +19,15 @@
                             <input class="form-control" id="player-apellidos" name="player-apellidos" type="text">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="player-position">Posicion</label>
-                        <input class="form-control" id="player-position" name="player-position" type="text">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="player-position">Posicion</label>
+                            <input class="form-control" id="player-position" name="player-position" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="player-number">Number</label>
+                            <input class="form-control" id="player-number" name="player-number" type="text">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="player-birthday">Fecha de nacimiento</label>

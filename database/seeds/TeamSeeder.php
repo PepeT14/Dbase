@@ -13,10 +13,10 @@ class TeamSeeder extends Seeder
     {
         //EQUIPO
         DB::table('teams')->insert([
-            'name' => 'Paquete U.D B',
+            'name' => 'A.D Marianistas',
             'league_id' => '1',
-            'club_id' => '1',
-            'category' => 'Pre-Benjamin'
+            'club_id' => '2',
+            'category' => 'infantil'
         ]);
         DB::table('teams')->insert([
             'name' => 'Paquete U.D A',

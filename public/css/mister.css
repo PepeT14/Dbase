@@ -41,28 +41,6 @@
   height: 100%;
 }
 
-.cuadro-jugador {
-  cursor: pointer;
-  border-radius: 5px;
-  border: 1.5px solid #009688;
-  min-height: 1.5em;
-  padding: 2px;
-  width: 100%;
-  margin: 10px 0;
-}
-.cuadro-jugador:hover {
-  background-color: #00796B;
-}
-
-.fila-jugadores {
-  margin-top: 20px;
-}
-
-#cronometro {
-  color: #009688;
-  font-size: 3em;
-}
-
 .inicio-botton {
   border-radius: 5px;
   background-color: #607D8B;
@@ -107,6 +85,85 @@
   font-weight: bold;
   padding-bottom: 7px;
   border-bottom: 1px solid #BDBDBD;
+}
+
+.equipo-container {
+  margin-top: 50px;
+}
+
+.equipo-title {
+  padding-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid #BDBDBD;
+}
+
+.add-player {
+  cursor: pointer;
+}
+
+.jugadores-equipo {
+  text-align: center;
+}
+
+.cronometro {
+  color: #00796B;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.botones {
+  margin-bottom: 15px;
+}
+@media only screen and (max-width:758px) {
+  .botones {
+    display: none;
+  }
+}
+
+.numero-jugador {
+  border-right: 1.5px solid #009688;
+  text-align: center;
+}
+
+.nombre-jugador {
+  text-align: center;
+}
+
+.cuadro-jugador {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1.5px solid #009688;
+  min-height: 1.5em;
+  padding: 2px;
+  width: 100%;
+  margin: 10px 0;
+}
+.cuadro-jugador:hover {
+  background-color: #00796B;
+}
+.cuadro-jugador.portero {
+  background-color: #bda605d1;
+}
+.cuadro-jugador.defensa {
+  background-color: #00a1ffb8;
+}
+.cuadro-jugador.medio {
+  background-color: #05bd13d1;
+}
+.cuadro-jugador.delantero {
+  background-color: #bd2705d1;
+}
+
+.fila-jugadores {
+  margin-top: 10px;
+}
+
+.tactica-btn {
+  margin: 15px 10px 0 10px;
+}
+.tactica-btn.selected {
+  background-color: #607D8B;
+  color: white;
 }
 
 /*# sourceMappingURL=mister.css.map */

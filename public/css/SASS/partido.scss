@@ -1,0 +1,43 @@
+@import 'variables';
+.cronometro{
+  color:$dark-primary-color;
+  font-size:3em;
+  margin-bottom:10px;
+}
+.botones{
+  margin-bottom:15px;
+  @media #{$media} and #{$pantallaSmall}{
+    display:none;
+  }
+}
+.numero-jugador{
+  border-right:1.5px solid $primary-color;
+  text-align:center;
+}
+.nombre-jugador{
+  text-align:center;
+}
+.cuadro-jugador{
+  cursor:pointer;
+  border-radius: 5px;
+  border: 1.5px solid $primary-color;
+  min-height: 1.5em;
+  padding: 2px;
+  width:100%;
+  margin: 10px 0;
+  &:hover{
+    background-color: $dark-primary-color;
+  }
+  &.portero{background-color:#bda605d1;}
+  &.defensa{background-color:#00a1ffb8;}
+  &.medio{background-color:#05bd13d1;}
+  &.delantero{background-color:#bd2705d1;}
+}
+
+.fila-jugadores{
+  margin-top:10px;
+}
+.tactica-btn{
+  margin:15px 10px 0 10px;
+  &.selected{background-color:$color-resaltado; color:$texto;}
+}

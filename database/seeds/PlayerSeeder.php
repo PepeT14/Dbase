@@ -11,7 +11,7 @@ class PlayerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*
         DB::table('players')->insert([
             'name' => 'Pepon',
             'email' => 'pepeg93@hotmail.com',
@@ -22,6 +22,6 @@ class PlayerSeeder extends Seeder
             'birthday' => '1993-5-19',
             'position' => 'MedioCentro',
             'team_id' => 1
-        ]);
+        ]);*/
     }
 }

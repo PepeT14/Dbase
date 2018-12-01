@@ -12,11 +12,12 @@
         </div>
         <div class="col-md-6 col-sm-12 jugadores-equipo">
             <table class="table">
-                <thead>
+                <thead class="thead-light">
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">posicion</th>
+                    <th scope="col">Posicion</th>
+                    <th scope="col">Numero</th>
                     <th scope="col">Edad</th>
                     <th scope="col" class="add-player"><i class="fa fa-plus-circle" data-toggle="modal" data-target="#add-player-form"></i></th>
                 </tr>
@@ -27,6 +28,7 @@
                         <td>{{$player->id}}</td>
                         <td>{{$player->name}}</td>
                         <td>{{$player->position}}</td>
+                        <td>{{$player->number}}</td>
                         <td>{{$player->edad()}}</td>
                     </tr>
                 @endforeach

@@ -38,26 +38,8 @@
   width:5em;
   height:100%;
 }
-.cuadro-jugador{
-  cursor:pointer;
-  border-radius: 5px;
-  border: 1.5px solid $primary-color;
-  min-height: 1.5em;
-  padding: 2px;
-  width:100%;
-  margin: 10px 0;
-  &:hover{
-    background-color: $dark-primary-color;
-  }
-}
 
-.fila-jugadores{
-  margin-top:20px;
-}
-#cronometro{
-  color:$primary-color;
-  font-size:3em;
-}
+
 .inicio-botton{
   border-radius:5px;
   background-color:$color-resaltado;
