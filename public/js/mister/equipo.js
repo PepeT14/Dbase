@@ -56,4 +56,30 @@ $(document).ready(function(){
         modalPanel.modal('show');
     }
 
+    function getPosiciones(){
+        let formacion = $('select#selector-formaciones option:selected').text().split('-');
+        let defensas = formacion[0];
+        let medios = formacion[1];
+        let delanteros = formacion[2] ? formacion[2] : 0;
+        let fila = '<div class="contenido-jugador-campo"> ' +
+                    '<div class="imagen-jugador-campo"><img class="img-fluid" src="http://dbase.com/imagenes/profile.png">' +
+                    '</div><div class="nombre-jugador-campo"><span></span></div></div>';
+        $('.campo-content .portero').append(fila);
+        for(let i=0;i<defensas;i++){
+            $('.campo-content .defensas').append(fila);
+        }
+        for(let i=0;i<medios;i++){
+            $('.campo-content .medios').append(fila);
+        }
+        for(let i=0;i<delanteros;i++){
+            $('.campo-content .delanteros').append(fila);
+        }
+        const linkJugadores = function(){
+            $('.contenido-jugador-campo').on('click',function(){
+               $('#modal-jugadores').modal('show');
+            });
+        };
+        linkJugadores();
+    }
+    getPosiciones();
 });

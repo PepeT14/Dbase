@@ -8,8 +8,6 @@
       transform:scale(1.1);
     }
     .textoIcono{
-      color:$texto;
-      background-color:$primary-color;
       padding:5px;
       border-radius:5px;
       font-size:2em;
@@ -52,11 +50,4 @@
   transform:scale(1.1);
 }
 
-
-/*------ ALINEACION -----*/
-.alineacion-container{
-  text-align:center;
-  color:$primary-color;
-  margin-top:50px;
-}
 

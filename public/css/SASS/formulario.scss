@@ -50,6 +50,7 @@
     width:100%;
     &.btn-group-toggle{
       border-radius:25px;
+      border:1px solid $primary-color;
       .btn{
         border-radius:25px;
         &.active{
@@ -88,10 +89,10 @@
   i{
     color:$texto;
     font-size:1.7em;
-    border:1.5px solid $light-primary-color;
     border-radius:5px;
     cursor:pointer;
     padding:5px;
-    &:hover{background-color:$light-primary-color}
+    background-color:$color-resaltado;
+    &:hover{background-color:$dark-color-resaltado;}
   }
 }

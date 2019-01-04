@@ -79,7 +79,11 @@ class misterController extends Controller{
 
     public function showEquipo(){
         $mister = Auth::guard('mister')->user();
-        return view('mister.equipo',with(compact('mister')));
+        $order = ['Portero','Defensa','MedioCentro','Delantero'];
+        $players = $mister->team->players->sortBy(function($player) use($order){
+           return array_search($player->position,$order);
+        });
+        return view('mister.equipo',with(compact('mister','players')));
     }
 
     public function addPlayer(Request $request){

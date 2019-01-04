@@ -2,16 +2,170 @@
 .equipo-container{
   margin-top:50px;
 }
-.equipo-title{
-  padding-bottom:20px;
-  width:100%;
-  border-bottom: 1px solid $divider-color;
-}
 
 .add-player{
   cursor:pointer;
+  margin-left:10px;
+  font-size:1.5em;
 }
 
 .jugadores-equipo{
   text-align:center;
+}
+
+
+.tacticas-icon{
+  background-image:url('../../imagenes/campos/tacticas.jpg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  cursor:pointer;
+}
+.add-tactica{
+  text-align:center;
+  &-btn{
+    cursor:pointer;
+    border-radius:5px;
+    background-color:$color-resaltado;
+    color:white;
+    &:hover{background-color:$dark-color-resaltado}
+  }
+}
+
+.jugadores-title{
+  justify-content: center;
+  align-items: center;
+}
+.jugadores-equipo {
+  justify-content: center;
+  table {
+    border-collapse:separate;
+    border-spacing: 0 15px;
+    box-shadow: 4px 0 20px -2px rgba(58,76,122,0.44);
+    background-color:white;
+    border-radius:15px;
+    padding:10px;
+    tr{
+      cursor:pointer;
+      background-color:white;
+      &:hover{background-color:$dark-color-resaltado;}
+    }
+    td {
+      border:0.7px solid $light-primary-color;
+      border-left:none;
+      border-right:none;
+      vertical-align: middle;
+      div {
+        &.posicion {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: $texto;
+          border-radius:5px;
+          &.PT {
+            background-color: #dfc12a;
+          }
+          &.DF {
+            background-color: dodgerblue;
+          }
+          &.MC {
+            background-color: green;
+          }
+          &.DL {
+            background-color: red;
+          }
+          width: 40px;
+          height: 30px;
+        }
+        &.foto {
+          width: 30px;
+          img {
+            border-radius: 50%;
+          }
+        }
+        &.nombre {
+          width: 80%;
+        }
+        &.dorsal {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: $texto;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: grey;
+        }
+      }
+    }
+  }
+}
+ /*------------ CAMPO CON LOS JUGADORES -------*/
+.equipo-content{
+  background-image: url('../../imagenes/campos/mediocampo.png');
+  background-position: top;
+  margin-left:-30px;
+  margin-right:-30px;
+  @media #{$media} and #{$pantallaSmall}{
+    height:350px;
+  }
+  @media #{$media} and #{$pantallaMedia}{
+    height:400px;
+  }
+  @media #{$media} and #{$pantallaGrande}{
+    height:550px;
+  }
+  background-size:150% 100%;
+  background-repeat: no-repeat;
+}
+
+.fila-campo{
+  .contenido-jugador-campo{
+    height:100%;
+    margin:2px 10px;
+    .imagen-jugador-campo{
+      height:70%;
+      text-align:center;
+      img{
+        height:100%;
+        border-radius:50%;
+        cursor:pointer;
+      }
+    }
+    .nombre-jugador-campo{
+      text-align:center;
+    }
+  }
+  &.portero{
+    grid-column:3/4;
+    grid-row:6/7;
+  }
+  &.defensas{
+    grid-row: 5/6;
+    grid-column:2/5;
+    .izquierdo{grid-row:4/5;grid-column:2/3;}
+    .central{grid-row:5/6;grid-column:3/4;}
+    .derecho{grid-row:4/5;grid-column:4/5;}
+  }
+  &.medios{
+    grid-row:3/4;
+    grid-column:2/5;
+    &.izquierdo{};
+    &.centro{grid-column:2/5};
+  }
+  &.delanteros{
+    grid-row:1/2;
+    grid-column:3/4;
+  }
+}
+
+.campo-content{
+  display:grid;
+  padding-top:60px;
+  padding-bottom:100px;
+  @media #{$media} and #{$pantallaGrande}{
+    padding-top:90px;
+    padding-bottom:130px;
+  }
+  grid-template-columns: 40px 90px auto 90px 40px;
+  grid-template-rows: 55px 55px 55px 55px 55px 55px;
 }

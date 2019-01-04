@@ -1,5 +1,8 @@
 <div class="row fila-jugadores">
     <div class="col-4">
+        <div class="icono-minutos">
+            <i class="fa fa-clock"></i>
+        </div>
         @foreach($match->players as $player)
             @if($player->pivot->playing)
                 <div class="row fila-jugador align-items-center">
@@ -13,7 +16,7 @@
                         </div>
                     </div>
                     <div class="minutes-jugador col-2">
-                        <span>{{$player->pivot->minutes}}</span>
+                        {{$player->pivot->minutes}}
                     </div>
                 </div>
             @endif
@@ -35,15 +38,17 @@
                     <div class="dropdown-menu">
                         @foreach($match->players as $player)
                             @if(!$player->pivot->playing)
-                                <div class="fila-jugador">
-                                    <div class="cuadro-jugador d-flex justify-content-center jugador-suplente" data-jugador="{{$player->id}}">
-                                        <div class="numero-jugador">
+                                <div class="row fila-jugador align-items-center">
+                                    <div class="cuadro-jugador row jugador-suplente col-10" data-jugador="{{$player->id}}" data-minuto='0'>
+                                        <div class="numero-jugador col-2 p-0 d-flex align-items-center">
                                             {{$player->number}}
                                         </div>
-                                        <span>{{$player->name}}</span>
+                                        <div class="nombre-jugador col-10">
+                                            <span>{{$player->name}}</span>
+                                        </div>
                                     </div>
-                                    <div class="minutes-jugador">
-                                        <span>{{$player->pivot->minutes}}</span>
+                                    <div class="minutes-jugador col-2">
+                                        {{$player->pivot->minutes}}
                                     </div>
                                 </div>
                             @endif

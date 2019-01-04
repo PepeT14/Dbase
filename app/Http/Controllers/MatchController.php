@@ -20,14 +20,21 @@ class MatchController extends Controller
         $minutosTitular = $match->players->where('id',$titularId)->first()->pivot->minutes;
         $match->players()->updateExistingPivot($titularId, ['minutes'=>intval($minutos) + $minutosTitular,'playing'=>0]);
         $match->players()->updateExistingPivot($suplenteId, ['playing'=>1]);
-        return intval($minutos) + intval($minutosTitular);
+        return $minutosTitular + intval($minutos);
     }
+
     public function updateMinutes(Request $request,$id){
         $match = Match::find($id);
-        $jugadorId = $request->input('jugador');
-        $minutos = $request->input('minuto') - $request->input('minutoJugador');
-        $minutosJugador = $match->players->where('id',$jugadorId)->first()->pivot->minutes;
-        $match->players()->updateExistingPivot($jugadorId, ['minutes'=>intval($minutos) + $minutosJugador]);
-        return view('mister.partido-jugadores',compact('match'));
+        $array = collect($request->all());
+        $res = collect([]);
+        foreach($array as $arr){
+            $jugadorId = $arr['jugador'];
+            $res->push($jugadorId);
+            $minutos = $arr['minuto'] - $arr['minutoJugador'];
+            $minutosJugador =$minutos + $match->players->where('id',$jugadorId)->first()->pivot->minutes;
+            $match->players()->updateExistingPivot($jugadorId, ['minutes'=>$minutosJugador]);
+        }
+        $match = Match::Where('id',$id)->first();
+        return  view('mister.partido-jugadores',compact('match'));
     }
 }

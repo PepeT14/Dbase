@@ -25,15 +25,25 @@
   padding: 2px;
   width:100%;
   margin: 10px 0;
+  &.selected{transform:scale(1.1);background-color:$dark-primary-color;color:$texto;}
   &:hover{
     background-color: $dark-primary-color;
+    color:$texto;
   }
-  &.portero{background-color:#bda605d1;}
-  &.defensa{background-color:#00a1ffb8;}
-  &.medio{background-color:#05bd13d1;}
-  &.delantero{background-color:#bd2705d1;}
+  .info-cuadro{
+    color:$texto;
+    padding:2px;
+    &.portero{background-color:#bda605d1;}
+    &.defensa{background-color:#00a1ffb8;}
+    &.medio{background-color:#05bd13d1;}
+    &.delantero{background-color:#bd2705d1;}
+  }
 }
-
+.icono-minutos{
+  text-align: end;
+  margin-right:-5px;
+  color:$dark-cancel-color;
+}
 .fila-jugadores{
   margin-top:10px;
 }

@@ -26,10 +26,6 @@
             <img src="{{asset($mister->team->club->escudo)}}" class="icono-equipo-partido">
         </div>
     </div>
-    <div class="row">
-        <button class="btn btn-primary-color outline tactica-btn">4-3-3</button>
-        <button class="btn btn-primary-color outline tactica-btn">3-5-2</button>
-    </div>
     <div class="partido-contenido-jugadores">
         @include('mister.partido-jugadores')
     </div>

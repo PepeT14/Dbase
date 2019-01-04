@@ -1,4 +1,11 @@
 @import 'variables';
+/*------ ALINEACION -----*/
+.alineacion-container{
+  text-align:center;
+  color:$primary-color;
+  margin-top:50px;
+}
+
 .add-suplentes{
   cursor:pointer;
   height:2em;
@@ -14,13 +21,15 @@
   }
 };
 
-.alineacion-container .row{
-  margin-top:10px;
-}
-
 .alineacion-title{
   font-size:1.5em;
   font-weight:bold;
   padding-bottom:7px;
   border-bottom:1px solid $divider-color;
+}
+
+.botones-alineacion{
+  border:1px solid $dark-color-resaltado;
+  border-radius:5px;
+  padding:0 10px 10px;
 }

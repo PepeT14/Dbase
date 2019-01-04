@@ -34,23 +34,30 @@ function parar () {
     document.getElementById("parar").disabled = true;
     document.getElementById("continuar").disabled = false;
     document.getElementById("reinicio").disabled = false;
+    let data = {};
     $('.jugador-titular').each(function(i){
        let minutoJugador = $(this).data('minuto');
        let jugador = $(this).data('jugador');
-       let data = {'jugador':jugador,'minuto':minutos,'minutoJugador':minutoJugador};
-        $.ajax({
-            url:$('meta[name="app-url"]').attr('content') + '/mister/match/'+$('.partido-content').data('partido')+'/updateMinutes',
-            method:'POST',
-            data:data,
-            success:function(response){
-                console.log('minutosActualizados'+response);
-                $('.partido-contenido-jugadores')[0].innerHTML=response;
-            },
-            error:function(response){
-                $('body')[0].innerHTML =response.responseText;
-                console.log(response);
-            }
-        });
+       data[i] = {'jugador':jugador,'minuto':minutos,'minutoJugador':minutoJugador};
+        $(this).data('minuto',minutos);
+        $(this).attr('data-minuto',minutos);
+    });
+    $.ajax({
+        url:$('meta[name="app-url"]').attr('content') + '/mister/match/'+$('.partido-content').data('partido')+'/updateMinutes',
+        method:'POST',
+        data:data,
+        success:function(response){
+            console.log('minutosActualizados'+response);
+            $('.partido-contenido-jugadores')[0].innerHTML=response;
+            let jugadorTitular =  $('.jugador-titular');
+            jugadorTitular.data('minuto',minutos);
+            jugadorTitular.attr('data-minuto',minutos);
+            activaCambios();
+        },
+        error:function(response){
+            $('body')[0].innerHTML =response.responseText;
+            console.log(response);
+        }
     });
 }
 
@@ -68,6 +75,9 @@ function reinicio () {
     document.getElementById("parar").disabled = true;
     document.getElementById("continuar").disabled = true;
     document.getElementById("reinicio").disabled = true;
+    let jugadorTitular =  $('.jugador-titular');
+    jugadorTitular.data('minuto',0);
+    jugadorTitular.attr('data-minuto',0);
 }
 
 function cronometro () {
@@ -107,85 +117,89 @@ function cronometro () {
 * ---------------- ACCIONES ------------------
 * --------------------------------------------*/
 
-
-$('.jugador-suplente').on('click',function(){
-    $(this).addClass('seleccionado');
-    $('#cambio-jugador').submit();
-});
-
-$('.jugador-titular').on('click',function(){
-    $(this).addClass('seleccionado');
-});
-
-
-$('#cambio-jugador').on('submit',function(){
-    event.preventDefault();
-    let jugadorTitular = $('.jugador-titular.seleccionado');
-    let jugadorSuplente = $('.jugador-suplente.seleccionado');
-    let jugadorTitularId = jugadorTitular.data('jugador');
-    let jugadorSuplenteId = jugadorSuplente.data('jugador');
-    let minutosTitular = jugadorTitular.data('minuto');
-    let data = {'titular':jugadorTitularId,'suplente':jugadorSuplenteId,'minuto':minutos,'minutosTitular':minutosTitular};
-    $.ajax({
-       url:$('meta[name="app-url"]').attr('content') + '/mister/match/'+$('.partido-content').data('partido')+'/changePlayer',
-       method:'POST',
-       data:data,
-       success:function(response){
-           console.log('Cambio de jugador realizado');
-           console.log(response);
-       },
-       error:function(response){
-           $('body')[0].innerHTML =response.responseText;
-           console.log(response);
-       }
+let activaCambios = function(){
+    $('.jugador-suplente').on('click',function(){
+        $(this).addClass('seleccionado');
+        $('#cambio-jugador').submit();
     });
-    $('#modal-acciones').modal('hide');
-    jugadorSuplente.data('jugador',jugadorTitularId);
-    jugadorSuplente.attr('data-jugador',jugadorTitularId);
-    jugadorTitular.data('jugador',jugadorSuplenteId);
-    jugadorTitular.attr('data-jugador',jugadorSuplenteId);
-    jugadorSuplente.data('minuto',minutos);
-    jugadorSuplente.attr('data-minuto',minutos);
-    jugadorTitular.data('minuto',minutos);
-    jugadorTitular.attr('data-minuto',minutos);
-    let a = jugadorTitular[0].innerHTML;
-    let b = jugadorSuplente[0].innerHTML;
-    jugadorSuplente[0].innerHTML = a;
-    jugadorTitular[0].innerHTML = b;
-    $('.seleccionado').removeClass('seleccionado');
-    return false;
-});
 
-$('.tactica-btn').on('click',function(){
-    if($(this).hasClass('selected')){
-        eliminaTactica($(this));
-    }else{
-        eliminaTactica($('.tactica-btn.selected'));
-        $(this).addClass('selected');
-        rellenaPosiciones($(this)[0].innerText.trim());
-    }
-});
-let eliminaTactica = function(boton){
-    boton.removeClass('selected');
-    $('.fila-jugadores .jugador-titular').removeClass('portero').removeClass('defensa').removeClass('medio').removeClass('delantero');
-};
-let rellenaPosiciones = function(tactica){
-    let defensas = tactica.split('-')[0];
-    let medios = parseInt(tactica.split('-')[1]) + parseInt(defensas);
-    $('.fila-jugadores .jugador-titular').each(function(i){
-        switch(true){
-            case i===0:
-                $(this).addClass('portero');
-                break;
-            case i>0 && i<=defensas:
-                $(this).addClass('defensa');
-                break;
-            case i>defensas && i<=medios:
-                $(this).addClass('medio');
-                break;
-            case i>medios:
-                $(this).addClass('delantero');
-                break;
+    $('.jugador-titular').on('click',function(){
+        $(this).addClass('seleccionado');
+    });
+
+    $('#cambio-jugador').on('submit',function(){
+        event.preventDefault();
+        let jugadorTitular = $('.jugador-titular.seleccionado');
+        let jugadorSuplente = $('.jugador-suplente.seleccionado');
+        let jugadorTitularId = jugadorTitular.data('jugador');
+        let jugadorSuplenteId = jugadorSuplente.data('jugador');
+        let minutosTitular = jugadorTitular.data('minuto');
+        let data = {'titular':jugadorTitularId,'suplente':jugadorSuplenteId,'minuto':minutos,'minutosTitular':minutosTitular};
+        $.ajax({
+            url:$('meta[name="app-url"]').attr('content') + '/mister/match/'+$('.partido-content').data('partido')+'/changePlayer',
+            method:'POST',
+            data:data,
+            success:function(response){
+                console.log('Cambio de jugador realizado');
+                console.log(response);
+            },
+            error:function(response){
+                $('body')[0].innerHTML =response.responseText;
+                console.log(response);
+            }
+        });
+        $('#modal-acciones').modal('hide');
+        jugadorSuplente.data('jugador',jugadorTitularId);
+        jugadorSuplente.attr('data-jugador',jugadorTitularId);
+        jugadorTitular.data('jugador',jugadorSuplenteId);
+        jugadorTitular.attr('data-jugador',jugadorSuplenteId);
+
+
+        jugadorSuplente.data('minuto',minutos);
+        jugadorSuplente.attr('data-minuto',minutos);
+        jugadorTitular.data('minuto',minutos);
+        jugadorTitular.attr('data-minuto',minutos);
+
+        let a = jugadorTitular[0].innerHTML;
+        let b = jugadorSuplente[0].innerHTML;
+        jugadorSuplente[0].innerHTML = a;
+        jugadorTitular[0].innerHTML = b;
+        $('.seleccionado').removeClass('seleccionado');
+        return false;
+    });
+
+    $('.tactica-btn').on('click',function(){
+        if($(this).hasClass('selected')){
+            eliminaTactica($(this));
+        }else{
+            eliminaTactica($('.tactica-btn.selected'));
+            $(this).addClass('selected');
+            rellenaPosiciones($(this)[0].innerText.trim());
         }
     });
+    let eliminaTactica = function(boton){
+        boton.removeClass('selected');
+        $('.fila-jugadores .jugador-titular').removeClass('portero').removeClass('defensa').removeClass('medio').removeClass('delantero');
+    };
+    let rellenaPosiciones = function(tactica){
+        let defensas = tactica.split('-')[0];
+        let medios = parseInt(tactica.split('-')[1]) + parseInt(defensas);
+        $('.fila-jugadores .jugador-titular').each(function(i){
+            switch(true){
+                case i===0:
+                    $(this).addClass('portero');
+                    break;
+                case i>0 && i<=defensas:
+                    $(this).addClass('defensa');
+                    break;
+                case i>defensas && i<=medios:
+                    $(this).addClass('medio');
+                    break;
+                case i>medios:
+                    $(this).addClass('delantero');
+                    break;
+            }
+        });
+    };
 };
+activaCambios();

@@ -11,7 +11,6 @@ $(document).ready(function(){
 
     $('.navegacion-menu i').on('click',function(){
         let backSection = $(this).parent().data('backsection');
-        console.log(backSection);
         $(this).parent().parent().parent().hide('slow');
         $('#'+backSection).show('slow');
     });

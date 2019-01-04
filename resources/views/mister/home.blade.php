@@ -41,7 +41,7 @@
         @endif
     </div>
     @if($mister->team)
-        <div id="partido-formulario" class="section col-lg-4 col-md-8 col-sm-12">
+        <div id="partido-formulario" class="section col-lg-6 col-md-8 col-sm-12">
             @include('mister.formularios.newPartidoForm')
         </div>
         <div id="editar-alineacion" class="section col-lg-6 col-md-8 col-sm-12">

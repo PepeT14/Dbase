@@ -18,53 +18,36 @@
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="fecha-partido">FECHA</label>
-                <input class="form-control" type="date" name="fecha-partido" id="fecha-partido">
-            </div>
-            <div class="form-group">
-                <label for="hora-partido">HORA</label>
-                <input class="form-control" type="time" name="hora-partido" id="hora-partido">
-            </div>
-            {{--<div class="form-group">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-100 btn-clarito dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Etiquetas
-                    </button>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fecha-partido">FECHA</label>
+                    <input class="form-control" type="date" name="fecha-partido" id="fecha-partido">
                 </div>
-                <div class="dropdown-menu">
-                    <input class="form-control" placeholder="Etiqueta">
-                </div>
-            </div>--}}
-            <div class="form-group">
-                <div class="btn-group btn-group-toggle tipo-campo" data-toggle="buttons">
-                    <label class="btn active flex-fill border-secundario">
-                        <input  type="radio" name="F5" id="F-5-btn" autocomplete="off" checked>
-                        F5
-                    </label>
-                    <label class="btn flex-fill border-secundario">
-                        <input class="form-check-input" type="radio" name="F7" id="F-7-btn" autocomplete="off">
-                        F7
-                    </label>
-                    <label class="btn flex-fill border-secundario">
-                        <input  type="radio" name="F8" id="F-8-btn" autocomplete="off">
-                        F8
-                    </label>
-                    <label class="btn flex-fill border-secundario">
-                        <input class="form-check-input" type="radio" name="F11" id="F-11-btn" autocomplete="off">
-                        F11
-                    </label>
+                <div class="form-group col-md-6">
+                    <label for="hora-partido">HORA</label>
+                    <input class="form-control" type="time" name="hora-partido" id="hora-partido">
                 </div>
             </div>
-            <div class="col form-group">
-                <label for="jornada-partido">JORNADA</label>
-                <input class="form-control" type="text" name="jornada-partido" id="jornada-partido">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="jornada-partido">JORNADA</label>
+                    <input class="form-control" type="text" name="jornada-partido" id="jornada-partido">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tipo-campo">TIPO PARTIDO</label>
+                    <select class="form-control" id="tipo-campo">
+                        <option value="F5">Fútbol 5</option>
+                        <option value="F7">Fútbol 7</option>
+                        <option value="F8">Fútbol 8</option>
+                        <option value="F11">Fútbol 11</option>
+                    </select>
+                </div>
             </div>
             <div class="form-row button-row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-lg-6 col-sm-12">
                     <button id="edit-alineacion-btn" class="btn btn-principal outline btn-form col-12" data-players="{{$mister->team->players}}">EDITAR ALINEACION</button>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-lg-6 col-sm-12">
                     <button class="btn btn-primary-color btn-form col-12">EMPEZAR PARTIDO</button>
                 </div>
             </div>

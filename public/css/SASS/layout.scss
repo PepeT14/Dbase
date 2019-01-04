@@ -5,6 +5,7 @@ html,body{
   color:$primary-text;
   height:100%;
   overflow:scroll;
+  background-color:#ebf5f4f2;
 }
 /*------ CLASES GLOBALES ------*/
 .main-content{
@@ -24,7 +25,7 @@ html,body{
 .border-secundario{border:1px solid $light-primary-color}
 
 .logout{cursor:pointer;}
-.dropdown-menu{padding:15px;}
+.dropdown-menu{padding:25px;}
 
 .group-around{
   display:flex;
@@ -133,8 +134,8 @@ html,body{
 -------------------------------------------------*/
 /*---CABECERA---*/
 .header-first{
-  background-color:$dark-primary-color;
   height:70px;
+  background-color: $dark-primary-color;
   .content {
     max-height:100%;
     width: 100%;
@@ -155,8 +156,8 @@ html,body{
   }
 }
 .header-second{
-  background-color:$light-primary-color;
   height:30px;
+  background-color: $primary-color;
   .content{
     height:100%;
     i.icono-navegacion-cabecera{

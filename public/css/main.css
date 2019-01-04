@@ -3,6 +3,7 @@ html, body {
   color: #212121;
   height: 100%;
   overflow: scroll;
+  background-color: #ebf5f4f2;
 }
 
 /*------ CLASES GLOBALES ------*/
@@ -32,7 +33,7 @@ html, body {
 }
 
 .dropdown-menu {
-  padding: 15px;
+  padding: 25px;
 }
 
 .group-around {
@@ -164,8 +165,8 @@ html, body {
 -------------------------------------------------*/
 /*---CABECERA---*/
 .header-first {
-  background-color: #00796B;
   height: 70px;
+  background-color: #00796B;
 }
 .header-first .content {
   max-height: 100%;
@@ -187,8 +188,8 @@ html, body {
 }
 
 .header-second {
-  background-color: #B2DFDB;
   height: 30px;
+  background-color: #009688;
 }
 .header-second .content {
   height: 100%;
@@ -284,6 +285,7 @@ html, body {
 }
 .form-group .btn-group.btn-group-toggle {
   border-radius: 25px;
+  border: 1px solid #009688;
 }
 .form-group .btn-group.btn-group-toggle .btn {
   border-radius: 25px;
@@ -322,13 +324,13 @@ html, body {
 .control-panel-icon i {
   color: white;
   font-size: 1.7em;
-  border: 1.5px solid #B2DFDB;
   border-radius: 5px;
   cursor: pointer;
   padding: 5px;
+  background-color: #607D8B;
 }
 .control-panel-icon i:hover {
-  background-color: #B2DFDB;
+  background-color: #425F6D;
 }
 
 /*# sourceMappingURL=main.css.map */
