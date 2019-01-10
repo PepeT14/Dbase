@@ -2,3 +2,29 @@
 @import 'SASS/alineacion';
 @import 'SASS/equipo';
 @import 'SASS/partido';
+
+/*----- INICIO -----*/
+.iconos-iniciales{
+  margin-top:150px;
+  z-index:9999;
+  .iconoContent{
+    margin:15px;
+    &:hover{
+      transform:scale(1.1);
+    }
+    .textoIcono{
+      padding:5px;
+      border-radius:5px;
+      font-size:2em;
+    }
+  }
+}
+.panel-fondo{
+  position:fixed;
+  background-color:white;
+  height:20px;
+  width:20px;
+  display:none;
+  left:100%;
+  z-index:9998;
+}

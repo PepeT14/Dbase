@@ -5,6 +5,9 @@
         <div class="icono-profile" data-toggle="dropdown" id="dropdownMisterProfileBtn">
             <img class="img-fluid user-icon" src="{!! $mister->file ? asset($mister->file) : asset('imagenes/profile.png') !!}">
         </div>
+        <div class="icon-menu fa fa-bars">
+
+        </div>
         <div class="dropdown-menu mister-profile" aria-labelledby="dropdownMisterProfileBtn">
             <div class="logout">
                 <i class="fa fa-power-off logout"></i>

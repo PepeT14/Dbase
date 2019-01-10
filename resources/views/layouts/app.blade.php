@@ -11,6 +11,7 @@
 <body>
 <div class="loader"><img class="icono-loader" src="{{asset('imagenes/carga.png')}}"></div>
 @if(Auth::guard('mister')->check())
+    @include('mister.menu')
     @include('mister.mister-header')
     <div class="container-fluid d-flex justify-content-center align-items-center flex-column main-content">
         @yield('content')

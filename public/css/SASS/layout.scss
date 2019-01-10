@@ -166,7 +166,16 @@ html,body{
     }
   }
 }
-
+.icon-menu{
+  font-size:4.3em;
+  cursor:pointer;
+}
+.close-menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px !important;
+}
 /*---LOGO_CARGA---*/
 .loader{
   position: fixed;

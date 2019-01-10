@@ -1,27 +1,5 @@
 @import 'variables';
-/*----- INICIO -----*/
-.iconos-iniciales{
-  margin-top:50px;
-  .iconoContent{
-    margin:15px;
-    &:hover{
-      transform:scale(1.1);
-    }
-    .textoIcono{
-      padding:5px;
-      border-radius:5px;
-      font-size:2em;
-    }
-  }
-}
-.panel-fondo{
-  position:fixed;
-  background-color:white;
-  height:100%;
-  width:100%;
-  display:none;
-  z-index:9999;
-}
+
 /*------AÑADIR EQUIPO------*/
 
 .new-team{

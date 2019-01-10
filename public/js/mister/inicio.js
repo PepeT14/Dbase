@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    $('.icon-menu').on('click',function(){
+        $('.panel-fondo').show().animate({height:'100%',width:'100%',left:0},1000)
+    });
+    $('.close-menu').on('click',function(){
+       $('.panel-fondo').animate({height:'20px',width:'20px',left:'100%'},800,function(){$(this).hide();});
+    });
 /*--------------------------------------------------------
 * ----------------- CLASE OBJETO PARTIDO -------------------
 * --------------------------------------------------------*/
