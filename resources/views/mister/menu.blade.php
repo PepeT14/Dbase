@@ -7,33 +7,41 @@
             @if($mister->team)
                 <div class="iconoContent equipoHerramientas row justify-content-center">
                     <div class="textoIcono icono-accion ruta" data-href="{{route('mister.equipo')}}">
-                        <span>EQUIPO</span>
+                        <i class="fa fa-users-cog"></i><span>EQUIPO</span>
                     </div>
                 </div>
                 <div class="iconoContent estadisticasHerramienta row justify-content-center">
                     <div class="textoIcono icono-accion" data-href="">
-                        <span>ESTADISTICAS</span>
+                        <i class="fa fa-chart-bar"></i><span>ESTADISTICAS</span>
                     </div>
                 </div>
                 <div class="iconoContent partidosHerramienta row justify-content-center">
                     <div class="textoIcono icono-accion">
-                        <span>ENTRENAMIENTO</span>
+                        <i class="far fa-clipboard"></i><span>ENTRENAMIENTO</span>
                     </div>
                 </div>
                 <div class="iconoContent partidosHerramienta row justify-content-center">
                     <div class="textoIcono icono-accion seccion" data-section='partido-formulario'>
-                        <span>PARTIDO</span>
+                        <i class="fa fa-futbol"></i><span>PARTIDO</span>
                     </div>
                 </div>
                 <div class="iconoContent partidosHerramienta row justify-content-center">
                     <div class="textoIcono icono-accion">
-                        <span>INVENTARIO</span>
+                        <i class="fa fa-cubes"></i><span>INVENTARIO</span>
                     </div>
                 </div>
                 <div class="iconoContent partidosHerramienta row justify-content-center">
                     <div class="textoIcono icono-accion">
-                        <span>CALENDARIO</span>
+                        <i class="far fa-calendar-alt"></i><span>CALENDARIO</span>
                     </div>
+                </div>
+                <div class="iconoContent row justify-content-center">
+                    <div class="textoIcono icono-accion logout">
+                        <i class="fa fa-power-off"></i><span>SALIR</span>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             @else
                 <div class="iconoContent partidosHerramienta row justify-content-center">

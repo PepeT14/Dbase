@@ -170,9 +170,9 @@ html, body {
 }
 .header-first .content {
   max-height: 100%;
-  width: 100%;
-  display: inline-flex;
   justify-content: space-between;
+  padding-right: 15px;
+  align-items: center;
 }
 .header-first .content .icono-profile {
   width: 70px;
@@ -200,7 +200,7 @@ html, body {
 }
 
 .icon-menu {
-  font-size: 4.3em;
+  font-size: 3.3em;
   cursor: pointer;
 }
 
@@ -209,6 +209,10 @@ html, body {
   top: 0;
   right: 0;
   padding: 10px !important;
+}
+
+.menu-container {
+  height: 100%;
 }
 
 /*---LOGO_CARGA---*/
@@ -278,13 +282,12 @@ html, body {
 .form-group input, .form-group select {
   border-color: #607D8B;
 }
-.form-group input:focus, .form-group select:focus {
-  border-color: #B2DFDB;
-  box-shadow: 0 0 0 0.2rem #607D8B;
-}
-.form-group input:focus.error, .form-group select:focus.error {
+.form-group input.error, .form-group select.error {
   border-color: #c36868;
   box-shadow: 0 0 0 0.2remmist #884a4a;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: #B2DFDB;
 }
 .form-group label {
   color: #212121;
@@ -308,6 +311,10 @@ html, body {
 }
 .form-group .btn-group .btn.focus, .form-group .btn-group .btn:focus {
   box-shadow: none;
+}
+.form-group.required .control-label:after {
+  content: "*";
+  color: red;
 }
 
 .navegacion-menu {

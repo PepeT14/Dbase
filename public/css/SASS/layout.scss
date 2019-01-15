@@ -138,9 +138,9 @@ html,body{
   background-color: $dark-primary-color;
   .content {
     max-height:100%;
-    width: 100%;
-    display:inline-flex;
     justify-content: space-between;
+    padding-right:15px;
+    align-items: center;
     .icono-profile{
       width:70px;
       display:flex;
@@ -167,7 +167,7 @@ html,body{
   }
 }
 .icon-menu{
-  font-size:4.3em;
+  font-size:3.3em;
   cursor:pointer;
 }
 .close-menu{
@@ -175,6 +175,9 @@ html,body{
   top: 0;
   right: 0;
   padding: 10px !important;
+}
+.menu-container{
+  height:100%;
 }
 /*---LOGO_CARGA---*/
 .loader{

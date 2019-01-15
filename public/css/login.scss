@@ -14,16 +14,15 @@
 .seccion-inicial.animate{
   transform:scale(1);
 }
-#login-form{
-  opacity: 0;
+.welcome-form-container{
   position:absolute;
-  transition: opacity 1s ease;
-  transition-delay: .4s;
-  z-index:-1;
-}
-#login-form.animate{
-  opacity:1;
+  .form-panel{
+    display:none;
+  }
 }
 .login-container{
    height:100%;
+}
+.club-register-form{
+  text-align:left;
 }

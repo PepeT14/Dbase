@@ -332,8 +332,8 @@
 
 /*----- INICIO -----*/
 .iconos-iniciales {
-  margin-top: 150px;
   z-index: 9999;
+  display: none;
 }
 .iconos-iniciales .iconoContent {
   margin: 15px;
@@ -345,6 +345,10 @@
   padding: 5px;
   border-radius: 5px;
   font-size: 2em;
+  color: #425F6D;
+}
+.iconos-iniciales .iconoContent .textoIcono span {
+  padding-left: 10px;
 }
 
 .panel-fondo {

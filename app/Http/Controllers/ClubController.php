@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Club;
 use App\Models\League;
+use Mail;
+use App\Mail\clubRegister;
 
 class ClubController extends Controller
 {
@@ -35,5 +37,9 @@ class ClubController extends Controller
 
 
         return redirect()->action('superAdmin@home');
+    }
+    public function register(Request $request){
+        Mail::to('pepeg93@hotmail.com')->send(new clubRegister($request->data));
+        return view('includes.auth.success');
     }
 }

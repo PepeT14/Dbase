@@ -1,9 +1,6 @@
 {{--Librerías útiles (Bootstrap, fontAwesome, cs-Selects, fullCalendar....)--}}
 <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap.min.css')}}" type="text/css">
-<link rel="stylesheet" href="{{asset('css/fontawesome/fontawesome.min.css')}}" type="text/css">
-<link rel="stylesheet" href="{{asset('css/fontawesome/solid.min.css')}}" type="text/css">
-<link rel="stylesheet" href="{{asset('css/fontawesome/brands.min.css')}}" type="text/css">
-<link rel="stylesheet" href="{{asset('css/fontawesome/regular.min.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('css/fontawesome/all.min.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-select.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-slide.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-elastic.css')}}" type="text/css">

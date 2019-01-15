@@ -16,20 +16,19 @@
   transform: scale(1);
 }
 
-#login-form {
-  opacity: 0;
+.welcome-form-container {
   position: absolute;
-  transition: opacity 1s ease;
-  transition-delay: 0.4s;
-  z-index: -1;
 }
-
-#login-form.animate {
-  opacity: 1;
+.welcome-form-container .form-panel {
+  display: none;
 }
 
 .login-container {
   height: 100%;
+}
+
+.club-register-form {
+  text-align: left;
 }
 
 /*# sourceMappingURL=login.css.map */

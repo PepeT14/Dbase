@@ -3,6 +3,10 @@
 <script src="{{asset('js/jQuery/jquery-ui.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jQuery/jQueryValidate/jquery.validate.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/jQuery/jQueryValidate/additional-methods.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/jQuery/jQueryValidate/localization/messages_es.js')}}" type="text/javascript"></script>
+
+{{--FontAwesome--}}
+<script src="{{asset('js/fontawesome/all.min.js')}}" type="text/javascript"></script>
 
 {{--FullCalendar--}}
 <script src="{{asset('js/fullcalendar/moment.js')}}" type="text/javascript"></script>
@@ -18,3 +22,4 @@
 
 {{--Scripts propios--}}
 <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/validaciones.js')}}" type="text/javascript"></script>

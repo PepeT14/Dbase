@@ -117,3 +117,4 @@ Route::group(['middleware' => ['auth:tutor']],function(){
 Route::get('/profile/{mister}','misterController@showProfile')->name('mister.profile');
 Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
+Route::get('/clubRegister','clubController@register')->name('club.register');

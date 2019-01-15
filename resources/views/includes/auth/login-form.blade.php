@@ -1,4 +1,7 @@
 <div class="form-panel login-form">
+    <button type="button" class="close" id="close-login">
+        <i class="fa fa-times"></i>
+    </button>
     <div class="form-title">Login</div>
     <div class="formulario-contenido">
         <form method="POST" action="{{ route('login') }}">

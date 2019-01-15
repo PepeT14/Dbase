@@ -12,11 +12,14 @@
                     </div>
                     <div class="divider"></div>
                     <div class="registra-club">
-                        <button class="btn btn-register">REGISTRA TU CLUB</button>
+                        <button class="btn btn-register welcome-btn" data-section=".club-register-form">REGISTRA TU CLUB</button>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-10" id="login-form">
+                <div class="col-lg-4 col-md-6 col-sm-10 welcome-form-container" id="login-form">
                     @include('includes.auth.login-form')
+                </div>
+                <div class="welcome-form-container col-md-6 col-sm-10" id="register-club-form">
+                    @include('includes.auth.clubRegister')
                 </div>
             </div>
         </div>

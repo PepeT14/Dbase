@@ -33,13 +33,12 @@
 .form-group{
   input,select{
     border-color:$color-resaltado;
+    &.error{
+      border-color:$cancel-color;
+      box-shadow: 0 0 0 0.2remmist $dark-cancel-color;
+    }
     &:focus{
       border-color:$light-primary-color;
-      box-shadow:0 0 0 0.2rem $color-resaltado;
-      &.error{
-        border-color:$cancel-color;
-        box-shadow: 0 0 0 0.2remmist $dark-cancel-color;
-      }
     }
   }
   label{
@@ -61,6 +60,7 @@
     }
     .btn.focus,.btn:focus{box-shadow:none;}
   }
+  &.required .control-label:after{content:'*';color:red;}
 }
 
 .navegacion-menu{
