@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth:admin']],function(){
     //Equipos
     Route::get('admin/teams','adminController@teams')->name('admin.teams');
     Route::get('admin/teams/create','teamController@create')->name('team.create');
+
     //Entrenadores
     Route::get('admin/invitar/{team}','adminController@misterInvite')->name('mister.invite');
 
@@ -91,15 +92,18 @@ Route::group(['middleware' => ['auth:mister']],function(){
         Route::get('/home','misterController@home')->name('mister.home');
         Route::get('/tactica','misterController@tactica')->name('mister.tactica');
 
+        Route::get('/calendar','misterController@calendar')->name('mister.calendar');
+
         //Partido
-        Route::get('/partido/{id}','misterController@startPartido')->name('mister.start.partido');
-        Route::post('/create/match','misterController@addMatch')->name('mister.create.match');
+        Route::get('/partido/{id}','MatchController@show')->name('mister.start.partido');
+        Route::post('/match','MatchController@create')->name('mister.create.match');
         Route::post('/match/{id}/changePlayer','MatchController@changePlayer')->name('match.changePlayer');
         Route::post('/match/{id}/updateMinutes','MatchController@updateMinutes')->name('match.updateMinutes');
 
         //Equipo
-        Route::get('/equipo','misterController@showEquipo')->name('mister.equipo');
-        Route::post('/create/player','misterController@addPlayer')->name('mister.create.player');
+        Route::get('/equipo','teamController@show')->name('mister.equipo');
+        Route::post('/player','playerController@create')->name('mister.create.player');
+
     });
 });
 

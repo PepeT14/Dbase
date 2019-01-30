@@ -25,107 +25,19 @@ class misterController extends Controller{
         return view('misterProfile',compact('mister'));
     }
 
+    //CALENDARIO
+    public function calendar(){
+        $mister = Auth::guard('mister')->user();
+        return view('mister.calendar',compact('mister'));
+    }
+
+
+    //TACTICAS
     public function tactica(){
         $mister = Auth::guard('mister')->user();
         return view('mister.tacticas',compact('mister'));
     }
-
-
-    public function addMatch(Request $request){
-        $mister = Auth::guard('mister')->user();
-
-        $this->validate($request,[
-            'fecha-partido' =>'required|date',
-            'hora-partido' => 'required',
-            'jornada-partido' => 'required'
-        ]);
-
-        $match = new Match();
-        $match->jornada = $request->input('jornada-partido');
-        $match->title = 'Partido del '.$mister->team->name.'. Jornada '.$request->input('jornada-partido');
-        $fecha = $request->input('fecha-partido');
-        $hora = $request->input('hora-partido');
-        $match->start = Carbon::createFromFormat('Y-m-d H:i', $fecha.$hora);
-        $match->league()->associate($mister->team->league);
-        $match->save();
-
-        if($request->has('alineacion')){
-            $titulares = collect($request->input('alineacion.titulares'));
-            $suplentes = collect($request->input('alineacion.suplentes'));
-            foreach($titulares as $titular){
-                $player = Player::Where('id',collect($titular)->get('id'))->first();
-                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>1]);
-            }
-            forEach($suplentes as $suplente){
-                $player = Player::Where('id',collect($suplente)->get('id'))->first();
-                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>0]);
-            }
-        }
-        if($request->has('local')){
-            $quality = 'local';
-        }else{
-            $quality = 'visitante';
-        }
-        $match->teams()->attach($mister->team,['quality' => $quality]);
-        return 'partido/'.$match->id;
-    }
-
-    //EQUIPO
-    public function startPartido($match){
-        $mister = Auth::guard('mister')->user();
-        $match = Match::find($match);
-        return view('mister.partido',compact(['match','mister']));
-    }
-
-    public function showEquipo(){
-        $mister = Auth::guard('mister')->user();
-        $order = ['Portero','Defensa','MedioCentro','Delantero'];
-        $players = $mister->team->players->sortBy(function($player) use($order){
-           return array_search($player->position,$order);
-        });
-        return view('mister.equipo',with(compact('mister','players')));
-    }
-
-    public function addPlayer(Request $request){
-
-        $this->validate($request,[
-            'player-name' =>'required|string',
-            'player-position' =>'string',
-            'player-birthday' =>'required|date',
-        ]);
-
-        $player = new Player();
-        $player->name = $request->input('player-name').' '.$request->input('player-apellidos');
-        $player->position = $request->input('player-position');
-        $player->birthday = $request->input('player-birthday');
-        if($request->has('player-number')){
-            $player->number = $request->input('player-number');
-        }
-        $team = Auth::guard('mister')->user()->team;
-        $player->team()->associate($team);
-        $player->save();
-        return redirect()->route('mister.equipo');
-    }
-
-    //CALENDARIO PARTIDOS
-    public function getMisterCalendar(){
-        $partidos = $this->getMatchs();
-        $calendar = \Calendar::addEvents($partidos)->setOptions([
-            'displayEventTime' =>false,
-            'timeFormat'=> 'HH:mm',
-            'fixedWeekCount'=>false,
-            'dayNamesShort' =>['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']
-        ])->setCallbacks([
-            'eventClick'=>'function(calEvent){
-                if(calEvent.id.includes("e")){
-                    window.alert("edit");
-                }else{
-                    window.location.href="match/"+calEvent.id+"/";
-                }
-            }',
-        ]);
-        return $calendar;
-    }
+    
 
     //Partidos del entrenador
     public function getMatchs(){

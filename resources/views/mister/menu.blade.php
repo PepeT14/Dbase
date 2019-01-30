@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="iconoContent partidosHerramienta row justify-content-center">
-                    <div class="textoIcono icono-accion">
+                    <div class="textoIcono icono-accion ruta" data-href="{{route('mister.calendar')}}">
                         <i class="far fa-calendar-alt"></i><span>CALENDARIO</span>
                     </div>
                 </div>

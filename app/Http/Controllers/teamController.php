@@ -31,4 +31,16 @@ class teamController extends Controller
         $team= Team::all()->where('id','=',$team);
         return view('team.team',compact('team'));
     }
+
+    //Show
+    public function show(){
+        $mister = Auth::guard('mister')->user();
+        $order = ['Portero','Defensa','MedioCentro','Delantero'];
+        $players = $mister->team->players->sortBy(function($player) use($order){
+            return array_search($player->position,$order);
+        });
+        return view('mister.equipo',with(compact('mister','players')));
+    }
+
+
 }

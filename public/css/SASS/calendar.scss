@@ -1,0 +1,15 @@
+#calendar{
+  &.fc{
+    thead{
+      td,th{border:none;}
+    }
+    td{
+      &:first-child{
+        border-left:none;
+      }
+      &:last-child{
+        border-right:none;
+      }
+    }
+  }
+}

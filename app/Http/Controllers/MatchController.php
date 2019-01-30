@@ -8,10 +8,54 @@ use App\Models\Match;
 class MatchController extends Controller
 {
     //Create
-    public function createMatch(Request $request){
+    public function create(Request $request){
+        $mister = Auth::guard('mister')->user();
 
+        $this->validate($request,[
+            'fecha-partido' =>'required|date',
+            'hora-partido' => 'required',
+            'jornada-partido' => 'required'
+        ]);
+
+        $match = new Match();
+        $match->jornada = $request->input('jornada-partido');
+        $match->title = 'Partido del '.$mister->team->name.'. Jornada '.$request->input('jornada-partido');
+        $fecha = $request->input('fecha-partido');
+        $hora = $request->input('hora-partido');
+        $match->start = Carbon::createFromFormat('Y-m-d H:i', $fecha.$hora);
+        $match->league()->associate($mister->team->league);
+        $match->save();
+
+        if($request->has('alineacion')){
+            $titulares = collect($request->input('alineacion.titulares'));
+            $suplentes = collect($request->input('alineacion.suplentes'));
+            foreach($titulares as $titular){
+                $player = Player::Where('id',collect($titular)->get('id'))->first();
+                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>1]);
+            }
+            forEach($suplentes as $suplente){
+                $player = Player::Where('id',collect($suplente)->get('id'))->first();
+                $match->players()->attach($player,['minutes'=>0,'summoned' =>1,'playing'=>0]);
+            }
+        }
+        if($request->has('local')){
+            $quality = 'local';
+        }else{
+            $quality = 'visitante';
+        }
+        $match->teams()->attach($mister->team,['quality' => $quality]);
+        return 'partido/'.$match->id;
     }
 
+
+    //Empezar partido
+    public function show($match){
+        $mister = Auth::guard('mister')->user();
+        $match = Match::find($match);
+        return view('mister.partido',compact(['match','mister']));
+    }
+
+    //Cambiar jugador durante partido
     public function changePlayer(Request $request,$id){
         $match = Match::find($id);
         $titularId = $request->input('titular');
@@ -23,6 +67,7 @@ class MatchController extends Controller
         return $minutosTitular + intval($minutos);
     }
 
+    //Actualizar los minutos durante el partido
     public function updateMinutes(Request $request,$id){
         $match = Match::find($id);
         $array = collect($request->all());

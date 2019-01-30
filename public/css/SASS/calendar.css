@@ -1,0 +1,11 @@
+#calendar.fc thead td, #calendar.fc thead th {
+  border: none;
+}
+#calendar.fc td:first-child {
+  border-left: none;
+}
+#calendar.fc td:last-child {
+  border-right: none;
+}
+
+/*# sourceMappingURL=calendar.css.map */
