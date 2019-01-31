@@ -37,7 +37,7 @@ class misterController extends Controller{
         $mister = Auth::guard('mister')->user();
         return view('mister.tacticas',compact('mister'));
     }
-    
+
 
     //Partidos del entrenador
     public function getMatchs(){

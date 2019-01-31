@@ -39,7 +39,7 @@ class ClubController extends Controller
         return redirect()->action('superAdmin@home');
     }
     public function register(Request $request){
-        Mail::to('pepeg93@hotmail.com')->send(new clubRegister($request->data));
+        Mail::to('pepeg93@hotmail.com')->send(new clubRegister($request));
         return view('includes.auth.success');
     }
 }
