@@ -47,6 +47,21 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function showLoginSAForm(){
+        return view('auth.loginSA');
+    }
+
+    public function authenticateSA (Request $request){
+        $this->validate($request,[
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        if(Auth::guard('superAdmin')->attempt(['username'=>$request->username,'password'=>$request->password])){
+            return response()->redirectToRoute('superAdmin.home');
+        }
+        return $this->sendFailedLoginResponse($request);
+    }
+
     public function authenticate(Request $request){
 
 
@@ -66,9 +81,6 @@ class LoginController extends Controller
         }
         if(Auth::guard('tutor')->attempt(['username'=>$request->username , 'password'=>$request->password])){
             return response()->redirectToRoute('tutor.home');
-        }
-        if(Auth::guard('superAdmin')->attempt(['username'=>$request->username,'password'=>$request->password])){
-            return response()->redirectToRoute('superAdmin.home');
         }
         if($request->ajax()){
             return response()->json();

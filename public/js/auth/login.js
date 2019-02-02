@@ -39,4 +39,9 @@ $(document).ready(function() {
            return false;
        }
     });
+    $('.btn-cancel').on('click',function(){
+       event.preventDefault();
+       $('.club-register-form').fadeOut(700);
+       $('.seccion-inicial').addClass('animate');
+    });
 });

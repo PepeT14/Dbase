@@ -19,12 +19,12 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@authenticate')->name('login.submit');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('loginSA', 'Auth\LoginController@showLoginSAForm')->name('login');
+Route::post('loginSA','Auth\LoginController@authenticateSA')->name('loginSA.submit');
 
 // Registration Routes...
 Route::prefix('register')->group(function(){
     Route::middleware(['guest'])->group(function(){
-        Route::get('superAdminRegister','Auth\SuperAdmin\SuperAdminRegisterController@showSuperAdminRegister')->name('superAdmin.register');
-        Route::post('superAdminRegister','Auth\SuperAdmin\SuperAdminRegisterController@create')->name('superAdmin.submit');
         Route::get('adminRegister/{club}/','Auth\Admin\AdminRegisterController@showAdminRegister');
         Route::post('adminRegister','Auth\Admin\AdminRegisterController@registerAdmin')->name('admin.submit');
         Route::get('misterRegister/{team}','Auth\Mister\MisterRegisterController@showMisterRegister');
@@ -49,14 +49,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //SuperAdmin
 Route::group(['middleware' => ['auth:superAdmin']],function(){
-    Route::get('superAdmin/home','superAdminController@home')->name('superAdmin.home');
-    Route::get('superAdmin/invitar','superAdminController@invite')->name('superAdmin.invite');
+    Route::get('superAdmin/home','SuperAdminController@home')->name('superAdmin.home');
+    Route::get('superAdmin/invitar','SuperAdminController@invite')->name('superAdmin.invite');
 
     //League
     Route::get('superAdmin/league','leagueController@create')->name('league.create');
 
     //Club
-    Route::get('superAdmin/club','clubController@create')->name('club.create');
+    Route::get('superAdmin/club','ClubController@create')->name('club.create');
 });
 
 //Admin
@@ -121,4 +121,4 @@ Route::group(['middleware' => ['auth:tutor']],function(){
 Route::get('/profile/{mister}','misterController@showProfile')->name('mister.profile');
 Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
-Route::get('/clubRegister','clubController@register')->name('club.register');
+Route::get('/clubRegister','ClubController@register')->name('club.register');
