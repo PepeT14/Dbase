@@ -5,7 +5,7 @@
     </button>
     <div class="form-title">Login</div>
     <div class="formulario-contenido">
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('loginSA') }}">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for="username" class="control-label">Username</label>

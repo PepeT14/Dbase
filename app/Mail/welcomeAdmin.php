@@ -2,14 +2,13 @@
 
 namespace App\Mail;
 
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Auth;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\URL;
 
-class inviteAdmin extends Mailable
+class welcomeAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,8 +17,6 @@ class inviteAdmin extends Mailable
      *
      * @return void
      */
-    public $club;
-
     public function __construct(String $club)
     {
         //
@@ -33,8 +30,8 @@ class inviteAdmin extends Mailable
      */
     public function build()
     {
-        $superAdmin = Auth::guard('superAdmin')->user();
         $url = URL::to('/');
-        return $this->subject('Invitación a dBASE')->view('mails.inviteAdmin')->with(compact(['superAdmin','url']));
+        $club = $this->club;
+        return $this->markdown('mails.welcomeAdmin')->with(compact(['url','club']));
     }
 }

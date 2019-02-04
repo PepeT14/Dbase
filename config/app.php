@@ -183,6 +183,9 @@ return [
         //FullCalendar
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
+        //Mail css inliner
+        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
+
     ],
 
     /*

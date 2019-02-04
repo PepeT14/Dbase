@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
 use App\Mail\inviteAdmin;
+use Illuminate\Http\Request;
+use App\Mail\welcomeAdmin;
 use Mail;
 use App\Models\Club;
 use App\Models\League;
@@ -38,7 +38,7 @@ class SuperAdmincontroller extends Controller
             'club' => $club,
 
         ]);
-        return redirect()->action('superAdminController@home');
+        return redirect()->action('SuperAdminController@home');
     }
 
 }

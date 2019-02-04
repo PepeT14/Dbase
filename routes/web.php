@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@authenticate')->name('login.submit');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('loginSA', 'Auth\LoginController@showLoginSAForm')->name('login');
+Route::get('loginSA', 'Auth\LoginController@showLoginSAForm')->name('loginSA');
 Route::post('loginSA','Auth\LoginController@authenticateSA')->name('loginSA.submit');
 
 // Registration Routes...
@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth:superAdmin']],function(){
     //Club
     Route::get('superAdmin/club','ClubController@create')->name('club.create');
 });
+
 
 //Admin
 Route::group(['middleware' => ['auth:admin']],function(){
@@ -122,3 +123,5 @@ Route::get('/profile/{mister}','misterController@showProfile')->name('mister.pro
 Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
 Route::get('/clubRegister','ClubController@register')->name('club.register');
+
+Route::get('prueba',function(){return view('mails.inviteAdmin');});

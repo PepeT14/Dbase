@@ -87,6 +87,7 @@ class ComposerStaticInit53541b7b2cb86e41c741b647ca0437a6
         ),
         'F' => 
         array (
+            'Fedeisas\\LaravelMailCssInliner\\' => 31,
             'Faker\\' => 6,
         ),
         'D' => 
@@ -234,6 +235,10 @@ class ComposerStaticInit53541b7b2cb86e41c741b647ca0437a6
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'Fedeisas\\LaravelMailCssInliner\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fedeisas/laravel-mail-css-inliner/src',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -312,7 +317,6 @@ class ComposerStaticInit53541b7b2cb86e41c741b647ca0437a6
         'App\\Http\\Controllers\\Auth\\Player\\PlayerRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/Player/PlayerRegisterController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
-        'App\\Http\\Controllers\\Auth\\SuperAdmin\\SuperAdminRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/SuperAdmin/SuperAdminRegisterController.php',
         'App\\Http\\Controllers\\Auth\\Tutor\\TutorRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/Tutor/TutorRegisterController.php',
         'App\\Http\\Controllers\\ClubController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClubController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -333,8 +337,10 @@ class ComposerStaticInit53541b7b2cb86e41c741b647ca0437a6
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\InvitationRegister' => __DIR__ . '/../..' . '/app/Mail/InvitationRegister.php',
+        'App\\Mail\\clubRegister' => __DIR__ . '/../..' . '/app/Mail/clubRegister.php',
         'App\\Mail\\inviteAdmin' => __DIR__ . '/../..' . '/app/Mail/inviteAdmin.php',
         'App\\Mail\\inviteMister' => __DIR__ . '/../..' . '/app/Mail/inviteMister.php',
+        'App\\Mail\\welcomeAdmin' => __DIR__ . '/../..' . '/app/Mail/welcomeAdmin.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Assistence' => __DIR__ . '/../..' . '/app/Models/Assistence.php',
         'App\\Models\\Card' => __DIR__ . '/../..' . '/app/Models/Card.php',
@@ -990,6 +996,8 @@ class ComposerStaticInit53541b7b2cb86e41c741b647ca0437a6
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
+        'Fedeisas\\LaravelMailCssInliner\\CssInlinerPlugin' => __DIR__ . '/..' . '/fedeisas/laravel-mail-css-inliner/src/CssInlinerPlugin.php',
+        'Fedeisas\\LaravelMailCssInliner\\LaravelMailCssInlinerServiceProvider' => __DIR__ . '/..' . '/fedeisas/laravel-mail-css-inliner/src/LaravelMailCssInlinerServiceProvider.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
