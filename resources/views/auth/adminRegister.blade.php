@@ -1,52 +1,85 @@
 @extends('layouts.app')
-
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/SASS/register.css')}}" type="text/css">
+@endsection
 @section('content')
-    <div class="item log" >
-        <div class="position-center-x full-width">
-            <div class="container-register">
-                <div class="banner-layer-register pull-left">
-                    <a  href="/"><img class="animated fadeIn delay-1s" src="{{asset('images/welcome/dbase2.png')}}"></a>
-                </div>
-                <div class="panel panel-transparent animated fadeInUp " id="login-view" data-error="{{$errors->has('username') ? '1' : '0'}}">
-                    <div class="panel-heading panel-title ">Registro</div>
-                    <div class="panel-body">
-                        <form class="form-register"  role="form" method="POST" action="{{route('admin.submit')}}" >
-                            {{ csrf_field() }}
-                            <div class="inputs">
-                                <input id="name" type="text" placeholder="Nombre" name="name" value="{{ old('name') }}"  required>
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                               <strong>{{ $errors->first('name') }}</strong>
-                                           </span>
-                                @endif
-                                <input id="email" type="email" placeholder="Correo Electrónico" name="email" value="{{ old('email') }}"  required>
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                               <strong>{{ $errors->first('email') }}</strong>
-                                           </span>
-                                @endif
-                                <input id="username" type="text" placeholder="Usuario" name="username" value="{{ old('username') }}"  required>
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                               <strong>{{ $errors->first('username') }}</strong>
-                                           </span>
-                                @endif
-                                <input id="password" type="password" placeholder="Contraseña" name="password"  required>
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                               <strong>{{ $errors->first('password') }}</strong>
-                                           </span>
-                                @endif
-                                <input id="club" type="text"  name="club" value="{{$club}}" readonly>
-                            </div>
-                            <button type="submit" class="btn-r btn-regist btn-register">
-                                Registro
-                            </button>
-
-                        </form>
-                    </div>
+    <div class="row align-items-center justify-content-center register-form-container">
+        <div class="col-md-6 register-form">
+            <div class="row register-form-title justify-content-center">
+                <div class="col-12">
+                    <h3>Bienvenido!</h3>
+                    <span>Formulario para el administrador de  {{$club}}</span>
                 </div>
             </div>
+            <form id="admin-register-form" class="register-form" data-club="{{$club}}">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+                    </div>
+                    <input type="email" id="admin-email" name="admin-email" class="form-control" placeholder="Email">
+
+                    <div class="input-group-append ">
+                        <div class="input-group-text check-container">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <circle id="admin-email-error" class="checkmark__circle" cx="25" cy="25" r="20" fill="none"></circle>
+                                <path class="checkmark__icon check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                                <path class="checkmark__icon cross" fill="none" d="M16 16 36 36 M36 16 16 36" ></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-user"></i></div>
+                    </div>
+                    <input type="text" id="admin-username" name="admin-username" class="form-control" placeholder="Usuario" autocomplete="username">
+                    <div class="input-group-append ">
+                        <div class="input-group-text check-container">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <circle class="checkmark__circle" cx="25" cy="25" r="20" fill="none"></circle>
+                                <path class="checkmark__icon check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                                <path class="checkmark__icon cross" fill="none" d="M16 16 36 36 M36 16 16 36" ></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                    </div>
+                    <input type="password" id="admin-password" name="admin-password" class="form-control" placeholder="Contraseña" autocomplete="new-password">
+                    <div class="input-group-append ">
+                        <div class="input-group-text check-container">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <circle class="checkmark__circle" cx="25" cy="25" r="20" fill="none"></circle>
+                                <path class="checkmark__icon check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                                <path class="checkmark__icon cross" fill="none" d="M16 16 36 36 M36 16 16 36" ></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                    </div>
+                    <input type="password" id="admin-password_confirm" name="admin-password_confirm" class="form-control" placeholder="Repite la contraseña"">
+                    <div class="input-group-append ">
+                        <div class="input-group-text check-container">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <circle class="checkmark__circle" cx="25" cy="25" r="20" fill="none"></circle>
+                                <path class="checkmark__icon check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                                <path class="checkmark__icon cross" fill="none" d="M16 16 36 36 M36 16 16 36" ></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+               <div class="row justify-content-center mt-2">
+                   <button class="btn btn-submit" type="submit">REGISTRARME</button>
+               </div>
+            </form>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('js/admin/register.js')}}" type="text/javascript"></script>
 @endsection

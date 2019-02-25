@@ -32,32 +32,36 @@ class AdminRegisterController extends Controller
     public function showAdminRegister($club){
         return view('auth.adminRegister')->with(compact(['club']));
     }
+
+    public function checkEmail(Request $request){
+       $username = Admin::Where('username','=',$request->username)->exists();
+       return response()->json($username);
+    }
+
     public function registerAdmin(Request $request){
         $messages =[
-            'email.exists' => 'Parece que usted no está invitado para ser administrador del club!',
-            'username.unique' => 'Ups! Hay otra persona que ya ha pensado este nombre de usuario, por favor, eliga otro',
-            'password.alpha_num' => 'Introduce una contraseña que solamente contenga letras y números por favor. Gracias'
+            'admin-email.exists' => 'Parece que usted no está invitado para ser administrador del club!',
+            'admin-username.unique' => 'Ups! Hay otra persona que ya ha pensado este nombre de usuario, por favor, eliga otro'
         ];
         $this->validate($request,[
-            'name' => 'required|min:3|max:190',
-            'email' => 'required|email|max:190|unique:admin_clubs,email|exists:valid_admins,email',
-            'username' => 'required|min:6|max:190|unique:admin_clubs,username',
-            'password' => 'required|min:6|max:190|alpha_num'
+            'admin-email' => 'required|email|max:190|unique:admin_clubs,email|exists:valid_admins,email',
+            'admin-username' => 'required|min:6|max:190|unique:admin_clubs,username',
+            'admin-password' => 'required|min:6|max:190'
         ],$messages);
 
         $admin = new Admin();
-        $admin->name = $request->input('name');
-        $admin->email = $request->input('email');
+        $admin->email = $request->input('admin-email');
         $admin->username = $request->input('username');
         $admin->password = bcrypt($request->input('password'));
         $cName = $request->input('club');
-        $club = Club::where('name',$cName)->first();
+        $club = Club::all()->where('name',$cName)->first();
         $admin->club_id = $club->id;
-        $admin->save();
+        //$admin->save();
 
         $admin->club()->associate($club);
-        $club->admin()->save($admin);
+        //$club->admin()->save($admin);
 
-        return view('admin.home');
+        //return view('admin.home');
+        return $request->data;
     }
 }

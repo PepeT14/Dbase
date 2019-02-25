@@ -33,6 +33,8 @@ Route::prefix('register')->group(function(){
         Route::post('tutorRegister','Auth\Tutor\TutorRegisterController@registerTutor');
         Route::get('playerRegister','Auth\Player\PlayerRegisterController@showPlayerRegister');
         Route::post('playerRegister','Auth\Player\PlayerRegisterController@registerPlayer');
+
+        Route::get('checkEmail','Auth\Admin\AdminRegisterController@checkEmail');
     });
 });
 
