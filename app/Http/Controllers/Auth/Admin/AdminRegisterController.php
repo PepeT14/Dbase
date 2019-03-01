@@ -51,17 +51,18 @@ class AdminRegisterController extends Controller
 
         $admin = new Admin();
         $admin->email = $request->input('admin-email');
-        $admin->username = $request->input('username');
-        $admin->password = bcrypt($request->input('password'));
+        $admin->username = $request->input('admin-username');
+        $admin->password = bcrypt($request->input('admin-password'));
         $cName = $request->input('club');
         $club = Club::all()->where('name',$cName)->first();
         $admin->club_id = $club->id;
-        //$admin->save();
+        $admin->save();
 
         $admin->club()->associate($club);
-        //$club->admin()->save($admin);
+        $club->admin()->save($admin);
 
-        //return view('admin.home');
-        return $request->data;
+        return response()->json([
+            'url' => '/'
+        ]);
     }
 }

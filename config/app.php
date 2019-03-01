@@ -180,9 +180,6 @@ return [
         //DebugBar
         Barryvdh\Debugbar\ServiceProvider::class,
 
-        //FullCalendar
-        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-
         //Mail css inliner
         Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
 
@@ -233,9 +230,7 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class,
-        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
-
+        'View' => Illuminate\Support\Facades\View::class
     ],
 
 ];

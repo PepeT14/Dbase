@@ -1,0 +1,87 @@
+@import 'admin/admin_header';
+@import 'SASS/variables';
+
+/*--- FONDO ---*/
+#admin_content{
+  background-image:url('../imagenes/fondos/cesped.jpg');
+  min-height:100%;
+  opacity:0.7;
+}
+
+.main_content{
+  padding-top:80px;
+}
+/*---  PANELES ---*/
+.main_panel{
+  background-color:#e9ebe6e6;
+  box-shadow: 1px 11px 33px -9px rgba(0,0,0,0.75);
+  height:100%;
+}
+
+
+/*--- HOME ---*/
+.home_content{
+  height:calc(100vh - 80px);
+  padding:80px 0;
+  font-family:'Lato',sans-serif;
+}
+.resultados_content{
+  margin:20px 0;
+  color:black;
+  .resultado_title{
+    margin:40px 0;
+    span{
+      border-bottom:solid 2px black;
+      font-size:2em;
+    }
+  }
+  .category_link{
+    border:solid 1.5px black;
+    margin-bottom:10px;
+    border-radius:10px;
+    cursor:pointer;
+    &:hover{
+      color:white;
+      background-color:grey;
+    }
+    span{
+      text-transform:uppercase;
+    }
+  }
+}
+
+.calendar_content{
+  //height:calc(100% - 40px);
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+/*--- FullCalendar ---*/
+#calendar{
+  height:100%;
+  .fc-toolbar{
+    .fc-center{
+      color:black;
+      text-transform:uppercase;
+    }
+  }
+  .fc-day-number{
+    float:left;
+  }
+  .fc-body{
+    box-shadow: 2px 13px 34px 0px rgba(0,0,0,0.75);
+  }
+  .fc-day-header{
+    text-transform:uppercase;
+    color:black;
+  }
+  .fc-day{
+    background-color:white;
+    &.fc-today{
+      background-color:#f1edd6;
+    }
+    &.fc-sat,&.fc-sun{
+      background-color:#f1f1f1;
+    }
+  }
+}

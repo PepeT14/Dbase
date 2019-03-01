@@ -8,7 +8,7 @@ $('#admin-register-form').on('submit',function(){
             method:'POST',
             data:data,
             success:function(response){
-                console.log(response);
+                window.location.href = response.url;
             },
             error:function(response){
                 for(let obj in response.responseJSON){
@@ -18,6 +18,7 @@ $('#admin-register-form').on('submit',function(){
                         adminValidator.showErrors(errors);
                     }
                 }
+                $('body')[0].innerHTML =response.responseText;
                 console.log(response);
             }
         });

@@ -10,3 +10,8 @@ $('#showLeagueForm').click(function(){
 $('#showInstForm').click(function(){
     $('#addInstForm').toggle();
 });
+
+$('.header_link.item').on('click',function(){
+    $('.header_link.active').removeClass('active');
+    $(this).addClass('active');
+});

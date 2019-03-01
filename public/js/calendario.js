@@ -5,7 +5,7 @@ var date = document.getElementById("date");
 var time = document.getElementById("time");
 
 function getDate() {
-    date.innerHTML = d.getDate() + " " + monthNames[d.getMonth()] + ", " + d.getFullYear();
+    if(date){date.innerHTML = d.getDate() + " " + monthNames[d.getMonth()] + ", " + d.getFullYear();}
 }
 
 function timer() {
@@ -18,7 +18,7 @@ function timer() {
         (minutes < 10 ? "0" + minutes : minutes)
     ].join(':');
 
-    time.innerHTML = strTime;
+    if(time){time.innerHTML = strTime;}
     // setTimeout(timer, 1000);
 }
 
@@ -37,3 +37,25 @@ function getOptions(){
     }
 }
 getOptions();
+
+/*--- FullCalendar ---*/
+$('#calendar').fullCalendar({
+    height:'parent',
+    fixedWeekCount:false,
+    selectable:true,
+    selectHelper:true,
+    selectAllow:function(selectInfo){
+      console.log(selectInfo);
+    },
+    header:{
+      left:'month,basicWeek,agendaDay',
+      center:'title',
+      right:'prev,today,next',
+    },
+    views:{
+        month:{
+            titleFormat:'MMMM YYYY',
+            columnFormat:'dddd'
+        }
+    }
+ });
