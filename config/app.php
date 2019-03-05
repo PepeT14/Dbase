@@ -178,11 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //DebugBar
-        Barryvdh\Debugbar\ServiceProvider::class,
-
-        //Mail css inliner
-        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class
     ],
 
     /*
