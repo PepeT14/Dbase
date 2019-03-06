@@ -12,13 +12,7 @@
 </head>
 <body>
 <div class="loader"><img class="icono-loader" src="{{asset('imagenes/carga.png')}}"></div>
-@if(Auth::guard('mister')->check())
-    @include('mister.menu')
-    @include('mister.mister-header')
-    <div class="container-fluid d-flex justify-content-center align-items-center flex-column main-content">
-        @yield('content')
-    </div>
-@elseif(Auth::guard('admin')->check())
+@auth('admin')
    <div class="container-fluid" id="admin_content">
        <div class="row" id="admin_header">
            @include('includes.adminHeader')
@@ -27,9 +21,10 @@
            @yield('content')
        </div>
    </div>
-@else
+@endauth
+@guest
     @yield('content')
-@endif
+@endguest
 
 @include('includes.scripts')
 @if(Auth::guard('mister')->check())

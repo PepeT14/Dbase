@@ -19,6 +19,8 @@ class Player extends playerUser
 
     protected $hidden = ['remember_token','password'];
 
+    protected $table='players';
+
     //Relationships
 
         //Match_stats (One to Many)

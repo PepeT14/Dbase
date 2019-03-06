@@ -21,22 +21,7 @@ class adminController extends Controller
         $eventos = $this->getEvents();
         $partidos = $this->getMatchs();
 
-        $calendar = \Calendar::addEvents($eventos)->addEvents($partidos)->setOptions([
-            'displayEventTime' =>false,
-            'timeFormat'=> 'HH:mm',
-            'fixedWeekCount'=>false,
-            'dayNamesShort' =>['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']
-        ])->setCallbacks([
-            'eventClick'=>'function(calEvent){
-                if(calEvent.id.includes("e")){
-                    window.alert("edit");
-                }else{
-                    window.location.href="match/"+calEvent.id+"/";
-                }
-            }',
-        ]);
-
-        return view('admin.home')->with(compact('calendar'));
+        return view('admin.home');
     }
 
     //Material
