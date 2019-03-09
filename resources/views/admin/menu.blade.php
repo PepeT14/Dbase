@@ -1,4 +1,4 @@
-<div class="panel-fondo">
+<div class="panel-fondo" id="admin_menu">
     <div class="menu-container d-flex align-items-center justify-content-center">
         <button type="button" class="close close-menu">
             <i class="fa fa-times"></i>

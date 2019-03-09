@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/SASS/register.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/register.css')}}" type="text/css">
 @endsection
 @section('content')
     <div class="row align-items-center justify-content-center register-form-container">
@@ -82,4 +82,5 @@
 @endsection
 @section('scripts')
     <script src="{{asset('js/admin/register.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/validaciones.js')}}" type="text/javascript"></script>
 @endsection

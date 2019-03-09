@@ -1,11 +1,29 @@
-#calendar.fc thead td, #calendar.fc thead th {
-  border: none;
+/*--- FullCalendar ---*/
+#calendar {
+  height: 100%;
 }
-#calendar.fc td:first-child {
-  border-left: none;
+#calendar .fc-toolbar .fc-center {
+  color: black;
+  text-transform: uppercase;
 }
-#calendar.fc td:last-child {
-  border-right: none;
+#calendar .fc-day-number {
+  float: left;
+}
+#calendar .fc-body {
+  box-shadow: 2px 13px 34px 0 rgba(0, 0, 0, 0.75);
+}
+#calendar .fc-day-header {
+  text-transform: uppercase;
+  color: black;
+}
+#calendar .fc-day {
+  background-color: white;
+}
+#calendar .fc-day.fc-today {
+  background-color: #f1edd6;
+}
+#calendar .fc-day.fc-sat, #calendar .fc-day.fc-sun {
+  background-color: #f1f1f1;
 }
 
 /*# sourceMappingURL=calendar.css.map */

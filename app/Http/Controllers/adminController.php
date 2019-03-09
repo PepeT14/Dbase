@@ -11,17 +11,28 @@ use App\Models\League;
 use Mail;
 use App\Mail\inviteMister;
 use DB;
-use MaddHatter\LaravelFullcalendar\Calendar;
 use App\Models\League_Nof;
 
 class adminController extends Controller
 {
-    //Home
-    public function home(){
-        $eventos = $this->getEvents();
-        $partidos = $this->getMatchs();
-
-        return view('admin.home');
+    //INDEX
+    public function index(Request $request){
+        $admin = Auth::guard('admin')->user();
+        if($request->ajax()){
+            return 'AJAX';
+        }else{
+            return view('admin.home');
+        }
+    }
+    //HOME
+    public function home(Request $request){
+        $admin = Auth::guard('admin')->user();
+        if($request->ajax()){
+            $sections = view('admin.home')->renderSections();
+            return response()->json(['html'=>$sections['content'],'title'=>'home']);
+        }else{
+            return view('admin.home',['ajax'=>false]);
+        }
     }
 
     //Material
@@ -73,7 +84,7 @@ class adminController extends Controller
         return view('admin.leaguesNof')->with(compact('leaguesNof'));
     }
 
-    //Invitar Entrenador
+    //TECNICOS
     public function misterInvite(Request $request,$team){
         $admin = Auth::guard('admin')->user();
         Mail::to($request->input('email'))->send(new inviteMister($team));
@@ -85,6 +96,14 @@ class adminController extends Controller
 
         ]);
         return redirect()->action('adminController@teams');
+    }
+    public function showMisters(Request $request){
+        $admin = Auth::guard('admin')->user();
+        if($request->ajax()){
+            $sections = view('admin.misters',['teams' => $admin->club->teams])->renderSections();
+            return response()->json(['html'=>$sections['content'],'title'=>'tecnicos']);
+        }
+        return view('admin.misters',['teams' => $admin->club->teams]);
     }
 
     //Instalaciones

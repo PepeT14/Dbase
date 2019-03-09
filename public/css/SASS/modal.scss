@@ -1,0 +1,43 @@
+@import 'variables';
+
+/*------- MODAL ----*/
+.modal-title{
+  color:$primary-color;
+  text-align:center;
+  width:100%;
+  font-size:1.5em;
+}
+
+.cuadro-action{
+  width:100%;
+  border:1.5px solid $dark-primary-color;
+  display:flex;
+  border-radius:5px;
+  margin-bottom:10px;
+  justify-content: space-between;
+  align-items: baseline;
+  input{
+    color:$light-primary-color;
+    font-size:1em;
+    font-weight:bold;
+    text-align:center;
+    border:none;
+    &:focus{box-shadow:none; text-align:left;}
+  }
+  i{
+    font-size:1.2em;
+    color:$primary-color;
+    cursor:pointer;
+    margin-right:10px;
+  }
+}
+
+.modal-footer{
+}
+.add-more-action{
+  width:100%;
+  text-align:center;
+  font-size:1.7em;
+  color:$primary-color;
+  i{cursor:pointer;}
+}

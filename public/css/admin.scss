@@ -1,5 +1,5 @@
-@import 'admin/admin_header';
 @import 'SASS/variables';
+@import 'SASS/calendar';
 
 /*--- FONDO ---*/
 #admin_content{
@@ -8,23 +8,12 @@
   opacity:0.7;
 }
 
-.main_content{
-  padding-top:80px;
-}
-/*---  PANELES ---*/
-.main_panel{
-  background-color:#e9ebe6e6;
-  box-shadow: 1px 11px 33px -9px rgba(0,0,0,0.75);
-  height:100%;
-}
-
-
 /*--- HOME ---*/
-.home_content{
+.admin_home{
   height:calc(100vh - 80px);
   padding:80px 0;
-  font-family:'Lato',sans-serif;
 }
+
 .resultados_content{
   margin:20px 0;
   color:black;
@@ -51,37 +40,39 @@
 }
 
 .calendar_content{
-  //height:calc(100% - 40px);
   margin-top:20px;
   margin-bottom:20px;
 }
 
-/*--- FullCalendar ---*/
-#calendar{
-  height:100%;
-  .fc-toolbar{
-    .fc-center{
-      color:black;
-      text-transform:uppercase;
+/*--- EQUIPO TECNICO ---*/
+.panel_header{
+  .panel_title{
+    margin:20px 0;
+    text-transform: uppercase;
+    font-size:2em;
+  }
+  .panel_description{
+    font-family:$fuente_texto;
+    text-align:center;
+    a{
+      cursor:pointer;
+      text-decoration: underline;
     }
   }
-  .fc-day-number{
-    float:left;
+}
+/*
+* Cambio de secciones
+*/
+.admin_panel{
+  transition:max-width 1s,padding;
+  transition-delay: 0.1s;
+  max-width:0;
+  padding:0;
+  &.animate{
+    max-width:100%;
+    padding:0 15px;
   }
-  .fc-body{
-    box-shadow: 2px 13px 34px 0px rgba(0,0,0,0.75);
-  }
-  .fc-day-header{
-    text-transform:uppercase;
-    color:black;
-  }
-  .fc-day{
-    background-color:white;
-    &.fc-today{
-      background-color:#f1edd6;
-    }
-    &.fc-sat,&.fc-sun{
-      background-color:#f1f1f1;
-    }
+  div.animated{
+    opacity:0;
   }
 }

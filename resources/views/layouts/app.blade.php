@@ -14,13 +14,20 @@
 <div class="loader"><img class="icono-loader" src="{{asset('imagenes/carga.png')}}"></div>
 @auth('admin')
    <div class="container-fluid" id="admin_content">
-       <div class="row" id="admin_header">
-           @include('includes.adminHeader')
+       @include('admin.menu')
+       <div class="row header" id="admin_header">
+           @include('admin.adminHeader')
        </div>
-       <div class="main_content">
+       <div class="main_content" id="admin_main_content">
            @yield('content')
        </div>
    </div>
+@endauth
+@auth('mister')
+    <div class="content">
+        @include('admin.menu')
+        @yield('content')
+    </div>
 @endauth
 @guest
     @yield('content')

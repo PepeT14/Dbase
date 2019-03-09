@@ -38,24 +38,3 @@ function getOptions(){
 }
 getOptions();
 
-/*--- FullCalendar ---*/
-$('#calendar').fullCalendar({
-    height:'parent',
-    fixedWeekCount:false,
-    selectable:true,
-    selectHelper:true,
-    selectAllow:function(selectInfo){
-      console.log(selectInfo);
-    },
-    header:{
-      left:'month,basicWeek,agendaDay',
-      center:'title',
-      right:'prev,today,next',
-    },
-    views:{
-        month:{
-            titleFormat:'MMMM YYYY',
-            columnFormat:'dddd'
-        }
-    }
- });

@@ -22,4 +22,3 @@
 
 {{--Scripts propios--}}
 <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/validaciones.js')}}" type="text/javascript"></script>

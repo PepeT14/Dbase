@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="home_content row justify-content-center align-items-center">
-        <div class="main_panel col-10 row" id="admin_panel">
-            <div class="col-lg-3 d-none d-lg-block resultados_content">
+    <div class="admin_home row justify-content-center align-items-center">
+        <div class="main_panel col-10 row admin_panel" id="home">
+            <div class="col-lg-3 d-none d-lg-block resultados_content animated faster">
                 <div class="resultado_title row justify-content-center">
                     <span>RESULTADOS</span>
                 </div>
@@ -15,12 +15,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 calendar_content">
+            <div class="col-lg-9 col-md-12 calendar_content animated faster">
                 <div id="calendar"></div>
             </div>
         </div>
     </div>
 @endsection
-@section('scripts')
-    <script src="{{asset('js/calendario.js')}}" type="text/javascript"></script>
-@endsection
+

@@ -63,8 +63,10 @@ Route::group(['middleware' => ['auth:superAdmin']],function(){
 
 
 //Admin
-Route::group(['middleware' => ['auth:admin']],function(){
-   Route::get('/admin/home','adminController@home')->name('admin.home');
+Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
+
+    Route::get('','adminController@index')->name('admin');
+    Route::get('/home','adminController@home')->name('admin.home');
 
 
     //Material
@@ -79,6 +81,7 @@ Route::group(['middleware' => ['auth:admin']],function(){
 
     //Entrenadores
     Route::get('admin/invitar/{team}','adminController@misterInvite')->name('mister.invite');
+    Route::get('/tecnicos','adminController@showMisters')->name('admin.misters');
 
     //Ligas no federativas
     Route::get('admin/ligasNof','adminController@leaguesNof')->name('admin.leaguesNof');

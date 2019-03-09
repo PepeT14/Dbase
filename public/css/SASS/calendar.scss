@@ -1,15 +1,29 @@
+/*--- FullCalendar ---*/
 #calendar{
-  &.fc{
-    thead{
-      td,th{border:none;}
+  height:100%;
+  .fc-toolbar{
+    .fc-center{
+      color:black;
+      text-transform:uppercase;
     }
-    td{
-      &:first-child{
-        border-left:none;
-      }
-      &:last-child{
-        border-right:none;
-      }
+  }
+  .fc-day-number{
+    float:left;
+  }
+  .fc-body{
+    box-shadow: 2px 13px 34px 0 rgba(0,0,0,0.75);
+  }
+  .fc-day-header{
+    text-transform:uppercase;
+    color:black;
+  }
+  .fc-day{
+    background-color:white;
+    &.fc-today{
+      background-color:#f1edd6;
+    }
+    &.fc-sat,&.fc-sun{
+      background-color:#f1f1f1;
     }
   }
 }
