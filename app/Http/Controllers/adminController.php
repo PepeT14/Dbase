@@ -103,7 +103,7 @@ class adminController extends Controller
             $sections = view('admin.misters',['teams' => $admin->club->teams])->renderSections();
             return response()->json(['html'=>$sections['content'],'title'=>'tecnicos']);
         }
-        return view('admin.misters',['teams' => $admin->club->teams]);
+        return view('admin.misters',['admin' => $admin]);
     }
 
     //Instalaciones

@@ -16,25 +16,19 @@
         </div>
         <div class="row panel_body animated faster align-items-center">
             <div class="row w-100 h-100 justify-content-center" id="tecnicos_content">
-                @for($n=0;$n<10;$n++)
-                    <div class="mister_info">
-                        <div class="mister_image"></div>
-                    </div>
-                @endfor
-            </div>
-            @foreach($teams as $team)
-                @if($team->mister)
+                @foreach($admin->club->misters as $mister)
                     <div class="mister_info">
                         <div class="mister_image">
-                            <img src="{{$team->mister->file}}">
+                            <img src="{{$mister->file}}">
                         </div>
                         <div class="mister_desc">
-                            <div class="mister_name">{{$team->mister->name}}</div>
-                            <div class="mister_team">{{$team->name}}</div>
+                            <div class="mister_name">{{$mister->name}}</div>
+                            <div class="mister_team">{{$mister->rol}}</div>
                         </div>
                     </div>
-                @endif
-            @endforeach
+                @endforeach
+            </div>
+
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="new-player">
+                <form id="new_mister" data-action="form" data-href="">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="mister-name">Nombre</label>
@@ -19,9 +19,20 @@
                             <input class="form-control" id="mister-apellidos" name="mister-apellidos" type="text">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="mister-rol">Cargo</label>
-                        <input class="form-control" id="mister-rol" name="mister-rol" type="text">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="mister-rol">Cargo</label>
+                            <select class="form-control" id="mister-rol" name="mister-rol" type="text">
+                                <option value="entrenador">Entrenador</option>
+                                <option value="segundo_entrenador">Segundo Entrenador</option>
+                                <option value="delegado">Delegado</option>
+                                <option value="secretario">Secretario</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="mister-email">Email</label>
+                            <input class="form-control" id="mister-email" name="mister-email" type="email">
+                        </div>
                     </div>
                     <div class="form-row button-row">
                         <div class="col-md-6 col-sm-12">

@@ -21,11 +21,14 @@ class CreateMistersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('file')->nullable();
-            $table->integer('team_id')->unsigned();
+            $table->enum('rol',['entrenador','segundo_entrenador','delegado','secretario'])->nullable();
+            $table->integer('team_id')->nullable()->unsigned();
+            $table->integer('club_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('club_id')->references('id')->on('clubs');
 
         });
     }

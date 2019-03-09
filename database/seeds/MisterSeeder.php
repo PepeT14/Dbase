@@ -17,7 +17,7 @@ class MisterSeeder extends Seeder
             'email' => str_random(10).'@gmail.com',
             'username' => 'mister',
             'password' => bcrypt('prueba'),
-            'team_id' => '1',
+            'club_id' => '1'
         ]);
     }
 }

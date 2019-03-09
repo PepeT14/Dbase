@@ -35,15 +35,22 @@ class Club extends Model
         return $this->hasMany('App\Models\ClubMaterial','club_id');
     }
 
-    //Instalaciones
+
+        //Instalaciones (One to Many)
     public function instalaciones(){
         return $this->hasMany('App\Models\Instalacion','club_id');
     }
 
-    //Leagues no federativas (One to Many)
+        //Leagues no federativas (One to Many)
     public function leaguesNof(){
         return $this->hasMany('App\Models\League_Nof','club_id');
     }
+
+        //Cuerpo Tecnico (One to Many)
+    public function misters(){
+        return $this->hasMany('App\Models\Mister','club_id');
+    }
+
     public function adminStatus(){
         if($this->Admin){
             return "Registrado";

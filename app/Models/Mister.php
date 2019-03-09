@@ -38,4 +38,9 @@ class Mister extends misterUser
     public function notes(){
         return $this->hasMany('App\Models\Note','mister_id');
     }
+
+        //Club (Many to One)
+    public function club(){
+        return $this->belongsTo('App\Models\Club','club_id');
+    }
 }
