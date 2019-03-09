@@ -3,17 +3,25 @@
 <div class="admin_home row justify-content-center align-items-center">
     <div class="main_panel col-10 admin_panel" id="tecnicos">
         <div class="col-12 panel_header animated faster">
+            <div class="fa fa-user-plus" id="add_tecnico_button" data-toggle="tooltip" data-placement="left" title="Añadir un técnico a la plantilla." data-action="modal" data-modalTarget="#add_tecnico_form"></div>
             <div class="panel_title row justify-content-center">
                 Equipo Técnico
             </div>
             <div class="panel_description row justify-content-center">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-lg-6 col-sm-12">
                     Aquí se muestra la información relativa al equipo técnico del club para gestionar los equipos
-                    y asignar estos equipos a los técnicos dirigáse a la sección <a id="link_equipos">Equipos</a>
+                    y asignar estos equipos a los técnicos dirigáse a la sección <a data-action="link" data-target="#teams_link">Equipos</a>
                 </div>
             </div>
         </div>
-        <div class="row panel_body animated faster">
+        <div class="row panel_body animated faster align-items-center">
+            <div class="row w-100 h-100 justify-content-center" id="tecnicos_content">
+                @for($n=0;$n<10;$n++)
+                    <div class="mister_info">
+                        <div class="mister_image"></div>
+                    </div>
+                @endfor
+            </div>
             @foreach($teams as $team)
                 @if($team->mister)
                     <div class="mister_info">
@@ -27,10 +35,8 @@
                     </div>
                 @endif
             @endforeach
-            <div class="mister_info">
-                <div class="mister_image"></div>
-            </div>
         </div>
     </div>
 </div>
+@include('admin.modals.addMister')
 @endsection

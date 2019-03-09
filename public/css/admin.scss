@@ -2,10 +2,12 @@
 @import 'SASS/calendar';
 
 /*--- FONDO ---*/
-#admin_content{
+.background_image{
   background-image:url('../imagenes/fondos/cesped.jpg');
-  min-height:100%;
   opacity:0.7;
+  position:fixed;
+  top:0;
+  left:0;
 }
 
 /*--- HOME ---*/
@@ -46,6 +48,7 @@
 
 /*--- EQUIPO TECNICO ---*/
 .panel_header{
+  max-height:calc(30% - 40px);
   .panel_title{
     margin:20px 0;
     text-transform: uppercase;
@@ -60,6 +63,33 @@
     }
   }
 }
+.panel_body{
+  margin-top:25px;
+  height:calc(70% - 25px);
+}
+#tecnicos_content{
+  overflow-y:auto;
+  margin:0 20px;
+  .mister_info{
+    margin:10px;
+    min-width:200px;
+    height:250px;
+    border:solid 1px black;
+  }
+}
+#add_tecnico_button{
+  border:solid 1px black;
+  color:black;
+  padding:5px;
+  float:right;
+  font-size:2em;
+  border-radius:5px;
+  cursor:pointer;
+  &:hover{
+    background-color:black;
+    color:white;
+  }
+}
 /*
 * Cambio de secciones
 */
@@ -69,7 +99,7 @@
   max-width:0;
   padding:0;
   &.animate{
-    max-width:100%;
+    max-width:83.3%;
     padding:0 15px;
   }
   div.animated{

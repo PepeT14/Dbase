@@ -32,9 +32,10 @@ $(document).ready(function(){
             objActive = obj;
         }
     });
-       //Una vez tenemos la clase añadida, guardamos la referencia en sectionActive, para mostrarla con el método showIn.
+       //Una vez tenemos la clase añadida, guardamos la referencia en sectionActive, para mostrarla con el método showIn. y linkeamos los botones con el métoodo links.
     let sectionActive = '#'+$(objActive).data('seccion');
     showIn(sectionActive);
+    links();
         //Guardamos una copia en el historial para mostrarlo posteriormente
     window.history.replaceState({html:document.getElementById('admin_main_content').innerHTML},'','');
 
@@ -78,13 +79,14 @@ $(document).ready(function(){
             }).done(function(){
                 setTimeout(function(){
                     showIn(sectionActive);
+                    links();
                 },10);
             });
         });
     });
 
     function showOut(){
-        $(sectionActive + ' div').addClass('fadeOut');
+        $(sectionActive + ' div.animated').addClass('fadeOut');
         $(sectionActive).removeClass('animate');
     }
 
@@ -98,8 +100,8 @@ $(document).ready(function(){
                 fin();
             },800)
         }).then(function(){
-           $(seccion + ' div').removeClass('fadeOut');
-           $(seccion + ' div').addClass('fadeIn');
+           $(seccion + ' div.animated').removeClass('fadeOut');
+           $(seccion + ' div.animated').addClass('fadeIn');
         });
     }
 
@@ -119,11 +121,6 @@ $(document).ready(function(){
         document.getElementById('admin_main_content').innerHTML = event.state.html;
         console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
     };
-
-
-    $('#link_equipos').on('click',function(){
-        $('#adminTeams_link').click();
-    });
 
 
     /*--- FullCalendar ---*/
@@ -147,6 +144,20 @@ $(document).ready(function(){
                     columnFormat:'dddd'
                 }
             }
+        });
+    }
+
+    $('#link_equipos').on('click',function(){
+        $('#adminTeams_link').click();
+    });
+    //tooltips and modals
+    function links(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-action="modal"]').on('click',function(){
+           $($(this).data('modaltarget')).modal('show');
+        });
+        $('[data-action="link"]').on('click',function(){
+           $($(this).data('target')).click();
         });
     }
 });

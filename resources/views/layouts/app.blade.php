@@ -18,6 +18,7 @@
        <div class="row header" id="admin_header">
            @include('admin.adminHeader')
        </div>
+       <div class="background_image w-100 h-100"></div>
        <div class="main_content" id="admin_main_content">
            @yield('content')
        </div>
@@ -38,7 +39,7 @@
     <script src="{{asset('js/mister/mister-main.js')}}" type="text/javascript"></script>
 @endif
 @if(Auth::guard('admin')->check())
-    <script src="{{asset('js/admin/admin.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/admin/admin.js')}}" type="text/javascript" id="admin_js"></script>
 @endif
 @yield('scripts')
 </body>
