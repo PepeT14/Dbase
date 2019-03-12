@@ -17,18 +17,20 @@
         <div class="row panel_body animated faster align-items-center">
             <div class="row w-100 h-100 justify-content-center" id="tecnicos_content">
                 @foreach($admin->club->misters as $mister)
-                    <div class="mister_info">
-                        <div class="mister_image">
-                            <img src="{{$mister->file}}">
-                        </div>
-                        <div class="mister_desc">
-                            <div class="mister_name">{{$mister->name}}</div>
-                            <div class="mister_team">{{$mister->rol}}</div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="mister_info">
+                            <div class="mister_image">
+                                <img src="{{asset($mister->file)}}">
+                            </div>
+                            <div class="mister_desc">
+                                <div class="mister_name">{{$mister->name}}</div>
+                                <div class="info-divider"></div>
+                                <div class="mister_team">{{$mister->team}} - {{$mister->rol}}</div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
         </div>
     </div>
 </div>

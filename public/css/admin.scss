@@ -1,6 +1,7 @@
 @import 'SASS/variables';
 @import 'SASS/calendar';
 
+
 /*--- FONDO ---*/
 .background_image{
   background-image:url('../imagenes/fondos/cesped.jpg');
@@ -12,10 +13,11 @@
 
 /*--- HOME ---*/
 .admin_home{
-  height:calc(100vh - 80px);
   padding:80px 0;
 }
-
+#home_calendar{
+  height:calc(100vh - 80px);
+}
 .resultados_content{
   margin:20px 0;
   color:black;
@@ -50,9 +52,12 @@
 .panel_header{
   max-height:calc(30% - 40px);
   .panel_title{
-    margin:20px 0;
     text-transform: uppercase;
     font-size:2em;
+    clear:both;
+    .cs-select{
+      margin-right:10px;
+    }
   }
   .panel_description{
     font-family:$fuente_texto;
@@ -68,13 +73,39 @@
   height:calc(70% - 25px);
 }
 #tecnicos_content{
-  overflow-y:auto;
   margin:0 20px;
-  .mister_info{
-    margin:10px;
-    min-width:200px;
+}
+.mister_info{
+  margin:15px 0;
+  @media #{$media} and #{$pantallaSmall}{
     height:250px;
-    border:solid 1px black;
+  }
+  @media #{$media} and #{$pantallaMedia}{
+    height:300px;
+  }
+  height:350px;
+  background-color:white;
+  transition:transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor:pointer;
+  border-radius:4px;
+  &:hover{
+    transform:scale(1.006, 1.006);
+    box-shadow:0 8px 17px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.1);
+  }
+  .mister_image{
+    text-align:center;
+    height:65%;
+    img{
+      width:100%;
+      height:100%;
+      border-radius:4px 4px 0 0;
+    }
+  }
+  .mister_desc{
+    text-align:center;
+    .mister_name{
+      margin:15px 0;
+    }
   }
 }
 #add_tecnico_button{
@@ -90,6 +121,39 @@
     color:white;
   }
 }
+
+/*--- EQUIPO ---*/
+.team_header_tab{
+  @media #{$media} and #{$pantallaSmall}{
+    font-size:12px;
+    margin:10px 5px;
+    padding:0;
+  }
+  text-transform: uppercase;
+  padding:10px;
+  margin:10px;
+  cursor:pointer;
+  &.active{
+    &:after{
+      width:100%;
+    }
+  }
+  &:hover:after{
+    width:100%;
+  }
+  &:after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+  }
+}
+.team_detail_content{
+  opacity:0;
+  display:none;
+}
 /*
 * Cambio de secciones
 */
@@ -100,7 +164,10 @@
   padding:0;
   &.animate{
     max-width:83.3%;
-    padding:0 15px;
+    @media #{$media} and #{$pantallaSmall}{
+      max-width:100%;
+    }
+    padding:20px 15px;
   }
   div.animated{
     opacity:0;

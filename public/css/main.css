@@ -14,6 +14,11 @@ html, body {
   width: 100%;
   z-index: 9997;
 }
+@media only screen and (max-width:758px) {
+  .header {
+    height: 50px;
+  }
+}
 .header .header_section {
   height: 100%;
   display: inline-flex;
@@ -46,6 +51,9 @@ html, body {
   .header .header_section .header_link.item {
     font-size: 0.9em;
   }
+}
+.header .header_section .header_link.item:hover {
+  transform: scale(1.02);
 }
 .header .header_section .header_link.item.active {
   margin-top: 12px;
@@ -303,6 +311,11 @@ html, body {
   margin: 25px;
 }
 
+.info-divider {
+  border-bottom: 1.5px solid #BDBDBD;
+  margin: 10px 40px;
+}
+
 .icono-accion {
   cursor: pointer;
 }
@@ -330,6 +343,10 @@ html, body {
   .group-around .btn {
     margin-bottom: 5px;
   }
+}
+
+div.cs-select.cs-skin-underline {
+  font-size: 1em;
 }
 
 .panel-dbase {

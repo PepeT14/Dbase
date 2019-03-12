@@ -43,7 +43,7 @@ class Team extends Model
         return $this->hasMany('App\Models\Training','team_id');
     }
         //Mister (One to Many)
-    public function mister(){
+    public function misters(){
         return $this->hasMany('App\Models\Mister','team_id');
     }
         //Team_Stats (One to Many)

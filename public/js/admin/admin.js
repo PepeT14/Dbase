@@ -1,10 +1,10 @@
 $('#formAddTeam').on('click',function(){
-   $('#formAddTeam').hide();
-   $('.add-team').show();
+    $('#formAddTeam').hide();
+    $('.add-team').show();
 });
 
 $('#showLeagueForm').click(function(){
-   $('#addLeagueForm').toggle();
+    $('#addLeagueForm').toggle();
 });
 
 $('#showInstForm').click(function(){
@@ -14,29 +14,33 @@ $(document).ready(function(){
     /*
     ** --- Lo primero que vamos a hacer es cargar el contenido de la seccion que corresponda --- **
      */
-        //Obtenemos la url actual separada por / para saber cual es el final, y que estamos cargando. Esto va ser la primera vez o cuando se recargue.
+    //Obtenemos la url actual separada por / para saber cual es el final, y que estamos cargando. Esto va ser la primera vez o cuando se recargue.
     let urlAct = window.location.href.split('/');
     let urlSection = null;
     let objActive = null;
-        //Comprobamos el caso de home y la url de admin sola para cargar el calendario, en cualquier otro caso obtenemos el último valor de la url.
+    //Comprobamos el caso de home y la url de admin sola para cargar el calendario, en cualquier otro caso obtenemos el último valor de la url.
     if(urlAct[urlAct.length-1]==='home' || urlAct.length<4){
         initCalendar();
         urlSection = 'home';
     }else{
         urlSection = urlAct[urlAct.length-1];
     }
-        // Tenemos en urlSection el valor de la seccion que vamos a mostar, buscamos su link en la cabecera y lo activamos.
+    // Tenemos en urlSection el valor de la seccion que vamos a mostar, buscamos su link en la cabecera y lo activamos.
     $('.header_link').each(function(n,obj){
         if($(obj).data('seccion')===urlSection){
             $(obj).addClass('active');
             objActive = obj;
         }
     });
-       //Una vez tenemos la clase añadida, guardamos la referencia en sectionActive, para mostrarla con el método showIn. y linkeamos los botones con el métoodo links.
+    //Una vez tenemos la clase añadida, guardamos la referencia en sectionActive, para mostrarla con el método showIn. y linkeamos los botones con el métoodo links.
     let sectionActive = '#'+$(objActive).data('seccion');
     showIn(sectionActive);
     links();
-        //Guardamos una copia en el historial para mostrarlo posteriormente
+    //Activamos el js de equipos si estamos ahi
+    if(urlSection ==='teams'){
+        jsTeams();
+    }
+    //Guardamos una copia en el historial para mostrarlo posteriormente
     window.history.replaceState({html:document.getElementById('admin_main_content').innerHTML},'','');
 
     /*
@@ -52,7 +56,7 @@ $(document).ready(function(){
         //Promise para controlar que primero se oculte y luego se cambie el contenido
         new Promise(function(ok){
             /* Ocultamos la seccion que se ve */
-            showOut();
+            showOut(sectionActive);
             //Activamos la nueva seccion
             sectionActive = '#'+sectionObj;
             $('.header_link.active').removeClass('active');
@@ -74,20 +78,23 @@ $(document).ready(function(){
                     processAjaxData(ajaxObj);
                 },
                 error:function(response){
-                    $('body').html(response);
+                    $('body').html(response.responseText);
                 }
             }).done(function(){
                 setTimeout(function(){
                     showIn(sectionActive);
                     links();
+                    if(sectionObj==='teams'){
+                        jsTeams();
+                    }
                 },10);
             });
         });
     });
 
-    function showOut(){
-        $(sectionActive + ' div.animated').addClass('fadeOut');
-        $(sectionActive).removeClass('animate');
+    function showOut(seccion){
+        $(seccion + ' div.animated').addClass('fadeOut');
+        $(seccion).removeClass('animate');
     }
 
     function showIn(seccion){
@@ -100,8 +107,8 @@ $(document).ready(function(){
                 fin();
             },800)
         }).then(function(){
-           $(seccion + ' div.animated').removeClass('fadeOut');
-           $(seccion + ' div.animated').addClass('fadeIn');
+            $(seccion + ' div.animated').removeClass('fadeOut');
+            $(seccion + ' div.animated').addClass('fadeIn');
         });
     }
 
@@ -141,7 +148,7 @@ $(document).ready(function(){
             views:{
                 month:{
                     titleFormat:'MMMM YYYY',
-                    columnFormat:'dddd'
+                    columnFormat:'ddd'
                 }
             }
         });
@@ -154,10 +161,57 @@ $(document).ready(function(){
     function links(){
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-action="modal"]').on('click',function(){
-           $($(this).data('modaltarget')).modal('show');
+            $($(this).data('modaltarget')).modal('show');
         });
         $('[data-action="link"]').on('click',function(){
-           $($(this).data('target')).click();
+            $($(this).data('target')).click();
         });
+        document.querySelectorAll('select.cs-select').forEach(function(el){
+           new SelectFx(el);
+        });
+    }
+
+    /*JavaScript para la seccion de los equipos.*/
+    function jsTeams(){
+        let teamSelector = $('#team_select');
+        showTeam(teamSelector.val());
+        teamSelector.on('change',function(){
+            showTeam($(this).val());
+        });
+
+        /* Funcion para mostrar el equipo seleccionado */
+        function showTeam(id){
+            $.ajax({
+                type:'POST',
+                url:$('meta[name="app-url"]').attr('content') + 'admin/teams/ajaxUpdate',
+                data:{team:id},
+                success:function(response){
+                    $('#team_detail_content').html(response.html);
+                    $('#team_detail_content div.animated').addClass('fadeIn');
+                    console.log(response);
+                },
+                error:function(err){
+                    $('body').html(err.responseText);
+                }
+            }).done(function(){
+                let sectionActive = $('.team_header_tab.active').data('seccion');
+                $(sectionActive).show();
+                linkHeader();
+            });
+        }
+        function linkHeader(){
+            $('.team_header_tab').on('click',function(){
+                //Obtenemos lo que está mostrandose actualmente
+                let actualSeleccionado = $('.team_header_tab.active');
+                let actualSeccion = actualSeleccionado.data('seccion');
+                //Quitamos el link de la cabecera y ocultamos la seccion
+                actualSeleccionado.removeClass('active');
+                $(actualSeccion).hide();
+                //Obtengo la nueva seccion a mostrar
+                let nuevaSeccion = $(this).data('seccion');
+                $(nuevaSeccion).show();
+                $(this).addClass('active');
+            });
+        }
     }
 });

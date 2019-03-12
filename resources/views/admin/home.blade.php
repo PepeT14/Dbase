@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="admin_home row justify-content-center align-items-center">
+    <div class="admin_home row justify-content-center align-items-center" id="home_calendar">
         <div class="main_panel col-10 row admin_panel" id="home">
             <div class="col-lg-3 d-none d-lg-block resultados_content animated faster">
                 <div class="resultado_title row justify-content-center">

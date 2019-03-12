@@ -17,6 +17,7 @@ class MisterSeeder extends Seeder
             'email' => str_random(10).'@gmail.com',
             'username' => 'mister',
             'password' => bcrypt('prueba'),
+            'file' => 'imagenes/playersAvatar/pep_guardiola.jpg',
             'club_id' => '1'
         ]);
     }

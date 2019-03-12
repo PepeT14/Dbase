@@ -15,7 +15,7 @@
                             <input class="form-control" id="mister-name" name="mister-name" type="text">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="mister-apellidos">Appellidos</label>
+                            <label for="mister-apellidos">Apellidos</label>
                             <input class="form-control" id="mister-apellidos" name="mister-apellidos" type="text">
                         </div>
                     </div>

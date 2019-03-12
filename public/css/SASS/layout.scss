@@ -9,6 +9,9 @@ html,body{
 }
 /*--- CABECERA ---*/
 .header{
+  @media #{$media} and #{$pantallaSmall}{
+    height:50px;
+  }
   position:fixed;
   top:0;
   height:80px;
@@ -43,6 +46,9 @@ html,body{
         text-align:center;
         @media(max-width:768px){
           font-size:0.9em;
+        }
+        &:hover{
+          transform: scale(1.02);
         }
         &.active{
           margin-top:12px;

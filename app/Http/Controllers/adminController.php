@@ -18,11 +18,7 @@ class adminController extends Controller
     //INDEX
     public function index(Request $request){
         $admin = Auth::guard('admin')->user();
-        if($request->ajax()){
-            return 'AJAX';
-        }else{
-            return view('admin.home');
-        }
+        return view('admin.home');
     }
     //HOME
     public function home(Request $request){
@@ -31,16 +27,20 @@ class adminController extends Controller
             $sections = view('admin.home')->renderSections();
             return response()->json(['html'=>$sections['content'],'title'=>'home']);
         }else{
-            return view('admin.home',['ajax'=>false]);
+            return view('admin.home');
         }
     }
 
     //Material
-    public function material(){
+    public function material(Request $request){
         $admin = Auth::guard('admin')->user();
         $materialAgrupado = ClubMaterial::all()->where('club_id','=',$admin->club->id)->groupBy('type');
-
-        return view('admin.material')->with(compact(['materialAgrupado']));
+        $view = view('admin.material')->with(compact(['materialAgrupado']));
+        $sections = $view->renderSections();
+        if($request->ajax()){
+            return response()->json(['html'=>$sections['content'],'title'=>'material']);
+        }
+        return $view;
     }
 
     public function createMaterial(Request $request){
@@ -69,13 +69,25 @@ class adminController extends Controller
     }
 
     //Equipos
-    public function teams(){
+    public function teams(Request $request){
         $admin = Auth::guard('admin')->user();
-        $teams = Team::where('club_id','=',$admin->club->id)->get();
+        $teams = $admin->club->teams;
         $leagues = League::all();
-        return view('admin.teams')->with(compact(['teams','leagues']));
+        $view = view('admin.teams')->with(compact(['admin','leagues','teams']));
+        $sections = $view->renderSections();
+        if($request->ajax()){
+            return response()->json(['html'=>$sections['content'],'title'=>'equipos']);
+        }
+        return $view;
     }
-
+    public function teamsDataUpdate(Request $request){
+        $admin = Auth::guard('admin')->user();
+        $team = $admin->club->teams->where('id',$request->team)->first();
+        if($request->ajax()){
+           return response()->json(['html'=>view('admin.includes.teamDetail',['team'=>$team])->render()]);
+        };
+        return $team;
+    }
     //Ligas No Federativas
     public function leaguesNof(){
         $admin = Auth::guard('admin')->user();
@@ -100,7 +112,7 @@ class adminController extends Controller
     public function showMisters(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()){
-            $sections = view('admin.misters',['teams' => $admin->club->teams])->renderSections();
+            $sections = view('admin.misters',['admin' => $admin])->renderSections();
             return response()->json(['html'=>$sections['content'],'title'=>'tecnicos']);
         }
         return view('admin.misters',['admin' => $admin]);

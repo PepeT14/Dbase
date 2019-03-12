@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-elastic.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-rotate.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-underline.css')}}" type="text/css">
+<link rel="stylesheet" href="{{asset('css/cs-select/cs-skin-overlay.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/fullcalendar/fullcalendar.css')}}" type="text/css">
 <link rel="stylesheet" href="{{asset('css/animate.css')}}" type="text/css">
 {{--Css propios--}}

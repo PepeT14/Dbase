@@ -18,7 +18,7 @@
        <div class="row header" id="admin_header">
            @include('admin.adminHeader')
        </div>
-       <div class="background_image w-100 h-100"></div>
+       <div class="background_image w-100 h-100 d-none d-md-block"></div>
        <div class="main_content" id="admin_main_content">
            @yield('content')
        </div>
