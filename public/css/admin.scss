@@ -12,12 +12,6 @@
 }
 
 /*--- HOME ---*/
-.admin_home{
-  padding:80px 0;
-}
-#home_calendar{
-  height:calc(100vh - 80px);
-}
 .resultados_content{
   margin:20px 0;
   color:black;
@@ -50,14 +44,10 @@
 
 /*--- EQUIPO TECNICO ---*/
 .panel_header{
-  max-height:calc(30% - 40px);
   .panel_title{
     text-transform: uppercase;
     font-size:2em;
     clear:both;
-    .cs-select{
-      margin-right:10px;
-    }
   }
   .panel_description{
     font-family:$fuente_texto;
@@ -154,6 +144,122 @@
   opacity:0;
   display:none;
 }
+
+.panel_select_overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:9999;
+  background-color:rgba(255,255,255,0.96);
+  opacity:0;
+  visibility: hidden;
+  transform:perspective(100vw) translate3d(0,0,-200px);
+  transition:opacity 0.4s,transform 0.4s;
+  &.animate{
+    opacity:0.9;
+    visibility: visible;
+    transform:perspective(100vw) translate3d(0,0,0);
+  }
+  .selector_options{
+    font-size:1.3em;
+    font-weight:bold;
+    ul{
+      list-style-type: none;
+      padding:0;
+    }
+    .option{
+      cursor:pointer;
+      color:#95948f;
+      &.selected{
+        color:darkorange;
+      }
+    }
+  }
+  .selector_title{
+    color:#bbb9b4;
+    text-transform:uppercase;
+    font-size:0.9em;
+  }
+  .first-row{
+    text-align:right;
+  }
+}
+#select_team_icon{
+  border-radius: 50%;
+  //box-shadow: 0 0 2px black;
+  border: solid 0.08em;
+  padding: 7px;
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  cursor:pointer;
+  &:hover{
+    transform:scale(1.08, 1.08);
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.38);
+    //color:white;
+    //background-color:black;
+  }
+}
+
+/*--- MATERIAL ---*/
+.material-card{
+  width:350px;
+  cursor:pointer;
+  margin-bottom:10px;
+  height:170px;
+  transition:transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  &:hover{
+    transform:scale(1.006, 1.006);
+    box-shadow:0 8px 17px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.1);
+    &:before{
+      opacity:.04;
+    }
+    .card-img.fondo .material-icons:before{
+      opacity:.04;
+      transform:scale(1.7);
+    }
+  }
+  &:before, &:after{
+    content:'';
+    transition:opacity 0.6s linear;
+    background-color:#000;
+    opacity:0;
+    position:absolute;
+    height:100%;
+    width:100%;
+  }
+  .card-img.fondo{
+    position:absolute;
+    width:65px;
+    height:65px;
+    left:calc(50% - 32px);
+    top:calc(50% - 32px);
+    .material-icons{
+      padding:8px;
+      cursor:pointer;
+      font-size:50px;
+      &:before, &:after{
+        content:'';
+        border-radius: 50%;
+        position: absolute;
+        background-color: #000;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity:0;
+        transition:transform .7s cubic-bezier(.4,0,.2,1), opacity 75ms linear;
+        transform-origin: center center;
+        transform:scale(0);
+      }
+      &.active:after{
+        opacity:.16;
+        transform: scale(1.7);
+      }
+    }
+  }
+}
 /*
 * Cambio de secciones
 */
@@ -163,10 +269,7 @@
   max-width:0;
   padding:0;
   &.animate{
-    max-width:83.3%;
-    @media #{$media} and #{$pantallaSmall}{
-      max-width:100%;
-    }
+    max-width:100%;
     padding:20px 15px;
   }
   div.animated{

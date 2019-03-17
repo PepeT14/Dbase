@@ -14,4 +14,9 @@ class Instalacion extends Model
     public function club(){
         return $this->belongsTo('App\Models\Club','club_id');
     }
+
+        //Reserva (one to Many)
+    public function reservas(){
+        return $this->hasMany('App\Models\Reserva','instalacion_id');
+    }
 }

@@ -89,8 +89,8 @@ Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
     Route::get('admin/ligasNof/create','leaguesNofController@create')->name('leagueNof.create');
 
     //Instalaciones
-    Route::get('admin/instalaciones','adminController@instalaciones')->name('admin.instalaciones');
-    Route::get('admin/instalaciones/create','instalacionesController@create')->name('instalacion.create');
+    Route::get('/instalaciones','adminController@instalaciones')->name('admin.instalaciones');
+    Route::post('/instalaciones','instalacionesController@create')->name('instalacion.create');
 });
 
 //Mister

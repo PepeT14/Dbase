@@ -21,4 +21,12 @@ class leaguesNofController extends Controller
 
         return redirect()->action('adminController@leaguesNof');
     }
+
+    //Ligas No Federativas
+    public function leaguesNof(){
+        $admin = Auth::guard('admin')->user();
+        $club = $admin->club;
+        $leaguesNof = League_Nof::all()->where('club_id','=',$club->id);
+        return view('admin.leaguesNof')->with(compact('leaguesNof'));
+    }
 }

@@ -61,6 +61,10 @@ class Team extends Model
         return $this->hasMany('App\Models\TeamMaterial','team_id');
     }
 
+        //Reservas (One to Many)
+    public function reservas(){
+        return $this->hasMany('App\Models\Reserva','team_id');
+    }
     //Ligas no federativas (Many to Many)
     public function leagues_nof(){
         return $this->belongsToMany('App\Models\League_nof','teams_leagues_nof','team_id','league_nof_id');

@@ -3,7 +3,7 @@ html, body {
   color: #212121;
   height: 100%;
   overflow: scroll;
-  background-color: #ebf5f4f2;
+  background-color: #fafafa;
 }
 
 /*--- CABECERA ---*/
@@ -79,13 +79,13 @@ html, body {
 
 /*--- CONTENIDO ---*/
 .main_content {
-  padding-top: 80px;
+  padding-top: 160px;
 }
 
 .main_panel {
   background-color: #e9ebe6e6;
   box-shadow: 1px 11px 33px -9px rgba(0, 0, 0, 0.75);
-  height: 100%;
+  min-height: calc(100vh - 240px);
 }
 
 /*--- MENU ---*/
@@ -288,15 +288,6 @@ html, body {
   width: 13em;
 }
 
-/*------ ANIMACIONES -----*/
-@keyframes rotar {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 /*------ CLASES GLOBALES ------*/
 .main-content {
   overflow: auto;
@@ -317,6 +308,10 @@ html, body {
 }
 
 .icono-accion {
+  cursor: pointer;
+}
+
+.icon {
   cursor: pointer;
 }
 
@@ -424,6 +419,39 @@ div.cs-select.cs-skin-underline {
 }
 .btn-save:hover {
   background-color: #00796B;
+}
+
+/*---- ANIMACIONES ---*/
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+}
+@keyframes radius-in {
+  from {
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes rotar {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

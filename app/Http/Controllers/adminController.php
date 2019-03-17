@@ -15,12 +15,14 @@ use App\Models\League_Nof;
 
 class adminController extends Controller
 {
-    //INDEX
+    /*---------------------------------------------
+    * ----------------- INICIO  -------------------
+    * ---------------------------------------------*/
     public function index(Request $request){
         $admin = Auth::guard('admin')->user();
         return view('admin.home');
     }
-    //HOME
+
     public function home(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()){
@@ -31,7 +33,9 @@ class adminController extends Controller
         }
     }
 
-    //Material
+    /*-----------------------------------------------
+    * ----------------- MATERIAL  -------------------
+    * -----------------------------------------------*/
     public function material(Request $request){
         $admin = Auth::guard('admin')->user();
         $materialAgrupado = ClubMaterial::all()->where('club_id','=',$admin->club->id)->groupBy('type');
@@ -43,32 +47,10 @@ class adminController extends Controller
         return $view;
     }
 
-    public function createMaterial(Request $request){
-        $admin = Auth::guard('admin')->user();
-        $material = New ClubMaterial();
-        $material->cantidad = $request->input('cantidad');
-        $material->stock = $request->input('cantidad');
-        $material->type= $request->input('type');
-        $material->subtype = $request->input('subtype');
-        $material->description = $request->input('description');
-        $material->club_id = $admin->club->id;
-        $material->save();
 
-        return redirect()->action('adminController@material');
-    }
-    public function deleteMaterial($id){
-        ClubMaterial::where('id',$id)->first()->delete();
-        return $this->material();
-    }
-    public function addMaterial($id){
-        $material=ClubMaterial::where('id',$id)->first();
-        $material->cantidad = $material->cantidad+1;
-        $material->stock = $material->stock+1;
-        $material->save();
-        return $this->material();
-    }
-
-    //Equipos
+    /*----------------------------------------------
+    * ----------------- EQUIPOS  -------------------
+    * ----------------------------------------------*/
     public function teams(Request $request){
         $admin = Auth::guard('admin')->user();
         $teams = $admin->club->teams;
@@ -88,15 +70,10 @@ class adminController extends Controller
         };
         return $team;
     }
-    //Ligas No Federativas
-    public function leaguesNof(){
-        $admin = Auth::guard('admin')->user();
-        $club = $admin->club;
-        $leaguesNof = League_Nof::all()->where('club_id','=',$club->id);
-        return view('admin.leaguesNof')->with(compact('leaguesNof'));
-    }
 
-    //TECNICOS
+    /*-----------------------------------------------
+    * ----------------- TÉCNICOS  -------------------
+    * -----------------------------------------------*/
     public function misterInvite(Request $request,$team){
         $admin = Auth::guard('admin')->user();
         Mail::to($request->input('email'))->send(new inviteMister($team));
@@ -109,6 +86,7 @@ class adminController extends Controller
         ]);
         return redirect()->action('adminController@teams');
     }
+
     public function showMisters(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()){
@@ -118,14 +96,24 @@ class adminController extends Controller
         return view('admin.misters',['admin' => $admin]);
     }
 
-    //Instalaciones
-    public function instalaciones(){
+    /*----------------------------------------------------
+    * ----------------- INSTALACIONES  -------------------
+    * ----------------------------------------------------*/
+    public function instalaciones(Request $request){
         $admin = Auth::guard('admin')->user();
-        $instalaciones = Instalacion::all()->where('club_id','=',$admin->club->id);
-        return view('admin.instalaciones',compact('instalaciones'));
+        $instalaciones = $admin->club->instalaciones;
+        $view = view('admin.instalaciones',compact(['instalaciones','admin']));
+        if($request->ajax()){
+            $sections = $view->renderSections();
+            return response()->json(['html'=>$sections['content'],'title'=>'instalaciones']);
+        }
+        return $view;
     }
 
-    //CREAR EVENTOS
+
+    /*------------------------------------------------------------
+     * ----------------- FUNCIONES AUXILIARES  -------------------
+     * -----------------------------------------------------------*/
     public function getEvents(){
         $admin = Auth::guard('admin')->user();
         $events=collect([]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instalacion;
+use App\Models\Club;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -19,4 +20,5 @@ class instalacionesController extends Controller
         $club->instalaciones()->save($instalacion);
         return redirect()->action('adminController@instalaciones');
     }
+
 }

@@ -14,4 +14,5 @@
 
 {{-- Fuentes Externas --}}
 <link href="https://fonts.googleapis.com/css?family=Comfortaa|Lato" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 

@@ -1,24 +1,43 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('content')
-    <div class="admin content">
-        @if($instalaciones->isEmpty())
-            No tiene aún instalaciones
-        @else
-            <table>
-                @foreach($instalaciones as $instalacion)
+    <div class="main_panel row col-10 admin_panel" id="instalaciones">
+        <div class="col-3 animated faster">
+
+        </div>
+        <div class="col-9 animated faster" id="instalaciones_calendar">
+            <div class="panel_header">
+                <div class="panel_title"></div>
+            </div>
+            <div class="panel_body">
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td>{{$instalacion->name}}</td>
-                        <td>{{$instalacion->tipo}}</td>
+                        <th scope="col"></th>
+                        <th scope="col">Lunes</th>
+                        <th scope="col">Martes</th>
+                        <th scope="col">Miércoles</th>
+                        <th scope="col">Jueves</th>
+                        <th scope="col">Viernes</th>
+                        <th scope="col">Sábado</th>
+                        <th scope="col">Domingo</th>
                     </tr>
-                @endforeach
-            </table>
-        @endif
-        <button id="showInstForm">Añadir instalacion</button>
-        <form id="addInstForm" action="{{route('instalacion.create')}}" style="display:none;">
-            <input name="name" placeholder="nombre">
-            <input name="tipo" placeholder="tipo">
-            <input name="terreno" placeholder="terreno">
-            <button>Añadir Instalacion</button>
-        </form>
+                    </thead>
+                    <tbody>
+                    @foreach($instalaciones as $instalacion)
+                        <tr>
+                            <th scope="row">{{$instalacion->name}}</th>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                            <td class="table-success">LIBRE</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection

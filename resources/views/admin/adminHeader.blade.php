@@ -2,7 +2,7 @@
     <img class="header_link logo" src="{{asset('imagenes/logo.svg')}}">
 </div>
 <div class="header_section col-10">
-    <div class="header_link col item" id="home_link" data-href="admin/home" data-seccion="home">
+    <div class="header_link col item" id="home_link" data-seccion="home"  data-href="admin/home" >
         <span class="d-none d-md-block">INICIO</span>
         <i class="fa fa-home d-md-none"></i>
     </div>
@@ -10,10 +10,12 @@
         <span class="d-none d-md-block">EQUIPOS</span>
         <i class="fa fa-clipboard d-md-none"></i>
     </div>
-    <div class="header_link col item" id="instalaciones_link" data-seccion="instalaciones">
+    <div class="header_link col item" id="instalaciones_link" data-seccion="instalaciones" data-href="admin/instalaciones">
         <span class="d-none d-md-block">INSTALACIONES</span>
     </div>
-    <div class="header_link col item" id="inventario_link" data-seccion="material" data-href="admin/material"><span>INVENTARIO</span></div>
+    <div class="header_link col item" id="inventario_link" data-seccion="material" data-href="admin/material">
+        <span>INVENTARIO</span>
+    </div>
     <div class="header_link col item" id="tecnicos_link" data-href="admin/tecnicos" data-seccion="tecnicos">
         <span>TÉCNICOS DEPORTIVOS</span>
     </div>
