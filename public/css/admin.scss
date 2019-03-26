@@ -49,12 +49,9 @@
     }
   }
   #add_categories_event{
-    font-size:.8em;
-    margin-left:15px;
     color:$dark-primary-color;
     cursor:pointer;
     border:solid .8px;
-    border-radius:15px;
     padding:5px;
     &:hover{
       transform:scale(1.006);
@@ -64,7 +61,20 @@
     }
   }
   .event_categorie{
-    box-shadow:1px 1px 2px -1px
+    box-shadow:1px 1px 2px -1px;
+    font-size:.8em;
+    margin-left:15px;
+    border-radius:15px;
+    padding:5px 10px;
+    display:flex;
+    align-items:center;
+    &.selected{
+      color:white;
+      .material-icons{
+        margin-left:5px;
+        cursor:pointer;
+      }
+    }
   }
   #add_rep_event{
     font-size:.9em;

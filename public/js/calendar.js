@@ -207,10 +207,13 @@ class Calendar{
             }
         });
     }
+
+    /* LOGICA EVENTOS */
     static dinamicEvents(){
         let isMouseDown = false;
         let startDate = null;
         let endDate = null;
+        window.evento = null;
         $('.weekView_body .ppns-cal__cell').on('mousedown',function(){
             startDate = $(this).data('fecha');
             $('.ppns-cal__cell.selected').removeClass('selected');
@@ -231,14 +234,20 @@ class Calendar{
             $('#time_event_end').val(endDate);
             $('#add_event_modal').modal('show');
             $('.add_event_content').addClass('flipInX');
+            evento = new Event({
+                start:startDate,
+                end:endDate
+            });
         });
         $('#add_event_modal').on('hide.bs.modal',function(){
             $('.ppns-cal__cell.selected').removeClass('selected');
             startDate = null;
             endDate = null;
             isMouseDown = false;
-            //Limpio el panel de categorias
+            //Cierro el panel de categorias
             Calendar.hideCategoryPanel();
+            //Limpio las categorias seleccionadas
+            $('.event_categorie.selected').remove();
         });
         Calendar.categoriesPanel()
     };
@@ -255,11 +264,29 @@ class Calendar{
         });
         //Accion al clickar en nueva categoria
         $('#add_new_categorie').on('click',function(){
-            Calendar.createCategoryPanel();
-            //Logica al clickar en la fecha para atrás
-            $('.back_icon').on('click',function(){
-              Calendar.selectCategoryPanel()
+            Calendar.createCategoryPanel(0);
+            $('#category-name').val('');
+            $('.btn-save').find('span').html('Crear');
+        });
+        //Accion al clickar en editar categoria
+        $('.edit_category').on('click',function(){
+            let title = $(this).parent().data('title');
+            let color = $(this).parent().data('color');
+            let id = $(this).parent().data('id');
+            Calendar.createCategoryPanel(id);
+            $('#category-name').val(title);
+            $('.color_selection').each(function(i,el){
+                if($(el).css('background-color') === color){
+                    $(el).addClass('selected');
+                }
             });
+            $('.btn-save').find('span').html('Editar');
+        });
+
+        //Accion para añadir etiqueta al evento.
+        $('.categorie.selectable').on('click',function(){
+            evento.category = $(this).parent().data('id');
+            $('.categories_event_panel .close-menu').click();
         });
     };
     static selectCategoryPanel(){
@@ -273,9 +300,13 @@ class Calendar{
         //Muestro el contenido correspondiente
         $('#select_category').show().addClass('active');
     }
-    static createCategoryPanel(){
+    static createCategoryPanel(id){
         //añado elemenotos y textos correspondientes
         $('.panel-title').prepend('<span class="material-icons back_icon">arrow_back</span>');
+        //Logica al clickar en la fecha para atrás
+        $('.back_icon').on('click',function(){
+            Calendar.selectCategoryPanel()
+        });
         $('.panel-title .title-text').html('Nueva etiqueta');
         //Muestro el panel y oculto el contenido de seleccionar
         $('#select_category').hide().removeClass('active');
@@ -296,28 +327,52 @@ class Calendar{
                 $(this).addClass('selected');
             });
         }
-        Calendar.saveCategory();
+        Calendar.saveCategory(id);
+
     }
     static hideCategoryPanel(){
         //Pongo de nuevo la vista principal
         Calendar.selectCategoryPanel();
         //Oculto el panel de las categorias
         $('.categories_event_panel').removeClass('active');
+        //Añado si el evento tiene categoria
+        if(evento.category !== null){
+            let color=null;
+            let title = null;
+            $('.categorie_row').each(function(i,el){
+                if($(el).data('id') === evento.category){
+                    color = $(el).data('color');
+                    title = $(el).data('title');
+                }
+            });
+            //Elimino otra categoria
+            $('.event_categorie.selected').remove();
+            //Añado la nueva
+            $('#row_categorie_event').prepend('<div class="event_categorie selected" style="background-color:'+color+'">' +
+                '<span>'+title+'</span>' +
+                '<span class="material-icons clear_category">clear</span></div>');
+
+            $('.clear_category').on('click',function(){
+                $('.event_categorie.selected').remove();
+                evento.category = null;
+            });
+        }
     }
-     static saveCategory(){
+     static saveCategory(id){
          $('#create_category').find('.btn-save').on('click',function(){
              event.preventDefault();
              let color = $('.color_selection.selected').css('background-color');
              let title = $('#category-name').val();
+             let update = $('.btn-save span').html() === 'Editar';
              if(title === ''){
                  $('#create_category').find('.form-group').eq(0).children().addClass('error');
              }else if(color === undefined){
                  $('#create_category').find('.form-group').eq(1).find('.title').addClass('error');
              } else{
                  $.ajax({
-                     type:'POST',
+                     type:update ? 'PUT' : 'POST',
                      url:$('meta[name="app-url"]').attr('content') + $(this).data('href'),
-                     data:{color:color,title:title},
+                     data:{color:color,title:title,update:update,id:id},
                      success:function(response){
                          $('#category_panel').html(response);
                      },
@@ -335,4 +390,13 @@ class Calendar{
              }
          });
      }
+}
+
+class Event{
+    constructor(options){
+        this.category = options.category ? options.category : null;
+        this.title = options.title ? options.title : '';
+        this.start = options.start ? options.start : '';
+        this.end = options.end ? options.end : '';
+    }
 }

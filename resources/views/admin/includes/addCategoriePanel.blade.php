@@ -8,11 +8,11 @@
     <div class="info-divider"></div>
     <div class="panel_body active" id="select_category">
         @foreach($admin->categories() as $categoria)
-            <div class="row align-items-center ml-2 mr-4 categorie_row">
-                <div class="categorie" id="{{$categoria->id}}"  style="background-color:{{$categoria->color}}">
+            <div class="row align-items-center ml-2 mr-4 categorie_row" data-id="{{$categoria->id}}" data-title="{{$categoria->title}}" data-color="{{$categoria->color}}">
+                <div class="categorie selectable"  style="background-color:{{$categoria->color}}">
                     <span>{{$categoria->title}}</span>
                 </div>
-                <span class="material-icons">edit</span>
+                <span class="material-icons edit_category">edit</span>
             </div>
         @endforeach
         <div class="row align-items-center ml-2 mr-4 categorie_row">

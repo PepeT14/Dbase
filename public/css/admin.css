@@ -51,12 +51,9 @@
   outline: none;
 }
 .event_modal #add_categories_event {
-  font-size: 0.8em;
-  margin-left: 15px;
   color: #00796B;
   cursor: pointer;
   border: solid 0.8px;
-  border-radius: 15px;
   padding: 5px;
 }
 .event_modal #add_categories_event:hover {
@@ -67,6 +64,19 @@
 }
 .event_modal .event_categorie {
   box-shadow: 1px 1px 2px -1px;
+  font-size: 0.8em;
+  margin-left: 15px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+.event_modal .event_categorie.selected {
+  color: white;
+}
+.event_modal .event_categorie.selected .material-icons {
+  margin-left: 5px;
+  cursor: pointer;
 }
 .event_modal #add_rep_event {
   font-size: 0.9em;

@@ -127,6 +127,15 @@ class adminController extends Controller
         return $admin;
     }
 
+    public function updateCategory(Request $request){
+        $admin = Auth::guard('admin')->user();
+        DB::table('admin_event_categories')->where('id',$request->id)->update([
+            'title' => $request->title,
+            'color' => $request->color
+        ]);
+        return view('admin.includes.addCategoriePanel',['admin'=>$admin]);
+    }
+
     /*------------------------------------------------------------
      * ----------------- FUNCIONES AUXILIARES  -------------------
      * -----------------------------------------------------------*/

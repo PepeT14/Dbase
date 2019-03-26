@@ -9,9 +9,11 @@
                     </div>
                     <div class="row align-items-center mt-2">
                         <div class="col-2"></div>
-                        <div id="add_categories_event" class="row align-items-center event_categorie">
-                            <span class="material-icons">add</span>
-                            <span>Etiquetas</span>
+                        <div id="row_categorie_event" class="row">
+                            <div id="add_categories_event" class="event_categorie">
+                                <span class="material-icons">add</span>
+                                <span>Etiqueta</span>
+                            </div>
                         </div>
                     </div>
                     <div class="row align-items-center mt-3">
