@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminEvents extends Migration
+class CreateAdminEventCategorie extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,13 @@ class CreateAdminEvents extends Migration
     public function up()
     {
         //
-        Schema::create('admin_events',function(Blueprint $table){
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->string('place');
+        Schema::create('admin_event_categories',function(Blueprint $table){
+            $table->increments('id');
             $table->string('title');
+            $table->string('color');
             $table->integer('admin_id')->unsigned();
-            $table->integer('category_id')->unsigned()->nullable();
 
             $table->foreign('admin_id')->references('id')->on('admin_clubs');
-            $table->foreign('category_id')->references('id')->on('admin_event_categories');
         });
     }
 
@@ -36,6 +33,6 @@ class CreateAdminEvents extends Migration
     {
         //
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('admin_events');
+        Schema::dropIfExists('admin_event_categories');
     }
 }

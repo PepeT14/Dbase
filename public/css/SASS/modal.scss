@@ -41,3 +41,8 @@
   color:$primary-color;
   i{cursor:pointer;}
 }
+
+.modal_footer_buttons{
+  display:flex;
+  justify-content:space-around;
+}

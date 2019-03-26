@@ -18,5 +18,11 @@ class AdminSeeder extends Seeder
             'password' => bcrypt('prueba'),
             'club_id' => '1'
         ]);
+
+        DB::table('admin_event_categories')->insert([
+            'title' => 'Partidos',
+            'color' => 'red',
+            'admin_id' => '1'
+        ]);
     }
 }

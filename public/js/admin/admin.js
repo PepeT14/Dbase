@@ -34,7 +34,7 @@ $(document).ready(function(){
     });
 
         //Guardamos en la variable sectionActive la seccion activa actualmente.
-    sectionActive = '#'+$(objActive).data('seccion');
+    sectionActive = $(objActive).data('seccion');
         //Mostramos la seccion activa.
     showIn(sectionActive);
         //Activamos los modals, los tooltips, etc...
@@ -71,79 +71,70 @@ $(document).ready(function(){
             //Obeto ajax dónde almacenaremos la respuesta del servidor y el cuál procesaremos para realizar las acciones necesarias.
         let ajaxObj = {html:null,section:null,url:null};
 
-        /*
-        * Creamos un objeto Promise donde controlaremos los tiempos de ejecución y nos aseguraremos del orden de las acciones a realizar
-         */
-        new Promise(function(ok){
-            //Desactivamos el link activo
-            $('.header_link.active').removeClass('active');
-            //Activamos el link clickado
-            obj.addClass('active');
-            /*
-            * Ocultamos la seccion que tenemos activa
-             */
-            $(sectionActive + ' div.animated').addClass('fadeOut');
-            $(sectionActive).removeClass('animate');
-            //Activamos la seccion clickada
-            sectionActive = '#'+sectionObj;
-            //Doy por finalizado el promise dentro de 1s
-            setTimeout(ok,1000);
-        }).then(function(){
-            /*-- Llamada ajax a la ruta que necesitamos, y si devuelve la vista con éxito la insertamos en el contenido.*/
-            $.ajax({
-                type:'GET',
-                url: $('meta[name="app-url"]').attr('content') + urlObj,
-                success:function(response){
-                    ajaxObj = {
-                        html:response.html,
-                        title:response.title ? response.title : null,
-                        section:sectionObj,
-                        url:$('meta[name="app-url"]').attr('content')+ urlObj
-                    };
-                    //Procesamos la respuesta ajax, aquí vamos a insertar en el nodo html '#admin_main_content' lo que nos lleha en response.html
-                    processAjaxData(ajaxObj);
-                },
-                error:function(response){
-                    //En caso de error mostramos el error en el cuerpo HTML.
-                    $('body').html(response.responseText);
-                }
-            }).done(function(){
-                //Una vez ha finalizado el promise, esperamos 10 ms y mostramos la seccion.
-                setTimeout(function(){
-                    showIn(sectionActive);
-                    links();
-                    loadSectionScripts(sectionObj);
-                },10);
-            });
+        $.ajax({
+            type:'GET',
+            url: $('meta[name="app-url"]').attr('content') + urlObj,
+            success:function(response){
+                ajaxObj = {
+                    html:response.html,
+                    title:response.title ? response.title : null,
+                    section:sectionObj,
+                    url:$('meta[name="app-url"]').attr('content')+ urlObj
+                };
+                //Procesamos la respuesta ajax, aquí vamos a insertar en el nodo html '#admin_main_content' lo que nos lleha en response.html
+                processAjaxData(ajaxObj);
+
+                //Desactivamos el link activo
+                $('.header_link.active').removeClass('active');
+                //Activamos el link clickado
+                obj.addClass('active');
+                /*
+                * Ocultamos la seccion que tenemos activa
+                 */
+                console.log('links cambiados.Comenzando llamada Ajax');
+            },
+            error:function(response){
+                //En caso de error mostramos el error en el cuerpo HTML.
+                $('body').html(response.responseText);
+            }
+        }).done(function(){
+            //Una vez ha finalizado el promise, esperamos 10 ms y mostramos la seccion.
+            setTimeout(function() {
+                showIn(sectionObj, sectionActive);
+                links();
+                loadSectionScripts(sectionObj);
+                sectionActive = sectionObj;
+            },10);
         });
     });
 
-    function showIn(seccion){
+    function showIn(seccionObj,seccionOld){
         //Muestro el contenedor
-        $(seccion).addClass('animate');
-        //Creo un promise para mostrar una vez redimensionado.
-        new Promise(function(fin){
-            setTimeout(function(){
-                $('#calendar').fullCalendar('option', 'height', 'parent');
-                fin();
-            },800)
-        }).then(function(){
-            $(seccion + ' div.animated').removeClass('fadeOut');
-            $(seccion + ' div.animated').addClass('fadeIn');
-        });
+        $('#'+seccionObj).addClass('active');
+        //$('#calendar').fullCalendar('option', 'height', 'parent');
+        setTimeout(function(){
+            if(seccionObj === seccionOld){
+                $('#teams').siblings().not('.modal').not('.active').remove();
+                $('.modal.'+seccionOld).eq(0).remove();
+            }else{
+                $('#'+seccionOld).remove();
+                $('.modal.'+seccionOld).remove();
+            }
+        },700);
     }
 
 
     /*Función que cambia el historial, recibe un id y objeto con html y url.*/
     processAjaxData = function(response){
         //Si la peticion ajax se hace desde el objeto de home, no cargo en el contenido, sino que creo un nuevo documento.
-        document.getElementById('admin_main_content').innerHTML = response.html;
+        $('#admin_main_content').append(response.html);
         document.title = 'dBase';
         window.history.pushState({html:response.html},"dBase", response.url);
         if(response.title==='home'){
             initCalendar();
         }
     };
+
     /*Funcion personalizada en el popState, que se active cuando se hagan llamdas al historial, por ejemplo en back o en forward*/
     window.onpopstate = function(event){
         document.getElementById('admin_main_content').innerHTML = event.state.html;
@@ -153,26 +144,19 @@ $(document).ready(function(){
 
     /*--- FullCalendar ---*/
     function initCalendar(){
-        $('#calendar').fullCalendar({
-            height:'parent',
-            fixedWeekCount:false,
-            selectable:true,
-            selectHelper:true,
-            selectAllow:function(selectInfo){
-                console.log(selectInfo);
-            },
-            header:{
-                left:'month,basicWeek,agendaDay',
-                center:'title',
-                right:'prev,today,next',
-            },
-            views:{
-                month:{
-                    titleFormat:'MMMM YYYY',
-                    columnFormat:'ddd'
-                }
-            }
+        let pantallaResponsive = window.innerWidth < 1000;
+        $('#month_calendar').Calendar({
+            shortDays:true,
+            mainCalendar:false,
+            view:'monthView'
         });
+        $('#week_calendar').Calendar({
+           shortDays: pantallaResponsive,
+           mainCalendar:true,
+           view:'weekView'
+        });
+        $('.ppns-main.monthView').find('.today').addClass('active');
+
     }
 
     $('#link_equipos').on('click',function(){
@@ -181,8 +165,12 @@ $(document).ready(function(){
     //tooltips and modals
     function links(){
         $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
         $('[data-action="modal"]').on('click',function(){
             $($(this).data('modaltarget')).modal('show');
+        });
+        $('.header_link.icon').on('click',function(){
+            $(this).addClass('active');
         });
         $('[data-action="link"]').on('click',function(){
             $($(this).data('target')).click();

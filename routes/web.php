@@ -91,6 +91,9 @@ Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
     //Instalaciones
     Route::get('/instalaciones','adminController@instalaciones')->name('admin.instalaciones');
     Route::post('/instalaciones','instalacionesController@create')->name('instalacion.create');
+
+    //Eventos
+    Route::post('/categories','adminController@createCategory');
 });
 
 //Mister
@@ -130,4 +133,4 @@ Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
 Route::get('/clubRegister','ClubController@register')->name('club.register');
 
-Route::get('prueba',function(){return view('mails.inviteAdmin');});
+Route::get('prueba',function(){return view('prueba');});

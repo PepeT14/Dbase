@@ -1,24 +1,34 @@
 @extends('layouts.app')
 @section('content')
-    <div class="admin_home row justify-content-center align-items-center" id="home_calendar">
-        <div class="main_panel col-10 row admin_panel" id="home">
-            <div class="col-lg-3 d-none d-lg-block resultados_content animated faster">
-                <div class="resultado_title row justify-content-center">
-                    <span>RESULTADOS</span>
+    <div class="main_section container-fluid" id="home">
+        <div class="admin_home row">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="main_panel side_calendar_panel d-none d-md-block">
+                    <div id="month_calendar" class="side_calendar calendar_content"></div>
                 </div>
-                <div class="resultados_list row justify-content-center">
-                    <div class="category_link col-8 row justify-content-center">
-                        <span>PRE-BENJAMIN</span>
+                <div class="main_panel side_calendar_panel d-none d-md-block">
+                    <div class="row info_panel">
+                        <div class="col-2">
+                            <span class="material-icons">calendar_today</span>
+                        </div>
+                        <div class="col-8 panel_title">
+                            <span>Eventos de hoy</span>
+                        </div>
+                        <div class="col-2">
+                            <span class="material-icons">add</span>
+                        </div>
                     </div>
-                    <div class="category_link col-8 row justify-content-center">
-                        <span>bemjamin</span>
-                    </div>
+                    <div class="info-divider"></div>
+                    <div class="row events_info"></div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 calendar_content animated faster">
-                <div id="calendar"></div>
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <div class="main_panel main_calendar_panel">
+                    <div id="week_calendar" class="main_calendar calendar_content"></div>
+                </div>
             </div>
         </div>
     </div>
+    @include('admin.modals.addEvent')
 @endsection
 

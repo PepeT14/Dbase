@@ -20,16 +20,16 @@ class adminController extends Controller
     * ---------------------------------------------*/
     public function index(Request $request){
         $admin = Auth::guard('admin')->user();
-        return view('admin.home');
+        return view('admin.home',['admin'=>$admin]);
     }
 
     public function home(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()){
-            $sections = view('admin.home')->renderSections();
+            $sections = view('admin.home',['admin'=>$admin])->renderSections();
             return response()->json(['html'=>$sections['content'],'title'=>'home']);
         }else{
-            return view('admin.home');
+            return view('admin.home',['admin'=>$admin]);
         }
     }
 
@@ -110,6 +110,22 @@ class adminController extends Controller
         return $view;
     }
 
+    /*----------------------------------------------------
+    * ----------------- EVENTOS  -------------------
+    * ----------------------------------------------------*/
+
+    public function createCategory(Request $request){
+        $admin = Auth::guard('admin')->user();
+        if($request->ajax()){
+            DB::table('admin_event_categories')->insert([
+                'title' => $request->title,
+                'color' => $request->color,
+                'admin_id' => $admin->id
+            ]);
+            return view('admin.includes.addCategoriePanel',['admin'=>$admin]);
+        }
+        return $admin;
+    }
 
     /*------------------------------------------------------------
      * ----------------- FUNCIONES AUXILIARES  -------------------

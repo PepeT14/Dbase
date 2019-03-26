@@ -10,7 +10,6 @@
 
 {{--FullCalendar--}}
 <script src="{{asset('js/fullcalendar/moment.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/fullcalendar/fullcalendar.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/fullcalendar/locale/es.js')}}" type="text/javascript"></script>
 
 {{-- Bootstrap --}}
@@ -22,3 +21,4 @@
 
 {{--Scripts propios--}}
 <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/calendar.js')}}" type="text/javascript"></script>

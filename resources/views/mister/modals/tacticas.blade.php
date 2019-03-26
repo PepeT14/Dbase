@@ -22,9 +22,7 @@
 
             </div>
             <div class="modal-body" id="tacticas-modal-body">
-                @foreach($mister->team->sistems as $sistem)
 
-                @endforeach
             </div>
             <div class="modal-footer">
                 <button class="btn btn-cancel btn-form">CANCELAR</button>

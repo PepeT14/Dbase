@@ -1,25 +1,27 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        @foreach($materialAgrupado->keys() as $key)
-            <div class="card material-card shadow-sm">
-                <i class="card-img-top"></i>
-                <div class="card-body">
-                    <h5 class="card-title">{{$key}}</h5>
-                    <p class="card-text">Pinche aquí para acceder al detalle del material.</p>
+    <div class="admin_material container-fluid main_section" id="material">
+        <div class="row">
+            @foreach($materialAgrupado->keys() as $key)
+                <div class="card material-card shadow">
+                    <i class="card-img-top"></i>
+                    <div class="card-body">
+                        <h5 class="card-title">{{$key}}</h5>
+                        <p class="card-text">Pinche aquí para acceder al detalle del material.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+            @endforeach
+            <div class="card material-card add-card shadow">
+                <div class="card-img fondo">
+                    <i class="material-icons" id="add_material_icon">add</i>
                 </div>
-            </div>
-        @endforeach
-        <div class="card material-card shadow-sm add-card">
-            <div class="card-img fondo">
-                <i class="material-icons" id="add_material_icon">add</i>
             </div>
         </div>
     </div>
-    <div class="row">
+    {{--<div class="row">
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading" id="materialPanel">
@@ -102,5 +104,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 @endsection

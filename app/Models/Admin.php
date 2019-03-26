@@ -33,4 +33,9 @@ class Admin extends adminUser
         $events = DB::table('admin_events')->where('admin_id',$this->id)->get();
         return $events;
     }
+
+    public function categories(){
+        $categories = DB::table('admin_event_categories')->where('admin_id',$this->id)->get();
+        return $categories;
+    }
 }

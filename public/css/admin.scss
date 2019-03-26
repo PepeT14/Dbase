@@ -1,47 +1,235 @@
 @import 'SASS/variables';
-@import 'SASS/calendar';
 
-
-/*--- FONDO ---*/
-.background_image{
-  background-image:url('../imagenes/fondos/cesped.jpg');
-  opacity:0.7;
-  position:fixed;
-  top:0;
-  left:0;
-}
 
 /*--- HOME ---*/
-.resultados_content{
-  margin:20px 0;
-  color:black;
-  .resultado_title{
-    margin:40px 0;
-    span{
-      border-bottom:solid 2px black;
-      font-size:2em;
-    }
+.main_calendar_panel{
+  height:75vh;
+  @media #{$media} and #{$pantallaSmall}{
+    height:50vh;
   }
-  .category_link{
-    border:solid 1.5px black;
-    margin-bottom:10px;
-    border-radius:10px;
-    cursor:pointer;
-    &:hover{
-      color:white;
-      background-color:grey;
-    }
-    span{
-      text-transform:uppercase;
-    }
+  .ppns-cal__col{
+    font-size:.9em;
   }
 }
-
+.side_calendar_panel{
+  height:50%;
+  &:first-child{
+    margin-bottom:30px;
+  }
+}
 .calendar_content{
-  margin-top:20px;
-  margin-bottom:20px;
+  height:100%;
+  position:relative;
 }
 
+.side_calendar{
+  .ppns-cal__cell span{
+    height:25px;
+    width:25px;
+    line-height:25px;
+  }
+}
+.info_panel{
+  text-align:center;
+  font-size:1.2em;
+  font-weight:bold;
+  color:$primary-color;
+  .material-icons{
+    color: $dark-primary-color;
+  }
+}
+.event_modal{
+  top:100px;
+  input{
+    border:none;
+    border-bottom:solid 1px $primary-color;
+    padding:10px 15px;
+    &:focus{
+      outline:none;
+    }
+  }
+  #add_categories_event{
+    font-size:.8em;
+    margin-left:15px;
+    color:$dark-primary-color;
+    cursor:pointer;
+    border:solid .8px;
+    border-radius:15px;
+    padding:5px;
+    &:hover{
+      transform:scale(1.006);
+    }
+    .material-icons{
+      margin-right:3px;
+    }
+  }
+  .event_categorie{
+    box-shadow:1px 1px 2px -1px
+  }
+  #add_rep_event{
+    font-size:.9em;
+    cursor:pointer;
+    border:solid .8px;
+    border-radius:15px;
+    padding:5px 15px;
+    font-weight:bold;
+    background-color:#fafafa;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.5);
+    &:hover{
+      transform: scale(1.006);
+    }
+    .material-icons{
+      margin-left:3px;
+    }
+  }
+  .foot-option{
+    font-size:.9em;
+    cursor:pointer;
+    &.cancel_option{
+      color:$dark-cancel-color;
+    }
+    &.save_option{
+      color:$save-color;
+    }
+  }
+  .material-icons{
+    text-align:center;
+    font-size:1em;
+  }
+  .categories_event_panel{
+    position:absolute;
+    background-color:#fafafa;
+    box-shadow:-5px 4px 20px 0 rgba(0, 0, 0, 0.2);
+    top:0;
+    left:30%;
+    right:0;
+    border-radius:.3rem;
+    transform:perspective(400px) rotateY(90deg);
+    padding:15px;
+    min-width:300px;
+    transition:transform .5s cubic-bezier(0,0,.5,1),opacity .2s linear;
+    transform-origin:left;
+    opacity:0;
+    &.active{
+      transform:perspective(400px);
+      transition:transform .5s cubic-bezier(0,0,.5,1),opacity .2s linear;
+      opacity:1;
+    }
+    .panel-title{
+      font-weight:bold;
+      button{
+        font-size:.9em;
+      }
+      .material-icons.back_icon{
+        position:absolute;
+        left:0;
+        top:0;
+        padding:10px;
+        font-size:.9em;
+        opacity:.5;
+        cursor:pointer;
+      }
+    }
+    .panel_body{
+      opacity:0;
+      display:none;
+      &.active{
+        opacity:1;
+        display:block;
+      }
+    }
+    .categorie{
+      padding:5px 10px;
+      font-size:.8em;
+      border-radius:7px;
+      cursor:pointer;
+      width:100%;
+      max-width:100%;
+      transition:transform .3s,box-shadow .3s;
+      color:white;
+      margin-bottom:5px;
+      &:hover{
+        box-shadow: 1px 5px 17px 0 rgba(0, 0, 0, 0.1);
+        transform: scale(1.007);
+      }
+    }
+    #add_new_categorie{
+      background-color:darkgrey;
+      color:black;
+      display:flex;
+      align-items: center;
+      margin-top:10px;
+      &:hover{
+        transform:scale(1);
+        box-shadow:none;
+        background-color:gray;
+      }
+      .material-icons{
+        position:relative;
+        left:0;
+        color:black;
+        margin-right:10px;
+      }
+    }
+    .categorie_row .material-icons{
+      position:absolute;
+      right:15px;
+      cursor:pointer;
+      color:$divider-color;
+    }
+    #create_category{
+      .title{
+        font-size:.9em;
+        font-weight:bold;
+        &.error{
+          color:red;
+          &:after{
+            content:'*';
+            color:red;
+          }
+        }
+      }
+      input{
+        border:solid 1px $dark-color-resaltado;
+        border-radius:5px;
+        padding:5px;
+        width:70%;
+        &.error{
+          border-color:$dark-cancel-color;
+        }
+      }
+      .color_grid_selection{
+        display:flex;
+        flex-wrap: wrap;
+        margin-top:2px;
+        .color_selection{
+          height:50px;
+          width:50px;
+          border-radius:5px;
+          margin:0 3px 3px 0;
+          cursor:pointer;
+          position:relative;
+          &:hover{
+            opacity:.7;
+          }
+          .material-icons{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            color: white;
+            transform: translate(-50%,-50%);
+            font-size: 1.2em;
+            opacity:0;
+            transition:opacity .2s linear;
+          }
+          &.selected .material-icons{
+            opacity:1;
+          }
+        }
+      }
+    }
+  }
+}
 /*--- EQUIPO TECNICO ---*/
 .panel_header{
   .panel_title{
@@ -206,12 +394,11 @@
 .material-card{
   width:350px;
   cursor:pointer;
-  margin-bottom:10px;
   height:170px;
   transition:transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow:0 10px 27px 1px rgba(0,0,0,0.75);
+  margin:10px 5px;
   &:hover{
-    transform:scale(1.006, 1.006);
-    box-shadow:0 8px 17px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.1);
     &:before{
       opacity:.04;
     }
@@ -239,20 +426,6 @@
       padding:8px;
       cursor:pointer;
       font-size:50px;
-      &:before, &:after{
-        content:'';
-        border-radius: 50%;
-        position: absolute;
-        background-color: #000;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        opacity:0;
-        transition:transform .7s cubic-bezier(.4,0,.2,1), opacity 75ms linear;
-        transform-origin: center center;
-        transform:scale(0);
-      }
       &.active:after{
         opacity:.16;
         transform: scale(1.7);
@@ -263,16 +436,3 @@
 /*
 * Cambio de secciones
 */
-.admin_panel{
-  transition:max-width 1s,padding;
-  transition-delay: 0.1s;
-  max-width:0;
-  padding:0;
-  &.animate{
-    max-width:100%;
-    padding:20px 15px;
-  }
-  div.animated{
-    opacity:0;
-  }
-}

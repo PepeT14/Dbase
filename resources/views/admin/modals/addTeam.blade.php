@@ -1,4 +1,4 @@
-<div class="modal modal-panel fade" id="add_team_form" data-error={{$errors ? '1' : '0'}}>
+<div class="modal modal-panel fade teams" id="add_team_form" data-error={{$errors ? '1' : '0'}}>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

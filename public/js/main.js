@@ -46,7 +46,7 @@ $(document).ready(function(){
      * El logout se controla desde aquí al ser algo que siempre estará
      */
     $('.logout').on('click',function(){
-        $('#logout-form').submit();
+        setTimeout(function(){$('#logout-form').submit()},10);
     });
 
     /*--- Metodo que al añadir la clase ruta a un icono del menú, redirecciona al pinchar a la ruta indicada en data-href*/
