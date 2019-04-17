@@ -2,7 +2,6 @@
 
 namespace Illuminate\Validation;
 
-use Closure;
 use RuntimeException;
 use BadMethodCallException;
 use Illuminate\Support\Arr;
@@ -11,7 +10,9 @@ use Illuminate\Support\Fluent;
 use Illuminate\Support\MessageBag;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
+use Illuminate\Contracts\Validation\ImplicitRule;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Contracts\Validation\Rule as RuleContract;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
 class Validator implements ValidatorContract
@@ -347,6 +348,12 @@ class Validator implements ValidatorContract
         // attribute is invalid and we will add a failure message for this failing attribute.
         $validatable = $this->isValidatable($rule, $attribute, $value);
 
+        if ($rule instanceof RuleContract) {
+            return $validatable
+                    ? $this->validateUsingCustomRule($attribute, $value, $rule)
+                    : null;
+        }
+
         $method = "validate{$rule}";
 
         if ($validatable && ! $this->$method($attribute, $value, $parameters, $this)) {
@@ -422,7 +429,7 @@ class Validator implements ValidatorContract
     /**
      * Determine if the attribute is validatable.
      *
-     * @param  string  $rule
+     * @param  object|string  $rule
      * @param  string  $attribute
      * @param  mixed   $value
      * @return bool
@@ -438,7 +445,7 @@ class Validator implements ValidatorContract
     /**
      * Determine if the field is present, or the rule implies required.
      *
-     * @param  string  $rule
+     * @param  object|string  $rule
      * @param  string  $attribute
      * @param  mixed   $value
      * @return bool
@@ -449,18 +456,20 @@ class Validator implements ValidatorContract
             return $this->isImplicit($rule);
         }
 
-        return $this->validatePresent($attribute, $value) || $this->isImplicit($rule);
+        return $this->validatePresent($attribute, $value) ||
+               $this->isImplicit($rule);
     }
 
     /**
      * Determine if a given rule implies the attribute is required.
      *
-     * @param  string  $rule
+     * @param  object|string  $rule
      * @return bool
      */
     protected function isImplicit($rule)
     {
-        return in_array($rule, $this->implicitRules);
+        return $rule instanceof ImplicitRule ||
+               in_array($rule, $this->implicitRules);
     }
 
     /**
@@ -478,7 +487,7 @@ class Validator implements ValidatorContract
         $data = ValidationData::initializeAndGatherData($attribute, $this->data);
 
         return array_key_exists($attribute, $data)
-                    || in_array($attribute, array_keys($this->data));
+                    || array_key_exists($attribute, $this->data);
     }
 
     /**
@@ -490,7 +499,7 @@ class Validator implements ValidatorContract
      */
     protected function isNotNullIfMarkedAsNullable($rule, $attribute)
     {
-        if (in_array($rule, $this->implicitRules) || ! $this->hasRule($attribute, ['Nullable'])) {
+        if ($this->isImplicit($rule) || ! $this->hasRule($attribute, ['Nullable'])) {
             return true;
         }
 
@@ -512,6 +521,25 @@ class Validator implements ValidatorContract
     }
 
     /**
+     * Validate an attribute using a custom rule object.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @param  \Illuminate\Contracts\Validation\Rule  $rule
+     * @return void
+     */
+    protected function validateUsingCustomRule($attribute, $value, $rule)
+    {
+        if (! $rule->passes($attribute, $value)) {
+            $this->failedRules[$attribute][get_class($rule)] = [];
+
+            $this->messages->add($attribute, $this->makeReplacements(
+                $rule->message(), $attribute, get_class($rule), []
+            ));
+        }
+    }
+
+    /**
      * Check if we should stop further validations on a given attribute.
      *
      * @param  string  $attribute
@@ -524,7 +552,7 @@ class Validator implements ValidatorContract
         }
 
         if (isset($this->failedRules[$attribute]) &&
-            in_array('uploaded', array_keys($this->failedRules[$attribute]))) {
+            array_key_exists('uploaded', $this->failedRules[$attribute])) {
             return true;
         }
 
@@ -914,11 +942,13 @@ class Validator implements ValidatorContract
      * Set the custom messages for the validator.
      *
      * @param  array  $messages
-     * @return void
+     * @return $this
      */
     public function setCustomMessages(array $messages)
     {
         $this->customMessages = array_merge($this->customMessages, $messages);
+
+        return $this;
     }
 
     /**

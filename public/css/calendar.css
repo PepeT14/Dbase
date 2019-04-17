@@ -1,19 +1,97 @@
+@charset "UTF-8";
+/*------------------------------------------------------------
+  ---------------------- GENERAL -----------------------
+------------------------------------------------------------*/
+.ppns-main {
+  font-family: Raleway, sans-serif;
+  margin-top: 15px;
+}
+
+.ppns-cal__row {
+  display: flex;
+  position: relative;
+}
+
+.ppns-cal__cell, .ppns-cal__col {
+  width: calc(100% / 7);
+  text-align: center;
+  position: relative;
+  height: 100%;
+  font-size: 0.8em;
+  margin: 0 5px;
+}
+.ppns-cal__cell.head, .ppns-cal__col.head {
+  text-transform: uppercase;
+  color: #757575;
+  border-bottom: solid 0.9px #BDBDBD;
+}
+.ppns-cal__cell.head.today, .ppns-cal__cell.head.active, .ppns-cal__col.head.today, .ppns-cal__col.head.active {
+  color: black;
+}
+
+/*------------------------------------------------------------
+  ---------------------- CABECERA -----------------------
+------------------------------------------------------------*/
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 20px;
   font-size: 1em;
   letter-spacing: 2px;
-  height: 50px;
-  margin: 0 -15px;
+  height: 30px;
+  margin: 10px -15px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+}
+.wrapper.main {
+  justify-content: space-between;
+  margin: 0 -15px;
+  height: 60px;
+  padding: 20px 20px 0;
+}
+.wrapper .ppns_sel_view {
+  display: flex;
+  margin-right: 100px;
+}
+.wrapper .ppns_sel_view .sel_view {
+  width: 100px;
+  display: block;
+  text-align: center;
+  color: #c0c8da;
+  cursor: pointer;
+}
+.wrapper .ppns_sel_view .sel_view:hover {
+  color: #00796B;
+}
+.wrapper .ppns_sel_view .sel_view.active {
+  border-bottom: solid 2px #00796B;
+  font-weight: bold;
+  color: #00796B;
+}
+.wrapper .month_year_info {
+  text-transform: uppercase;
+}
+.wrapper .left_info {
+  display: flex;
+}
+.wrapper .ppns_today {
+  border: solid 1px #00796B;
+  border-radius: 15px;
+  padding: 2px 5px;
+}
+.wrapper .ppns_today:hover {
+  color: white;
+  background-color: #00796B;
+  cursor: pointer;
 }
 .wrapper .month_year {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  width: 100%;
+  width: 75%;
   justify-content: center;
   text-transform: uppercase;
   position: relative;
@@ -51,159 +129,53 @@
   padding: 0 25px;
 }
 
-.month_year_info {
-  text-transform: uppercase;
+/*------------------------------------------------------------
+  ---------------------- VISTA DEl MES -----------------------
+------------------------------------------------------------*/
+.monthView .ppns-cal__row {
+  border-bottom: none;
+  height: 30px;
 }
-
-.left_info {
-  display: flex;
+.monthView .ppns-cal__row:first-child {
+  height: 20px;
 }
-
-.ppns_sel_view {
-  display: flex;
-  margin-right: 100px;
+.monthView .ppns-cal__row .ppns-cal__cell.day.old {
+  color: #BDBDBD;
 }
-.ppns_sel_view .sel_view {
-  width: 100px;
-  display: block;
-  text-align: center;
-  color: #c0c8da;
-  cursor: pointer;
-}
-.ppns_sel_view .sel_view:hover {
-  color: #00796B;
-}
-.ppns_sel_view .sel_view.active {
-  border-bottom: solid 2px #00796B;
-  font-weight: bold;
-  color: #00796B;
-}
-
-.ppns_today {
-  border: solid 1px #00796B;
-  border-radius: 15px;
-  padding: 2px 5px;
-}
-.ppns_today:hover {
-  color: white;
-  background-color: #00796B;
-  cursor: pointer;
-}
-
-.ppns-main {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 50px 0 0;
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
-}
-.ppns-main .weekView_body {
-  height: calc(100% - 50px);
-  overflow: scroll;
-}
-
-.ppns-cal__row {
-  display: flex;
-  position: relative;
-  height: calc(100% / 7);
-  align-items: center;
-}
-.ppns-cal__row.weekView {
-  height: calc(100% / 9);
-}
-.ppns-cal__row.weekView:first-child {
-  height: calc(100% / 10);
-}
-.ppns-cal__row.weekView.hour.now .ppns-cal__cell {
-  border-top: solid 1px #00796B;
-}
-.ppns-cal__row.weekView.hour.older .ppns-cal__cell {
-  background-color: rgba(166, 168, 179, 0.12);
-}
-.ppns-cal__row.weekView .ppns-cal__cell {
-  cursor: default;
-  width: calc(100% / 8);
-  border-right: solid 0.7px rgba(166, 168, 179, 0.12);
-  border-top: solid 0.7px rgba(166, 168, 179, 0.12);
-}
-.ppns-cal__row.weekView .ppns-cal__cell span:after {
-  content: none;
-}
-.ppns-cal__row.weekView .ppns-cal__cell.selected {
-  background-color: #b2dfdb78;
-}
-
-.ppns-cal__col {
-  width: calc(100% / 7);
-  text-align: center;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  position: relative;
-  color: #bfbebe;
-}
-.ppns-cal__col.today, .ppns-cal__col.active {
-  color: black;
-}
-.ppns-cal__col.weekView {
-  width: calc(100% / 8);
-  height: 100%;
-  border-right: solid 0.7px rgba(166, 168, 179, 0.12);
-}
-.ppns-cal__col span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-
-.ppns-cal__cell {
-  width: calc(100% / 7);
-  text-align: center;
-  position: relative;
-  cursor: pointer;
-  height: 100%;
-  font-size: 0.9em;
-}
-.ppns-cal__cell.old {
-  color: #bfbebe;
-}
-.ppns-cal__cell.today span:before {
+.monthView .ppns-cal__row .ppns-cal__cell.today span:before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   border: solid 1.5px #00796b;
-  transform: scale(1.3);
+  transform: scale(1.1);
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-.ppns-cal__cell:hover span:after {
+.monthView .ppns-cal__row .ppns-cal__cell:hover span:after {
   opacity: 0.16;
-  transform: scale(1.3);
+  transform: scale(1.1);
 }
-.ppns-cal__cell.active {
+.monthView .ppns-cal__row .ppns-cal__cell.active {
   color: white;
 }
-.ppns-cal__cell.active span:after {
+.monthView .ppns-cal__row .ppns-cal__cell.active span:after {
   opacity: 0.9;
   z-index: -1;
-  transform: scale(1.3);
+  transform: scale(1.1);
 }
-.ppns-cal__cell span {
+.monthView .ppns-cal__row .ppns-cal__cell span {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 40px;
-  width: 40px;
+  height: 25px;
+  width: 25px;
   transform: translate(-50%, -50%);
-  line-height: 40px;
+  line-height: 25px;
+  font-family: Roboto, sans-serif;
 }
-.ppns-cal__cell span:after {
+.monthView .ppns-cal__row .ppns-cal__cell span:after {
   content: "";
   background-color: #004c40;
   width: 100%;
@@ -213,6 +185,718 @@
   left: 0;
   border-radius: 50%;
   transform: scale(0);
+}
+.monthView .ppns-cal__row.main {
+  height: 100px;
+}
+.monthView .ppns-cal__row.main:first-child {
+  height: 50px;
+}
+.monthView .ppns-cal__row.main .ppns-cal__cell {
+  border-bottom: solid 0.9px #BDBDBD;
+}
+.monthView .ppns-cal__row.main .ppns-cal__cell.day.main span {
+  top: 25%;
+  left: 15%;
+}
+.monthView .ppns-cal__row.main .ppns-cal__cell.day.main span:after {
+  content: none;
+}
+
+/*-----------------------------------------------------------------
+  ---------------------- VISTA DE LA SEMANA -----------------------
+-------------------------------------------------------------------*/
+.weekView .weekView_body {
+  z-index: 1;
+}
+.weekView .ppns-cal__row {
+  height: 50px;
+}
+.weekView .ppns-cal__row:not(:first-child) {
+  border-top: solid 1px #BDBDBD;
+}
+.weekView .ppns-cal__row.head {
+  position: sticky;
+  top: 60px;
+  background-color: white;
+  z-index: 2;
+}
+.weekView .ppns-cal__row.older {
+  background-color: #fafafa;
+}
+.weekView .ppns-cal__row.now {
+  border-top: solid 2px #00796B;
+}
+.weekView .ppns-cal__col span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-family: Roboto, sans-serif;
+}
+.weekView .ppns-cal__cell.hour_info_cell span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.weekView .ppns-cal__cell.selected {
+  background-color: #b2dfdb78;
+}
+.weekView .ppns-cal__cell .event {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.weekView .ppns-cal__cell .event.top-0 {
+  top: 0%;
+}
+.weekView .ppns-cal__cell .event.h-0 {
+  height: 0%;
+}
+.weekView .ppns-cal__cell .event.top-1 {
+  top: 1%;
+}
+.weekView .ppns-cal__cell .event.h-1 {
+  height: 100%;
+}
+.weekView .ppns-cal__cell .event.top-2 {
+  top: 2%;
+}
+.weekView .ppns-cal__cell .event.h-2 {
+  height: 200%;
+}
+.weekView .ppns-cal__cell .event.top-3 {
+  top: 3%;
+}
+.weekView .ppns-cal__cell .event.h-3 {
+  height: 300%;
+}
+.weekView .ppns-cal__cell .event.top-4 {
+  top: 4%;
+}
+.weekView .ppns-cal__cell .event.h-4 {
+  height: 400%;
+}
+.weekView .ppns-cal__cell .event.top-5 {
+  top: 5%;
+}
+.weekView .ppns-cal__cell .event.h-5 {
+  height: 500%;
+}
+.weekView .ppns-cal__cell .event.top-6 {
+  top: 6%;
+}
+.weekView .ppns-cal__cell .event.h-6 {
+  height: 600%;
+}
+.weekView .ppns-cal__cell .event.top-7 {
+  top: 7%;
+}
+.weekView .ppns-cal__cell .event.h-7 {
+  height: 700%;
+}
+.weekView .ppns-cal__cell .event.top-8 {
+  top: 8%;
+}
+.weekView .ppns-cal__cell .event.h-8 {
+  height: 800%;
+}
+.weekView .ppns-cal__cell .event.top-9 {
+  top: 9%;
+}
+.weekView .ppns-cal__cell .event.h-9 {
+  height: 900%;
+}
+.weekView .ppns-cal__cell .event.top-10 {
+  top: 10%;
+}
+.weekView .ppns-cal__cell .event.h-10 {
+  height: 1000%;
+}
+.weekView .ppns-cal__cell .event.top-11 {
+  top: 11%;
+}
+.weekView .ppns-cal__cell .event.h-11 {
+  height: 1100%;
+}
+.weekView .ppns-cal__cell .event.top-12 {
+  top: 12%;
+}
+.weekView .ppns-cal__cell .event.h-12 {
+  height: 1200%;
+}
+.weekView .ppns-cal__cell .event.top-13 {
+  top: 13%;
+}
+.weekView .ppns-cal__cell .event.h-13 {
+  height: 1300%;
+}
+.weekView .ppns-cal__cell .event.top-14 {
+  top: 14%;
+}
+.weekView .ppns-cal__cell .event.h-14 {
+  height: 1400%;
+}
+.weekView .ppns-cal__cell .event.top-15 {
+  top: 15%;
+}
+.weekView .ppns-cal__cell .event.h-15 {
+  height: 1500%;
+}
+.weekView .ppns-cal__cell .event.top-16 {
+  top: 16%;
+}
+.weekView .ppns-cal__cell .event.h-16 {
+  height: 1600%;
+}
+.weekView .ppns-cal__cell .event.top-17 {
+  top: 17%;
+}
+.weekView .ppns-cal__cell .event.h-17 {
+  height: 1700%;
+}
+.weekView .ppns-cal__cell .event.top-18 {
+  top: 18%;
+}
+.weekView .ppns-cal__cell .event.h-18 {
+  height: 1800%;
+}
+.weekView .ppns-cal__cell .event.top-19 {
+  top: 19%;
+}
+.weekView .ppns-cal__cell .event.h-19 {
+  height: 1900%;
+}
+.weekView .ppns-cal__cell .event.top-20 {
+  top: 20%;
+}
+.weekView .ppns-cal__cell .event.h-20 {
+  height: 2000%;
+}
+.weekView .ppns-cal__cell .event.top-21 {
+  top: 21%;
+}
+.weekView .ppns-cal__cell .event.h-21 {
+  height: 2100%;
+}
+.weekView .ppns-cal__cell .event.top-22 {
+  top: 22%;
+}
+.weekView .ppns-cal__cell .event.h-22 {
+  height: 2200%;
+}
+.weekView .ppns-cal__cell .event.top-23 {
+  top: 23%;
+}
+.weekView .ppns-cal__cell .event.h-23 {
+  height: 2300%;
+}
+.weekView .ppns-cal__cell .event.top-24 {
+  top: 24%;
+}
+.weekView .ppns-cal__cell .event.h-24 {
+  height: 2400%;
+}
+.weekView .ppns-cal__cell .event.top-25 {
+  top: 25%;
+}
+.weekView .ppns-cal__cell .event.h-25 {
+  height: 2500%;
+}
+.weekView .ppns-cal__cell .event.top-26 {
+  top: 26%;
+}
+.weekView .ppns-cal__cell .event.h-26 {
+  height: 2600%;
+}
+.weekView .ppns-cal__cell .event.top-27 {
+  top: 27%;
+}
+.weekView .ppns-cal__cell .event.h-27 {
+  height: 2700%;
+}
+.weekView .ppns-cal__cell .event.top-28 {
+  top: 28%;
+}
+.weekView .ppns-cal__cell .event.h-28 {
+  height: 2800%;
+}
+.weekView .ppns-cal__cell .event.top-29 {
+  top: 29%;
+}
+.weekView .ppns-cal__cell .event.h-29 {
+  height: 2900%;
+}
+.weekView .ppns-cal__cell .event.top-30 {
+  top: 30%;
+}
+.weekView .ppns-cal__cell .event.h-30 {
+  height: 3000%;
+}
+.weekView .ppns-cal__cell .event.top-31 {
+  top: 31%;
+}
+.weekView .ppns-cal__cell .event.h-31 {
+  height: 3100%;
+}
+.weekView .ppns-cal__cell .event.top-32 {
+  top: 32%;
+}
+.weekView .ppns-cal__cell .event.h-32 {
+  height: 3200%;
+}
+.weekView .ppns-cal__cell .event.top-33 {
+  top: 33%;
+}
+.weekView .ppns-cal__cell .event.h-33 {
+  height: 3300%;
+}
+.weekView .ppns-cal__cell .event.top-34 {
+  top: 34%;
+}
+.weekView .ppns-cal__cell .event.h-34 {
+  height: 3400%;
+}
+.weekView .ppns-cal__cell .event.top-35 {
+  top: 35%;
+}
+.weekView .ppns-cal__cell .event.h-35 {
+  height: 3500%;
+}
+.weekView .ppns-cal__cell .event.top-36 {
+  top: 36%;
+}
+.weekView .ppns-cal__cell .event.h-36 {
+  height: 3600%;
+}
+.weekView .ppns-cal__cell .event.top-37 {
+  top: 37%;
+}
+.weekView .ppns-cal__cell .event.h-37 {
+  height: 3700%;
+}
+.weekView .ppns-cal__cell .event.top-38 {
+  top: 38%;
+}
+.weekView .ppns-cal__cell .event.h-38 {
+  height: 3800%;
+}
+.weekView .ppns-cal__cell .event.top-39 {
+  top: 39%;
+}
+.weekView .ppns-cal__cell .event.h-39 {
+  height: 3900%;
+}
+.weekView .ppns-cal__cell .event.top-40 {
+  top: 40%;
+}
+.weekView .ppns-cal__cell .event.h-40 {
+  height: 4000%;
+}
+.weekView .ppns-cal__cell .event.top-41 {
+  top: 41%;
+}
+.weekView .ppns-cal__cell .event.h-41 {
+  height: 4100%;
+}
+.weekView .ppns-cal__cell .event.top-42 {
+  top: 42%;
+}
+.weekView .ppns-cal__cell .event.h-42 {
+  height: 4200%;
+}
+.weekView .ppns-cal__cell .event.top-43 {
+  top: 43%;
+}
+.weekView .ppns-cal__cell .event.h-43 {
+  height: 4300%;
+}
+.weekView .ppns-cal__cell .event.top-44 {
+  top: 44%;
+}
+.weekView .ppns-cal__cell .event.h-44 {
+  height: 4400%;
+}
+.weekView .ppns-cal__cell .event.top-45 {
+  top: 45%;
+}
+.weekView .ppns-cal__cell .event.h-45 {
+  height: 4500%;
+}
+.weekView .ppns-cal__cell .event.top-46 {
+  top: 46%;
+}
+.weekView .ppns-cal__cell .event.h-46 {
+  height: 4600%;
+}
+.weekView .ppns-cal__cell .event.top-47 {
+  top: 47%;
+}
+.weekView .ppns-cal__cell .event.h-47 {
+  height: 4700%;
+}
+.weekView .ppns-cal__cell .event.top-48 {
+  top: 48%;
+}
+.weekView .ppns-cal__cell .event.h-48 {
+  height: 4800%;
+}
+.weekView .ppns-cal__cell .event.top-49 {
+  top: 49%;
+}
+.weekView .ppns-cal__cell .event.h-49 {
+  height: 4900%;
+}
+.weekView .ppns-cal__cell .event.top-50 {
+  top: 50%;
+}
+.weekView .ppns-cal__cell .event.h-50 {
+  height: 5000%;
+}
+.weekView .ppns-cal__cell .event.top-51 {
+  top: 51%;
+}
+.weekView .ppns-cal__cell .event.h-51 {
+  height: 5100%;
+}
+.weekView .ppns-cal__cell .event.top-52 {
+  top: 52%;
+}
+.weekView .ppns-cal__cell .event.h-52 {
+  height: 5200%;
+}
+.weekView .ppns-cal__cell .event.top-53 {
+  top: 53%;
+}
+.weekView .ppns-cal__cell .event.h-53 {
+  height: 5300%;
+}
+.weekView .ppns-cal__cell .event.top-54 {
+  top: 54%;
+}
+.weekView .ppns-cal__cell .event.h-54 {
+  height: 5400%;
+}
+.weekView .ppns-cal__cell .event.top-55 {
+  top: 55%;
+}
+.weekView .ppns-cal__cell .event.h-55 {
+  height: 5500%;
+}
+.weekView .ppns-cal__cell .event.top-56 {
+  top: 56%;
+}
+.weekView .ppns-cal__cell .event.h-56 {
+  height: 5600%;
+}
+.weekView .ppns-cal__cell .event.top-57 {
+  top: 57%;
+}
+.weekView .ppns-cal__cell .event.h-57 {
+  height: 5700%;
+}
+.weekView .ppns-cal__cell .event.top-58 {
+  top: 58%;
+}
+.weekView .ppns-cal__cell .event.h-58 {
+  height: 5800%;
+}
+.weekView .ppns-cal__cell .event.top-59 {
+  top: 59%;
+}
+.weekView .ppns-cal__cell .event.h-59 {
+  height: 5900%;
+}
+.weekView .ppns-cal__cell .event.top-60 {
+  top: 60%;
+}
+.weekView .ppns-cal__cell .event.h-60 {
+  height: 6000%;
+}
+.weekView .ppns-cal__cell .event.top-61 {
+  top: 61%;
+}
+.weekView .ppns-cal__cell .event.h-61 {
+  height: 6100%;
+}
+.weekView .ppns-cal__cell .event.top-62 {
+  top: 62%;
+}
+.weekView .ppns-cal__cell .event.h-62 {
+  height: 6200%;
+}
+.weekView .ppns-cal__cell .event.top-63 {
+  top: 63%;
+}
+.weekView .ppns-cal__cell .event.h-63 {
+  height: 6300%;
+}
+.weekView .ppns-cal__cell .event.top-64 {
+  top: 64%;
+}
+.weekView .ppns-cal__cell .event.h-64 {
+  height: 6400%;
+}
+.weekView .ppns-cal__cell .event.top-65 {
+  top: 65%;
+}
+.weekView .ppns-cal__cell .event.h-65 {
+  height: 6500%;
+}
+.weekView .ppns-cal__cell .event.top-66 {
+  top: 66%;
+}
+.weekView .ppns-cal__cell .event.h-66 {
+  height: 6600%;
+}
+.weekView .ppns-cal__cell .event.top-67 {
+  top: 67%;
+}
+.weekView .ppns-cal__cell .event.h-67 {
+  height: 6700%;
+}
+.weekView .ppns-cal__cell .event.top-68 {
+  top: 68%;
+}
+.weekView .ppns-cal__cell .event.h-68 {
+  height: 6800%;
+}
+.weekView .ppns-cal__cell .event.top-69 {
+  top: 69%;
+}
+.weekView .ppns-cal__cell .event.h-69 {
+  height: 6900%;
+}
+.weekView .ppns-cal__cell .event.top-70 {
+  top: 70%;
+}
+.weekView .ppns-cal__cell .event.h-70 {
+  height: 7000%;
+}
+.weekView .ppns-cal__cell .event.top-71 {
+  top: 71%;
+}
+.weekView .ppns-cal__cell .event.h-71 {
+  height: 7100%;
+}
+.weekView .ppns-cal__cell .event.top-72 {
+  top: 72%;
+}
+.weekView .ppns-cal__cell .event.h-72 {
+  height: 7200%;
+}
+.weekView .ppns-cal__cell .event.top-73 {
+  top: 73%;
+}
+.weekView .ppns-cal__cell .event.h-73 {
+  height: 7300%;
+}
+.weekView .ppns-cal__cell .event.top-74 {
+  top: 74%;
+}
+.weekView .ppns-cal__cell .event.h-74 {
+  height: 7400%;
+}
+.weekView .ppns-cal__cell .event.top-75 {
+  top: 75%;
+}
+.weekView .ppns-cal__cell .event.h-75 {
+  height: 7500%;
+}
+.weekView .ppns-cal__cell .event.top-76 {
+  top: 76%;
+}
+.weekView .ppns-cal__cell .event.h-76 {
+  height: 7600%;
+}
+.weekView .ppns-cal__cell .event.top-77 {
+  top: 77%;
+}
+.weekView .ppns-cal__cell .event.h-77 {
+  height: 7700%;
+}
+.weekView .ppns-cal__cell .event.top-78 {
+  top: 78%;
+}
+.weekView .ppns-cal__cell .event.h-78 {
+  height: 7800%;
+}
+.weekView .ppns-cal__cell .event.top-79 {
+  top: 79%;
+}
+.weekView .ppns-cal__cell .event.h-79 {
+  height: 7900%;
+}
+.weekView .ppns-cal__cell .event.top-80 {
+  top: 80%;
+}
+.weekView .ppns-cal__cell .event.h-80 {
+  height: 8000%;
+}
+.weekView .ppns-cal__cell .event.top-81 {
+  top: 81%;
+}
+.weekView .ppns-cal__cell .event.h-81 {
+  height: 8100%;
+}
+.weekView .ppns-cal__cell .event.top-82 {
+  top: 82%;
+}
+.weekView .ppns-cal__cell .event.h-82 {
+  height: 8200%;
+}
+.weekView .ppns-cal__cell .event.top-83 {
+  top: 83%;
+}
+.weekView .ppns-cal__cell .event.h-83 {
+  height: 8300%;
+}
+.weekView .ppns-cal__cell .event.top-84 {
+  top: 84%;
+}
+.weekView .ppns-cal__cell .event.h-84 {
+  height: 8400%;
+}
+.weekView .ppns-cal__cell .event.top-85 {
+  top: 85%;
+}
+.weekView .ppns-cal__cell .event.h-85 {
+  height: 8500%;
+}
+.weekView .ppns-cal__cell .event.top-86 {
+  top: 86%;
+}
+.weekView .ppns-cal__cell .event.h-86 {
+  height: 8600%;
+}
+.weekView .ppns-cal__cell .event.top-87 {
+  top: 87%;
+}
+.weekView .ppns-cal__cell .event.h-87 {
+  height: 8700%;
+}
+.weekView .ppns-cal__cell .event.top-88 {
+  top: 88%;
+}
+.weekView .ppns-cal__cell .event.h-88 {
+  height: 8800%;
+}
+.weekView .ppns-cal__cell .event.top-89 {
+  top: 89%;
+}
+.weekView .ppns-cal__cell .event.h-89 {
+  height: 8900%;
+}
+.weekView .ppns-cal__cell .event.top-90 {
+  top: 90%;
+}
+.weekView .ppns-cal__cell .event.h-90 {
+  height: 9000%;
+}
+.weekView .ppns-cal__cell .event.top-91 {
+  top: 91%;
+}
+.weekView .ppns-cal__cell .event.h-91 {
+  height: 9100%;
+}
+.weekView .ppns-cal__cell .event.top-92 {
+  top: 92%;
+}
+.weekView .ppns-cal__cell .event.h-92 {
+  height: 9200%;
+}
+.weekView .ppns-cal__cell .event.top-93 {
+  top: 93%;
+}
+.weekView .ppns-cal__cell .event.h-93 {
+  height: 9300%;
+}
+.weekView .ppns-cal__cell .event.top-94 {
+  top: 94%;
+}
+.weekView .ppns-cal__cell .event.h-94 {
+  height: 9400%;
+}
+.weekView .ppns-cal__cell .event.top-95 {
+  top: 95%;
+}
+.weekView .ppns-cal__cell .event.h-95 {
+  height: 9500%;
+}
+.weekView .ppns-cal__cell .event.top-96 {
+  top: 96%;
+}
+.weekView .ppns-cal__cell .event.h-96 {
+  height: 9600%;
+}
+.weekView .ppns-cal__cell .event.top-97 {
+  top: 97%;
+}
+.weekView .ppns-cal__cell .event.h-97 {
+  height: 9700%;
+}
+.weekView .ppns-cal__cell .event.top-98 {
+  top: 98%;
+}
+.weekView .ppns-cal__cell .event.h-98 {
+  height: 9800%;
+}
+.weekView .ppns-cal__cell .event.top-99 {
+  top: 99%;
+}
+.weekView .ppns-cal__cell .event.h-99 {
+  height: 9900%;
+}
+.weekView .ppns-cal__cell .event.top-100 {
+  top: 100%;
+}
+.weekView .ppns-cal__cell .event.h-100 {
+  height: 10000%;
+}
+
+/*------------------------------------------------------------
+  ---------------------- VISTA DEl DIA -----------------------
+------------------------------------------------------------*/
+/*------------------------------------------------------------
+  ---------------------- VISTA DEl AÑO -----------------------
+------------------------------------------------------------*/
+.yearView {
+  margin-top: 10px;
+}
+
+.yearView_body {
+  display: flex;
+  flex-wrap: wrap;
+}
+.yearView_body .ppns-cal_row {
+  margin: 15px 0;
+}
+@media only screen and (max-width:990px) {
+  .yearView_body .ppns-cal_row {
+    margin: 10px 0;
+  }
+  .yearView_body .ppns-cal_row .ppns-cal__cell {
+    font-size: 0.7em;
+  }
+}
+.yearView_body .ppns-cal_row .ppns-cal_cell {
+  text-align: center;
+  border-right: solid 1px #BDBDBD;
+  color: #bfbebe;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.yearView_body .ppns-cal_row .ppns-cal_cell:first-child {
+  border-left: solid 1px #BDBDBD;
+}
+.yearView_body .ppns-cal_row .ppns-cal_cell.active {
+  color: black;
+}
+.yearView_body .ppns-cal_row .ppns-cal_cell span {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=calendar.css.map */

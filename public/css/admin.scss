@@ -2,26 +2,11 @@
 
 
 /*--- HOME ---*/
-.main_calendar_panel{
-  height:75vh;
-  @media #{$media} and #{$pantallaSmall}{
-    height:50vh;
-  }
-  .ppns-cal__col{
-    font-size:.9em;
-  }
-}
 .side_calendar_panel{
-  height:50%;
   &:first-child{
     margin-bottom:30px;
   }
 }
-.calendar_content{
-  height:100%;
-  position:relative;
-}
-
 .side_calendar{
   .ppns-cal__cell span{
     height:25px;
@@ -38,6 +23,7 @@
     color: $dark-primary-color;
   }
 }
+
 .event_modal{
   top:100px;
   input{
@@ -106,16 +92,13 @@
     text-align:center;
     font-size:1em;
   }
+  //Panel de categorias
   .categories_event_panel{
     position:absolute;
-    background-color:#fafafa;
-    box-shadow:-5px 4px 20px 0 rgba(0, 0, 0, 0.2);
     top:0;
     left:30%;
     right:0;
-    border-radius:.3rem;
     transform:perspective(400px) rotateY(90deg);
-    padding:15px;
     min-width:300px;
     transition:transform .5s cubic-bezier(0,0,.5,1),opacity .2s linear;
     transform-origin:left;
@@ -239,7 +222,137 @@
       }
     }
   }
+
+  //Panel de evento
+  .repeat_event_panel{
+    position:absolute;
+    display:none;
+    right:15px;
+    bottom:15px;
+    left:15px;
+    top:15px;
+    transform:translate(-25%,0);
+    opacity:0;
+    transition:transform .3s ease-out,opacity .15s linear;
+    &.active{
+      transform:translate(0,0);
+      opacity:1;
+    }
+    .options_body{
+      padding:25px 0;
+      height:300px;
+      .repeat_option{
+        border-bottom: solid 1px #00796B;
+        cursor: pointer;
+        font-size: 0.9em;
+        padding-left: 15px;
+        height: calc(100% / 7);
+        display: flex;
+        align-items: center;
+        &:hover{
+          background-color:$light-primary-color;
+        }
+        &.selected{
+          background-color:$dark-primary-color;
+          color:white;
+          &:hover{background-color:$dark-primary-color;}
+
+        }
+      }
+    }
+  }
+  //Repeticion evento
+  .repeat_selection{
+    height:0;
+    &.active{
+      height:100%;
+    }
+    //Informacion de la repeticion
+    #picker_repeat{
+      border-bottom:solid 1px $divider-color;
+      opacity:0;
+      display:none;
+      transition:opacity .2s linear .3s;
+      height:25px;
+      &.active{
+        opacity:1;
+      }
+      #picker_repeat_input, .material-icons{
+        color:$divider-color;
+        cursor:pointer;
+      }
+    }
+    #info_repeat_event{
+      color:$divider-color;
+      margin:5px 15px;
+      font-size:.8em;
+      text-align:center;
+      &:before{
+        content:'*';
+      }
+    }
+    //Seleccionar dia del mes
+    #day_month_select{
+      transition:opacity .2s linear .4s;
+      opacity:0;
+      display:none;
+      &.active{
+        opacity:1;
+      }
+      td.day_month_table{
+        text-align:center;
+        cursor:pointer;
+        &:hover{
+          background-color:$light-primary-color;
+        }
+        &.selected{
+          &:hover{
+            background-color:$dark-primary-color;
+          }
+          background-color:$dark-primary-color;
+          color:white;
+        }
+      }
+    }
+    //Seleccionar dia de la semana
+    #day_repeat{
+      transition:opacity .2s linear .4s;
+      opacity:0;
+      display:none;
+      &.active{
+        opacity:1;
+      }
+      .col{
+        border:solid 1px $primary-color;
+        border-right:none;
+        height:35px;
+        line-height: 35px;
+        cursor:pointer;
+        &:first-child{
+          border-top-left-radius:4px;
+          border-bottom-left-radius:4px;
+        }
+        &:last-child{
+          border-right:solid 1px $primary-color;
+          border-top-right-radius:4px;
+          border-bottom-right-radius: 4px;
+        }
+        &.selected{
+          background-color:$primary-color;
+          color:white;
+          &:hover{
+            background-color:$primary-color;
+          }
+        }
+        &:hover{
+          background-color:$light-primary-color;
+        }
+      }
+    }
+  }
+
 }
+
 /*--- EQUIPO TECNICO ---*/
 .panel_header{
   .panel_title{

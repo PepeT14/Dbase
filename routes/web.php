@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
     Route::post('/instalaciones','instalacionesController@create')->name('instalacion.create');
 
     //Eventos
+    Route::post('/events','adminController@createEvent');
     Route::post('/categories','adminController@createCategory');
     Route::put('/categories','adminController@updateCategory');
 });

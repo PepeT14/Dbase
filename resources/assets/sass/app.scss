@@ -7,3 +7,8 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "node_modules/@material/tab-bar/mdc-tab-bar";
+@import "node_modules/@material/tab-scroller/mdc-tab-scroller";
+@import "node_modules/@material/tab-indicator/mdc-tab-indicator";
+@import "node_modules/@material/tab/mdc-tab";

@@ -24,7 +24,7 @@
             </div>
             <div class="col-lg-9 col-md-8 col-sm-12">
                 <div class="main_panel main_calendar_panel">
-                    <div id="week_calendar" class="main_calendar calendar_content"></div>
+                    <div id="week_calendar" class="main_calendar calendar_content" data-events="{{$admin->events()}}" data-categories="{{$admin->categories()}}"></div>
                 </div>
             </div>
         </div>

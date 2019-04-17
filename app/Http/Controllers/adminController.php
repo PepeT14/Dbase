@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\ClubMaterial;
 use Auth;
 use App\Models\Team;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use Carbon\CarbonInterval;
 use App\Models\League;
 use Mail;
 use App\Mail\inviteMister;
@@ -114,6 +117,69 @@ class adminController extends Controller
     * ----------------- EVENTOS  -------------------
     * ----------------------------------------------------*/
 
+    public function createEvent(Request $request){
+        $admin = Auth::guard('admin')->user();
+        if($request->ajax()) {
+            $startEvent = Carbon::createFromFormat('d-m-Y H:i',$request->start);
+            $endEvent = Carbon::createFromFormat('d-m-Y H:i',$request->end);
+            $endDate = Carbon::createFromFormat('d-m-Y H:i','30-06-2019 00:00');
+            $unidadFrecuencia = 'D';
+            $c = 0;
+            $fechas = array();
+            if($request->has('repetition')){
+                $repetition = collect($request->repetition);
+                $dias = $repetition->get('dias');
+                switch($repetition->get('frecuencia')){
+                    case 'Semanal':
+                        $unidadFrecuencia = 'W';
+                        break;
+                    case 'Mensual':
+                        $unidadFrecuencia = 'M';
+                        break;
+                    case 'Anual':
+                        $unidadFrecuencia = 'Y';
+                }
+                if($repetition->get('veces')==0){
+                    $veces = 1;
+                }else{
+                    $veces = $repetition->get('veces');
+                }
+                $interval = "P".$veces.$unidadFrecuencia;
+                $fechasInicio = $this->getDates($interval,$startEvent,$endDate,$dias);
+                $fechasFinal = $this->getDates($interval,$endEvent,$endDate,$dias);
+                if(count($fechasInicio) == count($fechasFinal)){
+                    for($i=0;$i<count($fechasInicio);$i++){
+                        DB::table('admin_events')->insert([
+                            'start' => Carbon::createFromFormat('d-m-Y H:i',$fechasInicio[$i]),
+                            'end' => Carbon::createFromFormat('d-m-Y H:i',$fechasFinal[$i]),
+                            'title' => $request->title,
+                            'admin_id' => $admin->id,
+                            'category_id' => $request->category
+                        ]);
+                    }
+                }
+                return $admin->events();
+            }else{
+                $fechas[] = $startEvent->format('d-m-Y H:i');
+                return $admin->events();
+            }
+        }
+        return $admin;
+    }
+    private static function getDates($intervalo,$fechaInicio,$fechaFinal,$dias){
+        $fechas = array();
+        $period = CarbonPeriod::create($fechaInicio,$intervalo,$fechaFinal);
+        foreach($period as $key => $date){
+            for($i=0;$i<count($dias);$i++){
+                $startEvent = new Carbon($date);
+                $horaInicio = $startEvent->format('H');
+                $minutos = $startEvent->format('i');
+                $startEvent = $startEvent->startOfWeek()->addDay($dias[$i]-1)->addHours($horaInicio)->addMinutes($minutos)->format('d-m-Y H:i');
+                $fechas[] = $startEvent;
+            }
+        }
+        return $fechas;
+    }
     public function createCategory(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()){

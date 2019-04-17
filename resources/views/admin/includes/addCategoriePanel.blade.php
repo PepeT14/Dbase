@@ -1,4 +1,4 @@
-<div class="panel categories_event_panel animated">
+<div class="panel categories_event_panel">
     <div class="row panel-title justify-content-center">
         <span class="title-text">Etiquetas</span>
         <button type="button" class="close close-menu">

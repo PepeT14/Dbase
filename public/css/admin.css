@@ -1,26 +1,6 @@
 /*--- HOME ---*/
-.main_calendar_panel {
-  height: 75vh;
-}
-@media only screen and (max-width:758px) {
-  .main_calendar_panel {
-    height: 50vh;
-  }
-}
-.main_calendar_panel .ppns-cal__col {
-  font-size: 0.9em;
-}
-
-.side_calendar_panel {
-  height: 50%;
-}
 .side_calendar_panel:first-child {
   margin-bottom: 30px;
-}
-
-.calendar_content {
-  height: 100%;
-  position: relative;
 }
 
 .side_calendar .ppns-cal__cell span {
@@ -110,14 +90,10 @@
 }
 .event_modal .categories_event_panel {
   position: absolute;
-  background-color: #fafafa;
-  box-shadow: -5px 4px 20px 0 rgba(0, 0, 0, 0.2);
   top: 0;
   left: 30%;
   right: 0;
-  border-radius: 0.3rem;
   transform: perspective(400px) rotateY(90deg);
-  padding: 15px;
   min-width: 300px;
   transition: transform 0.5s cubic-bezier(0, 0, 0.5, 1), opacity 0.2s linear;
   transform-origin: left;
@@ -239,6 +215,129 @@
 .event_modal .categories_event_panel #create_category .color_grid_selection .color_selection.selected .material-icons {
   opacity: 1;
 }
+.event_modal .repeat_event_panel {
+  position: absolute;
+  display: none;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  top: 15px;
+  transform: translate(-25%, 0);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.15s linear;
+}
+.event_modal .repeat_event_panel.active {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.event_modal .repeat_event_panel .options_body {
+  padding: 25px 0;
+  height: 300px;
+}
+.event_modal .repeat_event_panel .options_body .repeat_option {
+  border-bottom: solid 1px #00796B;
+  cursor: pointer;
+  font-size: 0.9em;
+  padding-left: 15px;
+  height: calc(100% / 7);
+  display: flex;
+  align-items: center;
+}
+.event_modal .repeat_event_panel .options_body .repeat_option:hover {
+  background-color: #B2DFDB;
+}
+.event_modal .repeat_event_panel .options_body .repeat_option.selected {
+  background-color: #00796B;
+  color: white;
+}
+.event_modal .repeat_event_panel .options_body .repeat_option.selected:hover {
+  background-color: #00796B;
+}
+.event_modal .repeat_selection {
+  height: 0;
+}
+.event_modal .repeat_selection.active {
+  height: 100%;
+}
+.event_modal .repeat_selection #picker_repeat {
+  border-bottom: solid 1px #BDBDBD;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.2s linear 0.3s;
+  height: 25px;
+}
+.event_modal .repeat_selection #picker_repeat.active {
+  opacity: 1;
+}
+.event_modal .repeat_selection #picker_repeat #picker_repeat_input, .event_modal .repeat_selection #picker_repeat .material-icons {
+  color: #BDBDBD;
+  cursor: pointer;
+}
+.event_modal .repeat_selection #info_repeat_event {
+  color: #BDBDBD;
+  margin: 5px 15px;
+  font-size: 0.8em;
+  text-align: center;
+}
+.event_modal .repeat_selection #info_repeat_event:before {
+  content: "*";
+}
+.event_modal .repeat_selection #day_month_select {
+  transition: opacity 0.2s linear 0.4s;
+  opacity: 0;
+  display: none;
+}
+.event_modal .repeat_selection #day_month_select.active {
+  opacity: 1;
+}
+.event_modal .repeat_selection #day_month_select td.day_month_table {
+  text-align: center;
+  cursor: pointer;
+}
+.event_modal .repeat_selection #day_month_select td.day_month_table:hover {
+  background-color: #B2DFDB;
+}
+.event_modal .repeat_selection #day_month_select td.day_month_table.selected {
+  background-color: #00796B;
+  color: white;
+}
+.event_modal .repeat_selection #day_month_select td.day_month_table.selected:hover {
+  background-color: #00796B;
+}
+.event_modal .repeat_selection #day_repeat {
+  transition: opacity 0.2s linear 0.4s;
+  opacity: 0;
+  display: none;
+}
+.event_modal .repeat_selection #day_repeat.active {
+  opacity: 1;
+}
+.event_modal .repeat_selection #day_repeat .col {
+  border: solid 1px #009688;
+  border-right: none;
+  height: 35px;
+  line-height: 35px;
+  cursor: pointer;
+}
+.event_modal .repeat_selection #day_repeat .col:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.event_modal .repeat_selection #day_repeat .col:last-child {
+  border-right: solid 1px #009688;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.event_modal .repeat_selection #day_repeat .col.selected {
+  background-color: #009688;
+  color: white;
+}
+.event_modal .repeat_selection #day_repeat .col.selected:hover {
+  background-color: #009688;
+}
+.event_modal .repeat_selection #day_repeat .col:hover {
+  background-color: #B2DFDB;
+}
 
 /*--- EQUIPO TECNICO ---*/
 .panel_header .panel_title {
@@ -247,7 +346,7 @@
   clear: both;
 }
 .panel_header .panel_description {
-  font-family: Lato, sans-serif;
+  font-family: Raleway, sans-serif;
   text-align: center;
 }
 .panel_header .panel_description a {

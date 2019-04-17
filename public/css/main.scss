@@ -2,6 +2,8 @@
 @import 'SASS/formulario';
 @import 'SASS/modal';
 
+
+
 /*---LOGO_CARGA---*/
 .loader{
   position: fixed;
@@ -76,7 +78,12 @@
     transform: scale(0);
   }
 }
-
+.panel{
+  background-color:#fafafa;
+  border-radius:.3rem;
+  padding:15px;
+  box-shadow:-5px 4px 20px 0 rgba(0, 0, 0, 0.2);
+}
 .border-secundario{border:1px solid $light-primary-color}
 
 .logout{cursor:pointer;}

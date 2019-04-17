@@ -142,7 +142,7 @@ $(document).ready(function(){
     };
 
 
-    /*--- FullCalendar ---*/
+    /*--- ppns_Calendar ---*/
     function initCalendar(){
         let pantallaResponsive = window.innerWidth < 1000;
         $('#month_calendar').Calendar({
@@ -151,12 +151,14 @@ $(document).ready(function(){
             view:'monthView'
         });
         $('#week_calendar').Calendar({
-           shortDays: pantallaResponsive,
-           mainCalendar:true,
-           view:'weekView'
+            shortDays: pantallaResponsive,
+            mainCalendar:true,
+            view:'weekView'
         });
         $('.ppns-main.monthView').find('.today').addClass('active');
-
+        $('#cancel_event').on('click',function(){
+           $('#add_event_modal').modal('hide');
+        });
     }
 
     $('#link_equipos').on('click',function(){
