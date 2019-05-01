@@ -56,9 +56,10 @@ class adminController extends Controller
     * ----------------------------------------------*/
     public function teams(Request $request){
         $admin = Auth::guard('admin')->user();
-        $teams = $admin->club->teams;
-        $leagues = League::all();
-        $view = view('admin.teams')->with(compact(['admin','leagues','teams']));
+        $teams = $admin->club->teams()->whereNotNull('league_id')->get();
+        $teamsNof = $admin->club->teams()->whereNull('league_id')->get();
+        $leagues = League::all()->where('province',$admin->club->province);
+        $view = view('admin.teams')->with(compact(['admin','teams','teamsNof','leagues']));
         $sections = $view->renderSections();
         if($request->ajax()){
             return response()->json(['html'=>$sections['content'],'title'=>'equipos']);
@@ -124,9 +125,9 @@ class adminController extends Controller
             $endEvent = Carbon::createFromFormat('d-m-Y H:i',$request->end);
             $endDate = Carbon::createFromFormat('d-m-Y H:i','30-06-2019 00:00');
             $unidadFrecuencia = 'D';
-            $c = 0;
-            $fechas = array();
-            if($request->has('repetition')){
+            $category = $request->has('category') ? $request->category : 'null';
+            if($request->has('repetition') && $request->repetition !== null){
+                var_dump($request->repetition);
                 $repetition = collect($request->repetition);
                 $dias = $repetition->get('dias');
                 switch($repetition->get('frecuencia')){
@@ -139,11 +140,7 @@ class adminController extends Controller
                     case 'Anual':
                         $unidadFrecuencia = 'Y';
                 }
-                if($repetition->get('veces')==0){
-                    $veces = 1;
-                }else{
-                    $veces = $repetition->get('veces');
-                }
+                $veces = $repetition->get('veces');
                 $interval = "P".$veces.$unidadFrecuencia;
                 $fechasInicio = $this->getDates($interval,$startEvent,$endDate,$dias);
                 $fechasFinal = $this->getDates($interval,$endEvent,$endDate,$dias);
@@ -152,17 +149,22 @@ class adminController extends Controller
                         DB::table('admin_events')->insert([
                             'start' => Carbon::createFromFormat('d-m-Y H:i',$fechasInicio[$i]),
                             'end' => Carbon::createFromFormat('d-m-Y H:i',$fechasFinal[$i]),
-                            'title' => $request->title,
+                            'title' =>  $request->title,
                             'admin_id' => $admin->id,
-                            'category_id' => $request->category
+                            'category_id' => $category
                         ]);
                     }
                 }
-                return $admin->events();
             }else{
-                $fechas[] = $startEvent->format('d-m-Y H:i');
-                return $admin->events();
+                DB::table('admin_events')->insert([
+                    'start' => $startEvent,
+                    'end' => $endEvent,
+                    'title' =>  $request->title,
+                    'admin_id' => $admin->id,
+                    'category_id' => $category
+                ]);
             }
+            return $admin->events();
         }
         return $admin;
     }

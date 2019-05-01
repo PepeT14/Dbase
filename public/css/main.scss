@@ -1,8 +1,23 @@
+@charset "UTF-8";
+//Plantillas propias
 @import 'SASS/layout';
 @import 'SASS/formulario';
 @import 'SASS/modal';
-
-
+//MATERIALIZE
+// Color
+@import "materialize/components/color-variables";
+@import "materialize/components/color-classes";
+@import 'materialize/components/variables';
+// Reset
+@import "materialize/components/normalize";
+@import "materialize/components/global";
+@import 'materialize/components/waves';
+@import 'materialize/components/buttons';
+@import 'materialize/components/tabs';
+@import "materialize/components/dropdown";
+@import 'materialize/components/forms/forms';
+@import 'materialize/components/forms/input-fields';
+@import 'materialize/components/forms/select';
 
 /*---LOGO_CARGA---*/
 .loader{
@@ -24,6 +39,12 @@
 }
 
 /*------ CLASES GLOBALES ------*/
+
+.modal-content{
+  border:none;
+  border-radius:0;
+  box-shadow:0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+}
 .main-content{
   overflow:auto;
 }
@@ -99,11 +120,21 @@
     }
   }
 }
-div.cs-select{
-  &.cs-skin-underline{
-    font-size:1em;
+
+/*--- Materialize Custom ---*/
+.select-wrapper li:not(.disabled) span{
+  text-transform: uppercase
+}
+
+.tabs{
+  a{
+    text-decoration: none;
+  }
+  .indicator{
+    background-color: $dark-primary-color;
   }
 }
+
 /*----BOTONES-----*/
 
 .btn-principal{
@@ -148,18 +179,12 @@ div.cs-select{
 }
 .btn-cancel{
   background-color:$cancel-color;
-  &:hover{background-color:$dark-cancel-color}
 }
 .btn-save{
-  background:$save-color;
-  color:white;
-  font-size:1.1em;
-  cursor:pointer;
-  padding:5px 10px;
-  &:hover{background-color:$dark-save-color}
+  background:$primary-color;
 }
 .btn-shadow{
-  box-shadow:2px 8px 17px 0 rgba(0,0,0,0.1);
+  box-shadow:0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 /*---- ANIMACIONES ---*/
 @keyframes pulse{

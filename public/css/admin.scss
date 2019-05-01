@@ -1,5 +1,5 @@
 @import 'SASS/variables';
-
+@import 'admin/teams';
 
 /*--- HOME ---*/
 .side_calendar_panel{
@@ -19,11 +19,29 @@
   font-size:1.2em;
   font-weight:bold;
   color:$primary-color;
+  padding-top:15px;
   .material-icons{
     color: $dark-primary-color;
   }
 }
-
+#add_event{
+  cursor:pointer;
+  position:relative;
+  &:hover{
+    &:after{
+      opacity:.2;
+      background-color:$dark-primary-color;
+      transform:scale(1.1);
+    }
+  }
+  &.active{
+    &:before{
+      opacity:.08;
+      transform:scale(1.1);
+      background-color:$dark-primary-color;
+    }
+  }
+}
 .event_modal{
   top:100px;
   input{
@@ -495,6 +513,7 @@
     text-align:right;
   }
 }
+
 #select_team_icon{
   border-radius: 50%;
   //box-shadow: 0 0 2px black;

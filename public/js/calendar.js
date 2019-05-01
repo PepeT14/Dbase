@@ -62,13 +62,23 @@ class Calendar{
     render(){
         this.renderCabecera();
         this.renderContenido();
-
         if(this.mainCalendar){
             let that = this;
             //Renderizamos y activamos la logica de añadir eventos
             this.dinamicEvents();
+            $('.ppns_today').on('click',function(){
+                that.moment = moment();
+                Calendar.destroy(that.contenedor);
+                that.render();
+                let sideCalendar = $('.side_calendar').Calendar('getCalendar');
+                if(sideCalendar !== undefined){
+                    sideCalendar.moment = moment();
+                    Calendar.destroy(sideCalendar.contenedor);
+                    sideCalendar.render();
+                }
+            });
             try{
-                this.renderEvents();
+                this.renderEvents(this.events);
             }catch{
                 console.log('error al renderizar los eventos');
             }
@@ -79,8 +89,7 @@ class Calendar{
                 let sideCalendar = $('.side_calendar').Calendar('getCalendar');
                 if(sideCalendar !== undefined){
                     sideCalendar.view = 'yearView';
-                    sideCalendar.year = that.year;
-                    sideCalendar.month = that.month;
+                    sideCalendar.moment = that.moment;
                     Calendar.destroy(sideCalendar.contenedor);
                     sideCalendar.render();
                 }
@@ -92,7 +101,7 @@ class Calendar{
                 let sideCalendar = $('.side_calendar').Calendar('getCalendar');
                 if(sideCalendar !== undefined){
                     sideCalendar.view = 'monthView';
-                    sideCalendar.month = that.month;
+                    sideCalendar.moment = that.moment;
                     Calendar.destroy(sideCalendar.contenedor);
                     sideCalendar.render();
                 }
@@ -198,7 +207,7 @@ class Calendar{
                 fila = $(fila).append('<div class="ppns-cal__cell day'+ (hoy ? ' today' : '') +  (notActual ? ' old' : '')+ (main ? ' main' :'')+
                                 '" data-fecha="'+n.format('DD-MM-YYYY')+
                                 '" data-week="'+n.week()+'" ' +
-                                'data-month="'+n.month()+'"><span>'+n.format('D')+'</span></div>');
+                                'data-month="'+n.month()+'"><div class="month_cell_header"><span>'+n.format('D')+'</span></div><div class="month_events"></div></div>');
             });
             tabla = $(tabla).append(fila[0].outerHTML);
         });
@@ -206,6 +215,7 @@ class Calendar{
         if(this.mainCalendar){
             $('#month_view').addClass('active');
         }else{
+            $('.ppns-main.monthView').find('.today').addClass('active');
             //Si no es calendario principal y vista de mes al clikar en un dia, renderizamos un nuevo calendario principal de la semana
             $('.ppns-cal__cell.day').on('click',function(){
                 //Eliminamos la clase activa del actual.
@@ -246,7 +256,7 @@ class Calendar{
         let ahora = moment().hour();
         for(let h=0;h<24;h++){
             let before = week < moment().week() || week === moment().week() && h < ahora;
-            let fila = '<div class="ppns-cal__row hour weekView '+(h === ahora ? 'now' : '') + (before ? ' older' : '')+'" />';
+            let fila = '<div class="ppns-cal__row hour weekView '+(h === ahora ? 'now' : '') + (before ? ' older' : '')+'" data-hour="'+h+'"/>';
             for(let d=0;d<8;d++){
                 if(d===0){
                     fila = $(fila).append('<div class="ppns-cal__cell hour_info_cell weekView"><span>'+moment().week(week).startOf('day').add(h,'hour').format('HH:mm')+'</span></div>');
@@ -259,7 +269,7 @@ class Calendar{
         tabla = $(tabla).append(body[0].outerHTML);
         $(this.contenedor).append(tabla[0].outerHTML);
         $('#week_view').addClass('active');
-        $('.main_calendar_panel').scrollTop($('.weekView.now').prev().prev()[0].offsetTop);
+        $('.main_calendar_panel').scrollTop($('.weekView.now').prev().prev()[0].offsetTop - 70);
         //Marco el dia de la semana que estamos focalizando.
         $('.ppns-main.weekView .ppns-cal__col').each(function(){
             //Por cada columna de la cabacera
@@ -324,15 +334,8 @@ class Calendar{
         //Hay dos formas de añadir eventos, una dinamicamente clickando doble sobre un dia, u hora, o arrastrando.
             //DOBLE CLICK
         celda.on('dblclick',function(){
-            startDate = $(this).data('fecha');
-            endDate = $(this).data('fecha');
             //Muestro el modal para crear el evento
             $('#add_event_modal').modal('show');
-            //Me creo un objeto evento con la fecha de inicio y de fin obtenidas anteriormente.
-            evento = new Event({
-                start:startDate,
-                end:endDate
-            });
         });
             //TODO ARRASTRANDO
         /*celda.on('mousedown',function() {
@@ -380,9 +383,21 @@ class Calendar{
                 });
             }
         });*/
+        let modal = $('#add_event_modal');
+        modal.on('show.bs.modal',function(){
+            startDate = $(this).data('fecha');
+            endDate = $(this).data('fecha');
 
+            //Me creo un objeto evento con la fecha de inicio y de fin obtenidas anteriormente.
+            evento = new Event({
+                start:startDate,
+                end:endDate
+            });
+            //Logica para guardar el evento cuando se pulse aceptar.
+            that.saveEvent();
+        });
         //Cuando el modal de creación de evento se cierra, se reinicia. Y se vuelve al inicio
-        $('#add_event_modal').on('hide.bs.modal',function(){
+        modal.on('hide.bs.modal',function(){
             //Limpio las celdas seleccionadas
             $('.ppns-cal__cell.selected').removeClass('selected');
             //Reinciio las variables
@@ -391,9 +406,8 @@ class Calendar{
             isMouseDown = false;
             //Elimino el evento para que la siguiente vez salga como de inicio.
             evento.destroy();
+            $('#save_event').off('click');
         });
-        //Logica para guardar el evento cuando se pulse aceptar.
-        this.saveEvent();
     };
 
     /*---------------------------------------------------------------
@@ -401,18 +415,26 @@ class Calendar{
     * ---------------------------------------------------------------*/
     saveEvent(){
         let that = this;
+        let frecuencia = null;
+        let veces = null;
         $('#save_event').on('click',function(){
             evento.title = $('input[name="event-title"]').val();
             if(evento.title === '' || evento.start === '' || evento.end === ''){
-
+                console.log('Formulario incompleto')
             }else{
+                frecuencia = evento.repetition.frecuencia;
+                veces = evento.repetition.veces;
+                if(frecuencia === '-' || veces === '-'){
+                    evento.repetition = {};
+                }
                 $.ajax({
                     type:'POST',
                     url: $('meta[name="app-url"]').attr('content') + $(this).data('href'),
                     data:{title:evento.title,start:evento.start,category:evento.category,end:evento.end,repetition:evento.repetition},
                     success:function(response){
                         that.events = response;
-                        that.renderWeekEvents(response);
+                        that.renderEvents(response);
+                        $('#add_event_modal').modal('hide');
                     },
                     error:function(err){
                         console.log(err);
@@ -422,30 +444,102 @@ class Calendar{
         });
     }
 
-    renderWeekEvents(e){
+    renderEvents(e){
+        //Renderizamos en el menú lateral los eventos del dia de hoy en caso de que existiera.
+        function renderDayEvents(categories){
+            let el = $('.side_calendar_panel .events_info');
+            let esHoy = function(m){
+                return moment(m).isBetween(moment().startOf('date'),moment().endOf('date'),null,'[]');
+            }
+            if(el !== undefined){
+                let todayEvents = e.filter(ev => esHoy(ev.start) || esHoy(ev.end));
+                let id=0;
+                todayEvents.forEach(function(e){
+                    categories.forEach(function(ca){
+                        if(ca.id === e.category_id){
+                            id = e.category_id;
+                            return false;
+                        }
+                    });
+                    let start = esHoy(e.start) ? moment(e.start).format('HH:mm') : '';
+                    let end = esHoy(e.end) ? moment(e.end).format('HH:mm') : '';
+                    $(el).append('<div class="today_event event c-'+id+'" data-start="'+e.start+'" data-end="'+e.end+'"><span>'+e.title+'</span><span>'+start+' - '+end+'</span></div>');
+                })
+            }
+        }
+        $('.event').remove();
         if(e !== null){
-            let color = 'grey';
-            let top = 0;
-            let events = e.filter(date => !moment(date.start).isBefore(moment().week(this.week).startOf('week')) &&  !moment(date.start).isAfter(moment().week(this.week).endOf('week')));
             let categories = $(this.contenedor).data('categories');
-            events.forEach(function(date){
-                $('.date_cell').each(function(i,el){
-                    let fC = moment($(el).data('fecha'), 'DD-MM-YYYY HH:mm');
-                    let start = moment(date.start);
-                    let end = moment(date.end);
-                    let h = end.diff(start,'hours')+1;
-                    if(start.isSame(fC,'hour')){
-                        top = (start.diff(fC,'minutes') / 60) * 100;
+            renderDayEvents(categories);
+            let f = this.view === 'monthView' ? 'month' : 'week';
+            let events = e.filter(ev => moment(ev.start).isBetween(moment(this.moment).startOf(f),moment(this.moment).endOf(f),null,'[]')
+                                        || moment(ev.end).isBetween(moment(this.moment).startOf(f),moment(this.moment).endOf(f),null,'[]'));
+            categories.forEach(function(ca){
+                document.styleSheets[0].insertRule('.c-'+ca.id+'.event:before{background-color:'+ca.color+'}');
+                document.styleSheets[0].insertRule('.c-'+ca.id+'.event:after{border-left:solid 2px '+ca.color+'; padding:2px; overflow:hidden; text-overflow:ellipsis;}');
+            });
+            if(f === 'month'){
+                let id = 0;
+                let me = false;
+                $('.ppns-cal__cell.day').each(function(i,el){
+                    let fecha = moment($(el).data('fecha'),'DD-MM-YYYY');
+                    let evs = events.filter(date => fecha.isBetween(moment(date.start),moment(date.end),'day','[]'));
+                    evs.forEach(function(event,i){
                         categories.forEach(function(ca){
-                            if(ca.id === date.category_id){
-                                color = ca.color;
+                            if(ca.id === event.category_id){
+                                id = event.category_id;
                                 return false;
                             }
                         });
-                        $(el).append('<div class="event top-'+top+' h-'+h+'" style="background-color:'+color+'">'+date.title+'</div>');
-                    }
+                        if(i>1){
+                            me = true;
+                        }else{
+                            $(el).find('.month_events').append('<div class="event c-'+id+'">'+event.title+'</div>');
+                        }
+                    });
+                    if(me){$(el).find('.month_events').append('<div class="more_events">...</div>')}
+                    me = false;
                 });
-            });
+            }else{
+                events.forEach(function(date){
+                    if(!Event.isRender(date)){
+                        //CADA EVENTO
+                        let start = moment(date.start);
+                        let end = moment(date.end);
+                        //En kn tengo guardado los eventos con los que comparte en algun momento una celda. Si, k = 0, renderizo este evento solo.
+                        //Veo si este evento comparte fechas con otros eventos.
+                        let kn = events.filter(e => (start.isBetween(moment(e.start),moment(e.end),null,'[)') || moment(e.start).isBetween(start,end,null,'[)')) && e.id!==date.id);
+                        if(kn.length === 0 ){
+                            Event.weekRender(categories,date);
+                        }else{
+                            let width = 100;
+                            let c = 1;
+                            let left = 0;
+                            let er = 0;
+                            kn.forEach(function(event,i){
+                                if(!Event.isRender(event)){
+                                    let eventosAlaVez = kn.filter(e => (moment(event.start).isBetween(moment(e.start),moment(e.end),null,'[)') || moment(e.start).isBetween(moment(event.start),moment(event.end),null,'[)')));
+                                    c = eventosAlaVez.length > c ? eventosAlaVez.length : c;
+                                    if(eventosAlaVez.length>1){
+                                        width = 100 / (eventosAlaVez.length+1);
+                                        eventosAlaVez.forEach(function(ev){if(Event.isRender(ev)){er++;}});
+                                        left = i !== 0 ? left + width : er * width;
+                                    }else{
+                                        left = 0;
+                                        width = 100 - (100 / (c+1));
+                                    }
+                                    Event.weekRender(categories,event,'width:'+width+'%; left:'+left+'%;');
+                                }
+                            });
+                            width = 100 / (c+1);
+                            left = 100 - width;
+                            Event.weekRender(categories,date,'width:'+width+'%; left:'+left+'%;');
+                            console.log(kn,date);
+                        }
+                    }
+
+                });
+            }
             console.log(events);
             console.log(categories);
         }else{
@@ -464,7 +558,7 @@ class Event{
         this.title = options.title ? options.title : '';
         this.start = options.start ? options.start : '';
         this.end = options.end ? options.end : '';
-        this.repetition = {dias:[]};
+        this.repetition = {};
         this.startPick = null;
         this.endPick = null;
         this.initSelectDates();
@@ -487,7 +581,59 @@ class Event{
         $('#add_rep_event, #repeat_button,.repeat_event_panel .close, .repeat_option, .month_table td.day_month_table, #day_repeat .col').off('click');
     }
 
-
+    /*---------------------------------------------------------------
+    * --------------------- RENDERIZAR EL EVENTO --------------------
+    * ---------------------------------------------------------------*/
+    static isRender(event){
+        return $('.event[data-id='+event.id+']').length > 0;
+    }
+    static monthRender(id,event){
+        let width = 100;
+        let alt = 20;
+        $('.ppns-cal__cell.day').each(function(i,el){
+            if(moment($(el).data('fecha'),'DD-MM-YYYY').isSame(moment(event.start),'day')){
+                width = width * (moment(event.end).diff(moment(event.start),'days')+1);
+                if(($(el).find('.month_events').height() + alt) > $(el).height()/100*50){
+                    console.log('Hay mas eventos');
+                }else{
+                    $(el).find('.month_events').append('<div class="event c-'+id+'" style="width:'+width+'%">'+event.title+'</div>');
+                }
+                return false;
+            }
+        });
+    }
+    static weekRender(categories,event,style){
+        style = style !== undefined ? style : '';
+        let top = 0;
+        let start = moment(event.start);
+        let end = moment(event.end);
+        let duration = end.diff(start,'hours');
+        let id = 0;
+        categories.forEach(function(ca){
+            if(ca.id === event.category_id){
+                id = event.category_id;
+                return false;
+            }
+        });
+        for(let i=0;i<7;i++){
+            for(let j=0;j<24;j++){
+                //Por cada celda que voy a controlar.
+                let el = $('.ppns-cal__row.hour').eq(j).find('.date_cell').eq(i);
+                let fC = moment($(el).data('fecha'), 'DD-MM-YYYY HH:mm');
+                if(start.isSame(fC,'hour')){
+                    top = (start.diff(fC,'minutes') / 60) * 100;
+                    if((start.hour() + duration) >= 25){
+                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+(24 - start.hour())+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
+                        start.add(1,'day');
+                        duration = duration - (24 - start.hour());
+                        start.hour(0);
+                    }else{
+                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+duration+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
+                    }
+                }
+            }
+        }
+    }
     /*---------------------------------------------------------------
     * --------------------- FECHAS DEL EVENTO --------------------
     * ---------------------------------------------------------------*/
@@ -769,7 +915,7 @@ class Event{
                 let day_repeat = $('#day_repeat');
                 let day_month = $('#day_month_select');
                 that.repetition.frecuencia = $(this).data('value');
-                that.repetition.veces=0;
+                that.repetition.veces=1;
                 $('#picker_repeat_input').text($(this).text());
                 $('#repeat_frec_info').text($(this).text());
                 //Si el calendario del mes esta activo, lo oculto
@@ -833,16 +979,16 @@ class Event{
 
         //Accion al elegir un dia de repeticion
         $('#day_repeat').find('.col').on('click',function(){
-            selectRepeatDays('#day_repeat .col',that,this);
+            selectRepeatDays('#day_repeat .col',that,this,'day');
         });
 
         //Accion al elegir un dia del mes de repeticion
         $('.month_table td.day_month_table').on('click',function(){
-           selectRepeatDays('.month_table td.day_month_table',that,this);
+           selectRepeatDays('.month_table td.day_month_table',that,this,'month');
         });
 
         //Funcion auxiliar para seleccionar los dias de repeticion
-        function selectRepeatDays(s,e,el){
+        function selectRepeatDays(s,e,el,f){
             let days = [];
             let info_day = $('#repeat_day_info');
             if($(el).hasClass('selected')){
@@ -855,7 +1001,11 @@ class Event{
             let seleccionados = $(s+'.selected');
             if(seleccionados.length>0){
                 seleccionados.each(function(i,el){
-                    days.push(moment().day($(el).data('value')).format('dddd'));
+                    if(f === 'month'){
+                        days.push($(el).data('value'))
+                    }else{
+                        days.push(moment().day($(el).data('value')).format('dddd'));
+                    }
                 });
                 info_day.text('. Los '+days.join(', '));
             }else{
@@ -888,22 +1038,25 @@ class Event{
                 day_repeat.css('display','flex').addClass('active');
                 //Añado la clase main del dia que se ha seleccionado.
                 day_repeat.find('.col').each(function(i,el){
-                    if($(el).data('value') === moment().date(that.start.split('-')[0]).day() && !that.repetition.dias.includes($(this).data('value').toString())){
+                    if($(el).data('value') === moment().date(that.start.split('-')[0]).day()){
                         $(this).addClass('selected');
-                        that.repetition.dias.push($(this).data('value').toString());
+                        that.repetition.dias = [$(this).data('value').toString()];
                         day = moment().day($(this).data('value')).format('dddd');
                     }
                 });
+                //Caso de que se escoja frecuencia mensual
             }else if(outPut.includes('Meses')){
+                //Si está la repeticion semanal, se oculta
                 if(day_repeat.hasClass('active')){
                     day_repeat.removeClass('active').hide();
                     info_day.text('');
                 }
+                //Se muestra el selector de dias mensual
                 day_month.show().addClass('active');
                 $('.month_table td.day_month_table').each(function(i,el){
-                    if($(el).data('value') === that.start.split('-')[0].toString()){
+                    if($(el).data('value').toString() === that.start.split('-')[0]){
                         $(this).addClass('selected');
-                        that.repetition.dias.push($(this).data('value').toString());
+                        that.repetition.dias = [$(this).data('value').toString()];
                     }
                 });
             }else{

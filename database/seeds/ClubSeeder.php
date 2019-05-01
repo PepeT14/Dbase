@@ -19,7 +19,8 @@ class ClubSeeder extends Seeder
             'country' => 'España',
             'city' => 'Jerez de la Frontera',
             'address' => 'Avenida Lebrija, 8',
-            'state' => 'Andalucía'
+            'state' => 'andalucia',
+            'province' => 'cadiz'
         ]);
 
         DB::table('clubs')->insert([
@@ -29,7 +30,8 @@ class ClubSeeder extends Seeder
             'country' => 'España',
             'city' => 'Jerez de la Frontera',
             'address' => 'Avenida Marianistas, 11',
-            'state' => 'Andalucía'
+            'state' => 'andalucia',
+            'province' => 'cadiz'
         ]);
 
         //Instalaciones

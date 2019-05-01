@@ -77,8 +77,8 @@ Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
 
     //Equipos
     Route::get('/teams','adminController@teams')->name('admin.teams');
+    Route::post('/teams','teamController@create')->name('admin.teams');
     Route::post('/teams/ajaxUpdate','adminController@teamsDataUpdate');
-    Route::get('admin/teams/create','teamController@create')->name('team.create');
 
     //Entrenadores
     Route::get('admin/invitar/{team}','adminController@misterInvite')->name('mister.invite');

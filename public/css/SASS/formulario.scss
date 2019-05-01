@@ -16,11 +16,14 @@
 .formulario-contenido{
   padding-top:1em;
 }
+
 .form-title{
-  border-bottom:solid 1px $dark-primary-color;
   text-align:center;
-  padding:0.5em 0 1em 0;
-  margin:0 2em;
+  padding:0.5em 0;
+  font-size:1.2em;
+  color:$dark-primary-color;
+  font-family:Raleway,sans-serif;
+  text-transform: uppercase;
 }
 .form-row.button-row{
   text-align:center;

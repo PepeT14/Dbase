@@ -1,0 +1,144 @@
+@import '../SASS/variables';
+
+.admin_teams{
+  display:inline-flex;
+  justify-content: space-around;
+}
+.main_team_panel{
+  right:5%;
+  &.active{
+    right:0;
+  }
+  &:first-child{
+    left:5%;
+    &.active{
+      left:0;
+    }
+  }
+  &.oculto{
+    animation:vlv .4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  &.active{
+    top:0;
+    cursor:default;
+    animation:activate .6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  &:before{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color:black;
+    opacity:.6;
+  }
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position: center;
+  margin:0 15px;
+  position:absolute;
+  top:100px;
+  height:50%;
+  width:35%;
+  transition:transform,left,right,top .6s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor:pointer;
+  z-index:3;
+  &:not(.active):hover{
+    transform:scale(1.04);
+    box-shadow:0 8px 17px 0 rgba(0, 0, 0, 0.1);
+  }
+  &#federados_link{
+    background-image:url('../../imagenes/fondos/federados.jpg');
+  }
+  &#escuela_link{
+    background-image: url('../../imagenes/fondos/escuela.jpg');
+  }
+  .back_icon{
+    opacity:0;
+    display:none;
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:white;
+    font-size:2em;
+    cursor:pointer;
+    z-index:3;
+  }
+  .title{
+    font-size:4em;
+    color:white;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-family:Comfortaa,cursive;
+    font-weight: bold;
+  }
+}
+.content_section{
+  position:absolute;
+  top:20%;
+  bottom:0;
+}
+.teams_section{
+  display:none;
+  opacity:0;
+  transform:perspective(100vw) translate3d(0,0,-200px);
+  transition:transform .25s, opacity .2s;
+  height:100%;
+  &.active{
+    opacity:1;
+    transform:perspective(100vw) translate3d(0,0,0);
+  }
+}
+.teams_info{
+  position:absolute;
+  top:30px;
+  .teams_table{
+    position:absolute;
+    left:15px;
+    top:5px;
+    white-space: nowrap;
+    td{
+      padding:15px;
+    }
+  }
+}
+#add_team_form .input-field input{
+  text-transform: uppercase;
+}
+#add_team_button{
+  position:absolute;
+  top:10%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  &.right{
+    top:15px;
+    right:0;
+    left:unset;
+    transform:translate(0,0);
+  }
+}
+/*----- ANIMACIONES ----*/
+@keyframes activate {
+  0%{
+    width:35%;
+    height:50%;
+  }
+  100%{
+    width:calc(100% - 30px);
+    height:20%;
+  }
+}
+
+@keyframes vlv{
+  from{
+    width:calc(100% - 30px);
+    height:20%;
+  }
+  to{
+    width:35%;
+    height:50%;
+  }
+}

@@ -15,11 +15,11 @@
                             <span>Eventos de hoy</span>
                         </div>
                         <div class="col-2">
-                            <span class="material-icons">add</span>
+                            <span class="material-icons" id="add_event">add</span>
                         </div>
                     </div>
                     <div class="info-divider"></div>
-                    <div class="row events_info"></div>
+                    <div class="events_info"></div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-8 col-sm-12">

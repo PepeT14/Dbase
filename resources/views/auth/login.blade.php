@@ -8,11 +8,11 @@
             <div class="container d-flex justify-content-center align-items-center">
                 <div class="seccion-inicial">
                     <div class="login-button">
-                        <button class="btn btn-login">LOGIN</button>
+                        <button class="btn btn-login teal darken-2">LOGIN</button>
                     </div>
                     <div class="divider"></div>
                     <div class="registra-club">
-                        <button class="btn btn-register welcome-btn" data-section=".club-register-form">REGISTRA TU CLUB</button>
+                        <button class="btn btn-register welcome-btn teal darken-2" data-section=".club-register-form">REGISTRA TU CLUB</button>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-10 welcome-form-container" id="login-form">

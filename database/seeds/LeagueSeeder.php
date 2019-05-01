@@ -11,13 +11,21 @@ class LeagueSeeder extends Seeder
      */
     public function run()
     {
+
+        $categorias = array('prebenjamin','benjamin','alevin','infantil','cadete','juvenil');
+
+        for($i = 0;$i<count($categorias);$i++){
+            DB::table('leagues')->insert([
+                ['name' => '3ª andaluza','state'=>'andalucia','province'=>'cadiz','category'=>$categorias[$i]],
+                ['name' => '2ª andaluza','state' =>'andalucia','province'=>'cadiz','category'=>$categorias[$i]]
+            ]);
+            if($i != 0){
+                DB::table('leagues')->insert([
+                   ['name'=>'4ª andaluza','state'=>'andalucia','province'=>'cadiz','category'=>$categorias[$i]]
+                ]);
+            }
+        }
         //
-        DB::table('leagues')->insert([
-            'name' => 'Tercera Andaluza',
-            'state' => 'Andalucía',
-            'province' => 'Cádiz',
-            'category' => 'Pre-Benjamin',
-        ]);
 
         //PARTIDOS
         DB::table('matchs')->insert([

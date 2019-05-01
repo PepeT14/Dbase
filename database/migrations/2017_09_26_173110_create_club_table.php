@@ -23,6 +23,7 @@ class CreateClubTable extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('state');
+            $table->string('province');
             $table->timestamps();
         });
     }

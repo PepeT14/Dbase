@@ -14,7 +14,7 @@
 <div class="loader"><img class="icono-loader" src="{{asset('imagenes/carga.png')}}"></div>
 @auth('admin')
     <header id="admin_header">
-        <div class="d-none d-md-flex row header align-items-center">
+        <div class="d-sm-none d-md-flex row header align-items-center">
             @include('admin.adminHeader')
         </div>
         <div class="d-md-none row header align-items-center">

@@ -15,6 +15,7 @@ class CreateAdminEvents extends Migration
     {
         //
         Schema::create('admin_events',function(Blueprint $table){
+            $table->increments('id');
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('place')->nullable();

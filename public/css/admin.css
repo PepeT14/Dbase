@@ -1,3 +1,151 @@
+.admin_teams {
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.main_team_panel {
+  right: 5%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0 15px;
+  position: absolute;
+  top: 100px;
+  height: 50%;
+  width: 35%;
+  transition: transform, left, right, top 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), -webkit-transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+  z-index: 3;
+}
+.main_team_panel.active {
+  right: 0;
+}
+.main_team_panel:first-child {
+  left: 5%;
+}
+.main_team_panel:first-child.active {
+  left: 0;
+}
+.main_team_panel.oculto {
+  animation: vlv 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.main_team_panel.active {
+  top: 0;
+  cursor: default;
+  animation: activate 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.main_team_panel:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.6;
+}
+.main_team_panel:not(.active):hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.1);
+}
+.main_team_panel#federados_link {
+  background-image: url("../../imagenes/fondos/federados.jpg");
+}
+.main_team_panel#escuela_link {
+  background-image: url("../../imagenes/fondos/escuela.jpg");
+}
+.main_team_panel .back_icon {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 3;
+}
+.main_team_panel .title {
+  font-size: 4em;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Comfortaa, cursive;
+  font-weight: bold;
+}
+
+.content_section {
+  position: absolute;
+  top: 20%;
+  bottom: 0;
+}
+
+.teams_section {
+  display: none;
+  opacity: 0;
+  transform: perspective(100vw) translate3d(0, 0, -200px);
+  transition: transform 0.25s, opacity 0.2s;
+  height: 100%;
+}
+.teams_section.active {
+  opacity: 1;
+  transform: perspective(100vw) translate3d(0, 0, 0);
+}
+
+.teams_info {
+  position: absolute;
+  top: 30px;
+}
+.teams_info .teams_table {
+  position: absolute;
+  left: 15px;
+  top: 5px;
+  white-space: nowrap;
+}
+.teams_info .teams_table td {
+  padding: 15px;
+}
+
+#add_team_form .input-field input {
+  text-transform: uppercase;
+}
+
+#add_team_button {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#add_team_button.right {
+  top: 15px;
+  right: 0;
+  left: unset;
+  transform: translate(0, 0);
+}
+
+/*----- ANIMACIONES ----*/
+@keyframes activate {
+  0% {
+    width: 35%;
+    height: 50%;
+  }
+  100% {
+    width: calc(100% - 30px);
+    height: 20%;
+  }
+}
+@keyframes vlv {
+  from {
+    width: calc(100% - 30px);
+    height: 20%;
+  }
+  to {
+    width: 35%;
+    height: 50%;
+  }
+}
 /*--- HOME ---*/
 .side_calendar_panel:first-child {
   margin-bottom: 30px;
@@ -14,9 +162,25 @@
   font-size: 1.2em;
   font-weight: bold;
   color: #009688;
+  padding-top: 15px;
 }
 .info_panel .material-icons {
   color: #00796B;
+}
+
+#add_event {
+  cursor: pointer;
+  position: relative;
+}
+#add_event:hover:after {
+  opacity: 0.2;
+  background-color: #00796B;
+  transform: scale(1.1);
+}
+#add_event.active:before {
+  opacity: 0.08;
+  transform: scale(1.1);
+  background-color: #00796B;
 }
 
 .event_modal {

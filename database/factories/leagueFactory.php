@@ -21,8 +21,8 @@ $factory->define(App\Models\League::class, function (Faker\Generator $faker) {
         $province = 'Murcia';
     return [
         'name' =>$faker->name,
-        'state' => $state,
-        'province' => $province,
+        'state' => 'andalucia',
+        'province' => 'cadiz',
         'category' => $faker->randomElement('Pre-Benjamin','Benjamin','Alevin','Infantil','Cadete','Juvenil')
     ];
 });

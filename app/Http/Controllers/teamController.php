@@ -11,18 +11,34 @@ class teamController extends Controller
 {
     //Create
     public function create(Request $request){
+
+        $this->validate($request,[
+            'team-name' =>'required',
+            'team-category' => 'required'
+        ]);
         $team = New Team();
         $admin = Auth::guard('admin')->user();
-        $team->name = $request->input('name');
-        $team->club_id = $admin->club->id;
-        $leagueName = $request->input('league');
-        $team->category = $request->input('category');
-        $league = League::all()->where('name','=',$leagueName)->first();
-        $team->league_id = $league->id;
+        $name = $request->input('team-name');
+        $category = $request->input('team-category');
 
-        $team->save();
+        if(!$admin->club->teams()->where('category','=',$category)->where('name','=',$name)->get()->isEmpty()){
+            $errors = 'Ya existe un equipo con este nombre y en esta categoria para este club.';
+            return response()->json(['error'=>$errors]);
+        }else{
+            $team->name = $name;
+            $team->club_id = $admin->club->id;
+            $team->category = $category;
+            if($request->has('team-league')){
+                $league = $request->input('team-league');
+                $league = League::all()->where('name','=',$league)->first();
+                $team->league_id = $league->id;
+            }
+            $team->save();
+            $teams = $admin->club->teams()->whereNotNull('league_id')->get();
+            $teamsNof = $admin->club->teams()->whereNull('league_id')->get();
+            return response()->json(['teams'=>$teams,'teamsNof'=>$teamsNof]);
+        }
 
-        return redirect()->action('adminController@teams');
 
     }
 

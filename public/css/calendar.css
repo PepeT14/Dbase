@@ -15,10 +15,13 @@
 .ppns-cal__cell, .ppns-cal__col {
   width: calc(100% / 7);
   text-align: center;
+  justify-content: center;
+  align-items: center;
   position: relative;
   height: 100%;
   font-size: 0.8em;
   margin: 0 5px;
+  display: flex;
 }
 .ppns-cal__cell.head, .ppns-cal__col.head {
   text-transform: uppercase;
@@ -203,9 +206,27 @@
   content: none;
 }
 
+.month_events {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin-top: 40px;
+}
+.month_events .event {
+  padding: 0 6px;
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+.month_events .more_events {
+  cursor: default;
+}
+
 /*-----------------------------------------------------------------
   ---------------------- VISTA DE LA SEMANA -----------------------
 -------------------------------------------------------------------*/
+.weekView .ppns-cal__cell, .weekView .ppns-cal__col {
+  min-width: calc(100% / 8 - 10px);
+}
 .weekView .weekView_body {
   z-index: 1;
 }
@@ -219,7 +240,7 @@
   position: sticky;
   top: 60px;
   background-color: white;
-  z-index: 2;
+  z-index: 4;
 }
 .weekView .ppns-cal__row.older {
   background-color: #fafafa;
@@ -249,612 +270,613 @@
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: 1;
 }
 .weekView .ppns-cal__cell .event.top-0 {
   top: 0%;
 }
 .weekView .ppns-cal__cell .event.h-0 {
-  height: 0%;
+  height: 0px;
 }
 .weekView .ppns-cal__cell .event.top-1 {
   top: 1%;
 }
 .weekView .ppns-cal__cell .event.h-1 {
-  height: 100%;
+  height: 50px;
 }
 .weekView .ppns-cal__cell .event.top-2 {
   top: 2%;
 }
 .weekView .ppns-cal__cell .event.h-2 {
-  height: 200%;
+  height: 100px;
 }
 .weekView .ppns-cal__cell .event.top-3 {
   top: 3%;
 }
 .weekView .ppns-cal__cell .event.h-3 {
-  height: 300%;
+  height: 150px;
 }
 .weekView .ppns-cal__cell .event.top-4 {
   top: 4%;
 }
 .weekView .ppns-cal__cell .event.h-4 {
-  height: 400%;
+  height: 200px;
 }
 .weekView .ppns-cal__cell .event.top-5 {
   top: 5%;
 }
 .weekView .ppns-cal__cell .event.h-5 {
-  height: 500%;
+  height: 250px;
 }
 .weekView .ppns-cal__cell .event.top-6 {
   top: 6%;
 }
 .weekView .ppns-cal__cell .event.h-6 {
-  height: 600%;
+  height: 300px;
 }
 .weekView .ppns-cal__cell .event.top-7 {
   top: 7%;
 }
 .weekView .ppns-cal__cell .event.h-7 {
-  height: 700%;
+  height: 350px;
 }
 .weekView .ppns-cal__cell .event.top-8 {
   top: 8%;
 }
 .weekView .ppns-cal__cell .event.h-8 {
-  height: 800%;
+  height: 400px;
 }
 .weekView .ppns-cal__cell .event.top-9 {
   top: 9%;
 }
 .weekView .ppns-cal__cell .event.h-9 {
-  height: 900%;
+  height: 450px;
 }
 .weekView .ppns-cal__cell .event.top-10 {
   top: 10%;
 }
 .weekView .ppns-cal__cell .event.h-10 {
-  height: 1000%;
+  height: 500px;
 }
 .weekView .ppns-cal__cell .event.top-11 {
   top: 11%;
 }
 .weekView .ppns-cal__cell .event.h-11 {
-  height: 1100%;
+  height: 550px;
 }
 .weekView .ppns-cal__cell .event.top-12 {
   top: 12%;
 }
 .weekView .ppns-cal__cell .event.h-12 {
-  height: 1200%;
+  height: 600px;
 }
 .weekView .ppns-cal__cell .event.top-13 {
   top: 13%;
 }
 .weekView .ppns-cal__cell .event.h-13 {
-  height: 1300%;
+  height: 650px;
 }
 .weekView .ppns-cal__cell .event.top-14 {
   top: 14%;
 }
 .weekView .ppns-cal__cell .event.h-14 {
-  height: 1400%;
+  height: 700px;
 }
 .weekView .ppns-cal__cell .event.top-15 {
   top: 15%;
 }
 .weekView .ppns-cal__cell .event.h-15 {
-  height: 1500%;
+  height: 750px;
 }
 .weekView .ppns-cal__cell .event.top-16 {
   top: 16%;
 }
 .weekView .ppns-cal__cell .event.h-16 {
-  height: 1600%;
+  height: 800px;
 }
 .weekView .ppns-cal__cell .event.top-17 {
   top: 17%;
 }
 .weekView .ppns-cal__cell .event.h-17 {
-  height: 1700%;
+  height: 850px;
 }
 .weekView .ppns-cal__cell .event.top-18 {
   top: 18%;
 }
 .weekView .ppns-cal__cell .event.h-18 {
-  height: 1800%;
+  height: 900px;
 }
 .weekView .ppns-cal__cell .event.top-19 {
   top: 19%;
 }
 .weekView .ppns-cal__cell .event.h-19 {
-  height: 1900%;
+  height: 950px;
 }
 .weekView .ppns-cal__cell .event.top-20 {
   top: 20%;
 }
 .weekView .ppns-cal__cell .event.h-20 {
-  height: 2000%;
+  height: 1000px;
 }
 .weekView .ppns-cal__cell .event.top-21 {
   top: 21%;
 }
 .weekView .ppns-cal__cell .event.h-21 {
-  height: 2100%;
+  height: 1050px;
 }
 .weekView .ppns-cal__cell .event.top-22 {
   top: 22%;
 }
 .weekView .ppns-cal__cell .event.h-22 {
-  height: 2200%;
+  height: 1100px;
 }
 .weekView .ppns-cal__cell .event.top-23 {
   top: 23%;
 }
 .weekView .ppns-cal__cell .event.h-23 {
-  height: 2300%;
+  height: 1150px;
 }
 .weekView .ppns-cal__cell .event.top-24 {
   top: 24%;
 }
 .weekView .ppns-cal__cell .event.h-24 {
-  height: 2400%;
+  height: 1200px;
 }
 .weekView .ppns-cal__cell .event.top-25 {
   top: 25%;
 }
 .weekView .ppns-cal__cell .event.h-25 {
-  height: 2500%;
+  height: 1250px;
 }
 .weekView .ppns-cal__cell .event.top-26 {
   top: 26%;
 }
 .weekView .ppns-cal__cell .event.h-26 {
-  height: 2600%;
+  height: 1300px;
 }
 .weekView .ppns-cal__cell .event.top-27 {
   top: 27%;
 }
 .weekView .ppns-cal__cell .event.h-27 {
-  height: 2700%;
+  height: 1350px;
 }
 .weekView .ppns-cal__cell .event.top-28 {
   top: 28%;
 }
 .weekView .ppns-cal__cell .event.h-28 {
-  height: 2800%;
+  height: 1400px;
 }
 .weekView .ppns-cal__cell .event.top-29 {
   top: 29%;
 }
 .weekView .ppns-cal__cell .event.h-29 {
-  height: 2900%;
+  height: 1450px;
 }
 .weekView .ppns-cal__cell .event.top-30 {
   top: 30%;
 }
 .weekView .ppns-cal__cell .event.h-30 {
-  height: 3000%;
+  height: 1500px;
 }
 .weekView .ppns-cal__cell .event.top-31 {
   top: 31%;
 }
 .weekView .ppns-cal__cell .event.h-31 {
-  height: 3100%;
+  height: 1550px;
 }
 .weekView .ppns-cal__cell .event.top-32 {
   top: 32%;
 }
 .weekView .ppns-cal__cell .event.h-32 {
-  height: 3200%;
+  height: 1600px;
 }
 .weekView .ppns-cal__cell .event.top-33 {
   top: 33%;
 }
 .weekView .ppns-cal__cell .event.h-33 {
-  height: 3300%;
+  height: 1650px;
 }
 .weekView .ppns-cal__cell .event.top-34 {
   top: 34%;
 }
 .weekView .ppns-cal__cell .event.h-34 {
-  height: 3400%;
+  height: 1700px;
 }
 .weekView .ppns-cal__cell .event.top-35 {
   top: 35%;
 }
 .weekView .ppns-cal__cell .event.h-35 {
-  height: 3500%;
+  height: 1750px;
 }
 .weekView .ppns-cal__cell .event.top-36 {
   top: 36%;
 }
 .weekView .ppns-cal__cell .event.h-36 {
-  height: 3600%;
+  height: 1800px;
 }
 .weekView .ppns-cal__cell .event.top-37 {
   top: 37%;
 }
 .weekView .ppns-cal__cell .event.h-37 {
-  height: 3700%;
+  height: 1850px;
 }
 .weekView .ppns-cal__cell .event.top-38 {
   top: 38%;
 }
 .weekView .ppns-cal__cell .event.h-38 {
-  height: 3800%;
+  height: 1900px;
 }
 .weekView .ppns-cal__cell .event.top-39 {
   top: 39%;
 }
 .weekView .ppns-cal__cell .event.h-39 {
-  height: 3900%;
+  height: 1950px;
 }
 .weekView .ppns-cal__cell .event.top-40 {
   top: 40%;
 }
 .weekView .ppns-cal__cell .event.h-40 {
-  height: 4000%;
+  height: 2000px;
 }
 .weekView .ppns-cal__cell .event.top-41 {
   top: 41%;
 }
 .weekView .ppns-cal__cell .event.h-41 {
-  height: 4100%;
+  height: 2050px;
 }
 .weekView .ppns-cal__cell .event.top-42 {
   top: 42%;
 }
 .weekView .ppns-cal__cell .event.h-42 {
-  height: 4200%;
+  height: 2100px;
 }
 .weekView .ppns-cal__cell .event.top-43 {
   top: 43%;
 }
 .weekView .ppns-cal__cell .event.h-43 {
-  height: 4300%;
+  height: 2150px;
 }
 .weekView .ppns-cal__cell .event.top-44 {
   top: 44%;
 }
 .weekView .ppns-cal__cell .event.h-44 {
-  height: 4400%;
+  height: 2200px;
 }
 .weekView .ppns-cal__cell .event.top-45 {
   top: 45%;
 }
 .weekView .ppns-cal__cell .event.h-45 {
-  height: 4500%;
+  height: 2250px;
 }
 .weekView .ppns-cal__cell .event.top-46 {
   top: 46%;
 }
 .weekView .ppns-cal__cell .event.h-46 {
-  height: 4600%;
+  height: 2300px;
 }
 .weekView .ppns-cal__cell .event.top-47 {
   top: 47%;
 }
 .weekView .ppns-cal__cell .event.h-47 {
-  height: 4700%;
+  height: 2350px;
 }
 .weekView .ppns-cal__cell .event.top-48 {
   top: 48%;
 }
 .weekView .ppns-cal__cell .event.h-48 {
-  height: 4800%;
+  height: 2400px;
 }
 .weekView .ppns-cal__cell .event.top-49 {
   top: 49%;
 }
 .weekView .ppns-cal__cell .event.h-49 {
-  height: 4900%;
+  height: 2450px;
 }
 .weekView .ppns-cal__cell .event.top-50 {
   top: 50%;
 }
 .weekView .ppns-cal__cell .event.h-50 {
-  height: 5000%;
+  height: 2500px;
 }
 .weekView .ppns-cal__cell .event.top-51 {
   top: 51%;
 }
 .weekView .ppns-cal__cell .event.h-51 {
-  height: 5100%;
+  height: 2550px;
 }
 .weekView .ppns-cal__cell .event.top-52 {
   top: 52%;
 }
 .weekView .ppns-cal__cell .event.h-52 {
-  height: 5200%;
+  height: 2600px;
 }
 .weekView .ppns-cal__cell .event.top-53 {
   top: 53%;
 }
 .weekView .ppns-cal__cell .event.h-53 {
-  height: 5300%;
+  height: 2650px;
 }
 .weekView .ppns-cal__cell .event.top-54 {
   top: 54%;
 }
 .weekView .ppns-cal__cell .event.h-54 {
-  height: 5400%;
+  height: 2700px;
 }
 .weekView .ppns-cal__cell .event.top-55 {
   top: 55%;
 }
 .weekView .ppns-cal__cell .event.h-55 {
-  height: 5500%;
+  height: 2750px;
 }
 .weekView .ppns-cal__cell .event.top-56 {
   top: 56%;
 }
 .weekView .ppns-cal__cell .event.h-56 {
-  height: 5600%;
+  height: 2800px;
 }
 .weekView .ppns-cal__cell .event.top-57 {
   top: 57%;
 }
 .weekView .ppns-cal__cell .event.h-57 {
-  height: 5700%;
+  height: 2850px;
 }
 .weekView .ppns-cal__cell .event.top-58 {
   top: 58%;
 }
 .weekView .ppns-cal__cell .event.h-58 {
-  height: 5800%;
+  height: 2900px;
 }
 .weekView .ppns-cal__cell .event.top-59 {
   top: 59%;
 }
 .weekView .ppns-cal__cell .event.h-59 {
-  height: 5900%;
+  height: 2950px;
 }
 .weekView .ppns-cal__cell .event.top-60 {
   top: 60%;
 }
 .weekView .ppns-cal__cell .event.h-60 {
-  height: 6000%;
+  height: 3000px;
 }
 .weekView .ppns-cal__cell .event.top-61 {
   top: 61%;
 }
 .weekView .ppns-cal__cell .event.h-61 {
-  height: 6100%;
+  height: 3050px;
 }
 .weekView .ppns-cal__cell .event.top-62 {
   top: 62%;
 }
 .weekView .ppns-cal__cell .event.h-62 {
-  height: 6200%;
+  height: 3100px;
 }
 .weekView .ppns-cal__cell .event.top-63 {
   top: 63%;
 }
 .weekView .ppns-cal__cell .event.h-63 {
-  height: 6300%;
+  height: 3150px;
 }
 .weekView .ppns-cal__cell .event.top-64 {
   top: 64%;
 }
 .weekView .ppns-cal__cell .event.h-64 {
-  height: 6400%;
+  height: 3200px;
 }
 .weekView .ppns-cal__cell .event.top-65 {
   top: 65%;
 }
 .weekView .ppns-cal__cell .event.h-65 {
-  height: 6500%;
+  height: 3250px;
 }
 .weekView .ppns-cal__cell .event.top-66 {
   top: 66%;
 }
 .weekView .ppns-cal__cell .event.h-66 {
-  height: 6600%;
+  height: 3300px;
 }
 .weekView .ppns-cal__cell .event.top-67 {
   top: 67%;
 }
 .weekView .ppns-cal__cell .event.h-67 {
-  height: 6700%;
+  height: 3350px;
 }
 .weekView .ppns-cal__cell .event.top-68 {
   top: 68%;
 }
 .weekView .ppns-cal__cell .event.h-68 {
-  height: 6800%;
+  height: 3400px;
 }
 .weekView .ppns-cal__cell .event.top-69 {
   top: 69%;
 }
 .weekView .ppns-cal__cell .event.h-69 {
-  height: 6900%;
+  height: 3450px;
 }
 .weekView .ppns-cal__cell .event.top-70 {
   top: 70%;
 }
 .weekView .ppns-cal__cell .event.h-70 {
-  height: 7000%;
+  height: 3500px;
 }
 .weekView .ppns-cal__cell .event.top-71 {
   top: 71%;
 }
 .weekView .ppns-cal__cell .event.h-71 {
-  height: 7100%;
+  height: 3550px;
 }
 .weekView .ppns-cal__cell .event.top-72 {
   top: 72%;
 }
 .weekView .ppns-cal__cell .event.h-72 {
-  height: 7200%;
+  height: 3600px;
 }
 .weekView .ppns-cal__cell .event.top-73 {
   top: 73%;
 }
 .weekView .ppns-cal__cell .event.h-73 {
-  height: 7300%;
+  height: 3650px;
 }
 .weekView .ppns-cal__cell .event.top-74 {
   top: 74%;
 }
 .weekView .ppns-cal__cell .event.h-74 {
-  height: 7400%;
+  height: 3700px;
 }
 .weekView .ppns-cal__cell .event.top-75 {
   top: 75%;
 }
 .weekView .ppns-cal__cell .event.h-75 {
-  height: 7500%;
+  height: 3750px;
 }
 .weekView .ppns-cal__cell .event.top-76 {
   top: 76%;
 }
 .weekView .ppns-cal__cell .event.h-76 {
-  height: 7600%;
+  height: 3800px;
 }
 .weekView .ppns-cal__cell .event.top-77 {
   top: 77%;
 }
 .weekView .ppns-cal__cell .event.h-77 {
-  height: 7700%;
+  height: 3850px;
 }
 .weekView .ppns-cal__cell .event.top-78 {
   top: 78%;
 }
 .weekView .ppns-cal__cell .event.h-78 {
-  height: 7800%;
+  height: 3900px;
 }
 .weekView .ppns-cal__cell .event.top-79 {
   top: 79%;
 }
 .weekView .ppns-cal__cell .event.h-79 {
-  height: 7900%;
+  height: 3950px;
 }
 .weekView .ppns-cal__cell .event.top-80 {
   top: 80%;
 }
 .weekView .ppns-cal__cell .event.h-80 {
-  height: 8000%;
+  height: 4000px;
 }
 .weekView .ppns-cal__cell .event.top-81 {
   top: 81%;
 }
 .weekView .ppns-cal__cell .event.h-81 {
-  height: 8100%;
+  height: 4050px;
 }
 .weekView .ppns-cal__cell .event.top-82 {
   top: 82%;
 }
 .weekView .ppns-cal__cell .event.h-82 {
-  height: 8200%;
+  height: 4100px;
 }
 .weekView .ppns-cal__cell .event.top-83 {
   top: 83%;
 }
 .weekView .ppns-cal__cell .event.h-83 {
-  height: 8300%;
+  height: 4150px;
 }
 .weekView .ppns-cal__cell .event.top-84 {
   top: 84%;
 }
 .weekView .ppns-cal__cell .event.h-84 {
-  height: 8400%;
+  height: 4200px;
 }
 .weekView .ppns-cal__cell .event.top-85 {
   top: 85%;
 }
 .weekView .ppns-cal__cell .event.h-85 {
-  height: 8500%;
+  height: 4250px;
 }
 .weekView .ppns-cal__cell .event.top-86 {
   top: 86%;
 }
 .weekView .ppns-cal__cell .event.h-86 {
-  height: 8600%;
+  height: 4300px;
 }
 .weekView .ppns-cal__cell .event.top-87 {
   top: 87%;
 }
 .weekView .ppns-cal__cell .event.h-87 {
-  height: 8700%;
+  height: 4350px;
 }
 .weekView .ppns-cal__cell .event.top-88 {
   top: 88%;
 }
 .weekView .ppns-cal__cell .event.h-88 {
-  height: 8800%;
+  height: 4400px;
 }
 .weekView .ppns-cal__cell .event.top-89 {
   top: 89%;
 }
 .weekView .ppns-cal__cell .event.h-89 {
-  height: 8900%;
+  height: 4450px;
 }
 .weekView .ppns-cal__cell .event.top-90 {
   top: 90%;
 }
 .weekView .ppns-cal__cell .event.h-90 {
-  height: 9000%;
+  height: 4500px;
 }
 .weekView .ppns-cal__cell .event.top-91 {
   top: 91%;
 }
 .weekView .ppns-cal__cell .event.h-91 {
-  height: 9100%;
+  height: 4550px;
 }
 .weekView .ppns-cal__cell .event.top-92 {
   top: 92%;
 }
 .weekView .ppns-cal__cell .event.h-92 {
-  height: 9200%;
+  height: 4600px;
 }
 .weekView .ppns-cal__cell .event.top-93 {
   top: 93%;
 }
 .weekView .ppns-cal__cell .event.h-93 {
-  height: 9300%;
+  height: 4650px;
 }
 .weekView .ppns-cal__cell .event.top-94 {
   top: 94%;
 }
 .weekView .ppns-cal__cell .event.h-94 {
-  height: 9400%;
+  height: 4700px;
 }
 .weekView .ppns-cal__cell .event.top-95 {
   top: 95%;
 }
 .weekView .ppns-cal__cell .event.h-95 {
-  height: 9500%;
+  height: 4750px;
 }
 .weekView .ppns-cal__cell .event.top-96 {
   top: 96%;
 }
 .weekView .ppns-cal__cell .event.h-96 {
-  height: 9600%;
+  height: 4800px;
 }
 .weekView .ppns-cal__cell .event.top-97 {
   top: 97%;
 }
 .weekView .ppns-cal__cell .event.h-97 {
-  height: 9700%;
+  height: 4850px;
 }
 .weekView .ppns-cal__cell .event.top-98 {
   top: 98%;
 }
 .weekView .ppns-cal__cell .event.h-98 {
-  height: 9800%;
+  height: 4900px;
 }
 .weekView .ppns-cal__cell .event.top-99 {
   top: 99%;
 }
 .weekView .ppns-cal__cell .event.h-99 {
-  height: 9900%;
+  height: 4950px;
 }
 .weekView .ppns-cal__cell .event.top-100 {
   top: 100%;
 }
 .weekView .ppns-cal__cell .event.h-100 {
-  height: 10000%;
+  height: 5000px;
 }
 
 /*------------------------------------------------------------
@@ -897,6 +919,41 @@
 }
 .yearView_body .ppns-cal_row .ppns-cal_cell span {
   cursor: pointer;
+}
+
+/*------------------------------------------------------------
+  ---------------------- EVENTO EN GENERAL -----------------------
+------------------------------------------------------------*/
+.today_event {
+  position: relative;
+  height: 40px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: space-between;
+}
+
+.event {
+  position: relative;
+}
+.event:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  opacity: 0.3;
+}
+.event:after {
+  position: absolute;
+  content: attr(data-title);
+  width: 100%;
+  height: 100%;
+  color: black;
+  left: 0;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 /*# sourceMappingURL=calendar.css.map */
