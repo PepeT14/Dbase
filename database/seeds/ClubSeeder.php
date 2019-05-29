@@ -35,12 +35,13 @@ class ClubSeeder extends Seeder
         ]);
 
         //Instalaciones
-        DB::table('instalaciones')->insert([
+        /*DB::table('instalaciones')->insert([
             ['name' => 'Pista 1','tipo' => 'Fútbol 7', 'club_id' => 1],
             ['name' => 'Pista 2','tipo' => 'Fútbol 7', 'club_id' => 2],
             ['name' => 'Pista 3','tipo' => 'Fútbol 11', 'club_id' => 1],
             ['name' => 'Pista 4','tipo' => 'Fútbol sala', 'club_id' => 2]
         ]);
+        */
 
         //Material
         DB::table('club_materials')->insert([

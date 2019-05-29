@@ -23,9 +23,10 @@ $imagen-inicio-fondo:url('../../imagenes/fondos/fondo-equipo.jpg');
 
 $media:'only screen';
 
-$pantallaSmall:'(max-width:758px)';
-$pantallaMedia:'(max-width:990px)';
-$pantallaGrande:'(min-width:992px)';
+$pantallaSmall:'(min-device-width:320px) and (max-width:750px)';
+$pantallaMedia:'(max-device-width:1024px)';
+$pantallaGrande:'(min-width:1224px)';
+$pantallaExtraGrande:'(min-width:1824px)';
 
 $fuente:Roboto,cursive;
 $fuente_texto:Raleway,sans-serif;

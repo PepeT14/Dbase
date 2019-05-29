@@ -14,8 +14,6 @@ function validateEmail(value){
     });
      return !respuesta;
 }
-
-
 /*---- FORMULARIO DE REGISTRO DE UN CLUB ----*/
 $('#form-register-club').validate({
     rules:{

@@ -18,6 +18,7 @@ class Club extends Model
         'deleted_at'
     ];
 
+
     //Relationships
 
         //Admin (One to One)
@@ -56,11 +57,23 @@ class Club extends Model
             return "Registrado";
         }
         else{
-            $valid = DB::table('valid_admins')->where('club',$this->name)->first();
+            $valid = DB::table('valid_admins')->where('club',$this->id)->first();
             if(is_null($valid)){
                 return "Por invitar";
             }else{
                 return "Pendiente";
+            }
+        }
+    }
+    public function email(){
+        if($this->admin){
+            return $this->admin->email;
+        }else{
+            $admin = DB::table('valid_admins')->where('club',$this->id)->first();
+            if(is_null($admin)){
+                return 'Aún no hemos invitado a este administrador';
+            }else{
+                return $admin->email;
             }
         }
     }

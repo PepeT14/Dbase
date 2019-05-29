@@ -91,11 +91,16 @@ Route::group(['middleware' => ['auth:admin'],'prefix' =>'admin'],function(){
     //Instalaciones
     Route::get('/instalaciones','adminController@instalaciones')->name('admin.instalaciones');
     Route::post('/instalaciones','instalacionesController@create')->name('instalacion.create');
+    Route::delete('/instalaciones','instalacionesController@delete')->name('instalacion.delete');
 
     //Eventos
     Route::post('/events','adminController@createEvent');
     Route::post('/categories','adminController@createCategory');
     Route::put('/categories','adminController@updateCategory');
+
+    //Reservas
+    Route::get('/reservas','adminController@getReservas');
+    Route::post('/reservas','instalacionesController@createReserva');
 });
 
 //Mister
@@ -135,4 +140,4 @@ Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
 Route::get('/clubRegister','ClubController@register')->name('club.register');
 
-Route::get('prueba',function(){return view('prueba');});
+Route::get('prueba',function(){return view('includes.auth.success');});

@@ -1,0 +1,252 @@
+@import 'SASS/variables';
+.ppns-datePicker{
+  position:fixed;
+  z-index:1050;
+  right:0;
+  top:-2rem;
+  font-family:Roboto,sans-serif;
+  background-color:white;
+  color:rgba(0,0,0,0.8);
+  font-size:12px;
+  text-align:center;
+  width:320px;
+  height:550px;
+  opacity:0;
+  display:none;
+}
+
+/*---- CABECERA ----*/
+.ppns-dp__header{
+  display:flex;
+  flex-direction:column;
+  background-color:#26a69a;
+  color:white;
+  padding-bottom:1rem;
+  height:30%;
+  .header-title{
+    font-weight:bold;
+    font-size:14px;
+    position:relative;
+    min-height:20px;
+    background-color:#00897b;
+  }
+  .header-info{
+    display:flex;
+    flex-direction:column;
+    padding-top:2rem;
+    .not-active{
+      opacity:.4;
+    }
+    .date-info{
+      font-size:2em;
+      text-transform:uppercase;
+    }
+    .time-info{
+      font-size:1.5em;
+      margin-top:1rem;
+    }
+  }
+  .view-change{
+    display:flex;
+    justify-content: space-between;
+    width:100%;
+    padding:0 1rem;
+    .material-icons{
+      cursor:pointer;
+      opacity:.4;
+      &.active{
+        opacity:1;
+      }
+    }
+  }
+}
+
+/*---- CUERPO ----*/
+.ppns-dp__body{
+  padding:1rem 1.5rem;
+  height:55%;
+}
+
+/*--- FOOTER ---*/
+.ppns-dp__footer{
+  display:flex;
+  justify-content: flex-end;
+  padding:1rem 0;
+  height:15%;
+  button{
+    margin:.5rem;
+  }
+}
+
+/*---- CALENDARIO ----*/
+.ppns-dp__calendar{
+  .calendar-header{
+    display:flex;
+    justify-content:space-between;
+    margin:0 -1rem;
+    text-transform:uppercase;
+    height:30px;
+    line-height:30px;
+    margin-bottom:.5rem;
+    .material-icons{
+      line-height:30px;
+      width:30px;
+      position:relative;
+      cursor:pointer;
+    }
+  }
+  .calendar-days{
+    height:250px;
+    td,th{
+      padding:0;
+      text-align:center;
+    }
+    .day-head{
+      text-transform:uppercase;
+    }
+  }
+  .days-row{
+    border-bottom:none;
+  }
+  .day{
+    cursor:pointer;
+    position:relative;
+    span{
+      width:30px;
+      height:30px;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      &:before{
+        content:'';
+        z-index:-1;
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        height:0;
+        width:0;
+        border-radius:50%;
+        background-color:#26a69a;
+        transition:width 100ms ease-in-out, height 100ms ease-in-out;
+      }
+      &.active, &:hover{
+        color:white;
+        &:before{
+          height:100%;
+          width:100%;
+        }
+      }
+      &.today{
+        &:after{
+          content:'';
+          z-index:-1;
+          position:absolute;
+          left:50%;
+          top:50%;
+          transform:translate(-50%,-50%);
+          height:100%;
+          width:100%;
+          border-radius:50%;
+          background-color:#b2dfdb;
+        }
+      }
+    }
+    &.not-month{
+      color:$divider-color;
+    }
+  }
+
+}
+
+
+/*--- RELOJ ----*/
+.ppns-dp__clock{
+  position:relative;
+  height:250px;
+  margin-top:1rem;
+  .format-select{
+    display:flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    .selector{
+      cursor:pointer;
+      position:relative;
+      height:30px;
+      width:30px;
+      line-height:30px;
+      &.selected:before, &:hover:before{
+        content:'';
+        position:absolute;
+        height:100%;
+        width:100%;
+        z-index:-1;
+        left:0;
+        border-radius:50%;
+        background-color:#b2dfdb;
+      }
+    }
+  }
+  .clock-hours{
+    position:absolute;
+    top:60%;
+    left:50%;
+    width:.3em;
+    height:.3em;
+    background-color:#26a69a;
+    border-radius:50%;
+    &:after{
+      content: '';
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background-color:#b2dfdb;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: -1;
+      opacity: .3;
+      border-radius:50%;
+    }
+    .clock-number{
+      cursor:pointer;
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:30px;
+      height:30px;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      @for $i from 1 through 24{
+        &:nth-child(#{$i}){
+          transform:translate(-50%,-50%) rotate(#{-75 + ($i * 15)}deg) translate(110px) rotate(#{75 - ($i * 15)}deg)
+        }
+      }
+      &:before{
+        content:'';
+        position:absolute;
+        background-color:#26a69a;
+        width:0;
+        height:0;
+        left:50%;
+        top:50%;
+        z-index:-1;
+        border-radius:50%;
+        transform:translate(-50%,-50%);
+        transition:width 100ms ease-in-out, height 100ms ease-in-out;
+      }
+      &.selected, &:hover{
+        color:white;
+        &:before{
+          width:100%;
+          height:100%;
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Player;
 use Illuminate\Support\Facades\Lang;
+use DB;
 
 class LoginController extends Controller
 {
@@ -64,37 +65,50 @@ class LoginController extends Controller
 
     public function authenticate(Request $request){
 
-
-        $this->validate($request,[
-           'username' => 'required',
-           'password' => 'required'
-        ]);
-//
-        if(Auth::guard('player')->attempt(['username'=>$request->username , 'password'=>$request->password])){
-            return response()->redirectToRoute('player.home');
-        }
-        if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
-            return response()->redirectToRoute('admin.home');
-        }
-        if(Auth::guard('mister')->attempt(['username'=>$request->username , 'password'=>$request->password])){
-            return response()->redirectToRoute('mister.home');
-        }
-        if(Auth::guard('tutor')->attempt(['username'=>$request->username , 'password'=>$request->password])){
-            return response()->redirectToRoute('tutor.home');
-        }
         if($request->ajax()){
-            return response()->json();
+            $username = $request->input('username');
+
+            if(DB::table('admin_clubs')->where('username','=',$username)->count()){
+                if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
+                    return response()->json(['url'=>'admin/home']);
+                }
+                $errors = 'Contraseña incorrecta';
+                return response()->json(['password'=>$errors]);
+            }
+            else if(DB::table('misters')->where('username',$username)->count()>0){
+                if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
+                    return response()->json(['url'=>'mister/home']);
+                }
+                $errors = 'Contraseña incorrecta';
+                return response()->json(['password'=>$errors]);
+            }
+            else{
+                return response()->json(['usuario'=>'Este usuario no existe en nuestra Base de datos.']);
+            }
+            /*if(DB::table('players')->where('username',$username)->count()>0){
+            if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
+                return response()->redirectToRoute('player.home');
+            }else{
+                $errors = 'Contraseña incorrecta.';
+                return response()->json(['contraseña'=>$errors]);
+            }
+            if(DB::table('tutors')->where('username',$username)->count()>0){
+                if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
+                    return response()->redirectToRoute('tutor.home');
+                }else{
+                    $errors = 'Contraseña incorrecta.';
+                    return response()->json(['contraseña'=>$errors]);
+                }
+            }*/
         }
         return $this->sendFailedLoginResponse($request);
     }
+
 
     protected function sendFailedLoginResponse(Request $request)
     {
         $errors = [$this->username() => trans('auth.failed')];
 
-        if ($request->expectsJson()) {
-            return response()->json($errors, 422);
-        }
         if ( ! Player::all()->where('username', $request->username)->first() ) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))

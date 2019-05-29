@@ -18,7 +18,8 @@ class CreateInstalacionTable extends Migration
            $table->increments('id');
            $table->string('name');
            $table->string('tipo');
-           $table->string('terreno')->nullable();
+           $table->string('terreno');
+           $table->integer('sectores')->default(1);
            $table->integer('club_id')->unsigned();
            $table->timestamps();
 

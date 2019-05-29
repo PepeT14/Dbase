@@ -18,7 +18,8 @@ class CreateReservasTable extends Migration
            $table->increments('id');
            $table->string('uso');
            $table->dateTime('fecha');
-           $table->integer('team_id')->unsigned();
+           $table->integer('tiempo');
+           $table->integer('team_id')->unsigned()->nullable();
            $table->integer('instalacion_id')->unsigned();
 
            $table->foreign('team_id')->references('id')->on('teams');

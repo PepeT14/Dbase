@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Club;
-use App\Models\League;
+use DB;
 use Mail;
 use App\Mail\clubRegister;
 
@@ -16,12 +16,12 @@ class ClubController extends Controller
 
         $club->name = $request->input('name');
         $club->telephone = $request->input('telephone');
-        $club->country=$request->input('country');
+        $club->country= 'SPAIN';
         $club->city=$request->input('city');
         $club->address = $request->input('address');
         $club->state = $request->input('state');
 
-        //Controles de Imagen:
+        /*//Controles de Imagen:
         if ($request->hasFile('escudo')) {
             if ($request->file('escudo')->isValid()) {
 //          $file = $request->file('photo');
@@ -32,11 +32,11 @@ class ClubController extends Controller
         }else{
             $club->escudo="";
         }
-
+        */
         $club->save();
 
 
-        return redirect()->action('superAdmin@home');
+        return redirect()->action('SuperAdminController@home');
     }
     public function register(Request $request){
         Mail::to('pepeg93@hotmail.com')->send(new clubRegister($request));

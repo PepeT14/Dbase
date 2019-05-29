@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Instalacion;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 use App\Models\ClubMaterial;
 use Auth;
@@ -114,6 +115,13 @@ class adminController extends Controller
         return $view;
     }
 
+    public function getReservas(Request $request){
+        $admin = Auth::guard('admin')->user();
+        $instalacion = $request->input('instalacion');
+        $reservas = $admin->club->instalaciones->where('id',$instalacion)->first()->reservas->where('fecha','>=',$request->input('primerDia'))->where('fecha','<=',$request->input('ultimoDia'))->values()->all();
+        return $reservas;
+    }
+
     /*----------------------------------------------------
     * ----------------- EVENTOS  -------------------
     * ----------------------------------------------------*/
@@ -190,7 +198,7 @@ class adminController extends Controller
                 'color' => $request->color,
                 'admin_id' => $admin->id
             ]);
-            return view('admin.includes.addCategoriePanel',['admin'=>$admin]);
+            return DB::table('admin_event_categories')->where('admin_id',$admin->id)->get();
         }
         return $admin;
     }
@@ -201,7 +209,7 @@ class adminController extends Controller
             'title' => $request->title,
             'color' => $request->color
         ]);
-        return view('admin.includes.addCategoriePanel',['admin'=>$admin]);
+        return DB::table('admin_event_categories')->where('admin_id',$admin->id)->get();
     }
 
     /*------------------------------------------------------------

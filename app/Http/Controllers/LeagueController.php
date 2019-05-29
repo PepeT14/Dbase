@@ -19,7 +19,7 @@ class LeagueController extends Controller
 
       $league->save();
 
-      return redirect()->action('superAdminController@home');
+      return redirect()->action('SuperAdminController@home');
     }
 
     //HOME

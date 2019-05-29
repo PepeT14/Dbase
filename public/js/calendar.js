@@ -21,15 +21,17 @@ $.fn.Calendar = function(options){
 class Calendar{
 
     //Constructor del calendario
-    constructor(contenedor,options){
+    constructor(contenedor,options) {
         this.contenedor = contenedor;
         this.shortDays = options.shortDays;
         this.mainCalendar = options.mainCalendar;
         this.view = options.view;
         this.moment = options.moment ? options.moment : moment();
-        this.events = $(contenedor).data('events');
-        this.categories = $(contenedor).data('categories');
-    }
+        this.views = options.views ? options.views : {};
+        //this.events = $(contenedor).data('events') !== undefined ? $(contenedor).data('events') : null;
+        //this.categories = $(contenedor).data('categories');
+    };
+
     //funcion para eliminar un calendario
     static destroy(contenedor){
         $(contenedor).find('.ppns-main').remove();
@@ -65,7 +67,9 @@ class Calendar{
         if(this.mainCalendar){
             let that = this;
             //Renderizamos y activamos la logica de añadir eventos
-            this.dinamicEvents();
+            //this.dinamicEvents();
+
+            //Logica del boton de hoy
             $('.ppns_today').on('click',function(){
                 that.moment = moment();
                 Calendar.destroy(that.contenedor);
@@ -77,11 +81,12 @@ class Calendar{
                     sideCalendar.render();
                 }
             });
-            try{
+            /*try{
                 this.renderEvents(this.events);
             }catch{
                 console.log('error al renderizar los eventos');
-            }
+            }*/
+
             //Activamos los cambios de vista
             $('#month_view').on('click',function(){
                 Calendar.destroy(that.contenedor);
@@ -98,6 +103,18 @@ class Calendar{
             $('#week_view').on('click',function(){
                 Calendar.destroy(that.contenedor);
                 that.view = 'weekView';
+                let sideCalendar = $('.side_calendar').Calendar('getCalendar');
+                if(sideCalendar !== undefined){
+                    sideCalendar.view = 'monthView';
+                    sideCalendar.moment = that.moment;
+                    Calendar.destroy(sideCalendar.contenedor);
+                    sideCalendar.render();
+                }
+                that.render();
+            });
+            $('#day_view').on('click',function(){
+                Calendar.destroy(that.contenedor);
+                that.view = 'dayView';
                 let sideCalendar = $('.side_calendar').Calendar('getCalendar');
                 if(sideCalendar !== undefined){
                     sideCalendar.view = 'monthView';
@@ -143,40 +160,33 @@ class Calendar{
     cabeceraMain(){
         let month = this.moment.format('MMMM');
         let anyo = this.moment.format('YYYY');
-        let html  = '<div class="wrapper ppns_header_calendar main">\n' +
-            '                            <div class="month_year_info">' +
-            '                               <div class="ppns_month">\n' +
-            '                                   <span class="month">'+month+'</span>\n' +
-            '                                   <span class="year">'+anyo+'</span>\n' +
-            '                               </div>\n' +
-            '                            </div>\n' +
-            '                            <div class="left_info">' +
-            '                               <div class="ppns_sel_view"> ' +
-            '                                   <span class="sel_view" id="month_view">Mes</span>' +
-            '                                   <span class="sel_view" id="week_view">Semana</span>' +
-            '                                   <span class="sel_view" id="day_view">Dia</span>' +
-            '                               </div>' +
-            '                               <div class="ppns_today">' +
-            '                                   <span class="today">Hoy</span>' +
-            '                               </div>' +
-            '                            </div>' +
-            '     </div>' ;
-        $(this.contenedor).append(html);
+        let day = this.moment.format('dddd') + ', ' +this.moment.date() + ' · ';
+        let html  = '<div class="wrapper ppns_header_calendar main"/>';
+        let info = '<div class="header_info">' +
+            (this.view === 'dayView' ? day : '') +month + ' ' + anyo + '</div>' +
+            '<div class="ppns_sel_view">' +
+            (this.views.month ? '<span class="sel_view" id="month_view">Mes</span>' :'') +
+            (this.views.week ? '<span class="sel_view" id="week_view">Semana</span>' :'')  +
+            (this.views.day ?  '<span class="sel_view" id="day_view">Dia</span>' :'') +
+            '</div>' +
+            '<div class="ppns_today"><span class="today">Hoy</span></div>';
+        html = $(html).append(info);
+        $(this.contenedor).append(html[0].outerHTML);
     }
 
 
-    /*---------------------------------------------------------------------------------
-    * ----------------------------- CONTENIDO DEL CALENDARIO ---------------------------
-    * --------------------------------------------------------------------------------- */
 
-        /*-------------- VISTA DEL MES --------------*/
+    /*---------------------------------------------------------------------------------
+    * --------------------------------- VISTA DEL MES ---------------------------------
+    * ---------------------------------------------------------------------------------*/
+
     renderMonth(){
         //iniciamos las variable que se usarán proximamente
         let year = this.moment.year();
         let month = this.moment.month();
+        let main = this.mainCalendar;
         let tabla = '<div class="ppns-main monthView" data-month="'+month+'"/>';
         let days = this.shortDays ? daysCortos : daysLargos;
-        let main = this.mainCalendar;
         let htmlCab = '';
         //generamos la cabecera de los dias de la semana
         days.forEach(function(n,i){
@@ -231,9 +241,9 @@ class Calendar{
                         let month = $(this).data('month');
                         let date = $(this).data('fecha').split('-')[0];
                         mainCalendar.moment = moment().year(year).month(month).date(date);
+                        Calendar.destroy(mainCalendar.contenedor);
+                        mainCalendar.render();
                     }
-                    Calendar.destroy(mainCalendar.contenedor);
-                    mainCalendar.render();
                 }
             });
         }
@@ -269,7 +279,7 @@ class Calendar{
         tabla = $(tabla).append(body[0].outerHTML);
         $(this.contenedor).append(tabla[0].outerHTML);
         $('#week_view').addClass('active');
-        $('.main_calendar_panel').scrollTop($('.weekView.now').prev().prev()[0].offsetTop - 70);
+        $('.main_panel').scrollTop($('.weekView.now')[0].offsetTop - 230);
         //Marco el dia de la semana que estamos focalizando.
         $('.ppns-main.weekView .ppns-cal__col').each(function(){
             //Por cada columna de la cabacera
@@ -284,7 +294,54 @@ class Calendar{
     }
 
 
-        /*------------------- VISTA DEL AÑO ----------------*/
+    /*---------------------------------------------------------------------------------
+    * --------------------------------- VISTA DEL DIA ---------------------------------
+    * ---------------------------------------------------------------------------------*/
+    renderDay(){
+        let month = this.moment.month();
+        let week = this.moment.week();
+        let tabla = '<div class="ppns-main weekView" data-month="'+month+'" data-week="'+week+'"/>';
+        let days = this.shortDays ? daysCortos : daysLargos;
+        let htmlCab = '<div class="ppns-cal__col weekView"></div>';
+        let that = this;
+        days.forEach(function(n,i){
+            htmlCab += '<div class="ppns-cal__col head weekView" data-fecha="'+moment().month(month).week(week).isoWeekday(i+1).format('DD-MM-YYYY')+'"><span>'+n+' '+moment().month(month).week(week).isoWeekday(i+1).format('DD')+'</span></div>';
+        });
+        let cabeceraTabla = $('<div class="ppns-cal__row head weekView"/>').append(htmlCab);
+        tabla = $(tabla).append(cabeceraTabla);
+        let body = '<div class="weekView_body"/>';
+        let ahora = moment().hour();
+        for(let h=0;h<24;h++){
+            let before = week < moment().week() || week === moment().week() && h < ahora;
+            let fila = '<div class="ppns-cal__row hour weekView '+(h === ahora ? 'now' : '') + (before ? ' older' : '')+'" data-hour="'+h+'"/>';
+            for(let d=0;d<8;d++){
+                if(d===0){
+                    fila = $(fila).append('<div class="ppns-cal__cell hour_info_cell weekView"><span>'+moment().week(week).startOf('day').add(h,'hour').format('HH:mm')+'</span></div>');
+                }else{
+                    fila = $(fila).append('<div class="ppns-cal__cell hour_info_cell weekView date_cell main" data-fecha="'+moment().week(week).startOf('week').add(d-1,'day').hour(h).format('DD-MM-YYYY HH:mm')+'"></div>');
+                }
+            }
+            body = $(body).append(fila[0].outerHTML);
+        }
+        tabla = $(tabla).append(body[0].outerHTML);
+        $(this.contenedor).append(tabla[0].outerHTML);
+        $('#day_view').addClass('active');
+        $('.main_calendar_panel').scrollTop($('.weekView.now').prev().prev()[0].offsetTop - 70);
+        //Marco el dia de la semana que estamos focalizando.
+        $('.ppns-main.weekView .ppns-cal__col').each(function(){
+            //Por cada columna de la cabacera
+            if($(this).data('fecha')=== that.moment.format('DD-MM-YYYY')){
+                //Si la fecha coincide con la fecha del dia del calendario auxiliar. Activamos el dia
+                $(this).addClass('active');
+                if($(this).data('fecha') > moment().format('DD-MM-YYYY')){
+                    $('.ppns-cal__row.older').removeClass('older');
+                }
+            }
+        });
+    }
+    /*---------------------------------------------------------------------------------
+    * --------------------------------- VISTA DEL AÑO ---------------------------------
+    * ---------------------------------------------------------------------------------*/
     renderYear(){
         let year = this.moment.format('YYYY');
         let month = this.moment.month();
@@ -322,7 +379,7 @@ class Calendar{
     * --------------------------------------------------------------------------------- */
 
         /* LOGICA EVENTOS */
-    dinamicEvents(){
+    /*dinamicEvents(){
         //Inicio las variables
         let isMouseDown = false;
         let startDate = null;
@@ -332,11 +389,6 @@ class Calendar{
         window.evento = null;
         let celda = $('.ppns-cal__cell.main');
         //Hay dos formas de añadir eventos, una dinamicamente clickando doble sobre un dia, u hora, o arrastrando.
-            //DOBLE CLICK
-        celda.on('dblclick',function(){
-            //Muestro el modal para crear el evento
-            $('#add_event_modal').modal('show');
-        });
             //TODO ARRASTRANDO
         /*celda.on('mousedown',function() {
             startDate = this;
@@ -382,7 +434,7 @@ class Calendar{
                     end:endDate
                 });
             }
-        });*/
+        });
         let modal = $('#add_event_modal');
         modal.on('show.bs.modal',function(){
             startDate = $(this).data('fecha');
@@ -408,41 +460,7 @@ class Calendar{
             evento.destroy();
             $('#save_event').off('click');
         });
-    };
-
-    /*---------------------------------------------------------------
-    * --------------------- GUARDAR  EVENTO --------------------
-    * ---------------------------------------------------------------*/
-    saveEvent(){
-        let that = this;
-        let frecuencia = null;
-        let veces = null;
-        $('#save_event').on('click',function(){
-            evento.title = $('input[name="event-title"]').val();
-            if(evento.title === '' || evento.start === '' || evento.end === ''){
-                console.log('Formulario incompleto')
-            }else{
-                frecuencia = evento.repetition.frecuencia;
-                veces = evento.repetition.veces;
-                if(frecuencia === '-' || veces === '-'){
-                    evento.repetition = {};
-                }
-                $.ajax({
-                    type:'POST',
-                    url: $('meta[name="app-url"]').attr('content') + $(this).data('href'),
-                    data:{title:evento.title,start:evento.start,category:evento.category,end:evento.end,repetition:evento.repetition},
-                    success:function(response){
-                        that.events = response;
-                        that.renderEvents(response);
-                        $('#add_event_modal').modal('hide');
-                    },
-                    error:function(err){
-                        console.log(err);
-                    }
-                });
-            }
-        });
-    }
+    };*/
 
     renderEvents(e){
         //Renderizamos en el menú lateral los eventos del dia de hoy en caso de que existiera.
@@ -545,573 +563,6 @@ class Calendar{
         }else{
             //.format('DD-MM-YYYY HH:mm') === $(el).data('fecha')
             console.log('No hay eventos para renderizar');
-        }
-    }
-
-}
-
-class Event{
-
-    //Constructor del evento
-    constructor(options){
-        this.category = options.category ? options.category : null;
-        this.title = options.title ? options.title : '';
-        this.start = options.start ? options.start : '';
-        this.end = options.end ? options.end : '';
-        this.repetition = {};
-        this.startPick = null;
-        this.endPick = null;
-        this.initSelectDates();
-        this.categoriesPanel();
-        this.repeatPanel();
-    }
-
-    destroy(){
-        this.start = '';
-        this.end = '';
-        this.category = null;
-        this.hideCategoryPanel();
-        this.hideRepeatPanel();
-        $('#time_event_end').AnyPicker('destroy');
-        $('#time_event_start').AnyPicker('destroy');
-        //Reinicio los botones de categorias
-        $('#add_categories_event, #add_new_categorie, .edit_category, .categorie.selectable , .btn-save').off('click');
-
-        //Reinicio los botones de la repeticion
-        $('#add_rep_event, #repeat_button,.repeat_event_panel .close, .repeat_option, .month_table td.day_month_table, #day_repeat .col').off('click');
-    }
-
-    /*---------------------------------------------------------------
-    * --------------------- RENDERIZAR EL EVENTO --------------------
-    * ---------------------------------------------------------------*/
-    static isRender(event){
-        return $('.event[data-id='+event.id+']').length > 0;
-    }
-    static monthRender(id,event){
-        let width = 100;
-        let alt = 20;
-        $('.ppns-cal__cell.day').each(function(i,el){
-            if(moment($(el).data('fecha'),'DD-MM-YYYY').isSame(moment(event.start),'day')){
-                width = width * (moment(event.end).diff(moment(event.start),'days')+1);
-                if(($(el).find('.month_events').height() + alt) > $(el).height()/100*50){
-                    console.log('Hay mas eventos');
-                }else{
-                    $(el).find('.month_events').append('<div class="event c-'+id+'" style="width:'+width+'%">'+event.title+'</div>');
-                }
-                return false;
-            }
-        });
-    }
-    static weekRender(categories,event,style){
-        style = style !== undefined ? style : '';
-        let top = 0;
-        let start = moment(event.start);
-        let end = moment(event.end);
-        let duration = end.diff(start,'hours');
-        let id = 0;
-        categories.forEach(function(ca){
-            if(ca.id === event.category_id){
-                id = event.category_id;
-                return false;
-            }
-        });
-        for(let i=0;i<7;i++){
-            for(let j=0;j<24;j++){
-                //Por cada celda que voy a controlar.
-                let el = $('.ppns-cal__row.hour').eq(j).find('.date_cell').eq(i);
-                let fC = moment($(el).data('fecha'), 'DD-MM-YYYY HH:mm');
-                if(start.isSame(fC,'hour')){
-                    top = (start.diff(fC,'minutes') / 60) * 100;
-                    if((start.hour() + duration) >= 25){
-                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+(24 - start.hour())+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
-                        start.add(1,'day');
-                        duration = duration - (24 - start.hour());
-                        start.hour(0);
-                    }else{
-                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+duration+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
-                    }
-                }
-            }
-        }
-    }
-    /*---------------------------------------------------------------
-    * --------------------- FECHAS DEL EVENTO --------------------
-    * ---------------------------------------------------------------*/
-
-    //Cuando se crea un evento y se abre el modal inicializo los selectores de las fechas con las fechas que me llegan.
-    initSelectDates(){
-        //Variables de selectores y para acceder al evento
-        let start = $('#time_event_start');
-        let end = $('#time_event_end');
-        let that = this;
-        //Selector de la fecha de inicio. Esta función se llama al crearse el evento, fecha de inicio = '' || fecha.
-        start.AnyPicker(objectPicker(that.start,'start',function(output){
-            that.start = output;
-            if(output > end.val()){
-                that.endPick.setSelectedDate(output);
-                that.endPick.setting.headerTitle.markup = '<span class="ap-header__title">'+output+'</span>';
-                end.val(output);
-            }
-            that.endPick.setMinimumDate(output);
-        }));
-
-        //Selector de la fecha de fin. Esta función se llama al crearse el evento, fecha de fin = '' || fecha.
-        end.AnyPicker(objectPicker(that.end,'end',function(output){
-            that.end = output;
-        }));
-
-        //Funcion auziliar para crear un objeto AnyPicker para los selectores de fechas.
-        function objectPicker(d,string,callback){
-            let date = d;
-            let sUserAgent = navigator.userAgent;
-            let mobile = {
-                Android:sUserAgent.match(/Android|Silk/i),
-                iOS:sUserAgent.match(/iPhone|iPad|iPod/i),
-                Windows:sUserAgent.match(/IEMobile/i)
-            };
-            let theme = 'default';
-            if(mobile.Android){theme='Android'}else if(mobile.iOS){theme='iOS'}else if(mobile.Windows){theme = 'Windows'}
-            return {
-                onInit:function(){string === 'end' ? that.endPick = this : that.startPick = this},
-                mode:'datetime',
-                theme:theme,
-                inputChangeEvent:'onChange',
-                onChange:function(cI,rI,sV){
-                    let title = $('.ap-header__title');
-                    let change = this.compareDates(sV.date,new Date(title.text()));
-                    if(change !== 0){
-                        date = moment(sV.date).format('DD-MM-YYYY HH:mm');
-                        $(title).text(date);
-                        this.setting.headerTitle.markup = '<span class="ap-header__title">'+date+'</span>'
-                    }
-                },
-                headerTitle:{markup:'<span class="ap-header__title">'+date+'</span>',type:'Text',contentBehaviour:'Dynamic',format:'dd-MM-yyyy HH:mm'},
-                onShowPicker:function(){
-                    $('.ap-content-switch-date').text('Fecha');
-                    $('.ap-content-switch-time').text('Hora');
-                },
-                i18n:{headerTitle:'Fecha',setButton:'ACEPTAR', cancelButton:'CANCELAR'},
-                dateTimeFormat:'dd-MM-YYYY HH:mm',
-                rowsNavigation:'scroller+buttons',
-                selectedDate:date,
-                onSetOutput:callback
-            };
-        }
-
-        //Además pongo las fechas como valor de los input
-        start.val(that.start);
-        end.val(that.end);
-    }
-
-
-    /*---------------------------------------------------------------
-    * --------------------- CATEGORIA DEL EVENTO --------------------
-    * ---------------------------------------------------------------*/
-
-    //Cuando creo un evento activo la lógica para el panel de las categorias
-    categoriesPanel(){
-        let that = this;
-        //Accion cuando pulse en el boton de categorias
-        $('#add_categories_event').on('click',function(){
-            $('.categories_event_panel').addClass('active');
-        });
-
-        //Accion al clickar en la X del panel
-        $('.categories_event_panel .close').on('click',function(){
-            that.hideCategoryPanel();
-        });
-        //Accion al clickar en nueva categoria
-        $('#add_new_categorie').on('click',function(){
-            that.createCategoryPanel(0);
-            $('#category-name').val('');
-            $('.btn-save').find('span').html('Crear');
-        });
-        //Accion al clickar en editar categoria
-        $('.edit_category').on('click',function(){
-            let title = $(this).parent().data('title');
-            let color = $(this).parent().data('color');
-            let id = $(this).parent().data('id');
-            that.createCategoryPanel(id);
-            $('#category-name').val(title);
-            $('.color_selection').each(function(i,el){
-                if($(el).css('background-color') === color){
-                    $(el).addClass('selected');
-                }
-            });
-            $('.btn-save').find('span').html('Editar');
-        });
-
-        //Accion para añadir etiqueta al evento.
-        $('.categorie.selectable').on('click',function(){
-            that.category = $(this).parent().data('id');
-            $('.categories_event_panel .close-menu').click();
-        });
-    };
-
-    /*----  PANEL PARA ELEGIR LA CATEGORIA DEL EVENTO ---*/
-    static selectCategoryPanel(){
-        //Elimino si hubiera elementos que no son de este panel.
-        $('.back_icon').remove();
-        //Oculto el panel de creacion y limpio el contenido de colores.
-        $('#create_category').hide().removeClass('active');
-        $('.color_grid_selection .color_selection').remove();
-        //Reseteo el texto
-        $('.panel-title .title-text').html('Etiquetas');
-        //Muestro el contenido correspondiente
-        $('#select_category').show().addClass('active');
-    }
-
-
-    /*--- PANEL PARA CREAR UNA CATEGORIA ---*/
-    createCategoryPanel(id){
-        let that = this;
-        //Añado al panel la flecha para volver atrás
-        $('.panel-title').prepend('<span class="material-icons back_icon">arrow_back</span>');
-        //Logica al clickar en la fecha para atrás
-        $('.back_icon').on('click',function(){
-            Event.selectCategoryPanel()
-        });
-        $('.panel-title .title-text').html('Nueva etiqueta');
-        //Muestro el panel y oculto el contenido de seleccionar
-        $('#select_category').hide().removeClass('active');
-        $('#create_category').show().addClass('active');
-        //Relleno los colores para seleccionar
-        seleccionColores();
-        //Funcion que rellena con colores el panel
-        function seleccionColores($color){
-            let colors = ['#884a4a','#425F6D','#51e898','#0079bf','#c377e0','#ff9f1a','#f2d600','#ff78cb','#355263'];
-            let html = '';
-            for(let i=0;i<colors.length;i++){
-                html = '<div class="color_selection '+ (colors[i] === $color ? selected : '') +'" style="background-color:'+colors[i]+'">' +
-                    '<span class="material-icons">done</span></div>';
-                $('.color_grid_selection').append(html);
-            }
-            $('.color_selection').on('click',function(){
-                $('.color_selection.selected').removeClass('selected');
-                $(this).addClass('selected');
-            });
-        }
-        //Lógica para guardar una categoria
-        $('.btn-save').on('click',function(){
-            event.preventDefault();
-            let color = $('.color_selection.selected').css('background-color');
-            let title = $('#category-name').val();
-            let update = $('.btn-save span').html() === 'Editar';
-            if(title === ''){
-                $('#create_category').find('.form-group').eq(0).children().addClass('error');
-            }else if(color === undefined){
-                $('#create_category').find('.form-group').eq(1).find('.title').addClass('error');
-            } else{
-                $.ajax({
-                    type:update ? 'PUT' : 'POST',
-                    url:$('meta[name="app-url"]').attr('content') + $(this).data('href'),
-                    data:{color:color,title:title,update:update,id:id},
-                    success:function(response){
-                        $('#category_panel').html(response);
-                    },
-                    error:function(err){
-                        $('body').html(err.responseText);
-                    }
-                }).done(function(){
-                    //Links
-                    that.categoriesPanel();
-                    //Muestro el panel
-                    $('.categories_event_panel').addClass('active');
-                    //El panel con el texto correspondiente
-                    Event.selectCategoryPanel();
-                });
-            }
-        });
-
-    }
-
-    /*--- FUNCION PARA OCULTAR EL PANEL DE CATEGORIAS---*/
-    hideCategoryPanel(){
-        let that = this;
-        //Pongo de nuevo la vista principal
-        Event.selectCategoryPanel();
-        //Oculto el panel de las categorias
-        $('.categories_event_panel').removeClass('active');
-        //Añado si el evento tiene categoria
-        if(this.category !== null){
-            let color=null;
-            let title = null;
-            $('.categorie_row').each(function(i,el){
-                if($(el).data('id') === that.category){
-                    color = $(el).data('color');
-                    title = $(el).data('title');
-                }
-            });
-            //Elimino otra categoria
-            $('.event_categorie.selected').remove();
-            //Añado la nueva
-            $('#row_categorie_event').prepend('<div class="event_categorie selected" style="background-color:'+color+'">' +
-                '<span>'+title+'</span>' +
-                '<span class="material-icons clear_category">clear</span></div>');
-
-            //Opcion para eliminar la categoria del evento.
-            $('.clear_category').on('click',function(){
-                $('.event_categorie.selected').remove();
-                that.category = null;
-            });
-        }else{
-            //limpio las categorias si no tiene evento
-            $('.event_categorie.selected').remove();
-        }
-    }
-
-
-    /*---------------------------------------------------------------
-    * --------------------- REPETICION DEL EVENTO --------------------
-    * ---------------------------------------------------------------*/
-    hideRepeatPanel(){
-        $('.repeat_selection').removeClass('active');
-        $('#picker_repeat, #day_month_select').css('display','none').addClass('active');
-        $('#day_repeat').removeClass('active').hide();
-        $('.month_table td.day_month_table, #day_repeat .col').removeClass('selected');
-        $('#picker_repeat_input').html('Sin Repetición');
-        $('#info_repeat_event').remove();
-        $('.repeat_option.selected').removeClass('selected');
-        $('.repeat_option').each(function(i,el){
-            if($(el).data('value') === 'nunca'){$(this).addClass('selected');}
-        });
-    }
-
-    //Inicio del panel de repeticion
-    repeatPanel(){
-
-        let that = this;
-        let anpi = this, sOut;
-
-        //Cuando clickamos en el boton de evento con repeticion
-        $('#add_rep_event').on('click',function(){
-            $('.repeat_selection').addClass('active');
-            $('#picker_repeat').css('display','flex').addClass('active');
-        });
-
-        //Al clickar en repeticion muestro el panel con las opciones
-        $('#repeat_button').on('click',function(){
-            $('.repeat_event_panel').show(function(){
-               $(this).addClass('active');
-            });
-        });
-        //Accion al clickar para cerrar el panel
-        $('.repeat_event_panel .close').on('click',function(){
-            let panel = $('.repeat_event_panel');
-            panel.removeClass('active');
-            setTimeout(function(){panel.hide()},500);
-        });
-
-        //Accion al clickar en una opcion del panel
-        $('.repeat_option').on('click',function(){
-            $('.repeat_event_panel .close').click();
-            if(!$(this).hasClass('selected')){
-                $('.repeat_option.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-            if($(this).hasClass('custom_btn')){
-                anpi.showOrHidePicker(sOut);
-            }else{
-                let day_repeat = $('#day_repeat');
-                let day_month = $('#day_month_select');
-                that.repetition.frecuencia = $(this).data('value');
-                that.repetition.veces=1;
-                $('#picker_repeat_input').text($(this).text());
-                $('#repeat_frec_info').text($(this).text());
-                //Si el calendario del mes esta activo, lo oculto
-                if(day_month.hasClass('active')){
-                    day_month.removeClass('active').hide();
-                }
-                //Si la seleccion de dias esta activa, la oculto
-                if(day_repeat.hasClass('active')){
-                    day_repeat.removeClass('active').hide();
-                }
-                //Le quito el texto a la repeticion personalizada.
-                $('#repeat_day_info').text('');
-            }
-        });
-
-        //AnyPicker para la repeticion del evento
-        $(".repeat_option.custom_btn").AnyPicker({
-            onInit:function(){
-                anpi = this;
-            },
-            inputChangeEvent:'onChange',
-            onSetOutput:cfSetOutPut,
-            mode:'select',
-            i18n:{
-                headerTitle:"FECHA",
-                setButton:'ACEPTAR',
-                clearButton:'LIMPIAR',
-                closeButton:'CERRAR',
-                cancelButton:'CANCELAR'
-            },
-            layout:'fixed',
-            vAlign:'bottom',
-            showComponentLabel:true,
-            rowsNavigation:'scroller+buttons',
-            parseInput:cfParseInput,
-            formatOutput:cfFormatOutPut,
-            components:[
-                {
-                    component:0,
-                    name:'number_repetition',
-                    label:'Cada',
-                },
-                {
-                    component:1,
-                    name:'frequency_repetition',
-                    label:'Frecuencia',
-                }
-            ],
-            dataSource:[
-                {
-                    component:0,
-                    data:createDataComponents(0)
-                },
-                {
-                    component:1,
-                    data:createDataComponents(1)
-                }
-            ]
-        });
-
-
-        //Accion al elegir un dia de repeticion
-        $('#day_repeat').find('.col').on('click',function(){
-            selectRepeatDays('#day_repeat .col',that,this,'day');
-        });
-
-        //Accion al elegir un dia del mes de repeticion
-        $('.month_table td.day_month_table').on('click',function(){
-           selectRepeatDays('.month_table td.day_month_table',that,this,'month');
-        });
-
-        //Funcion auxiliar para seleccionar los dias de repeticion
-        function selectRepeatDays(s,e,el,f){
-            let days = [];
-            let info_day = $('#repeat_day_info');
-            if($(el).hasClass('selected')){
-                $(el).removeClass('selected');
-                e.repetition.dias = e.repetition.dias.filter(val => val!==$(el).data('value').toString());
-            }else{
-                $(el).addClass('selected');
-                e.repetition.dias.push($(el).data('value').toString());
-            }
-            let seleccionados = $(s+'.selected');
-            if(seleccionados.length>0){
-                seleccionados.each(function(i,el){
-                    if(f === 'month'){
-                        days.push($(el).data('value'))
-                    }else{
-                        days.push(moment().day($(el).data('value')).format('dddd'));
-                    }
-                });
-                info_day.text('. Los '+days.join(', '));
-            }else{
-                info_day.text('');
-            }
-        }
-        //Funcion auxiliar cuando cambie la salida de la repeticion
-        function cfSetOutPut(outPut,selectedValues){
-            sOut = outPut;
-            let day_repeat = $('#day_repeat');
-            let day_month = $('#day_month_select');
-            let info_day = $('#repeat_day_info');
-            let day = '';
-            $('#picker_repeat_input').html(outPut);
-            if($('#info_repeat_event').length>0){
-                $('#repeat_frec_info').html(outPut);
-            }else if(!outPut.includes('Sin')){
-                $('.repeat_selection').append('<div id="info_repeat_event">El evento se repetirá <span id="repeat_frec_info">'+outPut+'</span><span id="repeat_day_info"></span></div>');
-            }
-            that.repetition.veces = selectedValues.values[0].val;
-            that.repetition.frecuencia = selectedValues.values[1].val;
-
-            //En caso de que se haya escogido frecuencia semanal
-            if(outPut.includes('Semanas')){
-                //Si el calendario del mes esta activo, lo oculto
-                if(day_month.hasClass('active')){
-                    day_month.removeClass('active').hide();
-                }
-                //Muestro el selector de los dias de la semana
-                day_repeat.css('display','flex').addClass('active');
-                //Añado la clase main del dia que se ha seleccionado.
-                day_repeat.find('.col').each(function(i,el){
-                    if($(el).data('value') === moment().date(that.start.split('-')[0]).day()){
-                        $(this).addClass('selected');
-                        that.repetition.dias = [$(this).data('value').toString()];
-                        day = moment().day($(this).data('value')).format('dddd');
-                    }
-                });
-                //Caso de que se escoja frecuencia mensual
-            }else if(outPut.includes('Meses')){
-                //Si está la repeticion semanal, se oculta
-                if(day_repeat.hasClass('active')){
-                    day_repeat.removeClass('active').hide();
-                    info_day.text('');
-                }
-                //Se muestra el selector de dias mensual
-                day_month.show().addClass('active');
-                $('.month_table td.day_month_table').each(function(i,el){
-                    if($(el).data('value').toString() === that.start.split('-')[0]){
-                        $(this).addClass('selected');
-                        that.repetition.dias = [$(this).data('value').toString()];
-                    }
-                });
-            }else{
-                if(day_repeat.hasClass('active')){
-                    day_repeat.removeClass('active').hide();
-                }else if(day_month.hasClass('active')){
-                    day_month.removeClass('active').hide();
-                }
-            }
-        }
-        //Funcion auxiliar para generar el valor de los selectores
-        function createDataComponents(i){
-            let arr=[{val:'-',label:'-'}];
-            if(i===0){
-                for(let i=1;i<21;i++){
-                    arr.push({val:i,label:i.toString()});
-                }
-            }else if(i===1){
-                let frecuencia=[{val:'Diario',label:'Dias'},{val:'Semanal',label:'Semanas'},{val:'Mensual',label:'Meses'},{val:'Anual',label:'Años'}];
-                frecuencia.forEach(function(el,){
-                    arr.push({val:el.val,label:el.label});
-                });
-            }
-            return arr;
-        }
-
-        //Funcion para seleccionar el valor correcto al abrir el selector de nuevo
-        function cfParseInput(elemValue){
-            let inArray = [];
-            let obj = this;
-            if(elemValue !== undefined && elemValue !== null && elemValue !== ''){
-                inArray.push(elemValue.split(' ')[1]);
-                inArray.push(elemValue.split(' ')[2]);
-            }else{
-                inArray = ['-','-'];
-            }
-            return inArray;
-        }
-        //Funcion para formatear el texto que vemos
-        function cfFormatOutPut(elemValues){
-            let outStr = 'Sin Repetición';
-            let valArray = [];
-            for(let i=0;i<this.tmp.numOfComp;i++){
-                if(elemValues.values[i].label !== undefined){
-                    valArray.push(elemValues.values[i].label.toString());
-                }else{
-                    valArray.push('-');
-                }
-            }
-            if(valArray[0] !== '-'){
-                if(valArray[1] !== '-'){
-                    outStr = 'cada '+ valArray[0] + ' ' + valArray[1];
-                }
-            }
-            return outStr;
         }
     }
 

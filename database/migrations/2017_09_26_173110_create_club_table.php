@@ -17,11 +17,11 @@ class CreateClubTable extends Migration
         Schema::create('clubs',function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
-            $table->string('telephone');
+            $table->string('telephone')->nullable();
             $table->string('escudo');
             $table->string('country');
             $table->string('city');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('state');
             $table->string('province');
             $table->timestamps();

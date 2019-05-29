@@ -1,71 +1,54 @@
 @import 'variables';
 
 /*----- FORMULARIOS -----*/
+div.invalid{
+  color:red;
+  font-size:.8em;
+  text-align:left;
+}
+
+.required label:before{
+  content:'* ';
+  color:red;
+}
+
 .form-panel{
   background-color:white;
-  border:1.5px solid $dark-primary-color;
   padding:10px;
-  border-radius:5px;
   text-align:center;
   height:100%;
   &.partido{
     border:none;
   }
 }
-
-.formulario-contenido{
-  padding-top:1em;
-}
-
 .form-title{
   text-align:center;
-  padding:0.5em 0;
   font-size:1.2em;
   color:$dark-primary-color;
   font-family:Raleway,sans-serif;
   text-transform: uppercase;
 }
-.form-row.button-row{
-  text-align:center;
-  div:first-child{margin-bottom:5px;}
+
+.buttons-form{
+  display:flex;
+  justify-content: flex-end;
+  margin-bottom:15px;
+  &>button:first-child{
+    margin-right:1rem;
+  }
 }
 
+.select-wrapper input{
+  text-overflow:ellipsis;
+}
+
+.form-info{
+  font-size:.9em;
+  text-align:center;
+}
 .form-title>img{
   width:5em;
 }
-.form-group{
-  input,select{
-    border-color:$color-resaltado;
-    &.error{
-      border-color:$cancel-color;
-      box-shadow: 0 0 0 0.2remmist $dark-cancel-color;
-    }
-    &:focus{
-      border-color:$light-primary-color;
-    }
-  }
-  label{
-    color:$primary-text;
-    &.error{color:red;}
-  }
-  .btn-group{
-    width:100%;
-    &.btn-group-toggle{
-      border-radius:25px;
-      border:1px solid $primary-color;
-      .btn{
-        border-radius:25px;
-        &.active{
-          background-color:$light-primary-color;
-          color:$texto;
-        }
-      }
-    }
-    .btn.focus,.btn:focus{box-shadow:none;}
-  }
-  &.required .control-label:after{content:'*';color:red;}
-}
-
 .navegacion-menu{
   padding:10px 20px 0 20px;
   i{

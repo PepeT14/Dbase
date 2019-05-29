@@ -1,23 +1,20 @@
-<div class="panel-dbase white col-md-6 panel-success">
-    <div class="panel-title"><h3>Enhorabuena! Se ha enviado una solicitud de registro para el club en dBaseApp.</h3></div>
-    <span>Ahora sólo tiene que esperar. Mientras puede gozarlo un poquito, aquí le dejamos gloria bendita</span>
-    <div class="divider"></div>
+<div class="main_panel panel-success z-depth-2">
+    <div class="panel-title"><h4>Solicitud de registro enviada con éxito.</h4></div>
     <div class="panel-body">
-        <span class="span-title">Pum!</span>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+            <circle class="path circle" fill="none" stroke="#009688" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+            <polyline class="path check" fill="none" stroke="#009688" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+        </svg>
+    </div>
+    <div class="panel-footer">
+        <span>En un plazo máximo de dos días recibirá un email con la invitación para formar parte de nuestra comunidad.</span>
         <div class="divider"></div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/TPt-nRG74Hw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="divider"></div>
-        <span class="span-title">Cubatón!</span>
-        <div class="divider"></div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/XaJf0K6iVPY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="divider"></div>
-        <span class="span-title">Hoy se sale!</span>
-        <div class="divider"></div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/--BHuKeveg4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="divider"></div>
-        <span class="span-title">Ya llegó Febrero</span>
-        <div class="divider"></div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/jUqLWpemtKg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="divider"></div>
+        <div class="follow-footer">
+            <div class="follow_info">Siguenos en nuestras redes</div>
+            <div class="follow_icons">
+                <img src="{{asset('imagenes/iconos/instagram.png')}}" data-href="https://www.instagram.com/dbaseapp/">
+            </div>
+        </div>
     </div>
 </div>
+<link rel="stylesheet" href="{{asset('css/login.css')}}" type="text/css">

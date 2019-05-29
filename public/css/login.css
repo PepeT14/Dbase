@@ -1,40 +1,105 @@
+/*--- FONDO Y BOTONES DE INICIO ---*/
 .login-bck {
   background: url("../../imagenes/fondos/fondo-equipo.jpg") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-bck .buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .seccion-inicial {
   transform: scale(0);
   text-align: center;
-  transition: transform 1s;
+  transition: transform 0.3s ease-in;
+}
+.seccion-inicial.animate {
+  transform: scale(1);
 }
 
 .seccion-inicial.animate {
   transform: scale(1);
 }
 
-.welcome-form-container {
-  position: absolute;
-}
-.welcome-form-container .form-panel {
+/*--- FORMULARIO LOGIN ---*/
+#login-form-panel {
   display: none;
+  opacity: 0;
+  position: absolute;
+  min-width: 30%;
 }
 
-.login-container {
-  height: 100%;
+/*--- FORMULARIO REGISTRO ---*/
+#registerClub-form-panel {
+  display: none;
+  opacity: 0;
+  position: absolute;
 }
 
 .club-register-form {
   text-align: left;
 }
 
+/*--- PANEL DE EXITO AL REGISTRAR EL CLUB ---*/
 .panel-success {
-  height: 80%;
   overflow: scroll;
   text-align: center;
+  font-family: Raleway, sans-serif;
+}
+.panel-success .panel-title {
+  color: #004c40;
+}
+.panel-success .panel-footer {
+  margin-top: 1rem;
+}
+.panel-success .follow_icons img {
+  cursor: pointer;
+  width: 3em;
+}
+
+/*--- CHECK VERDE AL REGISTRARTE ---*/
+svg {
+  width: 100px;
+  display: block;
+  margin: 40px auto 0;
+}
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+}
+.path.circle {
+  -webkit-animation: dash 1.5s ease-in-out;
+  animation: dash 1.5s ease-in-out;
+}
+.path.check {
+  stroke-dashoffset: -100;
+  -webkit-animation: dash-check 1.5s 0.55s ease-in-out forwards;
+  animation: dash-check 1.5s 0.55s ease-in-out forwards;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
 }
 
 /*# sourceMappingURL=login.css.map */
