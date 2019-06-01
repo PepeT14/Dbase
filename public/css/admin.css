@@ -17,7 +17,6 @@
 /*---  Contenido principal ---*/
 .main_calendar_panel {
   width: 100%;
-  margin-left: 20px;
   max-height: calc(100vh - 300px);
 }
 @media only screen and (min-device-width:320px) and (max-width:750px) {
@@ -31,11 +30,12 @@
 /*---  Contenido lateral ---*/
 .side_info {
   width: 25%;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   /*--- Panel de los eventos de hoy ---*/
 }
-@media only screen and (max-device-width:1024px) {
+@media only screen and (max-width:1024px) {
   .side_info {
     display: none;
   }
@@ -419,7 +419,7 @@
     height: 250px;
   }
 }
-@media only screen and (max-device-width:1024px) {
+@media only screen and (max-width:1024px) {
   .mister_info {
     height: 300px;
   }

@@ -29,9 +29,7 @@ class teamController extends Controller
             $team->club_id = $admin->club->id;
             $team->category = $category;
             if($request->has('team-league')){
-                $league = $request->input('team-league');
-                $league = League::all()->where('name','=',$league)->first();
-                $team->league_id = $league->id;
+                $team->league_id = $request->input('team-league');
             }
             $team->save();
             $teams = $admin->club->teams()->whereNotNull('league_id')->get();

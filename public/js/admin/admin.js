@@ -201,7 +201,7 @@ $(document).ready(function(){
         function events(){
             //Guardo en la variable modal el modal para añadir un evento.
             let modal = M.Modal.getInstance($('#add_event_modal'));
-
+            saveEvent();
             //Cuando abro el modal me creo un evento.
             modal.options.onOpenEnd = function(){
               window.evento = new Event({
@@ -406,17 +406,17 @@ $(document).ready(function(){
                 let veces = null;
                 $('#add_event_form').validate({
                     rules:{
-
+                        'event-title':'required',
+                        'time_event_start':'required',
+                        'time_event_end':'required'
                     },
-                    messages:{},
-                    submitHandler:function(){}
-                })
-                $('#save_event').on('click',function(){
-                    $('#add_event_fomr').submit();
-                    evento.title = $('input[name="event-title"]').val();
-                    if(evento.title === '' || evento.start === '' || evento.end === ''){
-                        console.log('Formulario incompleto')
-                    }else{
+                    messages:{
+                        'event-title':{'required':'Introduce un título para el evento'},
+                        'time_event_start':{'required':'Es necesario la fecha y hora de inicio'},
+                        'time_event_end':{'required':'Es necesario la fecha y hora de fin'}
+                    },
+                    submitHandler:function(){
+                        evento.title = $('input[name="event-title"]').val();
                         frecuencia = evento.repetition.frecuencia;
                         veces = evento.repetition.veces;
                         if(frecuencia === '-' || veces === '-'){
@@ -429,13 +429,16 @@ $(document).ready(function(){
                             success:function(response){
                                 that.events = response;
                                 that.renderEvents(response);
-                                $('#add_event_modal').modal('hide');
+                                modal.close();
                             },
                             error:function(err){
                                 console.log(err);
                             }
                         });
                     }
+                });
+                $('#save_event').on('click',function(){
+                    $('#add_event_form').submit();
                 });
             }
         }
@@ -522,8 +525,6 @@ $(document).ready(function(){
         });
 
         newTeamForm.validate({
-            errorElement:"div",
-            errorClass:'invalid',
             rules:{
                 'team-name':'required',
                 'team-category':'required'
@@ -552,7 +553,7 @@ $(document).ready(function(){
                             }
                             form.find('.modal-content').prepend('<div class="alert alert-danger" role="alert">'+response.error+'</div>');
                         }else{
-                            $('#add_team_form').modal('hide');
+                            modalForm.close();
                             let s = $('.teams_section.active');
                             let f = s.attr('id') === 'federados_section';
                             let t = f ? response.teams : response.teamsNof;
@@ -624,12 +625,12 @@ $(document).ready(function(){
                     $('#add_team_form').find('form').find('#team-category').parent().parent().after(html);
                     if(leagues !== undefined){
                         leagues.forEach(function(l){
-                            $('#team-league').append('<option value="'+l.id+'" data-category="'+l.category+'">'+l.name+' - '+l.category+' ('+l.province+')</option>');
+                            leagueSelector.append('<option value="'+l.id+'" data-category="'+l.category+'">'+l.name+' - '+l.category+' ('+l.province+')</option>');
                         });
                     }
                     $('select#team-league').formSelect();
 
-                    $('#team-league').on('change',function(){
+                    leagueSelector.on('change',function(){
                         let c = $(this).children('option:selected').data('category');
                         let s = $('select#team-category');
                         s.find('option[value="'+c+'"]').prop('selected',true);
@@ -673,10 +674,11 @@ $(document).ready(function(){
                             }
                             table = table + '<tr><td>'+team.name+'</td><td>'+league+'</td></tr></tbody></table></div>';
                         });
-                        ti.append($(html).append(tabs)[0].outerHTML);
                         ti.append($(table)[0].outerHTML);
                     }
                 }
+                ti.prepend($(html).append(tabs)[0].outerHTML);
+                document.querySelector('.tab>a').classList.add('active');
                 let instance = M.Tabs.init($('.tabs'),{
                    swipeable:true
                 });
@@ -782,7 +784,6 @@ $(document).ready(function(){
             //muevo la tarjeta de sitio que tiene un retardo de 100ms y tarda 300ms.
             card.css({'transform':'translate(-'+left+'px,-'+top+'px)'});
             left = card.width();
-            let right = $('.main_add_button').width() + 10;
             top = card.height() + 50;
             let height = window.innerHeight - 300;
             if(window.innerWidth>720){
@@ -791,7 +792,7 @@ $(document).ready(function(){
                 let side_calendar = $('.month_calendar_side');
                 let main_calendar = $('.week_calendar_instalaciones');
                 side_calendar.css({top:top+'px', width:left+'px'});
-                main_calendar.css({left:(left+20)+'px', height:height+'px','margin-top':'50px',right:right});
+                main_calendar.css({left:(left+20)+'px', height:height+'px','margin-top':'50px',right:'10px'});
 
                 $('#month_calendar').Calendar({
                     view:'monthView',

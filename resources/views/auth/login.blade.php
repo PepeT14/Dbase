@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="login-bck">
-        <div class="container buttons-container">
+        <div class="container buttons-container login-container">
             {{-- BOTONES PRINCIPALES --}}
             <div class="seccion-inicial">
                 <div class="login-button">
@@ -82,7 +82,7 @@
                         <div class="row">
                             <div class="buttons-form col s12">
                                 <button class="waves-effect waves-light btn red lighten-2 modal-close cancel">Cancelar</button>
-                                <button class="waves-effect waves-light btn teal" type="submit">Guardar</button>
+                                <button class="waves-effect waves-light btn teal" type="submit">Registrar</button>
                             </div>
                         </div>
                     </form>

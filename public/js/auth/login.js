@@ -106,6 +106,9 @@ $(document).ready(function() {
                 success:function(response){
                     $('.loader').fadeOut('slow');
                     $('.login-container').html(response);
+                    $('.follow_icons img').on('click',function(){
+                        window.open($(this).data('href'),'_blank');
+                    });
                 },
                 error:function(response){
                     $('.loader').fadeOut('slow');

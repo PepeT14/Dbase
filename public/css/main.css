@@ -206,6 +206,11 @@ html, body {
   font-weight: bold;
   text-transform: uppercase;
 }
+@media only screen and (max-width:1024px) {
+  .second_header .title {
+    font-size: 2.5em;
+  }
+}
 @media only screen and (min-device-width:320px) and (max-width:750px) {
   .second_header {
     height: 60px;
@@ -592,7 +597,7 @@ table td {
   margin-top: 100px;
 }
 .main_add_button.right {
-  margin-top: 15px;
+  margin: 15px 0;
   left: unset;
   transform: translate(0, 0);
 }

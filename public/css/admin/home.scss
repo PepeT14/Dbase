@@ -14,7 +14,6 @@
   /*---  Contenido principal ---*/
 .main_calendar_panel{
   width:100%;
-  margin-left:20px;
   max-height:calc(100vh - 300px);
   @media #{$media} and #{$pantallaSmall}{
     margin:0;
@@ -28,6 +27,7 @@
     display:none;
   }
   width:25%;
+  margin-right:20px;
   display:flex;
   flex-direction: column;
   .side_calendar_panel{

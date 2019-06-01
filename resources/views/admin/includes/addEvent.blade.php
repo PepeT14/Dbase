@@ -101,6 +101,6 @@
     </div>
     <div class="modal-footer">
         <button class="waves-effect waves-light btn red lighten-2 modal-close">Cancelar</button>
-        <button class="waves-effect waves-light btn teal" type="submit">Guardar</button>
+        <button class="waves-effect waves-light btn teal" id="save_event">Guardar</button>
     </div>
 </div>

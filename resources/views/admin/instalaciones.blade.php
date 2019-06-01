@@ -173,7 +173,7 @@
                         <div class="input-field required" style="display:none;opacity:0;">
                             <select id="team-reserva" name="team-reserva">
                                 <option value="" disabled selected>Eliga un equipo</option>
-                                @foreach($ADMIN->club->teams as $team)
+                                @foreach($admin->club->teams as $team)
                                     <option value="{{$team->id}}">{{$team->name}} - {{$team->category}} </option>
                                 @endforeach
                             </select>
