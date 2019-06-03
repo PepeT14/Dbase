@@ -1,83 +1,28 @@
 .register-form-container {
-  background-image: url("../imagenes/bienvenida.jpg");
+  background-image: url("../imagenes/fondos/cesped.jpg");
+  background-position: center;
+  height: 100%;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.register-form-container .register-form {
-  background-color: white;
-  margin: 0 20px;
-  -webkit-box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.75);
-  box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.75);
-}
-.register-form-container .register-form .register-form-title {
-  background-color: #455A64;
+
+.register-form-title {
+  margin-bottom: 1rem;
+  font-family: Raleway, sans-serif;
   text-align: center;
-  color: white;
-  padding: 15px 0;
 }
-.register-form-container .register-form form {
-  margin: 20px;
-  box-shadow: none;
+.register-form-title .title {
+  font-weight: bold;
+  font-size: 1.7em;
 }
-.register-form-container .register-form form input {
-  border-top-right-radius: 4px !important;
-  border-bottom-right-radius: 4px !important;
-  border-left: none;
-  height: 100%;
+.register-form-title .info {
+  font-size: 0.8em;
 }
-.register-form-container .register-form form input:focus {
-  box-shadow: none;
-  border-color: #ced4da;
-}
-.register-form-container .register-form form .input-group {
-  margin-top: 10px;
-}
-.register-form-container .register-form form .input-group input {
-  height: 40px;
-}
-.register-form-container .register-form form .input-group input.error {
-  border-color: red red red transparent;
-}
-.register-form-container .register-form form .input-group input.valid {
-  border-color: #7ac142 #7ac142 #7ac142 transparent;
-}
-.register-form-container .register-form form .input-group .input-group-prepend {
-  width: 40px;
-  height: 40px;
-}
-.register-form-container .register-form form .input-group .input-group-prepend.error .input-group-text {
-  border-color: red transparent red red;
-}
-.register-form-container .register-form form .input-group .input-group-prepend.valid .input-group-text {
-  border-color: #7ac142 transparent #7ac142 #7ac142;
-}
-.register-form-container .register-form form .input-group .input-group-text {
-  background-color: transparent;
-}
-.register-form-container .register-form form .input-group .input-group-append {
-  width: 40px;
-  height: 40px;
-}
-.register-form-container .register-form form .input-group .input-group-append .input-group-text {
-  border: none;
-  padding: 10px;
-}
-.register-form-container .register-form form .input-group .check-container svg {
-  height: 100%;
-  width: 100%;
-}
-.register-form-container .register-form form .input-group .check-container svg polyline {
-  fill: none;
-  stroke: black;
-}
-.register-form-container .register-form form .btn-submit {
-  background-color: #0d3a36;
-  color: white;
-  width: 50%;
-}
-.register-form-container .register-form form label.error {
-  display: block;
-  width: 100%;
-  color: red;
+
+.buttons {
+  text-align: center;
 }
 
 .checkmark__circle {
@@ -96,14 +41,14 @@
 }
 
 .checkmark {
-  width: 56px;
-  height: 56px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: block;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
-  margin: 10% auto;
+  margin: 1rem auto;
 }
 .checkmark.error {
   box-shadow: red inset 0 0 0;
@@ -145,12 +90,12 @@
 }
 @keyframes fill {
   100% {
-    box-shadow: inset 0 0 0 10px #7ac142;
+    box-shadow: inset 0 0 0 25px #7ac142;
   }
 }
 @keyframes fillred {
   100% {
-    box-shadow: inset 0 0 0 10px red;
+    box-shadow: inset 0 0 0 25px red;
   }
 }
 

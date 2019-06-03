@@ -1,89 +1,29 @@
-.register-form-container{
-  background-image:url('../imagenes/bienvenida.jpg');
-  .register-form{
-    background-color:white;
-    margin:0 20px;
-    -webkit-box-shadow: 0 0 20px 4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0 0 20px 4px rgba(0,0,0,0.75);
-    box-shadow: 0 0 20px 4px rgba(0,0,0,0.75);
-    .register-form-title{
-      background-color:#455A64;
-      text-align:center;
-      color:white;
-      padding:15px 0;
-    }
-    form{
-      margin:20px;
-      box-shadow:none;
-      input{
-        border-top-right-radius:4px !important;
-        border-bottom-right-radius:4px !important;
-        border-left:none;
-        height:100%;
-        &:focus{
-          box-shadow:none;
-          border-color:#ced4da;
-        }
-      }
-      .input-group{
-        margin-top:10px;
-        input{
-          height:40px;
-          &.error{
-            border-color:red red red transparent;
-          }
-          &.valid{
-            border-color:#7ac142 #7ac142 #7ac142 transparent;
-          }
-        }
-        .input-group-prepend{
-          width:40px;
-          height:40px;
-          &.error{
-            .input-group-text{border-color:red transparent red red;}
-          }
-          &.valid{
-            .input-group-text{border-color:#7ac142 transparent #7ac142 #7ac142;}
-          }
-        }
-        .input-group-text{
-          background-color:transparent;
-        }
-        .input-group-append{
-          width:40px;
-          height:40px;
-          .input-group-text{
-            border:none;
-            padding:10px;
-          }
-        }
-        .check-container{
-          svg{
-            height:100%;
-            width:100%;
-            polyline{
-              fill:none;
-              stroke:black;
-            }
-          }
-        }
-      }
-      .btn-submit{
-        background-color:#0d3a36;
-        color:white;
-        width:50%;
-      }
-      label{
-        &.error{
-          display:block;
-          width:100%;
-          color:red;
-        }
-      }
-    }
+.register-form-container {
+  background-image: url('../imagenes/fondos/cesped.jpg');
+  background-position: center;
+  height: 100%;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form-title{
+  margin-bottom:1rem;
+  font-family:Raleway, sans-serif;
+  text-align:center;
+  .title{
+    font-weight:bold;
+    font-size:1.7em;
+  }
+  .info{
+    font-size:.8em;
   }
 }
 
+.buttons{
+  text-align:center;
+}
 
 .checkmark__circle {
   stroke-dasharray: 150;
@@ -101,14 +41,14 @@
 }
 
 .checkmark {
-  width: 56px;
-  height: 56px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: block;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
-  margin: 10% auto;
+  margin: 1rem auto;
   &.error{
     box-shadow: red inset 0 0 0;
     animation: fillred .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
@@ -149,11 +89,11 @@
 }
 @keyframes fill {
   100% {
-    box-shadow: inset 0 0 0 10px #7ac142;
+    box-shadow: inset 0 0 0 25px #7ac142;
   }
 }
 @keyframes fillred {
   100% {
-    box-shadow: inset 0 0 0 10px red;
+    box-shadow: inset 0 0 0 25px red;
   }
 }

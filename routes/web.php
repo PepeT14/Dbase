@@ -140,4 +140,4 @@ Route::get('/league/{id}','leagueController@home')->name('league.home');
 Route::get('/team/{id}','teamController@home')->name('team.home');
 Route::get('/clubRegister','ClubController@register')->name('club.register');
 
-Route::get('prueba',function(){return view('includes.auth.success');});
+Route::get('prueba',function(){return view('mails.inviteMister');});

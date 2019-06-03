@@ -30,6 +30,7 @@ class AdminRegisterController extends Controller
      * */
 
     public function showAdminRegister($club){
+        $club = Club::where('id',$club)->first();
         return view('auth.adminRegister')->with(compact(['club']));
     }
 

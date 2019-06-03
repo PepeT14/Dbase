@@ -25,6 +25,23 @@ $(document).ready(function(){
         return moment(value,'DD/MM/YYYY HH:mm').isAfter(moment(otherDate),'DD/MM/YYYY HH:mm');
     },'No puede ocurrir antes del inicio.');
 
+    jQuery.validator.addMethod('checkUsername',function(value,element){
+        return this.optional(element) || validateEmail(value);
+    },'Usuario en uso.Elige otro usuario.');
+
+    function validateEmail(value){
+        $.ajax({
+            url:$('meta[name="app-url"]').attr('content') + '/register/checkEmail',
+            method:'GET',
+            async:false,
+            data:{'username':value},
+            success:function(response){
+                respuesta = response;
+            }
+        });
+        return !respuesta;
+    }
+
     $.validator.setDefaults({
         ignore:[],
         errorElement:'div',
