@@ -520,7 +520,7 @@ class Calendar{
                 });
             }else{
                 events.forEach(function(date){
-                    if(!Event.isRender(date)){
+                    if(!Calendar.isRender(date)){
                         //CADA EVENTO
                         let start = moment(date.start);
                         let end = moment(date.end);
@@ -528,14 +528,14 @@ class Calendar{
                         //Veo si este evento comparte fechas con otros eventos.
                         let kn = events.filter(e => (start.isBetween(moment(e.start),moment(e.end),null,'[)') || moment(e.start).isBetween(start,end,null,'[)')) && e.id!==date.id);
                         if(kn.length === 0 ){
-                            Event.weekRender(categories,date);
+                            Calendar.weekRender(categories,date);
                         }else{
                             let width = 100;
                             let c = 1;
                             let left = 0;
                             let er = 0;
                             kn.forEach(function(event,i){
-                                if(!Event.isRender(event)){
+                                if(!Calendar.isRender(event)){
                                     let eventosAlaVez = kn.filter(e => (moment(event.start).isBetween(moment(e.start),moment(e.end),null,'[)') || moment(e.start).isBetween(moment(event.start),moment(event.end),null,'[)')));
                                     c = eventosAlaVez.length > c ? eventosAlaVez.length : c;
                                     if(eventosAlaVez.length>1){
@@ -546,12 +546,12 @@ class Calendar{
                                         left = 0;
                                         width = 100 - (100 / (c+1));
                                     }
-                                    Event.weekRender(categories,event,'width:'+width+'%; left:'+left+'%;');
+                                    Calendar.weekRender(categories,event,'width:'+width+'%; left:'+left+'%;');
                                 }
                             });
                             width = 100 / (c+1);
                             left = 100 - width;
-                            Event.weekRender(categories,date,'width:'+width+'%; left:'+left+'%;');
+                            Calendar.weekRender(categories,date,'width:'+width+'%; left:'+left+'%;');
                             console.log(kn,date);
                         }
                     }
@@ -563,6 +563,43 @@ class Calendar{
         }else{
             //.format('DD-MM-YYYY HH:mm') === $(el).data('fecha')
             console.log('No hay eventos para renderizar');
+        }
+    }
+
+    static isRender(event){
+        return $('.event[data-id='+event.id+']').length > 0;
+    }
+
+    static weekRender(categories,event,style){
+        style = style !== undefined ? style : '';
+        let top = 0;
+        let start = moment(event.start);
+        let end = moment(event.end);
+        let duration = end.diff(start,'hours');
+        let id = 0;
+        categories.forEach(function(ca){
+            if(ca.id === event.category_id){
+                id = event.category_id;
+                return false;
+            }
+        });
+        for(let i=0;i<7;i++){
+            for(let j=0;j<24;j++){
+                //Por cada celda que voy a controlar.
+                let el = $('.ppns-cal__row.hour').eq(j).find('.date_cell').eq(i);
+                let fC = moment($(el).data('fecha'), 'DD-MM-YYYY HH:mm');
+                if(start.isSame(fC,'hour')){
+                    top = (start.diff(fC,'minutes') / 60) * 100;
+                    if((start.hour() + duration) >= 25){
+                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+(24 - start.hour())+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
+                        start.add(1,'day');
+                        duration = duration - (24 - start.hour());
+                        start.hour(0);
+                    }else{
+                        $(el).append('<div class="event top-'+top+' c-'+id+' h-'+duration+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
+                    }
+                }
+            }
         }
     }
 

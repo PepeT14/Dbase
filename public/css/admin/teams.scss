@@ -49,16 +49,11 @@
 .teams_section{
   display:none;
 }
-.teams_info{
-  margin-top:30px;
-  .teams_table{
-    position:absolute;
-    left:15px;
-    top:5px;
-    white-space: nowrap;
-    td{
-      padding:15px;
-    }
+.teams_table{
+  thead{
+    background-color:$light-primary-color;
+    text-transform:uppercase;
+    font-weight:bold;
   }
 }
 #add_team_button.right.responsive{

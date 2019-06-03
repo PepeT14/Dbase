@@ -38,7 +38,7 @@ class SuperAdmincontroller extends Controller
             'club' => $club,
 
         ]);
-        return redirect()->action('SuperAdminController@home');
+        return redirect()->action('SuperAdmincontroller@home');
     }
 
 }

@@ -67,7 +67,7 @@
         </div>
         <div id="category_panel">
             <div class="panel categories_event_panel">
-                <div class="row panel-title justify-content-center">
+                <div class="panel-title">
                     <span class="title-text">Etiquetas</span>
                     <i class="material-icons close hover-effect">close</i>
                 </div>

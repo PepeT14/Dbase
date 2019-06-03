@@ -179,7 +179,7 @@
   text-align:center;
 }
 
-table td{
+table td,th{
   border-radius:0;
 }
 .mr-2{
@@ -198,6 +198,8 @@ table td{
     transform:translate(0,0);
     @media #{$media} and #{$pantallaSmall}{
       margin-right:5px;
+      right:0;
+      position:absolute;
     }
   }
 }

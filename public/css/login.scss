@@ -41,6 +41,9 @@
   display:none;
   opacity:0;
   position:absolute;
+  @media #{$media} and #{$pantallaSmall}{
+    height:100%;
+  }
 }
 .club-register-form{
   text-align:left;

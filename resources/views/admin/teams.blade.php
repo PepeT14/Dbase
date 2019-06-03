@@ -12,7 +12,9 @@
             </div>
 
         </div>
-        <div class="teams_section content_section" id="federados_section" data-teams="{{$teams}}" data-leagues="{{$leagues}}"></div>
+        <div class="teams_section content_section" id="federados_section" data-teams="{{$teams}}" data-leagues="{{$leagues}}">
+
+        </div>
         <div class="teams_section content_section" id="escuela_section" data-teams="{{$teamsNof}}"></div>
     </div>
     <div class="modal modal-panel fade teams" id="add_team_form" data-error={{$errors ? '1' : '0'}}>

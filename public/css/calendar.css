@@ -1,6 +1,8 @@
 @charset "UTF-8";
 .event_modal {
   font-family: Raleway, sans-serif;
+  width: 30%;
+  overflow-x: hidden;
 }
 .event_modal #row_categorie_event {
   margin-left: 3rem;
@@ -52,6 +54,7 @@
 }
 .event_modal .categories_event_panel .panel-title {
   font-weight: bold;
+  text-align: center;
 }
 .event_modal .categories_event_panel .panel_body {
   opacity: 0;

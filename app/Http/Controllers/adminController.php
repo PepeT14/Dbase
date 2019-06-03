@@ -129,14 +129,13 @@ class adminController extends Controller
     public function createEvent(Request $request){
         $admin = Auth::guard('admin')->user();
         if($request->ajax()) {
-            $startEvent = Carbon::createFromFormat('d-m-Y H:i',$request->start);
-            $endEvent = Carbon::createFromFormat('d-m-Y H:i',$request->end);
+            $startEvent = Carbon::createFromFormat('d-m-Y H:i',$request->input('event-time.0'));
+            $endEvent = Carbon::createFromFormat('d-m-Y H:i',$request->input('event-time.1'));
             $endDate = Carbon::createFromFormat('d-m-Y H:i','30-06-2019 00:00');
             $unidadFrecuencia = 'D';
-            $category = $request->has('category') ? $request->category : 'null';
-            if($request->has('repetition') && $request->repetition !== null){
-                var_dump($request->repetition);
-                $repetition = collect($request->repetition);
+            $category = $request->has('category') ? $request->input('category') : 'null';
+            if($request->has('repetition') && $request->input('repetition') !== null){
+                $repetition = collect($request->input('repetition'));
                 $dias = $repetition->get('dias');
                 switch($repetition->get('frecuencia')){
                     case 'Semanal':
@@ -167,7 +166,7 @@ class adminController extends Controller
                 DB::table('admin_events')->insert([
                     'start' => $startEvent,
                     'end' => $endEvent,
-                    'title' =>  $request->title,
+                    'title' =>  $request->input('event-title'),
                     'admin_id' => $admin->id,
                     'category_id' => $category
                 ]);

@@ -202,6 +202,8 @@ $(document).ready(function(){
             //Guardo en la variable modal el modal para añadir un evento.
             let modal = M.Modal.getInstance($('#add_event_modal'));
             saveEvent();
+            let events = $('.main_calendar').data('events');
+            $('#week_calendar').Calendar('getCalendar').renderEvents(events);
             //Cuando abro el modal me creo un evento.
             modal.options.onOpenEnd = function(){
               window.evento = new Event({
@@ -211,8 +213,43 @@ $(document).ready(function(){
             };
 
             //Inicio los timePickers para el evento.
-            $('#time_event_start').dateTimePicker();
-            $('#time_event_end').dateTimePicker();
+            let apObject = {
+                layout:'fixed',
+                dateTimeFormat:'dd-MM-YYYY HH:mm',
+                showComponentLabel:true,
+                rowsNavigation:"scroller+buttons",
+                i18n:{
+                    setButton: "ACEPTAR",
+                    closeButton: "CANCELAR",
+                    cancelButton:'CANCELAR',
+                    componentLabels:
+                        {
+                            date: "Dia",
+                            month: "Mes",
+                            year: "Año",
+                            hours: "Horas",
+                            minutes: "Minutos",
+                        }
+                },
+                onSetOutput:function(){
+                   $(this.elem).parent().find('label').addClass('active');
+                },
+                onShowPicker:function(){
+                    $('.ap-content-switch-date').text('Fecha');
+                    $('.ap-content-switch-time').text('Hora');
+                },
+                onChange:function(cI,rI,sV){
+                    let title = $('.ap-footer');
+                    let change = this.compareDates(sV.date,new Date(title.text()));
+                    if(change !== 0){
+                        $('.ap-header__title').remove();
+                        date = moment(sV.date).format('DD-MM-YYYY HH:mm');
+                        $(title).prepend('<span class="ap-header__title">'+date+'</span>');
+                    }
+                },
+            };
+
+            $('#time_event_start,#time_event_end').AnyPicker(apObject);
 
             /*---------------------------------------------------------------
             * --------------------- CATEGORIA DEL EVENTO --------------------
@@ -401,7 +438,6 @@ $(document).ready(function(){
 
             /* ---- GUARDAR EVENTO ---*/
             function saveEvent(){
-                let that = this;
                 let frecuencia = null;
                 let veces = null;
                 $('#add_event_form').validate({
@@ -415,20 +451,24 @@ $(document).ready(function(){
                         'time_event_start':{'required':'Es necesario la fecha y hora de inicio'},
                         'time_event_end':{'required':'Es necesario la fecha y hora de fin'}
                     },
-                    submitHandler:function(){
+                    submitHandler:function(form){
                         evento.title = $('input[name="event-title"]').val();
                         frecuencia = evento.repetition.frecuencia;
                         veces = evento.repetition.veces;
                         if(frecuencia === '-' || veces === '-'){
                             evento.repetition = {};
                         }
+                        console.log(evento);
+                        let data = $(form).serializeFormJSON();
+                        data.category = evento.category;
+                        data.repetition = evento.repetition;
                         $.ajax({
-                            type:'POST',
-                            url: $('meta[name="app-url"]').attr('content') + $(this).data('href'),
-                            data:{title:evento.title,start:evento.start,category:evento.category,end:evento.end,repetition:evento.repetition},
+                            url: $('meta[name="app-url"]').attr('content') + 'admin/events',
+                            method:'POST',
+                            data:data,
                             success:function(response){
-                                that.events = response;
-                                that.renderEvents(response);
+                                console.log(response);
+                                $('.main_calendar').Calendar('getCalendar').renderEvents(response);
                                 modal.close();
                             },
                             error:function(err){
@@ -579,6 +619,7 @@ $(document).ready(function(){
 
             //Cargo los equipos
             loadTeams(teams);
+            M.Tabs.init(document.querySelector('.tabs.teams'),{swipeable:true});
 
             //Cargo las ligas y las categorias en el formulario en funcion de la seccion
             loadLeagues(section);
@@ -652,7 +693,6 @@ $(document).ready(function(){
 
         function loadTeams(teams){
             if(teams.length>0){
-                let html = '<div class="tabs_container"/>';
                 let tabs = '<ul class="tabs teams"/>';
                 let ti = $('.teams_section.active').find('.teams_info');
                 let grouped = teams.reduce(function(vA,x){
@@ -663,7 +703,7 @@ $(document).ready(function(){
                 let table = '';
                 for(cat in grouped){
                     tabs = $(tabs).append('<li class="tab"><a href="#'+cat+'">'+cat+'</a></li>');
-                    table = '<div id="'+cat+'"><table class="teams_table highlight"><thead><th>Nombre</th><th>Liga</th></thead><tbody>';
+                    table = '<div id="'+cat+'"><div class="main_panel z-depth-1"><table class="teams_table highlight"><thead><th>Nombre</th><th>Liga</th></thead><tbody>';
                     if(grouped.hasOwnProperty(cat)){
                         grouped[cat].forEach(function(team){
                             let league = $('#federados_section').data('leagues').filter(league => league.id === team.league_id);
@@ -672,16 +712,12 @@ $(document).ready(function(){
                             }else{
                                 league = '-';
                             }
-                            table = table + '<tr><td>'+team.name+'</td><td>'+league+'</td></tr></tbody></table></div>';
+                            table = table + '<tr><td>'+team.name+'</td><td>'+league+'</td></tr></tbody></table></div></div>';
                         });
                         ti.append($(table)[0].outerHTML);
                     }
                 }
-                ti.prepend($(html).append(tabs)[0].outerHTML);
-                document.querySelector('.tab>a').classList.add('active');
-                let instance = M.Tabs.init($('.tabs'),{
-                   swipeable:true
-                });
+                ti.prepend(tabs);
             }
         }
     }
@@ -1102,9 +1138,6 @@ $(document).ready(function(){
         /*---------------------------------------------------------------
         * --------------------- RENDERIZAR EL EVENTO --------------------
         * ---------------------------------------------------------------*/
-        static isRender(event){
-            return $('.event[data-id='+event.id+']').length > 0;
-        }
         static monthRender(id,event){
             let width = 100;
             let alt = 20;
@@ -1120,63 +1153,13 @@ $(document).ready(function(){
                 }
             });
         }
-        static weekRender(categories,event,style){
-            style = style !== undefined ? style : '';
-            let top = 0;
-            let start = moment(event.start);
-            let end = moment(event.end);
-            let duration = end.diff(start,'hours');
-            let id = 0;
-            categories.forEach(function(ca){
-                if(ca.id === event.category_id){
-                    id = event.category_id;
-                    return false;
-                }
-            });
-            for(let i=0;i<7;i++){
-                for(let j=0;j<24;j++){
-                    //Por cada celda que voy a controlar.
-                    let el = $('.ppns-cal__row.hour').eq(j).find('.date_cell').eq(i);
-                    let fC = moment($(el).data('fecha'), 'DD-MM-YYYY HH:mm');
-                    if(start.isSame(fC,'hour')){
-                        top = (start.diff(fC,'minutes') / 60) * 100;
-                        if((start.hour() + duration) >= 25){
-                            $(el).append('<div class="event top-'+top+' c-'+id+' h-'+(24 - start.hour())+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
-                            start.add(1,'day');
-                            duration = duration - (24 - start.hour());
-                            start.hour(0);
-                        }else{
-                            $(el).append('<div class="event top-'+top+' c-'+id+' h-'+duration+'" data-duration="'+duration+'" data-title="'+event.title+'" data-id="'+event.id+'" style="'+style+'"></div>');
-                        }
-                    }
-                }
-            }
-        }
+
         /*---------------------------------------------------------------
         * --------------------- FECHAS DEL EVENTO --------------------
         * ---------------------------------------------------------------*/
 
         //Cuando se crea un evento y se abre el modal inicializo los selectores de las fechas con las fechas que me llegan.
         initSelectDates(){
-            //Variables de selectores y para acceder al evento
-            let start = $('#time_event_start');
-            let end = $('#time_event_end');
-            let that = this;
-            //Selector de la fecha de inicio. Esta función se llama al crearse el evento, fecha de inicio = '' || fecha.
-            start.AnyPicker(objectPicker(that.start,'start',function(output){
-                that.start = output;
-                if(output > end.val()){
-                    that.endPick.setSelectedDate(output);
-                    that.endPick.setting.headerTitle.markup = '<span class="ap-header__title">'+output+'</span>';
-                    end.val(output);
-                }
-                that.endPick.setMinimumDate(output);
-            }));
-
-            //Selector de la fecha de fin. Esta función se llama al crearse el evento, fecha de fin = '' || fecha.
-            end.AnyPicker(objectPicker(that.end,'end',function(output){
-                that.end = output;
-            }));
 
             //Funcion auziliar para crear un objeto AnyPicker para los selectores de fechas.
             function objectPicker(d,string,callback){
@@ -1211,7 +1194,7 @@ $(document).ready(function(){
                     i18n:{headerTitle:'Fecha',setButton:'ACEPTAR', cancelButton:'CANCELAR'},
                     dateTimeFormat:'dd-MM-YYYY HH:mm',
                     rowsNavigation:'scroller+buttons',
-                    selectedDate:date,
+                    selectedDate:date.format('dd-MM-YYYY HH:mm'),
                     onSetOutput:callback
                 };
             }

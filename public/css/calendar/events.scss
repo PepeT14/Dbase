@@ -1,5 +1,7 @@
 .event_modal{
   font-family:Raleway,sans-serif;
+  width:30%;
+  overflow-x:hidden;
   #row_categorie_event{
     margin-left:3rem;
     margin-top:-1rem;
@@ -51,6 +53,7 @@
     }
     .panel-title{
       font-weight:bold;
+      text-align:center;
     }
     .panel_body{
       opacity:0;

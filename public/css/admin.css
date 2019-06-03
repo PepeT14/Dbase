@@ -110,17 +110,10 @@
   display: none;
 }
 
-.teams_info {
-  margin-top: 30px;
-}
-.teams_info .teams_table {
-  position: absolute;
-  left: 15px;
-  top: 5px;
-  white-space: nowrap;
-}
-.teams_info .teams_table td {
-  padding: 15px;
+.teams_table thead {
+  background-color: #B2DFDB;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 #add_team_button.right.responsive {

@@ -581,7 +581,7 @@ div.invalid {
   text-align: center;
 }
 
-table td {
+table td, th {
   border-radius: 0;
 }
 
@@ -604,6 +604,8 @@ table td {
 @media only screen and (min-device-width:320px) and (max-width:750px) {
   .main_add_button.right {
     margin-right: 5px;
+    right: 0;
+    position: absolute;
   }
 }
 
