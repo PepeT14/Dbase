@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Club;
-use Auth;
+use DB;
+
 class AdminRegisterController extends Controller
 {
     /*
@@ -40,30 +41,16 @@ class AdminRegisterController extends Controller
     }
 
     public function registerAdmin(Request $request){
-        $messages =[
-            'admin-email.exists' => 'Parece que usted no está invitado para ser administrador del club!',
-            'admin-username.unique' => 'Ups! Hay otra persona que ya ha pensado este nombre de usuario, por favor, eliga otro'
-        ];
-        $this->validate($request,[
-            'admin-email' => 'required|email|max:190|unique:admin_clubs,email|exists:valid_admins,email',
-            'admin-username' => 'required|min:6|max:190|unique:admin_clubs,username',
-            'admin-password' => 'required|min:6|max:190'
-        ],$messages);
 
         $admin = new Admin();
         $admin->email = $request->input('admin-email');
         $admin->username = $request->input('admin-username');
         $admin->password = bcrypt($request->input('admin-password'));
-        $cName = $request->input('club');
-        $club = Club::all()->where('name',$cName)->first();
-        $admin->club_id = $club->id;
+        $admin->club_id =  $request->input('club');
         $admin->save();
 
-        $admin->club()->associate($club);
-        $club->admin()->save($admin);
+        DB::table('valid_admins')->where('club',$admin->club_id)->delete();
 
-        return response()->json([
-            'url' => '/'
-        ]);
+        return response()->json(['username' => $admin->username,'password'=>$admin->password]);
     }
 }

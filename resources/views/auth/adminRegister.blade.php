@@ -14,7 +14,7 @@
                 <div class="title">Bienvenido a dbaseapp!</div>
                 <div class="info">Formulario para el administrador de  {{$club->name}}</div>
             </div>
-            <form id="admin-register-form" data-club="{{$club}}">
+            <form id="admin-register-form" data-club="{{$club->id}}">
                 <div class="row align-items-center">
                     <div class="input-field">
                         <i class="material-icons prefix">email</i>

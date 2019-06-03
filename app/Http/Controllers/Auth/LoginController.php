@@ -68,7 +68,7 @@ class LoginController extends Controller
         if($request->ajax()){
             $username = $request->input('username');
 
-            if(DB::table('admin_clubs')->where('username','=',$username)->count()){
+            if(DB::table('admin_clubs')->where('username','=',$username)->count()>0){
                 if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
                     return response()->json(['url'=>'admin/home']);
                 }
@@ -76,7 +76,7 @@ class LoginController extends Controller
                 return response()->json(['password'=>$errors]);
             }
             else if(DB::table('misters')->where('username',$username)->count()>0){
-                if(Auth::guard('admin')->attempt(['username'=>$request->username , 'password'=>$request->password])){
+                if(Auth::guard('mister')->attempt(['username'=>$request->username , 'password'=>$request->password])){
                     return response()->json(['url'=>'mister/home']);
                 }
                 $errors = 'Contraseña incorrecta';
